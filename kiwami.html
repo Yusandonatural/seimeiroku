@@ -422,6 +422,21 @@ html{scroll-behavior:smooth}
 .animal-emblem .em{font-size:44px; line-height:1}
 .a-emoji{font-size:20px; vertical-align:-2px; margin-right:3px}
 
+/* ── 占術の解説リード・年表 ── */
+.art-lead{
+  color:var(--ink-soft); font-size:13.5px; line-height:2; max-width:44em;
+  margin:-6px 0 22px; padding-left:14px; border-left:2px solid var(--gold);
+}
+.chron{overflow-x:auto; border:1px solid var(--line); border-radius:6px; margin-top:10px}
+.chron table{border-collapse:collapse; width:100%; min-width:660px; font-size:13px}
+.chron th,.chron td{padding:7px 12px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; line-height:1.7}
+.chron thead th{background:var(--card2); font-size:10.5px; letter-spacing:.16em; color:var(--ink-soft); position:sticky; top:0}
+.chron tbody tr:last-child td{border-bottom:none}
+.chron tr.now td{background:var(--gold-wash)}
+.chron td.dai{color:var(--bad); font-weight:600}
+.chron .sym{font-size:15px}
+@media print{.chron{overflow:visible}}
+
 /* ── PDF・印刷 ── */
 .print-bar{display:flex; justify-content:flex-end; margin:20px 0 -10px}
 button.print-btn{
@@ -554,7 +569,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       </div>
     </div>
     <hr class="art-rule">
-    <div id="west-body"></div>
+    <p class="art-lead">古代バビロニアに生まれ、ギリシャで体系化された西洋占星術。生まれた瞬間の天体配置を「出生図」として読み、太陽は人生の目的、月は素の感情、アセンダントは世界に見せる第一印象を表すとされます。本鑑定は天文近似計算で、あなたの三つの星を実際の空から割り出します。</p><div id="west-body"></div>
   </section>
 
   <section class="art" id="sec-shichu">
@@ -566,7 +581,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       </div>
     </div>
     <hr class="art-rule">
-    <div id="shichu-body"></div>
+    <p class="art-lead">中国・宋代に体系化された四柱推命は、生まれた年・月・日・時の四本の柱に干支を立て、暦をめぐる気の巡りから人を読む東洋占術の王様です。数ある占いの中でも理論体系の精緻さは随一で、鑑定の要は生まれた「日」の干＝日主。あなたという存在の核を表します。</p><div id="shichu-body"></div>
   </section>
 
   <section class="art" id="sec-name">
@@ -578,7 +593,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       </div>
     </div>
     <hr class="art-rule">
-    <div id="name-body"></div>
+    <p class="art-lead">姓名判断は、名前の画数から五つの「格」を導いて人生の各局面を読む、日本で発達した占いです。明治期に体系化された五格剖象法が主流で、本鑑定もその流れを汲みます。名は生涯でもっとも多く呼ばれ、書かれる「音と形」——その通奏低音を読み解きます。</p><div id="name-body"></div>
   </section>
 
   <section class="art" id="sec-kyusei">
@@ -590,7 +605,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       </div>
     </div>
     <hr class="art-rule">
-    <div id="kyusei-body"></div>
+    <p class="art-lead">九星気学は、古代中国の伝説の図「洛書」に由来する九つの星を生まれ年に配当し、方位と時運を読む学問です。大正期に日本で「気学」として大成しました。九つの星が毎年盤上を巡るため、運気の季節と吉方位が年ごとに移り変わるのが特徴です。</p><div id="kyusei-body"></div>
   </section>
 
   <section class="art" id="sec-animal">
@@ -602,7 +617,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       </div>
     </div>
     <hr class="art-rule">
-    <div id="animal-body"></div>
+    <p class="art-lead">動物占いは、四柱推命の十二運星を土台に1990年代の日本で生まれた性格分類です。60干支がそのまま60キャラクターに対応しており、愛らしい見た目の裏に本格的な東洋占術の骨格を持ちます。対人スタイルを直感的につかむ入口として優れています。</p><div id="animal-body"></div>
   </section>
 
   <section class="art" id="sec-num">
@@ -610,7 +625,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">数</div>
       <div class="art-titles"><div class="art-eyebrow">Numerology</div><h2 class="art-title">数秘術 ─ 誕生数とライフパス</h2></div>
     </div>
-    <hr class="art-rule"><div id="num-body"></div>
+    <hr class="art-rule"><p class="art-lead">数秘術は、古代ギリシャの数学者ピタゴラスに帰される「数の神秘学」です。「万物は数である」——生年月日や名前を一桁に還元した数に、人生の設計図が刻まれていると考えます。11・22・33だけは還元しない特別な「マスターナンバー」として扱われます。</p><div id="num-body"></div>
   </section>
 
   <section class="art" id="sec-kabbalah">
@@ -618,7 +633,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">智</div>
       <div class="art-titles"><div class="art-eyebrow">Kabbalah</div><h2 class="art-title">カバラ数秘術 ─ 生命の樹</h2></div>
     </div>
-    <hr class="art-rule"><div id="kabbalah-body"></div>
+    <hr class="art-rule"><p class="art-lead">カバラはユダヤ教に伝わる神秘思想で、宇宙の構造を「生命の樹」と呼ばれる10の球体（セフィラ）の図で表します。数秘術と同じ根を持ちますが、数を「樹のどこに立つ魂か」という霊的な地図として読むところに特徴があります。</p><div id="kabbalah-body"></div>
   </section>
 
   <section class="art" id="sec-maya">
@@ -626,7 +641,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">暦</div>
       <div class="art-titles"><div class="art-eyebrow">Mayan Tzolkin</div><h2 class="art-title">マヤ暦 ─ KINと太陽の紋章</h2></div>
     </div>
-    <hr class="art-rule"><div id="maya-body"></div>
+    <hr class="art-rule"><p class="art-lead">古代マヤ文明の神官が儀式に用いた260日周期の神聖暦「ツォルキン」。20の紋章と13の音が織りなす260のKINが日々を巡り、生まれた日のKINはその人の魂の設計図とされます。本鑑定は現代に広まったドリームスペル方式（うるう日を数えない）で算出しています。</p><div id="maya-body"></div>
   </section>
 
   <section class="art" id="sec-shukuyo">
@@ -634,7 +649,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">宿</div>
       <div class="art-titles"><div class="art-eyebrow">Shukuyo 27 Mansions</div><h2 class="art-title">宿曜占星術 ─ 二十七宿</h2></div>
     </div>
-    <hr class="art-rule"><div id="shukuyo-body"></div>
+    <hr class="art-rule"><p class="art-lead">宿曜占星術は、インド占星術が仏典「宿曜経」として中国を経由し、平安時代に弘法大師空海が日本へ伝えた密教占星術です。月の宿る二十七宿から本質と相性を読み、その的中ぶりから戦国武将が軍略に使い、江戸幕府が民間での使用を禁じたという逸話も残ります。</p><div id="shukuyo-body"></div>
   </section>
 
   <section class="art" id="sec-sanmei">
@@ -642,7 +657,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">算</div>
       <div class="art-titles"><div class="art-eyebrow">Sanmeigaku</div><h2 class="art-title">算命学 ─ 人体星図</h2></div>
     </div>
-    <hr class="art-rule"><div id="sanmei-body"></div>
+    <hr class="art-rule"><p class="art-lead">算命学は、中国の陰陽五行説を源流として日本で体系化された運命学です。生年月日の干支から「人体星図」という星の配置図を描き、頭・胸・腹・両手の五カ所に宿る星で人物像と人生の流れを読みます。政財界の帝王学としても学ばれてきました。</p><div id="sanmei-body"></div>
   </section>
 
   <section class="art" id="sec-rokusei">
@@ -650,7 +665,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">六</div>
       <div class="art-titles"><div class="art-eyebrow">Six Star Astrology</div><h2 class="art-title">六星占術 ─ 運命星と殺界</h2></div>
     </div>
-    <hr class="art-rule"><div id="rokusei-body"></div>
+    <hr class="art-rule"><p class="art-lead">六星占術は、細木数子氏が算命学や万象学を基に大成した占術です。生年月日から六つの運命星（土星人・金星人・火星人・天王星人・木星人・水星人）へ分類し、12年周期の運気——とりわけ運気の冬にあたる3年間「大殺界」——を読むことで広く知られています。</p><div id="rokusei-body"></div>
   </section>
 
   <section class="art" id="sec-ennea">
@@ -658,7 +673,7 @@ button.print-btn:hover{background:var(--gold-wash)}
       <div class="art-seal" aria-hidden="true">型</div>
       <div class="art-titles"><div class="art-eyebrow">Enneagram</div><h2 class="art-title">エニアグラム ─ 九つの性格類型</h2></div>
     </div>
-    <hr class="art-rule"><div id="ennea-body"></div>
+    <hr class="art-rule"><p class="art-lead">エニアグラムは、古代からの智慧を起源に20世紀に心理学と統合された、9タイプの性格類型論です。円周上の9つの点を結ぶ図形がその名の由来。世界的な企業研修でも使われる自己理解の地図で、本来は自己観察でタイプを見極めていきます。</p><div id="ennea-body"></div>
   </section>
 
   <section class="art" id="sec-synth">
@@ -2431,4 +2446,257 @@ render=function(inp){
        <span class="m-chip">六星<b>${ROKUSEI_NAMES[r.star]}${r.plus?"＋":"−"}</b></span>`);
   }
 };
+
+/* ══════════════════ 極 ─ 解説拡充と総合年表 ══════════════════ */
+
+/* 追加データ */
+const NUM_DETAIL={
+ 1:{s:"決断の速さと開拓精神。ゼロから一を生む力",c:"独走しすぎて孤立しないこと。頼るのも実力のうち"},
+ 2:{s:"人の気持ちを察する繊細なアンテナと調整力",c:"合わせすぎて自分を見失わないこと。NOも優しさ"},
+ 3:{s:"場を明るくする表現力と、遊びを形にする創造力",c:"散らかりがちな興味の風呂敷を、ときどき畳むこと"},
+ 4:{s:"コツコツ積む継続力と、仕組みを作る設計力",c:"予定外の変化を「壊れた」ではなく「更新」と捉えること"},
+ 5:{s:"変化への適応力と、人を惹きつける行動力",c:"自由の追求が「飽きっぽさ」にならないよう軸を一本"},
+ 6:{s:"深い愛情と責任感。人を癒し育てる力",c:"世話の焼きすぎは相手の力を奪うことも。見守る勇気を"},
+ 7:{s:"本質を見抜く分析力と、深く潜る集中力",c:"考えすぎて動けなくなる前に、小さく試すこと"},
+ 8:{s:"大きな目標を実現する統率力と経済感覚",c:"力の使い道を「支配」ではなく「保護」に向けること"},
+ 9:{s:"広い視野と慈悲。違いを包み込む器",c:"みんなに良くしようとして、自分が空っぽにならないこと"},
+ 11:{s:"鋭い直感とインスピレーション。人を照らす感化力",c:"敏感すぎる感受性の休ませ方を覚えること"},
+ 22:{s:"理想を現実の建築物に変える、稀有な実務力",c:"完璧な設計図を待たず、仮組みで進める勇気"},
+ 33:{s:"見返りを求めない愛と、人を育てる大きな器",c:"自己犠牲に傾かないこと。まず自分の器を満たして"}
+};
+const TONE_T=["第1の音・磁気：目的を定め、すべてを引き寄せる始まりの音","第2の音・月：二つの極の間で挑戦を見定める音","第3の音・電気：人と結びつき、奉仕で電流を流す音","第4の音・自己存在：形を測り、土台を定める音","第5の音・倍音：中心に立ち、輝きを放つ指揮の音","第6の音・律動：ゆらぎを整え、平等に組織する音","第7の音・共振：天と調律し、ひらめきを受信する音","第8の音・銀河：調和を体現し、手本となる音","第9の音・太陽：意図を脈動させ、大きく実現する音","第10の音・惑星：仕上げ、完成させ、見える形にする音","第11の音・スペクトル：溶かし、解放し、手放す音","第12の音・水晶：協力を束ね、普遍化する音","第13の音・宇宙：今に在り、超えて持ちこたえる音"];
+const SEPHIROT_LONG={
+ 1:"生命の樹の頂・ケテル（王冠）。純粋な意志と始まりの光を司ります。何もないところに最初の一点を打つ——それがあなたの霊的な役割です。",
+ 2:"第2のセフィラ・コクマー（知恵）。ひらめきの原液のような創造力を司ります。理屈より先に「わかってしまう」直観こそ、あなたの泉です。",
+ 3:"第3のセフィラ・ビナー（理解）。閃きを受け止め、形と秩序に変える力です。混沌に輪郭を与える編集者の魂を持ちます。",
+ 4:"第4のセフィラ・ケセド（慈悲）。惜しみなく広げ、与える愛の力です。あなたの豊かさは、循環させるほど大きくなります。",
+ 5:"第5のセフィラ・ゲブラー（峻厳）。断ち切り、律する強さの力です。優しさだけでは守れないものを、あなたの厳しさが守ります。",
+ 6:"中央に輝く第6のセフィラ・ティファレト（美）。すべてを調和させる太陽の座です。バランスの中心に立つことが、あなたの美学です。",
+ 7:"第7のセフィラ・ネツァク（勝利）。情熱を持続させ、勝利まで運ぶ力です。感情の炎を絶やさないことが、あなたの武器になります。",
+ 8:"第8のセフィラ・ホド（栄光）。知性の輝きと伝達の力です。言葉と論理で世界を写し取る書記官の魂を持ちます。",
+ 9:"第9のセフィラ・イェソド（基礎）。見える世界と見えない世界をつなぐ月の座です。イメージの力で現実の土台を作ります。",
+ 11:"マスターナンバー11——直感の門。ケテルとコクマーの間に架かる稲妻の通り道とされ、受信した光を人に伝える役割を持ちます。",
+ 22:"マスターナンバー22——構築の門。生命の樹の22の小径すべてを歩む数とされ、理想を地上に建てる大工の魂です。",
+ 33:"マスターナンバー33——愛の門。教え、癒し、育てることに人生が向かう、もっとも稀な数のひとつです。"
+};
+const UNKI_LONG=["畑に種を蒔く年。すぐに芽は出なくても、ここで蒔いたものが次の12年を決めます。新しい学びや出会いを意識的に。","蒔いた種が芽吹く年。小さな手応えが見え始めます。焦らず水をやり続けることが、後の大輪につながります。","花が開く年。人からの評価や引き立てが増え、物事が形になります。ここでの信用が財産になります。","少し立ち止まる小殺界。体調と心の点検を。無理をしなければ、次の飛躍への良い踊り場になります。","12年周期の最初の頂点。実力が実を結ぶ収穫期です。大きな決断や挑戦は、この年が好機です。","心が揺れやすい中殺界。判断が迷いがちになるため、大きな契約や転身は慎重に。相談相手を持つのが吉。","風向きが再び整う年。一度離れたチャンスや縁が戻ってくることも。再挑戦・再会に追い風が吹きます。","金運が実る年。収入・財産に関する動きが好調に。堅実な投資や貯蓄の仕組み作りに向きます。","高原のような安定期。攻めも守りもバランスよく進む、心地よい巡航速度の年です。","大殺界の一年目「陰影」。見通しが利きにくくなる時期の入口です。新規の大勝負より、足元の見直しを。","大殺界の二年目「停止」。動きが止まりやすい年。守りに徹し、力を蓄えることが最善の攻めになります。","大殺界の三年目「減退」。手放しと整理の年。ここで身軽になった人ほど、翌年の種子から鮮やかに再起します。"];
+const ENNEA_CORE=[
+ ["正しくありたい、良くありたい","堕落すること、間違った人間になること"],
+ ["愛されたい、必要とされたい","愛される価値がないと見なされること"],
+ ["価値ある存在でありたい、認められたい","無価値であること、失敗者と見られること"],
+ ["自分自身でありたい、特別でありたい","個性を失うこと、平凡に埋もれること"],
+ ["理解したい、有能でありたい","無知で無力なまま世界に飲まれること"],
+ ["安全でありたい、支えが欲しい","支えを失い、独りで放り出されること"],
+ ["満たされたい、痛みを避けたい","退屈と苦痛に閉じ込められること"],
+ ["自分の人生を自分で決めたい","他人に支配され、傷つけられること"],
+ ["平和でいたい、つながっていたい","分離と衝突で心の平和を失うこと"]
+];
+
+/* ── 数秘術：深読みカードを追加 ── */
+const _renderNumJP=renderNumJP;
+renderNumJP=function(){
+  _renderNumJP();
+  const {inp}=CUR;
+  const lp=lifePathOf(inp.y,inp.m,inp.d);
+  const bd=reduceNum(inp.d,true);
+  const D=NUM_DETAIL[lp]||NUM_DETAIL[reduceNum(lp,false)];
+  const Db=NUM_DETAIL[bd]||NUM_DETAIL[reduceNum(bd,false)];
+  $("num-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>ライフパス${lp}の深読み</h3>
+      <p><strong>強み</strong>　${D.s}。これはあなたが意識せずとも発揮している、生まれつきの装備です。</p>
+      <p><strong>人生の課題</strong>　${D.c}。数秘術では、課題は欠点ではなく「この人生で磨くと決めてきたテーマ」と読みます。</p>
+      <p><strong>誕生数${bd}との重なり</strong>　日常のふるまいには誕生数${bd}「${numJP(bd).k}」の癖——${Db.s.split("。")[0]}——が顔を出します。人生の大きな方向（ライフパス）と日々の癖（誕生数）、二つの数の間を行き来しながら、人は自分らしさを育てていきます。</p>
+    </div>`);
+};
+
+/* ── カバラ：生命の樹の解説を拡充 ── */
+renderKabbalah=function(){
+  const {inp}=CUR;
+  const un=lifePathOf(inp.y,inp.m,inp.d);
+  const bd=reduceNum(inp.d,true);
+  $("kabbalah-body").innerHTML=`
+    <div class="card">
+      <h3>運命数 ${un} ─ ${(SEPHIROT[un]||"マスターナンバー").split("─")[0]}</h3>
+      <p>カバラでは、生年月日のすべての数字を足して還元した「運命数」を、生命の樹のどの球体（セフィラ）に立つ魂かを示す座標として読みます。</p>
+      <p><strong>あなたの座＝${SEPHIROT[un]||"マスターナンバー"}</strong>　${SEPHIROT_LONG[un]||""}</p>
+      <p><strong>誕生数${bd}の彩り</strong>　${SEPHIROT_LONG[bd]?SEPHIROT_LONG[bd].split("。")[0]+"。日々の選択には、この球体の光が差し込みます。":"日々の選択にはマスターナンバーの光が差し込みます。"}</p>
+      <p class="muted">ピタゴラス式の数秘術が「数の性格」を読むのに対し、カバラは「魂の立ち位置」を読みます。同じ数でも、二つの体系を重ねることで立体的な像が浮かび上がります。生命の樹には10の球体と22の小径があり、タロットの大アルカナ22枚とも対応する、西洋神秘思想の背骨です。</p>
+    </div>`;
+};
+
+/* ── マヤ暦：音の解説と関係KINの使い方を追加 ── */
+const _renderMaya=renderMaya;
+renderMaya=function(){
+  _renderMaya();
+  const {inp}=CUR;
+  const kin=mayaKin(inp.y,inp.m,inp.d);
+  const tone=mayaToneOf(kin);
+  $("maya-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>銀河の音${tone}の生き方</h3>
+      <p>${TONE_T[tone-1]}。マヤ暦では、紋章が「何を持って生まれたか」を、音が「それをどう奏でるか」を表します。</p>
+      <p>音${tone}のあなたは、${tone<=4?"ウェイブスペルの序盤を担う「立ち上げの音」。物事の始まりに立ち会うとき、いちばん自然に力が出ます。":tone<=9?"ウェイブスペルの中盤を担う「展開の音」。始まったものを膨らませ、形にしていく過程で本領を発揮します。":"ウェイブスペルの終盤を担う「仕上げと手放しの音」。完成させ、次へ渡す場面であなたの真価が光ります。"}</p>
+      <p class="muted">関わりの紋章の使い方——類似KINの人とは安心して長く組めます。神秘KINの人には理屈抜きに惹かれ、学びが多い相手。反対KINの人は最初ぶつかりやすいものの、あなたに欠けた視点をくれる最高の鏡です。ガイドKINは人だけでなく「その紋章らしい生き方」を指針にする、という読み方もできます。</p>
+    </div>`);
+};
+
+/* ── 宿曜：相性の宿（栄親・安壊）を追加 ── */
+const _renderShukuyo=renderShukuyo;
+renderShukuyo=function(){
+  _renderShukuyo();
+  const {inp}=CUR;
+  const kr=kyureki(inp.y,inp.m,inp.d,inp.utc);
+  const my=shukuOf(kr);
+  const eishin=[],ankai=[],gotai=[];
+  for(let dd=1;dd<27;dd++){
+    const t=mod(my+dd,27), p=dd%9;
+    if(p===1||p===8)eishin.push(t);
+    if(p===3||p===4)ankai.push(t);
+    if(p===0)gotai.push(t);
+  }
+  const chips=arr=>arr.map(i=>`<span class="job-chip">${SHUKU27[i][0]}</span>`).join("");
+  $("shukuyo-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>${SHUKU27[my][0]}と縁の深い宿 ─ 宿曜の相性</h3>
+      <p>宿曜占星術の真骨頂は相性です。二十七宿の距離関係から「栄親」「安壊」などの縁を読みます。</p>
+      <p><strong>栄親（えいしん）─ 互いを繁栄させる最良の縁</strong><br>一緒にいるほど運が育つ、公私ともに理想的な相手です。</p>
+      <div class="job-chips">${chips(eishin)}</div>
+      <p style="margin-top:14px"><strong>安壊（あんかい）─ 強く惹かれ、強く壊し合う縁</strong><br>抗いがたい引力を持つ一方、近すぎると互いの土台を崩すことも。適度な距離が絆を長持ちさせます。</p>
+      <div class="job-chips">${chips(ankai)}</div>
+      <p style="margin-top:14px"><strong>命・業・胎 ─ 前世からの因縁の宿</strong><br>同じ${SHUKU27[my][0]}の人は「命」＝合わせ鏡の縁。${gotai.map(i=>SHUKU27[i][0]).join("・")}は「業・胎」＝どこか懐かしさを覚える魂の同郷です。</p>
+      <p class="fine">相性は見る方向（どちらから数えるか）で意味合いが変わるとされます。ここでは、あなたから見た縁を表示しています。</p>
+    </div>`);
+};
+
+/* ── 算命学：五本の星すべての解説 ── */
+const _renderSanmei=renderSanmei;
+renderSanmei=function(){
+  _renderSanmei();
+  const {fp}=CUR;
+  const rhand=shuseiOf(fp.ds,fp.ms);
+  const lhand=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.yb]);
+  const belly=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.db]);
+  $("sanmei-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>残る三つの星の読み解き</h3>
+      <p><strong>右手の星「${SHUSEI[rhand][0]}」（仕事・社会での顔）</strong>　${SHUSEI[rhand][1]}。職場やお金の稼ぎ方に、この星の質が表れます。</p>
+      <p><strong>左手の星「${SHUSEI[lhand][0]}」（家庭・パートナーへの顔）</strong>　${SHUSEI[lhand][1]}。身近な人にだけ見せる素顔です。</p>
+      <p><strong>腹の星「${SHUSEI[belly][0]}」（晩年と家系の顔）</strong>　${SHUSEI[belly][1]}。歳を重ねるほど、この星が前に出てきます。</p>
+      <p class="muted">五つの主星がすべて同じ人はほとんどいません。場面によって出てくる星が入れ替わる——それが算命学の考える「多面体としての人間」です。</p>
+    </div>`);
+};
+
+/* ── 六星占術：今年の運気の詳解 ── */
+const _renderRokusei=renderRokusei;
+renderRokusei=function(){
+  _renderRokusei();
+  const {fp,nowY,nyb}=CUR;
+  const r=rokuseiOf(fp);
+  const ph=mod(nyb-r.base,12);
+  $("rokusei-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>今年「${UNKI12[ph]}」の過ごし方</h3>
+      <p>${UNKI_LONG[ph]}</p>
+      <p class="muted">六星占術の12年周期は、農業の暦に似ています。種を蒔き（種子）、育て（緑生・立花）、刈り取り（達成・財成）、土を休ませる（大殺界）。どの季節にも意味があり、冬に種を蒔かないのと同じように、時期に合った動きを選ぶことが開運の本質です。</p>
+    </div>`);
+};
+
+/* ── エニアグラム：根源的欲求と恐れ ── */
+const _renderEnnea=renderEnnea;
+renderEnnea=function(){
+  _renderEnnea();
+  const {inp}=CUR;
+  const t=enneaOf(inp.y,inp.m,inp.d);
+  $("ennea-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>タイプ${t}を動かしているもの</h3>
+      <p><strong>根源的な欲求</strong>　「${ENNEA_CORE[t-1][0]}」。あなたの行動の多くは、意識するしないにかかわらず、この願いから発しています。</p>
+      <p><strong>根源的な恐れ</strong>　「${ENNEA_CORE[t-1][1]}」。強いストレス下の反応は、たいていこの恐れが引き金です。</p>
+      <p class="muted">エニアグラムの目的はタイプに人を閉じ込めることではなく、「自分の自動反応に気づき、選び直せるようになること」。欲求と恐れの正体を知るだけで、同じ状況でも打てる手が増えていきます。</p>
+    </div>`);
+};
+
+/* ── 生涯の運気：六星統合カーブ＋総合年表 ── */
+renderLife=function(){
+  const {fp,myStar,nowY}=CUR;
+  const vb=voidBranches(fp.di);
+  const r=rokuseiOf(fp);
+  const maxAge=90;
+  const pts=[];
+  for(let a=0;a<=maxAge;a++){
+    const y=fp.py+a;
+    const yb2=mod(y-4,12);
+    pts.push({a,y,base:palaceOfYear(y,myStar),voidY:vb.includes(yb2),rok:mod(yb2-r.base,12)});
+  }
+  const W=1000,H=230,padL=40,padR=14,padT=16,padB=34;
+  const X=a=>padL+(W-padL-padR)*a/maxAge;
+  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
+  // 六星大殺界の帯
+  let bands="";
+  let i=0;
+  while(i<=maxAge){
+    if(pts[i].rok>=9){let j=i;while(j+1<=maxAge&&pts[j+1].rok>=9)j++;
+      bands+=`<rect x="${(X(Math.max(i-0.5,0))).toFixed(1)}" y="${padT}" width="${(X(Math.min(j+0.5,maxAge))-X(Math.max(i-0.5,0))).toFixed(1)}" height="${H-padT-padB}" fill="var(--vermil)" opacity="0.09"/>`;i=j+1;}
+    else i++;
+  }
+  const P=pts.map(p=>({x:X(p.a),y:Y(PALACE_SCORE[p.base])}));
+  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
+  for(let k=0;k<P.length-1;k++){
+    const p0=P[Math.max(0,k-1)],p1=P[k],p2=P[k+1],p3=P[Math.min(P.length-1,k+2)];
+    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+  }
+  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
+  const grid=[];
+  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}歳</text>`);
+  const voidDots=pts.filter(p=>p.voidY).map(p=>`<circle cx="${X(p.a)}" cy="${Y(PALACE_SCORE[p.base])}" r="3" fill="var(--vermil)"/>`).join("");
+  const nowAge=nowY-fp.py;
+  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">いま ${nowAge}歳</text>`:"";
+  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="年齢ごとの運気カーブ（九星の波と六星の大殺界）" style="min-width:720px;max-width:none">
+    ${bands}${grid.join("")}
+    <path d="${area}" fill="var(--gold-wash)"/>
+    <path d="${line}" fill="none" stroke="var(--gold-deep)" stroke-width="2.2" stroke-linejoin="round"/>
+    ${voidDots}${nowMark}
+    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">好調</text>
+    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">充電</text>
+  </svg></div>`;
+  const nextPeak=pts.find(p=>p.y>nowY&&p.base===7);
+  const nextRest=pts.find(p=>p.y>=nowY&&p.base===1);
+  // 総合年表（今年から20年）
+  const symOf=p=>{
+    let g=0;
+    g+=PALACE_SCORE[p.base]>=4?1:(PALACE_SCORE[p.base]<=2?-1:0);
+    g+=p.rok>=9?-1.5:(p.rok===5?-0.5:([4,7,8].includes(p.rok)?1:0));
+    if(p.voidY)g-=0.5;
+    return g>=1.5?["◎","絶好調の重なり"]:g>=0.5?["○","追い風"]:g>-1?["△","平常〜慎重に"]:["▲","充電・守りの年"];
+  };
+  const rows=pts.filter(p=>p.y>=nowY&&p.y<nowY+20).map(p=>{
+    const dai=p.rok>=9, chu=p.rok===5, sho=p.rok===3;
+    const sym=symOf(p);
+    return `<tr${p.y===nowY?' class="now"':''}>
+      <td>${p.y}年</td><td>${p.a}歳</td><td>${kanshiName(mod(p.y-4,10),mod(p.y-4,12))}</td>
+      <td>${PALACE_SHORT[p.base]}<span class="fine">・${PALACE_T[p.base].split("＝")[0]}</span></td>
+      <td${dai?' class="dai"':''}>${UNKI12[p.rok]}${dai?"・大殺界":chu?"・中殺界":sho?"・小殺界":""}</td>
+      <td>${p.voidY?"空亡":"—"}</td>
+      <td><span class="sym">${sym[0]}</span> <span class="fine">${sym[1]}</span></td>
+    </tr>`;
+  }).join("");
+  $("life-body").innerHTML=`
+    <div class="card">
+      <h3>0歳から90歳までの運気カーブ ─ 九星の波 × 六星の大殺界</h3>
+      <p class="muted">金色の曲線は九星気学の9年周期（本命星${KYUSEI[myStar-1].n}がめぐる宮）。<span style="color:var(--vermil)">薄い赤の帯</span>は六星占術（${ROKUSEI_NAMES[r.star]}${r.plus?"＋":"−"}）の大殺界の3年間、<span style="color:var(--vermil)">●</span>は四柱推命の空亡の年です。三つの体系の「休め」のサインが重なる時期こそ、本当の充電期と読めます。年齢は立春区切りの目安です。</p>
+      ${svg}
+      <p class="muted">運気は9年と12年、二つの周期が重なって巡ります。${nextPeak?`九星の次の収穫は<strong>${nextPeak.y}年（${nextPeak.a}歳）</strong>。`:""}${nextRest?`<strong>${nextRest.y}年（${nextRest.a}歳）</strong>は九星の充電年です。`:""}山の年に思い切り攻め、帯の重なる谷の年に学びと整理を——それが二重周期の波乗りです。</p>
+    </div>
+    <div class="card">
+      <h3>総合運気年表 ─ これからの20年</h3>
+      <div class="chron"><table>
+        <thead><tr><th>年</th><th>年齢</th><th>干支</th><th>九星気学</th><th>六星占術</th><th>空亡</th><th>総合</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>
+      <p class="muted" style="margin-top:12px">総合欄は九星の宮・六星の運気・空亡を重ねた目安です。◎＝両体系の追い風が重なる年、▲＝複数の「休め」が重なる年。▲の年は悪運ではなく、次の◎を大きくするための仕込みの季節です。</p>
+      <p class="fine">六星占術の周期は公表の殺界年と照合済みですが、流派により1年前後する場合があります。</p>
+    </div>`;
+};
+
 </script>
