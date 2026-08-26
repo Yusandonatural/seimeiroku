@@ -1,0 +1,1616 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seimeiroku — Five-Art Birthday Reading</title>
+<style>
+:root{
+  --paper:#f6f1e6; --card:#fdfaf1; --card2:#f0e9d8;
+  --ink:#2b2733; --ink-soft:#5f596b; --ink-faint:#8b8496;
+  --line:#d9d0bc; --line-strong:#b9ad92;
+  --indigo:#26324e; --indigo-soft:#3d4c6e;
+  --gold:#a8842e; --gold-deep:#8a6b20; --gold-wash:rgba(168,132,46,.12);
+  --vermil:#b5432e; --vermil-wash:rgba(181,67,46,.1);
+  --matcha:#68724d; --matcha-wash:rgba(104,114,77,.14);
+  --good:#5a7a4e; --warn:#a56a2a; --bad:#a4432f;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","MS PMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#131722; --card:#1b2130; --card2:#222a3d;
+    --ink:#e8e1cd; --ink-soft:#b3abc0; --ink-faint:#847d93;
+    --line:#39415a; --line-strong:#4d5674;
+    --indigo:#9db1dd; --indigo-soft:#7e93c4;
+    --gold:#d2ab55; --gold-deep:#e0bd6e; --gold-wash:rgba(210,171,85,.13);
+    --vermil:#d76a52; --vermil-wash:rgba(215,106,82,.13);
+    --matcha:#9cab7b; --matcha-wash:rgba(156,171,123,.15);
+    --good:#8fb37f; --warn:#d1a35e; --bad:#d4715c;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#f6f1e6; --card:#fdfaf1; --card2:#f0e9d8;
+  --ink:#2b2733; --ink-soft:#5f596b; --ink-faint:#8b8496;
+  --line:#d9d0bc; --line-strong:#b9ad92;
+  --indigo:#26324e; --indigo-soft:#3d4c6e;
+  --gold:#a8842e; --gold-deep:#8a6b20; --gold-wash:rgba(168,132,46,.12);
+  --vermil:#b5432e; --vermil-wash:rgba(181,67,46,.1);
+  --matcha:#68724d; --matcha-wash:rgba(104,114,77,.14);
+  --good:#5a7a4e; --warn:#a56a2a; --bad:#a4432f;
+}
+:root[data-theme="dark"]{
+  --paper:#131722; --card:#1b2130; --card2:#222a3d;
+  --ink:#e8e1cd; --ink-soft:#b3abc0; --ink-faint:#847d93;
+  --line:#39415a; --line-strong:#4d5674;
+  --indigo:#9db1dd; --indigo-soft:#7e93c4;
+  --gold:#d2ab55; --gold-deep:#e0bd6e; --gold-wash:rgba(210,171,85,.13);
+  --vermil:#d76a52; --vermil-wash:rgba(215,106,82,.13);
+  --matcha:#9cab7b; --matcha-wash:rgba(156,171,123,.15);
+  --good:#8fb37f; --warn:#d1a35e; --bad:#d4715c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.9;
+  font-feature-settings:"palt";
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 96px}
+
+/* ── header ── */
+header.site{
+  padding:56px 0 36px; text-align:center; position:relative;
+  border-bottom:1px solid var(--line);
+}
+header.site::before{
+  content:""; display:block; height:5px; margin:0 auto 44px; max-width:880px;
+  border-top:1px solid var(--gold); border-bottom:3px double var(--gold);
+  opacity:.75;
+}
+.site-eyebrow{
+  font-family:var(--sans); font-size:11px; letter-spacing:.42em; text-indent:.42em;
+  color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;
+}
+h1.site-title{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(30px,6vw,42px); letter-spacing:.3em; text-indent:.3em;
+  margin:0 0 14px; text-wrap:balance; color:var(--ink);
+}
+.site-sub{color:var(--ink-soft); font-size:13.5px; letter-spacing:.14em; margin:0}
+.seal{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px;height:34px; margin-top:22px;
+  border:1.5px solid var(--vermil); color:var(--vermil);
+  font-family:var(--serif); font-size:17px; border-radius:4px;
+  transform:rotate(-3deg);
+}
+
+/* ── form ── */
+.entry{
+  margin:44px 0 0; background:var(--card); border:1px solid var(--line);
+  border-radius:6px; padding:34px 34px 30px; position:relative;
+}
+.entry::before{
+  content:"御記入"; position:absolute; top:-11px; left:28px;
+  background:var(--card); padding:0 10px;
+  font-family:var(--serif); font-size:12.5px; letter-spacing:.3em;
+  color:var(--gold-deep);
+}
+.f-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px 28px}
+@media(max-width:620px){.f-grid{grid-template-columns:1fr}}
+.f-field{display:flex; flex-direction:column; gap:7px}
+.f-label{
+  font-size:11.5px; letter-spacing:.22em; color:var(--ink-soft);
+  display:flex; align-items:baseline; gap:8px;
+}
+.f-label .opt{font-size:10px; color:var(--ink-faint); letter-spacing:.08em}
+.f-row{display:flex; gap:8px; align-items:center}
+input[type=text],input[type=number],select{
+  font-family:var(--sans); font-size:15px; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line-strong); border-radius:4px;
+  padding:9px 12px; width:100%; min-width:0;
+}
+input:focus-visible,select:focus-visible,button:focus-visible,.chip:focus-visible{
+  outline:2px solid var(--gold); outline-offset:2px;
+}
+.f-unit{font-size:12px; color:var(--ink-faint); flex:none}
+.f-check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft); margin-top:4px}
+.f-check input{width:15px;height:15px;accent-color:var(--gold)}
+.f-actions{margin-top:30px; display:flex; justify-content:center}
+button.go{
+  font-family:var(--serif); font-size:16.5px; letter-spacing:.42em; text-indent:.42em;
+  color:var(--paper); background:var(--indigo);
+  border:1px solid var(--indigo); border-radius:4px;
+  padding:13px 54px; cursor:pointer; transition:background .2s;
+}
+:root[data-theme="dark"] button.go, .dark-btn{color:#131722}
+@media (prefers-color-scheme: dark){ button.go{color:#131722} }
+:root[data-theme="light"] button.go{color:#f6f1e6}
+button.go:hover{background:var(--gold-deep); border-color:var(--gold-deep)}
+.f-note{margin-top:16px; font-size:11.5px; color:var(--ink-faint); text-align:center; letter-spacing:.05em}
+#overseas{display:none; grid-column:1/-1}
+#overseas.show{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:620px){#overseas.show{grid-template-columns:1fr}}
+
+/* ── results shell ── */
+#results{display:none}
+#results.show{display:block}
+
+/* hero 命式盤 */
+.meishiki{
+  margin-top:52px; background:var(--card); border:1px solid var(--line-strong);
+  border-radius:6px; overflow:hidden; position:relative;
+}
+.meishiki-head{
+  padding:30px 34px 24px; border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(circle at 84% 20%, var(--gold-wash), transparent 55%),
+    var(--card);
+  display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
+}
+.m-name{font-family:var(--serif); font-size:30px; letter-spacing:.18em; margin:0; line-height:1.4}
+.m-name small{display:block; font-size:12px; color:var(--ink-soft); letter-spacing:.22em; margin-top:6px; font-family:var(--sans)}
+.m-chips{display:flex; flex-wrap:wrap; gap:8px; max-width:420px; justify-content:flex-end}
+.m-chip{
+  font-size:12px; letter-spacing:.06em; padding:5px 12px; border-radius:999px;
+  border:1px solid var(--line-strong); background:var(--card2); color:var(--ink-soft);
+  white-space:nowrap;
+}
+.m-chip b{color:var(--ink); font-weight:600; margin-left:4px}
+.pillars{
+  display:flex; justify-content:center; gap:clamp(14px,4vw,38px);
+  padding:30px 20px 34px; background:var(--card);
+}
+.pillar{display:flex; flex-direction:column; align-items:center; gap:10px}
+.pillar .p-label{font-size:10.5px; letter-spacing:.3em; text-indent:.3em; color:var(--ink-faint)}
+.pillar .p-kanji{
+  writing-mode:vertical-rl; font-family:var(--serif); font-weight:600;
+  font-size:clamp(26px,5vw,34px); letter-spacing:.18em; line-height:1;
+  padding:14px 10px; border:1px solid var(--line); border-radius:4px;
+  background:var(--card2); color:var(--ink); min-height:96px;
+}
+.pillar.day .p-kanji{border-color:var(--gold); background:var(--gold-wash); color:var(--gold-deep)}
+.pillar .p-read{font-size:10.5px; color:var(--ink-faint); letter-spacing:.1em}
+.pillar .p-el{font-size:11px; color:var(--ink-soft)}
+
+/* nav chips */
+nav.toc{
+  position:sticky; top:0; z-index:30;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  margin:0 -20px; padding:10px 20px;
+  display:flex; gap:8px; overflow-x:auto; scrollbar-width:none;
+}
+nav.toc::-webkit-scrollbar{display:none}
+.chip{
+  flex:none; font-size:12.5px; letter-spacing:.1em; text-decoration:none;
+  color:var(--ink-soft); border:1px solid var(--line-strong); border-radius:999px;
+  padding:5px 15px; background:var(--card); white-space:nowrap;
+}
+.chip:hover{color:var(--gold-deep); border-color:var(--gold)}
+
+/* sections */
+section.art{margin-top:64px}
+.art-head{display:flex; align-items:center; gap:16px; margin-bottom:6px}
+.art-seal{
+  flex:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--gold); border-radius:4px; color:var(--gold-deep);
+  font-family:var(--serif); font-size:22px; font-weight:600;
+}
+.art-titles{min-width:0}
+.art-eyebrow{font-size:10.5px; letter-spacing:.3em; color:var(--gold-deep); text-transform:uppercase}
+h2.art-title{
+  font-family:var(--serif); font-size:23px; font-weight:600; letter-spacing:.16em;
+  margin:2px 0 0; text-wrap:balance;
+}
+.art-rule{border:none; border-top:1px solid var(--line); margin:14px 0 22px; position:relative}
+.art-rule::after{content:""; position:absolute; left:0; top:-1px; width:64px; border-top:1px solid var(--gold)}
+
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:6px;
+  padding:26px 28px; margin-bottom:16px;
+}
+.card h3{
+  font-family:var(--serif); font-size:16.5px; font-weight:600; letter-spacing:.12em;
+  margin:0 0 12px; color:var(--ink);
+  display:flex; align-items:center; gap:10px;
+}
+.card h3::before{content:""; width:7px; height:7px; background:var(--gold); transform:rotate(45deg); flex:none}
+.card p{margin:.5em 0; color:var(--ink); max-width:42em}
+.muted{color:var(--ink-soft); font-size:13px}
+.fine{color:var(--ink-faint); font-size:11.5px; letter-spacing:.04em}
+
+.kv{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; margin:10px 0}
+.kv dt{font-size:12px; color:var(--ink-faint); letter-spacing:.14em; padding-top:3px; white-space:nowrap}
+.kv dd{margin:0}
+.big-sign{font-family:var(--serif); font-size:22px; letter-spacing:.1em}
+.big-sign .sym{color:var(--gold-deep); margin-right:8px}
+
+.tag{
+  display:inline-block; font-size:11.5px; letter-spacing:.1em; border-radius:3px;
+  padding:2px 9px; margin-right:6px; vertical-align:2px;
+}
+.tag.gold{background:var(--gold-wash); color:var(--gold-deep); border:1px solid var(--gold)}
+.tag.verm{background:var(--vermil-wash); color:var(--vermil); border:1px solid var(--vermil)}
+.tag.matcha{background:var(--matcha-wash); color:var(--matcha); border:1px solid var(--matcha)}
+
+/* 五行 bars */
+.gogyo{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:16px 0 6px}
+.gg{display:flex; flex-direction:column; align-items:center; gap:6px}
+.gg .gg-bar{width:100%; height:88px; background:var(--card2); border:1px solid var(--line); border-radius:3px; display:flex; align-items:flex-end; overflow:hidden}
+.gg .gg-fill{width:100%; border-radius:2px 2px 0 0; min-height:3px; transition:height .6s ease}
+.gg .gg-name{font-family:var(--serif); font-size:15px}
+.gg .gg-count{font-size:11px; color:var(--ink-faint); font-variant-numeric:tabular-nums}
+
+/* 姓名 grids */
+.strokes-edit{display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 18px}
+.st-char{display:flex; flex-direction:column; align-items:center; gap:5px}
+.st-char .ch{font-family:var(--serif); font-size:26px; line-height:1}
+.st-char input{width:56px; text-align:center; padding:5px 4px; font-variant-numeric:tabular-nums}
+.st-sep{align-self:center; color:var(--ink-faint); font-size:18px; padding:0 2px}
+.goka{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:14px}
+@media(max-width:620px){.goka{grid-template-columns:repeat(2,1fr)}}
+.gk{
+  border:1px solid var(--line); border-radius:5px; background:var(--card2);
+  padding:14px 10px; text-align:center;
+}
+.gk .gk-name{font-size:11px; letter-spacing:.24em; text-indent:.24em; color:var(--ink-faint)}
+.gk .gk-num{font-family:var(--serif); font-size:30px; margin:4px 0 2px; font-variant-numeric:tabular-nums}
+.gk .gk-fortune{font-size:12px; letter-spacing:.15em}
+.gk .gk-phrase{font-size:10.5px; color:var(--ink-soft); margin-top:3px; line-height:1.5}
+.f-daikichi{color:var(--vermil)} .f-kichi{color:var(--good)}
+.f-hankichi{color:var(--warn)} .f-kyo{color:var(--ink-faint)} .f-daikyo{color:var(--ink-faint)}
+
+/* 方位盤 */
+.ban-wrap{display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap; margin-top:8px}
+.ban{
+  flex:none; display:grid; grid-template-columns:repeat(3,88px); grid-template-rows:repeat(3,88px);
+  border:1.5px solid var(--line-strong); background:var(--line);
+  gap:1px; font-variant-numeric:tabular-nums;
+}
+@media(max-width:420px){.ban{grid-template-columns:repeat(3,76px); grid-template-rows:repeat(3,76px)}}
+.ban .cell{
+  background:var(--card); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  position:relative; padding:4px;
+}
+.ban .dir{font-size:10px; letter-spacing:.2em; color:var(--ink-faint)}
+.ban .star{font-family:var(--serif); font-size:15.5px; letter-spacing:.04em; text-align:center; line-height:1.35}
+.ban .cell.center{background:var(--card2)}
+.ban .cell.good{background:var(--matcha-wash)}
+.ban .cell.bad{background:var(--vermil-wash)}
+.ban .mark{font-size:9.5px; letter-spacing:.08em}
+.ban .cell.good .mark{color:var(--good)} .ban .cell.bad .mark{color:var(--bad)}
+.ban-legend{flex:1; min-width:240px}
+.ban-legend ul{list-style:none; margin:8px 0; padding:0}
+.ban-legend li{padding:5px 0; border-bottom:1px dashed var(--line); font-size:13.5px; display:flex; gap:10px; align-items:baseline}
+.ban-legend li:last-child{border-bottom:none}
+.dir-b{font-family:var(--serif); letter-spacing:.1em; white-space:nowrap}
+
+/* 動物 */
+.animal-hero{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+.animal-emblem{
+  flex:none; width:92px; height:92px; border-radius:50%;
+  border:1.5px solid var(--gold); background:var(--gold-wash);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:30px; color:var(--gold-deep); font-weight:600;
+  letter-spacing:0; line-height:1.15; text-align:center; padding:8px;
+}
+.animal-hero .a-body{flex:1; min-width:240px}
+.animal-name{font-family:var(--serif); font-size:21px; letter-spacing:.08em; margin:0 0 4px}
+
+/* stars / score */
+.stars{font-size:18px; letter-spacing:.28em; color:var(--gold-deep); white-space:nowrap}
+.stars .off{color:var(--line-strong)}
+.today-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px}
+@media(max-width:620px){.today-grid{grid-template-columns:1fr}}
+.mini{border:1px solid var(--line); border-radius:5px; background:var(--card2); padding:16px 18px}
+.mini .mini-label{font-size:10.5px; letter-spacing:.26em; color:var(--ink-faint); margin-bottom:6px}
+.mini .mini-val{font-family:var(--serif); font-size:17px; letter-spacing:.06em}
+.mini .mini-note{font-size:12px; color:var(--ink-soft); margin-top:4px; line-height:1.7}
+
+/* 適職チップ */
+.job-chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px}
+.job-chip{
+  font-size:13px; letter-spacing:.08em; border-radius:999px;
+  border:1px solid var(--line-strong); color:var(--ink); background:var(--card2);
+  padding:4px 14px; white-space:nowrap;
+}
+.job-chip.hot{border-color:var(--gold); color:var(--gold-deep); background:var(--gold-wash)}
+
+/* こどものページ */
+#sec-kids .card{
+  border-radius:14px; font-size:16.5px; line-height:2.15;
+  border-width:1.5px;
+}
+#sec-kids .card h3{font-size:18px; letter-spacing:.14em}
+#sec-kids .card h3::before{background:var(--vermil); border-radius:50%; transform:none; width:9px; height:9px}
+#sec-kids .card p{max-width:38em}
+.kid-emblem{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:52px; height:52px; border-radius:50%; padding:0 10px;
+  border:1.5px solid var(--vermil); color:var(--vermil); background:var(--vermil-wash);
+  font-family:var(--serif); font-size:19px; margin-right:12px; vertical-align:middle;
+}
+.kid-stars{font-size:26px; letter-spacing:.2em; color:var(--gold-deep)}
+.kid-stars .off{color:var(--line-strong)}
+.kid-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px}
+@media(max-width:620px){.kid-grid{grid-template-columns:1fr}}
+.kid-mini{
+  border:1.5px dashed var(--line-strong); border-radius:12px; padding:16px 18px;
+  background:var(--card2);
+}
+.kid-mini .k-label{font-size:12px; letter-spacing:.22em; color:var(--vermil); margin-bottom:6px}
+.kid-mini .k-val{font-family:var(--serif); font-size:19px}
+
+/* 月運カレンダー */
+.months{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px}
+@media(max-width:620px){.months{grid-template-columns:repeat(2,1fr)}}
+.months .mini{padding:13px 14px}
+.months .mini .mini-val{font-size:15.5px}
+.months .mini.now{border-color:var(--gold); background:var(--gold-wash)}
+.months .mini.now .mini-label{color:var(--gold-deep)}
+
+/* synthesis */
+.synth{
+  border:1px solid var(--gold); background:var(--gold-wash);
+  border-radius:6px; padding:30px 32px; margin-bottom:16px;
+}
+.synth p{max-width:44em}
+.key-chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px}
+.key-chip{
+  font-family:var(--serif); font-size:13.5px; letter-spacing:.14em;
+  border:1px solid var(--gold); color:var(--gold-deep); border-radius:999px;
+  padding:4px 16px; background:var(--card);
+}
+
+footer.site{
+  margin-top:80px; padding:28px 0 8px; border-top:1px solid var(--line);
+  text-align:center;
+}
+footer .fine{max-width:46em; margin:0 auto; line-height:1.9}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important; scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth}
+
+/* ── 保存（この端末のみ） ── */
+.saved-list{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; align-items:center}
+.saved-list:empty{display:none}
+.saved-label{font-size:11px; letter-spacing:.18em; color:var(--gold-deep)}
+.saved-chip{
+  display:inline-flex; align-items:center; gap:8px; font-size:12.5px;
+  border:1px solid var(--line-strong); border-radius:999px; background:var(--card2);
+  padding:4px 6px 4px 14px; cursor:pointer; color:var(--ink);
+}
+.saved-chip:hover{border-color:var(--gold); background:var(--gold-wash)}
+.saved-chip .x{
+  width:18px; height:18px; border-radius:50%; border:none;
+  background:var(--line); color:var(--ink-soft); font-size:11px; cursor:pointer; line-height:1; padding:0;
+}
+.saved-chip .x:hover{background:var(--vermil); color:#fff}
+.save-ctl{display:flex; justify-content:center; align-items:center; gap:18px; margin-top:16px; flex-wrap:wrap}
+.save-ctl button{
+  font-size:11px; letter-spacing:.1em; color:var(--ink-faint);
+  background:none; border:1px solid var(--line-strong); border-radius:999px;
+  padding:3px 14px; cursor:pointer;
+}
+.save-ctl button:hover{color:var(--vermil); border-color:var(--vermil)}
+@media print{.saved-list,.save-ctl{display:none!important}}
+
+/* ── 五行カラー・動物グループ章 ── */
+:root{--el-wood:#5e6c43; --el-fire:#ab4029; --el-earth:#9a7a28; --el-metal:#7d7f8d; --el-water:#2c3c5e; --el-ink:#f6f1e6}
+@media (prefers-color-scheme: dark){
+  :root{--el-wood:#8fa06b; --el-fire:#cd6a52; --el-earth:#c7a44f; --el-metal:#9aa4b5; --el-water:#7e93c4; --el-ink:#131722}
+}
+:root[data-theme="light"]{--el-wood:#5e6c43; --el-fire:#ab4029; --el-earth:#9a7a28; --el-metal:#7d7f8d; --el-water:#2c3c5e; --el-ink:#f6f1e6}
+:root[data-theme="dark"]{--el-wood:#8fa06b; --el-fire:#cd6a52; --el-earth:#c7a44f; --el-metal:#9aa4b5; --el-water:#7e93c4; --el-ink:#131722}
+.el-t{
+  display:inline-block; min-width:2.1em; text-align:center; padding:0 7px; margin:0 2px;
+  border-radius:3px; font-size:11.5px; letter-spacing:.12em; font-family:var(--sans);
+  color:var(--el-ink); vertical-align:1.5px; font-weight:600;
+  print-color-adjust:exact; -webkit-print-color-adjust:exact;
+}
+.el-0{background:var(--el-wood)} .el-1{background:var(--el-fire)} .el-2{background:var(--el-earth)}
+.el-3{background:var(--el-metal)} .el-4{background:var(--el-water)}
+.grp-t{
+  display:inline-block; padding:0 10px; margin:0 3px; border-radius:999px;
+  font-size:11px; letter-spacing:.14em; font-family:var(--sans); font-weight:600;
+  color:var(--el-ink); vertical-align:1.5px;
+  print-color-adjust:exact; -webkit-print-color-adjust:exact;
+}
+.grp-m{background:var(--el-water)} .grp-e{background:var(--el-wood)} .grp-s{background:var(--el-fire)}
+.animal-emblem .em{font-size:44px; line-height:1}
+.a-emoji{font-size:20px; vertical-align:-2px; margin-right:3px}
+
+/* ── PDF・印刷 ── */
+.print-bar{display:flex; justify-content:flex-end; margin:20px 0 -10px}
+button.print-btn{
+  font-family:var(--sans); font-size:12.5px; letter-spacing:.18em;
+  color:var(--gold-deep); background:var(--card);
+  border:1px solid var(--gold); border-radius:999px;
+  padding:8px 24px; cursor:pointer;
+}
+button.print-btn:hover{background:var(--gold-wash)}
+@page{margin:12mm}
+@media print{
+  :root,:root[data-theme="dark"]{
+    --paper:#fff; --card:#fff; --card2:#f4f1e9;
+    --ink:#1e1b26; --ink-soft:#4c4658; --ink-faint:#6f6880;
+    --line:#c9c2b2; --line-strong:#a89d86;
+    --indigo:#26324e; --indigo-soft:#3d4c6e;
+    --gold:#8a6b20; --gold-deep:#6f5518; --gold-wash:#f3ecd9;
+    --vermil:#a4432f; --vermil-wash:#f7e8e3;
+    --matcha:#5c6b46; --matcha-wash:#edf0e2;
+    --good:#4c6a41; --warn:#8a5a1f; --bad:#933d2a;
+  }
+  nav.toc, form.entry, .print-bar, .mr-del, .add-row, button.go{display:none!important}
+  body{background:#fff}
+  header.site{padding:10px 0 20px}
+  header.site::before{margin-bottom:20px}
+  section.art{margin-top:28px}
+  .card,.mini,.gk,.kid-person,.kid-mini,.synth,.ban-wrap{break-inside:avoid}
+  .cmp{overflow:visible}
+  #results{display:block!important}
+}
+</style>
+<div class="wrap">
+<header class="site">
+  <div class="site-eyebrow">Birthday Divination System</div>
+  <h1 class="site-title">星命録<span style="font-size:.4em; letter-spacing:.18em; display:block; margin-top:10px">SEIMEIROKU</span></h1>
+  <p class="site-sub">A five-art birthday reading — Western astrology · Four Pillars (BaZi) · Numerology · Nine Star Ki · Animal Fortune</p>
+  <div class="seal" aria-hidden="true">鑑</div>
+</header>
+
+<form class="entry" id="form" autocomplete="off">
+  <div id="savedList" class="saved-list" aria-label="Saved readings"></div>
+  <div class="f-grid">
+    <div class="f-field">
+      <label class="f-label" for="mei">First name</label>
+      <input type="text" id="mei" placeholder="e.g. Emma" required>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="sei">Last name</label>
+      <input type="text" id="sei" placeholder="e.g. Smith" required>
+    </div>
+    <div class="f-field">
+      <span class="f-label">Date of birth</span>
+      <div class="f-row">
+        <input type="number" id="by" min="1900" max="2026" placeholder="1985" aria-label="Year"><span class="f-unit">Y</span>
+        <input type="number" id="bm" min="1" max="12" placeholder="4" aria-label="Month"><span class="f-unit">M</span>
+        <input type="number" id="bd" min="1" max="31" placeholder="15" aria-label="Day"><span class="f-unit">D</span>
+      </div>
+    </div>
+    <div class="f-field">
+      <span class="f-label">Time of birth <span class="opt">used for rising sign &amp; hour pillar</span></span>
+      <div class="f-row">
+        <input type="number" id="bh" min="0" max="23" placeholder="10" aria-label="Hour"><span class="f-unit">h</span>
+        <input type="number" id="bmin" min="0" max="59" placeholder="30" aria-label="Minute"><span class="f-unit">m</span>
+      </div>
+      <label class="f-check"><input type="checkbox" id="noTime">Time unknown (noon is used as an estimate)</label>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="pref">Place of birth</label>
+      <select id="pref"></select>
+    </div>
+    <div id="overseas">
+      <div class="f-field">
+        <label class="f-label" for="olat">Latitude (N+)</label>
+        <input type="number" id="olat" step="0.01" min="-90" max="90" placeholder="48.85">
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="olon">Longitude (E+)</label>
+        <input type="number" id="olon" step="0.01" min="-180" max="180" placeholder="2.35">
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="outc">UTC offset</label>
+        <input type="number" id="outc" step="0.5" min="-12" max="14" placeholder="1">
+      </div>
+    </div>
+  </div>
+  <div class="f-actions"><button type="submit" class="go">READ MY STARS</button></div>
+  <div class="save-ctl">
+    <label class="f-check"><input type="checkbox" id="saveOpt" checked>Save readings on this device (browser only)</label>
+    <button type="button" id="clearSaved">Delete saved data</button>
+  </div>
+  <p class="f-note">Everything is calculated right here on this page — nothing you enter is ever sent anywhere. Saved readings stay in this browser only.</p>
+</form>
+
+<div id="results">
+  <div class="print-bar"><button type="button" class="print-btn" onclick="window.print()">Save as PDF / Print</button></div>
+  <div class="meishiki" id="hero"></div>
+  <nav class="toc" aria-label="Contents">
+    <a class="chip" href="#sec-west">Astrology</a>
+    <a class="chip" href="#sec-shichu">Four Pillars</a>
+    <a class="chip" href="#sec-name">Numerology</a>
+    <a class="chip" href="#sec-kyusei">Nine Star Ki</a>
+    <a class="chip" href="#sec-animal">Animal Fortune</a>
+    <a class="chip" href="#sec-synth">Synthesis</a>
+    <a class="chip" href="#sec-jobs">Careers</a>
+    <a class="chip" href="#sec-life">Life Curve</a>
+    <a class="chip" href="#sec-health">Wellness</a>
+    <a class="chip" href="#sec-year">This Year</a>
+    <a class="chip" href="#sec-today">Today</a>
+    <a class="chip" href="#sec-kids">For Kids</a>
+  </nav>
+
+  <section class="art" id="sec-west">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">星</div>
+      <div class="art-titles"><div class="art-eyebrow">Western Astrology</div><h2 class="art-title">Your Three Stars</h2></div>
+    </div>
+    <hr class="art-rule"><div id="west-body"></div>
+  </section>
+
+  <section class="art" id="sec-shichu">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">命</div>
+      <div class="art-titles"><div class="art-eyebrow">Four Pillars of Destiny · BaZi</div><h2 class="art-title">The Four Pillars</h2></div>
+    </div>
+    <hr class="art-rule"><div id="shichu-body"></div>
+  </section>
+
+  <section class="art" id="sec-name">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">名</div>
+      <div class="art-titles"><div class="art-eyebrow">Numerology</div><h2 class="art-title">The Numbers in Your Name</h2></div>
+    </div>
+    <hr class="art-rule"><div id="name-body"></div>
+  </section>
+
+  <section class="art" id="sec-kyusei">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">方</div>
+      <div class="art-titles"><div class="art-eyebrow">Nine Star Ki &amp; Directions</div><h2 class="art-title">Nine Star Ki</h2></div>
+    </div>
+    <hr class="art-rule"><div id="kyusei-body"></div>
+  </section>
+
+  <section class="art" id="sec-animal">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">動</div>
+      <div class="art-titles"><div class="art-eyebrow">Animal Fortune — 60 Characters</div><h2 class="art-title">Animal Fortune</h2></div>
+    </div>
+    <hr class="art-rule"><div id="animal-body"></div>
+  </section>
+
+  <section class="art" id="sec-synth">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">綜</div>
+      <div class="art-titles"><div class="art-eyebrow">Synthesis</div><h2 class="art-title">What the Five Arts Agree On</h2></div>
+    </div>
+    <hr class="art-rule"><div id="synth-body"></div>
+  </section>
+
+  <section class="art" id="sec-jobs">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">職</div>
+      <div class="art-titles"><div class="art-eyebrow">Vocation</div><h2 class="art-title">Work You're Built For</h2></div>
+    </div>
+    <hr class="art-rule"><div id="jobs-body"></div>
+  </section>
+
+  <section class="art" id="sec-life">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">流</div>
+      <div class="art-titles"><div class="art-eyebrow">Life Fortune Curve</div><h2 class="art-title">Your Fortune, Age by Age</h2></div>
+    </div>
+    <hr class="art-rule"><div id="life-body"></div>
+  </section>
+
+  <section class="art" id="sec-health">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">養</div>
+      <div class="art-titles"><div class="art-eyebrow">Health &amp; Self-care</div><h2 class="art-title">Caring for Your Body</h2></div>
+    </div>
+    <hr class="art-rule"><div id="health-body"></div>
+  </section>
+
+  <section class="art" id="sec-year">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">年</div>
+      <div class="art-titles"><div class="art-eyebrow">Annual Fortune</div><h2 class="art-title" id="year-title">This Year</h2></div>
+    </div>
+    <hr class="art-rule"><div id="year-body"></div>
+  </section>
+
+  <section class="art" id="sec-today">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">日</div>
+      <div class="art-titles"><div class="art-eyebrow">Daily Fortune</div><h2 class="art-title" id="today-title">Today</h2></div>
+    </div>
+    <hr class="art-rule"><div id="today-body"></div>
+  </section>
+
+  <section class="art" id="sec-kids">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">童</div>
+      <div class="art-titles"><div class="art-eyebrow">For Kids</div><h2 class="art-title">Your Fortune, Made Simple</h2></div>
+    </div>
+    <hr class="art-rule"><div id="kids-body"></div>
+  </section>
+</div>
+
+<footer class="site">
+  <p class="fine">
+    This reading is for entertainment and self-reflection. Sun and Moon signs and the rising sign use astronomical
+    approximations (the Moon within ~2°); Four Pillars month boundaries follow the sun's ecliptic longitude;
+    numerology uses the Pythagorean system on Latin letters; city times assume standard time (no daylight-saving adjustment).
+    Different schools may read things differently — and none of it is medical, financial, or legal advice.
+  </p>
+  <div class="seal" aria-hidden="true" style="margin-top:14px">了</div>
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ══════════ Core tables ══════════ */
+const STEMS=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+const STEM_READ=["Yang Wood","Yin Wood","Yang Fire","Yin Fire","Yang Earth","Yin Earth","Yang Metal","Yin Metal","Yang Water","Yin Water"];
+const BRANCHES=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const BRANCH_READ=["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Boar"];
+const ELEMS=["Wood","Fire","Earth","Metal","Water"];
+const ELEM_COLOR={ "Wood":"#68724d","Fire":"#b5432e","Earth":"#a8842e","Metal":"#8d8d99","Water":"#26324e" };
+const ELEM_COLOR_DARK={ "Wood":"#9cab7b","Fire":"#d76a52","Earth":"#d2ab55","Metal":"#a9b3c4","Water":"#7e93c4" };
+const stemElem=s=>Math.floor(s/2);
+const BRANCH_ELEM=[4,2,0,0,2,1,1,2,3,3,2,4];
+const elTag=i=>`<span class="el-t el-${i}">${ELEMS[i]}</span>`;
+const grpTag=g=>`<span class="grp-t grp-${g==="Moon"?"m":g==="Earth"?"e":"s"}">${g}</span>`;
+
+/* ══════════ Western astrology ══════════ */
+const SIGNS=[
+ {n:"Aries",sym:"♈",el:"Fire",key:"drive",t:"The pathfinder of the zodiac. You act the moment inspiration strikes, and you'd rather stumble forward than wonder what might have been."},
+ {n:"Taurus",sym:"♉",el:"Earth",key:"steadiness",t:"You savor the world through the senses and build things that last. Slow to start, impossible to stop — your patience is second to none."},
+ {n:"Gemini",sym:"♊",el:"Air",key:"curiosity",t:"A quicksilver mind with wings. Words, ideas and news are your element, and you can juggle two of anything with a light touch."},
+ {n:"Cancer",sym:"♋",el:"Water",key:"empathy",t:"A guardian at heart. Your loyalty to your inner circle runs ocean-deep, and your memory keeps every kindness safe."},
+ {n:"Leo",sym:"♌",el:"Fire",key:"presence",t:"Born center-stage. You carry a warmth that lights up a room, and applause is honest fuel — you give a better show for it."},
+ {n:"Virgo",sym:"♍",el:"Earth",key:"precision",t:"The craftsman's eye. You notice what everyone else misses and quietly deliver work one notch above what was asked."},
+ {n:"Libra",sym:"♎",el:"Air",key:"harmony",t:"An instinct for balance and beauty. You smooth the room's rough edges and prefer a good conversation to any argument."},
+ {n:"Scorpio",sym:"♏",el:"Water",key:"depth",t:"A deep-sea explorer. Once you commit, you hold on for years, and the intensity beneath your calm surprises everyone eventually."},
+ {n:"Sagittarius",sym:"♐",el:"Fire",key:"adventure",t:"An archer aiming past the horizon. Freedom and truth pull you forward, and even your mishaps become good travel stories."},
+ {n:"Capricorn",sym:"♑",el:"Earth",key:"endurance",t:"The mountain climber. Time is your ally: what you build slowly, you build to the summit. Late-blooming, long-lasting."},
+ {n:"Aquarius",sym:"♒",el:"Air",key:"originality",t:"A messenger from the future. You walk one step outside convention and treat everyone — prince or stranger — exactly the same."},
+ {n:"Pisces",sym:"♓",el:"Water",key:"imagination",t:"A dreamer who dissolves boundaries. Your imagination is vast and your kindness has room for absolutely everyone."}
+];
+SIGNS.forEach(s=>s.sym+="︎");
+const MOON_T=["Feelings arrive fast and leave fast — you bounce back overnight.","You crave comfort and stability; good food is genuine medicine.","Boredom is the real enemy; chatter and novelty are your oxygen.","You're soft-hearted with your inner circle and need a safe harbor.","Being appreciated is your engine; a plain day feels a little flat.","You worry, therefore you care — your attentiveness is first-class.","You quietly step away from conflict; beauty restores you.","You feel deeply but show it rarely; your trust, once given, is total.","You're an optimist allergic to being fenced in.","You keep feelings on a tight leash; remember to loosen it sometimes.","You recharge alone and feel no need to match anyone else.","You're tender-hearted and easily moved; your daydreams power you."];
+const ASC_T=["Energetic and confident at first glance.","Calm and reassuring to be around.","Youthful and easy to talk to.","Approachable and nurturing.","Radiant — people notice when you enter.","Neat, intelligent, put-together.","Graceful and effortlessly polite.","Mysterious, with quiet steel.","Open, upbeat, adventurous.","Serious and dependable.","Distinctive — hard to pin down.","Soft and dreamily gentle."];
+const QUAL_T=["Cardinal — a self-starter who lights the fire. Starting is your superpower; delegate the finishing.","Fixed — once decided, immovable. Persistence is your greatest asset; pivots just take you a little longer.","Mutable — you bend with the wind and land on your feet. Adaptability is your weapon."];
+const SIGN_WORK=["You shine wherever something must go from zero to one — launches, sales, first responses.","You excel where quality and consistency win: craft, finance, food, real things.","Words, media, ideas and networks — your quick mind is the product.","You're the keel of any team: care work, teaching, hospitality.","Give you a stage and real authority and you'll repay both.","Precision work — analysis, editing, quality, operations — makes you irreplaceable.","Negotiation, HR, design: anywhere balance and taste are the job.","Deep specialization: you can out-focus everyone and become the authority.","Big horizons suit you — international work, education, publishing.","The classic long climb: institutions reward your discipline.","New tech, research, reform — you thrive where the map isn't drawn yet.","Work that touches hearts: art, care, imagery, healing."];
+const SIGN_LOVE=["You love in straight lines; honesty beats strategy every time.","Love grows slowly and surely with you — comfort is the courtship.","Conversation is the romance; best loves start as friendships.","You seek warmth and home; just don't give until it hurts.","You love theatrically and generously — and need applause back.","You love attentively; try not to proofread your partner.","You want an elegant, equal partnership.","All-in and deep; trust built slowly becomes unbreakable.","Freedom-loving; the best partner is a fellow traveler.","You court patiently and build for keeps — strong marriage material.","Love grows from friendship and needs breathing room.","Devoted and romantic; keep one foot on the ground."];
+const YEAR_EL_T=["A tailwind year — your natural style is exactly what works. Play your best cards.","A supported year — help arrives; accept it graciously and grow.","A giving year — output, creation and teaching bear fruit; watch for burnout.","A tempering year — pressure forges you, but rest is part of the training.","A hunting year — pick your target and strike; the spoils are real."];
+const SIGN_EL_TO_GOGYO={ "Fire":1,"Earth":2,"Air":0,"Water":4 };
+
+/* ══════════ Four Pillars ══════════ */
+const DAYSTEM_T=[
+ {sym:"Great Tree",key:"upright conviction",t:"甲 is the tall tree reaching for heaven: straight-grained, responsible, allergic to crooked dealings. Others navigate by you."},
+ {sym:"Flowering Vine",key:"supple strength",t:"乙 is the grass and vine: flexible, persistent, able to bloom in any soil. Gentle manner, iron roots."},
+ {sym:"Sun",key:"radiance",t:"丙 is the sun itself: open, warm, impossible to ignore. Your energy shines on everyone equally — light that grows people."},
+ {sym:"Lantern Flame",key:"insight and warmth",t:"丁 is the candle in the dark: subtle, deep-feeling, illuminating what matters. You warm whoever comes close."},
+ {sym:"Mountain",key:"unshakable calm",t:"戊 is the mountain: stable, generous, unmoved by weather. Trust gathers around you until you're the village landmark."},
+ {sym:"Fertile Field",key:"quiet cultivation",t:"己 is the tilled earth: nurturing, modest, patiently growing people and projects. Every harvest has your soil under it."},
+ {sym:"Forged Steel",key:"decisive edge",t:"庚 is tempered steel: decisive, brave, sharper with every trial. A fighter's star that cuts paths open."},
+ {sym:"Polished Gem",key:"refined taste",t:"辛 is the cut jewel: precise, aesthetic, quietly proud. Each hardship is another polish; you only get brighter."},
+ {sym:"Open Sea",key:"boundless freedom",t:"壬 is the great river and sea: expansive, free, endlessly resourceful. Fences are the one thing you can't stand."},
+ {sym:"Morning Dew",key:"gentle wisdom",t:"癸 is rain and dew: quiet intelligence that soaks in everywhere. You nourish people before they notice they were thirsty."}
+];
+const TSUHEN=["Peer","Ally","Bon Vivant","Artist","Venture Wealth","Steady Wealth","Challenger","Officer","Maverick","Scholar"];
+const TSUHEN_T=[
+ "A year to stand on your own. Solo ventures succeed; guard against stubbornness and loose spending.",
+ "A year to team up and go big. Partners multiply your power — just keep money matters crisp.",
+ "A year of comfort and delight. Food, hobbies and creation flourish; rest as well as you play.",
+ "A year of sharpened senses. Expression and craft catch the wind; keep your words kind.",
+ "A year where motion makes money. Network boldly — luck rides on your footwork.",
+ "A year of steady accumulation. Trust converts to wealth; slow and boring is the winning bet.",
+ "A busy, contested year. You're built for the sprint — protect sleep and health first.",
+ "A year of recognition. Promotions, credentials and contracts favor the diligent.",
+ "A year for learning and scheming (the good kind). Side projects and new fields open doors.",
+ "A year blessed by mentors and knowledge. Study, certify, and let seniors pull you up."
+];
+const TSUHEN_P=[
+ "Independent-minded — happier flying your own flag",
+ "A bold teammate with gambler's charm",
+ "Easygoing and pleasure-wise; people relax around you",
+ "Sharp-sensed and expressive; words and works that move people",
+ "Quick commercial instincts; turns contacts into harvests",
+ "Steady, trustworthy, compound-interest character",
+ "Combative spirit that lights up under pressure",
+ "Dutiful and proper; institutions trust you",
+ "Idea-driven; wins with insight and special knowledge",
+ "Bookish warmth; learning becomes charisma"
+];
+const TSUHEN_M=["Act solo and decisively","Team efforts surge; mind the wallet","Comfort and creativity peak — recharge","Senses sharpen; soften your words","Networking pays literally","Steady gains; good month for contracts","A sprint month — sleep first","Recognition arrives; stay diligent","Study and side projects shine","Ask mentors; doors open"];
+const HOUR_NAMES=["Hour of the Rat","Hour of the Ox","Hour of the Tiger","Hour of the Rabbit","Hour of the Dragon","Hour of the Snake","Hour of the Horse","Hour of the Goat","Hour of the Monkey","Hour of the Rooster","Hour of the Dog","Hour of the Boar"];
+const JUNIUN=["Birth","Bath","Coming of Age","Establishment","Zenith","Decline","Illness","Death","Grave","Void","Womb","Nurture"];
+const JUNIUN_T=[
+ "Fresh, open energy — people love to help you grow.",
+ "Restless and charming — you polish yourself through change.",
+ "Bright ambition — the more eyes on you, the better you perform.",
+ "Self-made strength — what you build by hand becomes your fortune.",
+ "Peak momentum — the boldest push in the twelve stages.",
+ "Mellow steadiness — strongest in defense and follow-through.",
+ "Fine-tuned sensitivity — your gentleness heals people.",
+ "Total focus — you go deeper into one path than anyone.",
+ "The keeper's gift — you save, preserve and honor what matters.",
+ "Phoenix energy — you restart from zero faster than anyone.",
+ "Endless curiosity — always pregnant with the next idea.",
+ "Beloved-junior energy — elders lift you; charm is real capital."
+];
+const YANG_START={0:11,2:2,4:2,6:5,8:8}, YIN_START={1:6,3:9,5:9,7:0,9:3};
+function juniun(stem,branch){const yang=stem%2===0;const start=yang?YANG_START[stem]:YIN_START[stem];
+  return yang?mod(branch-start,12):mod(start-branch,12);}
+
+/* ══════════ Nine Star Ki ══════════ */
+const KYUSEI=[
+ {n:"1 White Water",el:4,home:"N",t:"The water star: adaptable, patient, a master of human currents. Hardship becomes depth; you succeed quietly."},
+ {n:"2 Black Earth",el:2,home:"SW",t:"The mother-earth star: steady, devoted, the strongest supporter of the nine. Late harvests, but rich ones."},
+ {n:"3 Green Wood",el:0,home:"E",t:"The thunder star: action, announcements, eternal youth. You hear tomorrow's sound first."},
+ {n:"4 Green Wood",el:0,home:"SE",t:"The wind star: harmony, trust and connections carried far. Soft manner, shrewd judgment."},
+ {n:"5 Yellow Earth",el:2,home:"Center",t:"The emperor star: raw luck and presence. You end up at the center — and can rebuild from any ruin."},
+ {n:"6 White Metal",el:3,home:"NW",t:"The heaven star: responsible, exacting, a perfectionist heaven keeps polishing. Busy — and rising."},
+ {n:"7 Red Metal",el:3,home:"W",t:"The lake star: sociable, witty, a connoisseur of life's harvest. Charm outside, sharp arithmetic inside."},
+ {n:"8 White Earth",el:2,home:"NE",t:"The mountain star: inheritance and reinvention. You stack stones patiently, then move mountains at the turning point."},
+ {n:"9 Purple Fire",el:1,home:"S",t:"The fire star: passion, brains and glamour. Honors come to you — mind the quick flare."}
+];
+const PALACE_T={
+ 1:{label:"Kan · North",t:"A recharge winter. Study, rest and quiet groundwork — next year's climb starts here."},
+ 2:{label:"Kon · Southwest",t:"A preparation year. Till the soil, tend the base; the harvest is already promised."},
+ 3:{label:"Shin · East",t:"A launch year — spring thunder. New ventures get the strongest tailwind."},
+ 4:{label:"Son · Southeast",t:"A year of ripening ties. Trust, negotiations and good reputations travel on the wind."},
+ 5:{label:"Center",t:"A spotlight year. Eyes gather on you; strengthen your gravity rather than chase."},
+ 6:{label:"Ken · Northwest",t:"A fulfillment year. Ability gets recognized; busy, but satisfying."},
+ 7:{label:"Da · West",t:"A harvest year of joy and money. Enjoy — just cap the splurging."},
+ 8:{label:"Gon · Northeast",t:"A turning-point year. Clear out, switch tracks; the next peak appears."},
+ 9:{label:"Ri · South",t:"A limelight year. Praise, passes and prizes — plus a few graceful goodbyes."}
+};
+const PALACE_SCORE={1:1,2:2,3:3,4:4,5:4.5,6:4.8,7:5,8:3.5,9:2.5};
+const PALACE_SHORT={1:"Recharge",2:"Prepare",3:"Launch",4:"Grow",5:"Spotlight",6:"Fulfill",7:"Harvest",8:"Shift",9:"Limelight"};
+const PALACES=[
+ {dir:"N",base:1},{dir:"NE",base:8},{dir:"E",base:3},{dir:"SE",base:4},
+ {dir:"S",base:9},{dir:"SW",base:2},{dir:"W",base:7},{dir:"NW",base:6}
+];
+const BRANCH_DIR={0:"N",1:"NE",2:"NE",3:"E",4:"SE",5:"SE",6:"S",7:"SW",8:"SW",9:"W",10:"NW",11:"NW"};
+const OPP_DIR={"N":"S","S":"N","E":"W","W":"E","NE":"SW","SW":"NE","SE":"NW","NW":"SE"};
+const EHO={0:"ENE",5:"ENE",1:"WSW",6:"WSW",2:"SSE",7:"SSE",4:"SSE",9:"SSE",3:"NNW",8:"NNW"};
+const GETSUMEI_START={1:8,4:8,7:8,2:2,5:2,8:2,3:5,6:5,9:5};
+
+/* ══════════ Animal Fortune ══════════ */
+const ANIMALS={
+ "Wolf":{key:"a world of your own",t:"The lone wolf: strong enough to walk alone, loyal to your own compass, allergic to trends. Your one-of-a-kind work comes from that solitude."},
+ "Fawn":{key:"disarming honesty",t:"Curious yet cautious. Once someone is inside your fence, you're openly affectionate — and your inability to scheme is exactly your charm."},
+ "Monkey":{key:"playful skill",t:"The entertainer-craftsman: quick hands, quick wit, born for games and contests. Praise makes you visibly stronger."},
+ "Cheetah":{key:"explosive starts",t:"Fastest off the line on the whole savanna. New goals ignite you; long sieges bore you. A born challenger."},
+ "Black Panther":{key:"polished instinct",t:"The stylist: proud, sleek, first to spot whatever is new and beautiful. Behind the cool is a soft heart that bruises quietly."},
+ "Lion":{key:"regal composure",t:"The king who never shows weakness in public and protects the pride. A soft spot for VIP treatment is your endearing tell."},
+ "Tiger":{key:"unhurried authority",t:"The big-hearted boss: fair, balanced, unhurried. People gather around your calm — and your clutch strength is the forest's best."},
+ "Tanuki":{key:"warm old-soul charm",t:"The people-person: experience-first, tradition-loving, mysteriously good at making any room relax. A late-blooming winner."},
+ "Koala":{key:"strategic ease",t:"The relaxed strategist: looks laid-back, plans three years out. Naps are infrastructure; the eucalyptus tree is non-negotiable."},
+ "Elephant":{key:"quiet mastery",t:"The silent expert: professional pride, patient accumulation, a memory that forgets neither kindness nor slight."},
+ "Sheep":{key:"keeping the flock whole",t:"The coordinator: lonely alone, glad in company, always spotting whoever drifted off. 'For everyone' is your personal joy."},
+ "Pegasus":{key:"sky-borne intuition",t:"The free spirit with wings: intuition over logic, genius when inspired. Only fine-print rules can clip you."}
+};
+const ANIMAL_GROUP={"Fawn":"Moon","Black Panther":"Moon","Sheep":"Moon","Tanuki":"Moon","Wolf":"Earth","Monkey":"Earth","Tiger":"Earth","Koala":"Earth","Lion":"Sun","Elephant":"Sun","Cheetah":"Sun","Pegasus":"Sun"};
+const ANIMAL_EMOJI={"Wolf":"🐺","Fawn":"🦌","Monkey":"🐵","Cheetah":"🐆","Black Panther":"🐈‍⬛","Lion":"🦁","Tiger":"🐯","Tanuki":"🦝","Koala":"🐨","Elephant":"🐘","Sheep":"🐑","Pegasus":"🦄"};
+const GROUP_T={
+ "Moon":"The Moon group: kind-hearted harmonizers who'd rather be good than right. Reading the room is your superpower; saying 'no' is the training ground.",
+ "Earth":"The Earth group: grounded realists who value pace, plans and results. Dependable to a fault — an occasional unguarded moment doubles your charm.",
+ "Sun":"The Sun group: inspiration-first free spirits who light up the room. Ride your good moods hard, and delegate the paperwork."
+};
+const CHARS60=[
+["Long-distance Cheetah","Cheetah"],["Sociable Tanuki","Tanuki"],["Restless Monkey","Monkey"],["Light-footed Koala","Koala"],["Caring Black Panther","Black Panther"],
+["Loving Tiger","Tiger"],["Full-sprint Cheetah","Cheetah"],["Polished Tanuki","Tanuki"],["Ambitious Monkey","Monkey"],["Motherly Koala","Koala"],
+["Honest Fawn","Fawn"],["Popular Elephant","Elephant"],["Sunny Wolf","Wolf"],["Independent Sheep","Sheep"],["Grounded Monkey","Monkey"],
+["Koala of Koalas","Koala"],["Strong-willed Fawn","Fawn"],["Delicate Elephant","Elephant"],["Wandering Wolf","Wolf"],["Quiet Sheep","Sheep"],
+["Composed Pegasus","Pegasus"],["Strong-winged Pegasus","Pegasus"],["Innocent Sheep","Sheep"],["Creative Wolf","Wolf"],["Gentle Wolf","Wolf"],
+["Persistent Sheep","Sheep"],["Storm-riding Pegasus","Pegasus"],["Elegant Pegasus","Pegasus"],["Challenger Sheep","Sheep"],["Adaptable Wolf","Wolf"],
+["Leader Elephant","Elephant"],["Reliable Fawn","Fawn"],["Active Koala","Koala"],["Moody Monkey","Monkey"],["Glad-to-help Sheep","Sheep"],
+["Likable Wolf","Wolf"],["Charging Elephant","Elephant"],["Dazzling Fawn","Fawn"],["Dreaming Koala","Koala"],["Devoted Monkey","Monkey"],
+["Late-blooming Tanuki","Tanuki"],["Strong-legged Cheetah","Cheetah"],["Roaming Tiger","Tiger"],["Passionate Black Panther","Black Panther"],["Service-hearted Koala","Koala"],
+["Defensive Monkey","Monkey"],["Warm-hearted Tanuki","Tanuki"],["Dignified Cheetah","Cheetah"],["Serene Tiger","Tiger"],["Deep-feeling Black Panther","Black Panther"],
+["My-way Lion","Lion"],["Commanding Lion","Lion"],["Expressive Black Panther","Black Panther"],["Optimist Tiger","Tiger"],["Powerful Tiger","Tiger"],
+["Unpretentious Black Panther","Black Panther"],["Emotional Lion","Lion"],["Tender-hearted Lion","Lion"],["Freedom-loving Black Panther","Black Panther"],["Merciful Tiger","Tiger"]
+];
+const GROUP_PAIR_T={
+ "MoonMoon":"Two peacemakers — lovely air, but someone has to say the honest thing first.",
+ "EarthEarth":"Two realists — fast decisions, shared arithmetic, solid ground.",
+ "SunSun":"Two fireworks — glorious momentum; outsource the deadlines.",
+ "MoonEarth":"Heart meets results. Translate for each other and you cover offense and defense.",
+ "MoonSun":"The moon quietly steadies the sun. A classic duo — sun, remember to say thanks.",
+ "EarthSun":"Realist meets dreamer. Different clocks, complementary weapons."
+};
+const groupPairText=(a,b)=>GROUP_PAIR_T[a+b]||GROUP_PAIR_T[b+a];
+
+/* ══════════ Numerology (Pythagorean) ══════════ */
+const NUM_T={
+ 1:{key:"the Pioneer",t:"Independent, original, first through the wall. You lead best when you trust your own compass."},
+ 2:{key:"the Diplomat",t:"Sensitive, cooperative, the quiet glue of every alliance. Partnership is where you shine."},
+ 3:{key:"the Performer",t:"Expressive, joyful, creativity that spills over. Your words and play lift everyone's spirits."},
+ 4:{key:"the Builder",t:"Practical, loyal, brick-by-brick reliable. Systems and foundations are your art form."},
+ 5:{key:"the Explorer",t:"Freedom-hungry, adaptable, allergic to cages. Change is not a risk to you — it's oxygen."},
+ 6:{key:"the Guardian",t:"Warm, responsible, the family's beating heart. You heal by taking care — mind your own tank too."},
+ 7:{key:"the Seeker",t:"Analytical, private, drawn to the deep questions. Solitude is your laboratory."},
+ 8:{key:"the Executive",t:"Ambitious, capable, built for scale and stewardship. Money and power obey good management."},
+ 9:{key:"the Humanitarian",t:"Compassionate, worldly-wise, giving by nature. Your circle is wider than most people's horizons."},
+ 11:{key:"the Illuminator",t:"A master number: intuition turned up loud. You inspire — once you stop doubting the signal."},
+ 22:{key:"the Master Builder",t:"A master number: vision plus engineering. You can make the impossible stand upright."},
+ 33:{key:"the Master Teacher",t:"A master number: love in service at scale. Rare, demanding, quietly world-changing."}
+};
+
+/* ══════════ Wellness ══════════ */
+const ELEM_BODY=[
+ {organ:"liver, gallbladder, eyes, tendons & the autonomic nerves",note:"Stress tends to surface as eye strain, stiff shoulders, irritability and frazzled nerves.",care:"Deep sleep, deep breaths, leafy greens and something pleasantly sour. Move your body to burn off anger."},
+ {organ:"heart, small intestine, blood vessels & tongue",note:"Overwork tends to surface as palpitations, blood-pressure swings, flushing and poor sleep.",care:"Short naps and real breaks protect the heart. A little pleasant bitterness — green tea — is your friend."},
+ {organ:"stomach, spleen & digestion",note:"Worry plus irregular meals goes straight to your stomach.",care:"Chew well, eat warm, keep sweets moderate. When you overthink, move instead."},
+ {organ:"lungs, large intestine, skin & nose",note:"Dry seasons bring coughs, rough skin and sluggish digestion.",care:"Humidify, feed your gut (fiber, ferments), and talk your sadness out early — it deepens the breath."},
+ {organ:"kidneys, bladder, ears, bones & hormones",note:"Cold and overwork show up as heavy lower back, ringing ears, swelling and early graying.",care:"Keep your lower body warm. Black foods — beans, sesame, seaweed — help; go easy on salt."}
+];
+const SIGN_BODY=["head, face & eyes","throat, neck & thyroid","lungs, arms & shoulders","stomach & chest","heart, back & blood pressure","intestines & digestion","kidneys, lower back & skin","reproductive & urinary systems","liver, hips & thighs","bones, joints, knees & teeth","calves & circulation","feet, lymph & immunity"];
+const SIGN_BODY_CARE=["Headaches and eye strain mean you're overdriving — schedule screen breaks.","Guard the throat and neck: scarves and humidifiers are armor.","Your breath runs shallow — stretch the shoulder blades and breathe deep.","Stress lands in your stomach; eat warm and practice not carrying it alone.","Fatigue collects in heart and back — book rest before you need it.","Your gut is your mood-meter: ferments, fiber and the phrase 'good enough'.","Keep the lower back warm and hydrated; balance is your medicine.","This sign's keystone systems — stay warm and keep the checkups regular.","Feasts hit the liver first: schedule alcohol-free days, stretch the hips.","Bones, joints and teeth are lifetime assets: calcium plus dental visits.","Circulation is the theme — walk, take stairs, wake those calves.","Swollen feet and low immunity are your alarms; sleep is your supplement."];
+
+/* ══════════ Careers ══════════ */
+const SIGN_JOBS=[
+ ["Founder","Sales","Sports & fitness","Emergency medicine","Fire & police"],
+ ["Chef & pâtissier","Finance & assets","Music","Craftsmanship","Real estate"],
+ ["Journalism","Broadcasting","Translation","Marketing","IT & web"],
+ ["Childcare","Nursing","Teaching","Counseling","Food & hospitality"],
+ ["Executive","Acting & talent","Producing","Design","Public office"],
+ ["Accounting","Pharmacy","Quality control","Data analysis","Editing"],
+ ["HR & liaison","Law","Beauty & fashion","Weddings & events","Diplomacy"],
+ ["Research","Medicine","Psychology","Investigation","Traditional craft"],
+ ["Trade","Travel & tourism","Academia","Publishing","Coaching"],
+ ["Public service","Banking","Architecture","Management","Heritage industries"],
+ ["IT & AI","R&D","Invention","Nonprofits","Media"],
+ ["Fine art","Music & film","Care work","Childcare","Therapy"]
+];
+const STEM_JOBS=[
+ ["Management","Education","Architecture & forestry","Public service","Corporate planning"],
+ ["Design","Floristry & gardens","Executive support","Service industry","Editing"],
+ ["Entertainment","Sales","PR","Energy","Sports"],
+ ["Research","Beauty","Cuisine","Counseling","Lighting & film"],
+ ["Real estate","Civil engineering","Finance","Agriculture","Logistics"],
+ ["Teaching","Food & farming","Nutrition","Talent development","Community work"],
+ ["Police & defense","Surgery","Metal & machinery","Athletics","New-market sales"],
+ ["Jewelry & beauty","Dentistry","Precision instruments","Fine art","Criticism"],
+ ["Trade","Shipping","Fisheries","Tourism","Freelancing"],
+ ["Scholarship","Writing","Brewing & beverages","Medicine","Mind & spirit work"]
+];
+const ANIMAL_JOBS={
+ "Wolf":["Specialist","Artisan","Researcher","Freelancer"],
+ "Fawn":["Customer care","Education","PR","Team support"],
+ "Monkey":["Sales","Entertainment","Planning","Engineering"],
+ "Cheetah":["New-business sales","Sports","Journalism","Startups"],
+ "Black Panther":["Fashion","Beauty","Advertising","Product design"],
+ "Lion":["Executive","Management","Education","Brand business"],
+ "Tiger":["Executive","Site management","Law","Public service"],
+ "Tanuki":["Heritage business","HR","Brokerage","Client relations"],
+ "Koala":["Planning","Finance","Real estate","Wellness services"],
+ "Elephant":["Engineering","Manufacturing","Research","Traditional craft"],
+ "Sheep":["Administration","Accounting","Welfare","Team coordination"],
+ "Pegasus":["Creative direction","International work","Art","Product development"]
+};
+
+/* ══════════ For kids ══════════ */
+const SIGN_KID=["You're a brave starter — when you want to try, you TRY! And when you fall, you bounce right back up.","You love yummy food and soft, pretty things — and you never, ever give up.","You're a super-curious chatterbox who learns new things at lightning speed.","You're kind and never forget your friends. You can't walk past someone who's sad.","You're the class star! Clapping makes you even stronger — like sunshine for people.","You notice the little things nobody else sees, and everyone counts on you.","You're the peacemaker — great at helping friends make up after a fight.","You can focus SO hard on one thing that you become the expert of it.","You love adventures and faraway places. Small worries just bounce off you.","You keep going step by step — and you get more amazing every single year.","You think of ideas nobody else thinks of. 'What if?' is your favorite question.","You have a giant imagination and a soft heart that understands people."];
+const STEM_KID=["In the middle of your heart grows a BIG TREE — straight and true. Friends find their way by you.","In your heart there's a FLOWER — gentle, but strong enough to bloom anywhere.","In your heart shines a little SUN — you make every room brighter just by walking in.","In your heart glows a CANDLE — quiet, warm, lighting up what really matters.","In your heart stands a MOUNTAIN — calm and steady; nothing shakes you easily.","In your heart is a warm FIELD — you're great at helping things (and people) grow.","In your heart is a shiny SWORD — when you decide, you're strong! Practice makes you sharper.","In your heart sparkles a JEWEL — you love beautiful things, and you shine when you try hard.","In your heart rolls a big OCEAN — wide, free, full of clever ideas.","In your heart falls gentle RAIN — you think quietly and your kindness soaks into everyone."];
+const ANIMAL_KID={"Wolf":"A cool wolf who likes alone-time and invents its very own way of doing things.","Fawn":"A friendly little deer — honest, sweet, and snuggly with best friends.","Monkey":"A playful monkey with clever hands. Compliments = power-ups!","Cheetah":"The fastest runner! You love being FIRST to try new things.","Black Panther":"A stylish panther with a nose for everything new and cool.","Lion":"The king of animals — secretly a hard worker, publicly magnificent.","Tiger":"A dependable tiger boss who always helps friends in trouble.","Tanuki":"A cozy tanuki who makes everyone feel at home.","Koala":"A sleepy-looking koala who is secretly super smart. Naps required!","Elephant":"A steady elephant who never forgets what it practices.","Sheep":"A gentle sheep who's happiest when everyone's together.","Pegasus":"A flying horse full of magic ideas — give it sky and watch it go!"};
+const KID_TODAY={5:"An AMAZING day! Try the thing you've been dreaming about.",4:"A good-wind day — even better with friends.",3:"A regular day. Do things carefully and tomorrow gets better.",2:"A slow day. Tidy your room and your luck levels up.",1:"A rest day. Sleep early and recharge your power!"};
+
+/* ══════════ Places ══════════ */
+const PREFS=[
+["Tokyo, Japan",35.69,139.69,9],["Osaka, Japan",34.69,135.52,9],["Kyoto, Japan",35.02,135.76,9],["Nara, Japan",34.69,135.83,9],
+["Sapporo, Japan",43.06,141.35,9],["Sendai, Japan",38.27,140.87,9],["Nagoya, Japan",35.18,136.91,9],["Hiroshima, Japan",34.40,132.46,9],["Fukuoka, Japan",33.61,130.42,9],["Naha, Japan",26.21,127.68,9],
+["New York, USA",40.71,-74.01,-5],["Los Angeles, USA",34.05,-118.24,-8],["Chicago, USA",41.88,-87.63,-6],["Honolulu, USA",21.31,-157.86,-10],
+["London, UK",51.51,-0.13,0],["Paris, France",48.85,2.35,1],["Berlin, Germany",52.52,13.40,1],["Rome, Italy",41.90,12.50,1],["Madrid, Spain",40.42,-3.70,1],
+["Sydney, Australia",-33.87,151.21,10],["Auckland, NZ",-36.85,174.76,12],
+["Singapore",1.35,103.82,8],["Hong Kong",22.32,114.17,8],["Taipei, Taiwan",25.03,121.57,8],["Seoul, Korea",37.57,126.98,9],["Shanghai, China",31.23,121.47,8],["Bangkok, Thailand",13.76,100.50,7],
+["Toronto, Canada",43.65,-79.38,-5],["Vancouver, Canada",49.28,-123.12,-8],["São Paulo, Brazil",-23.55,-46.63,-3],["Mexico City, Mexico",19.43,-99.13,-6],["Mumbai, India",19.08,72.88,5.5],["Dubai, UAE",25.20,55.27,4]
+];
+
+/* ══════════ Astronomy & pillars (same math as the Japanese edition) ══════════ */
+const rad=d=>d*Math.PI/180, deg=r=>r*180/Math.PI;
+const norm=d=>((d%360)+360)%360;
+const mod=(a,n)=>((a%n)+n)%n;
+function jdn(y,m,d){const a=Math.floor((14-m)/12),Y=y+4800-a,M=m+12*a-3;
+  return d+Math.floor((153*M+2)/5)+365*Y+Math.floor(Y/4)-Math.floor(Y/100)+Math.floor(Y/400)-32045;}
+function jdUT(y,m,d,hLocal,utcOff){return jdn(y,m,d)+((hLocal-utcOff)-12)/24;}
+function sunLon(jd){const n=jd-2451545,L=norm(280.460+0.9856474*n),g=rad(norm(357.528+0.9856003*n));
+  return norm(L+1.915*Math.sin(g)+0.020*Math.sin(2*g));}
+function moonLon(jd){const n=jd-2451545;
+  return norm(218.316+13.176396*n+6.289*Math.sin(rad(norm(134.963+13.064993*n))));}
+function ascendant(jd,lat,lon){const n=jd-2451545;
+  const ramc=rad(norm(norm(280.46061837+360.98564736629*n)+lon));
+  const eps=rad(23.4393),phi=rad(lat);
+  return norm(deg(Math.atan2(Math.cos(ramc),-(Math.sin(ramc)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))));}
+const signOf=lon=>Math.floor(norm(lon)/30);
+const degInSign=lon=>norm(lon)%30;
+function fourPillars(y,m,d,hour,utcOff){
+  const sl=sunLon(jdUT(y,m,d,12,utcOff));
+  let py=y; if(m<=2 && sl>=270 && sl<315) py=y-1;
+  const ys=mod(py-4,10), yb=mod(py-4,12);
+  const mi=Math.floor(norm(sl-315)/30);
+  const ms=mod((ys%5)*2+2+mi,10), mb=mod(2+mi,12);
+  const di=mod(jdn(y,m,d)+49,60), ds=di%10, db=di%12;
+  let hs=null,hb=null;
+  if(hour!=null){ hb=Math.floor(mod(hour+1,24)/2)%12; hs=mod((ds%5)*2+hb,10); }
+  return {py,ys,yb,ms,mb,di,ds,db,hs,hb,sl,mi};
+}
+function kanshiName(s,b){return STEMS[s]+BRANCHES[b];}
+function kanshiRead(s,b){return STEM_READ[s]+" "+BRANCH_READ[b];}
+function voidBranches(di){const g=Math.floor(di/10);return [mod(10-2*g,12),mod(11-2*g,12)];}
+function tsuhen(dayS,otherS){const rel=mod(stemElem(otherS)-stemElem(dayS),5);
+  return rel*2+((dayS%2)===(otherS%2)?0:1);}
+function elemRel(mine,other){
+  if(mine===other)return 0;
+  if(mod(other+1,5)===mine)return 1;
+  if(mod(mine+1,5)===other)return 2;
+  if(mod(other+2,5)===mine)return 3;
+  return 4;
+}
+function honmeiStar(py){let n=11-mod(py,9); if(n>9)n-=9; return n;}
+function yearOfNow(date){const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();
+  const sl=sunLon(jdUT(y,m,d,12,9));
+  return (m<=2 && sl>=270 && sl<315)?y-1:y;}
+function starAt(center,base){let s=center+(base-5); while(s<1)s+=9; while(s>9)s-=9; return s;}
+function palaceOfYear(y,myStar){const center=honmeiStar(y);
+  let base=myStar-center+5; while(base<1)base+=9; while(base>9)base-=9; return base;}
+
+/* ══════════ Numerology ══════════ */
+const PY={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,I:9,J:1,K:2,L:3,M:4,N:5,O:6,P:7,Q:8,R:9,S:1,T:2,U:3,V:4,W:5,X:6,Y:7,Z:8};
+const VOWELS="AEIOU";
+function reduceNum(n,master){while(n>9){if(master&&(n===11||n===22||n===33))return n;
+  n=String(n).split("").reduce((a,c)=>a+ +c,0);}return n;}
+function lifePath(y,m,d){return reduceNum(String(y).split("").reduce((a,c)=>a+ +c,0)+
+  String(m).split("").reduce((a,c)=>a+ +c,0)+String(d).split("").reduce((a,c)=>a+ +c,0),true);}
+function nameNums(full){
+  const L=full.toUpperCase().replace(/[^A-Z]/g,"").split("");
+  if(!L.length)return null;
+  const sum=arr=>arr.reduce((a,c)=>a+PY[c],0);
+  const v=L.filter(c=>VOWELS.includes(c)), c=L.filter(ch=>!VOWELS.includes(ch));
+  return {expr:reduceNum(sum(L),true), soul:v.length?reduceNum(sum(v),true):null, pers:c.length?reduceNum(sum(c),true):null};
+}
+const numOf=n=>NUM_T[n]||NUM_T[reduceNum(n,false)];
+
+/* ══════════ Helpers ══════════ */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const isDark=()=>{const t=document.documentElement.dataset.theme;
+  if(t==="dark")return true; if(t==="light")return false;
+  return matchMedia("(prefers-color-scheme: dark)").matches;};
+const elColor=e=>(isDark()?ELEM_COLOR_DARK:ELEM_COLOR)[ELEMS[e]];
+function starsHtml(n){let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">★</span>';
+  return `<span class="stars" role="img" aria-label="${n} out of 5">${h}</span>`;}
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const WDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+const fmtDate=(y,m,d)=>`${MONTHS[m-1]} ${d}, ${y}`;
+
+/* ══════════ Form setup ══════════ */
+(function(){
+  const sel=$("pref");
+  PREFS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p[0];sel.appendChild(o);});
+  const ov=document.createElement("option");ov.value="overseas";ov.textContent="Somewhere else (enter coordinates)";sel.appendChild(ov);
+  sel.value=0;
+  sel.addEventListener("change",()=>{$("overseas").classList.toggle("show",sel.value==="overseas");});
+  $("noTime").addEventListener("change",e=>{$("bh").disabled=$("bmin").disabled=e.target.checked;});
+})();
+
+/* ══════════ Saved readings (this device only) ══════════ */
+const LS_KEY="seimeiroku_en_v1";
+function lsGet(){try{return JSON.parse(localStorage.getItem(LS_KEY)||"null")}catch(e){return null}}
+function lsSet(v){try{localStorage.setItem(LS_KEY,JSON.stringify(v));return true}catch(e){return false}}
+function lsClear(){try{localStorage.removeItem(LS_KEY)}catch(e){}}
+function lsAvailable(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return true}catch(e){return false}}
+function fillForm(p){
+  $("sei").value=p.sei; $("mei").value=p.mei;
+  $("by").value=p.y; $("bm").value=p.m; $("bd").value=p.d;
+  $("noTime").checked=p.hour==null;
+  $("bh").disabled=$("bmin").disabled=p.hour==null;
+  if(p.hour!=null){$("bh").value=Math.floor(p.hour);$("bmin").value=Math.round(p.hour%1*60);}
+  else{$("bh").value="";$("bmin").value="";}
+  $("pref").value=p.pref;
+  $("overseas").classList.toggle("show",p.pref==="overseas");
+  if(p.pref==="overseas"){$("olat").value=p.lat;$("olon").value=p.lon;$("outc").value=p.utc;}
+}
+function renderSaved(){
+  const box=$("savedList"); if(!box)return;
+  const st=lsGet(); const ppl=(st&&st.people)||[];
+  box.innerHTML=ppl.length?`<span class="saved-label">SAVED READINGS</span>`+ppl.map((p,i)=>
+    `<span class="saved-chip" data-i="${i}" role="button" tabindex="0">${esc(p.mei)} ${esc(p.sei)}<span class="fine">(${p.y})</span><button type="button" class="x" aria-label="Remove ${esc(p.mei)}" data-x="${i}">×</button></span>`).join(""):"";
+  box.querySelectorAll(".saved-chip").forEach(ch=>{
+    ch.addEventListener("click",e=>{
+      if(e.target.dataset.x!==undefined){
+        const st2=lsGet(); if(st2&&st2.people){st2.people.splice(+e.target.dataset.x,1); lsSet(st2); renderSaved();}
+        e.stopPropagation(); return;
+      }
+      const st2=lsGet(); const p=st2&&st2.people&&st2.people[+ch.dataset.i];
+      if(p){fillForm(p); document.getElementById("form").dispatchEvent(new Event("submit",{cancelable:true}));}
+    });
+  });
+}
+function saveRecord(rec){
+  if(!$("saveOpt")||!$("saveOpt").checked)return;
+  const st=lsGet()||{people:[],opt:true};
+  const key=p=>`${p.sei}|${p.mei}|${p.y}-${p.m}-${p.d}`;
+  st.people=(st.people||[]).filter(p=>key(p)!==key(rec));
+  st.people.unshift(rec);
+  if(st.people.length>20)st.people.length=20;
+  st.opt=true; st.last=rec;
+  lsSet(st); renderSaved();
+}
+(function initSaved(){
+  if(!lsAvailable()){
+    const ctl=document.querySelector(".save-ctl");
+    if(ctl)ctl.innerHTML='<span class="fine">Saving isn\'t available in this environment — readings still work normally.</span>';
+    return;
+  }
+  const st=lsGet();
+  if(st){
+    if($("saveOpt"))$("saveOpt").checked=st.opt!==false;
+    if(st.last&&st.opt!==false)fillForm(st.last);
+  }
+  renderSaved();
+  if($("saveOpt"))$("saveOpt").addEventListener("change",e=>{
+    const s2=lsGet()||{people:[]}; s2.opt=e.target.checked; lsSet(s2);
+  });
+  if($("clearSaved"))$("clearSaved").addEventListener("click",()=>{lsClear();renderSaved();if($("saveOpt"))$("saveOpt").checked=true;});
+})();
+
+/* ══════════ Main ══════════ */
+let CUR=null;
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const sei=$("sei").value.trim(), mei=$("mei").value.trim();
+  const y=+$("by").value, m=+$("bm").value, d=+$("bd").value;
+  if(!sei||!mei||!y||!m||!d){alert("Please enter first name, last name and date of birth.");return;}
+  const dt=new Date(y,m-1,d);
+  if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d){alert("That date doesn't exist.");return;}
+  const noTime=$("noTime").checked;
+  let hour=null;
+  if(!noTime && $("bh").value!==""){ hour=+$("bh").value + (+$("bmin").value||0)/60; }
+  let lat,lon,utc;
+  if($("pref").value==="overseas"){
+    lat=parseFloat($("olat").value); lon=parseFloat($("olon").value); utc=parseFloat($("outc").value);
+    if(isNaN(lat)||isNaN(lon)||isNaN(utc)){alert("Please enter latitude, longitude and UTC offset.");return;}
+  }else{ const p=PREFS[+$("pref").value]; lat=p[1]; lon=p[2]; utc=p[3]; }
+  saveRecord({sei,mei,y,m,d,hour,pref:$("pref").value,lat,lon,utc});
+  render({sei,mei,y,m,d,hour,noTime,lat,lon,utc});
+  $("results").classList.add("show");
+  requestAnimationFrame(()=>$("hero").scrollIntoView({behavior:"smooth",block:"start"}));
+});
+
+function render(inp){
+  const {sei,mei,y,m,d,hour,lat,lon,utc}=inp;
+  const now=new Date();
+  const calcHour=hour==null?12:hour;
+  const jdBirth=jdUT(y,m,d,calcHour,utc);
+  const sunL=sunLon(jdBirth), moonL=moonLon(jdBirth);
+  const sun=signOf(sunL), moon=signOf(moonL);
+  const asc=hour==null?null:signOf(ascendant(jdBirth,lat,lon));
+  const fp=fourPillars(y,m,d,hour,utc);
+  const myStar=honmeiStar(fp.py);
+  const charNo=fp.di+1, charName=CHARS60[fp.di][0], animal=CHARS60[fp.di][1];
+  const nowY=yearOfNow(now);
+  const nys=mod(nowY-4,10), nyb=mod(nowY-4,12);
+  const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
+  const tdi=mod(jdToday+49,60), tds=tdi%10, tdb=tdi%12;
+  const lp=lifePath(y,m,d);
+  const nn=nameNums(mei+sei);
+  CUR={inp,fp,sun,moon,asc,sunL,moonL,myStar,charNo,charName,animal,now,nowY,nys,nyb,tdi,tds,tdb,lp,nn};
+  renderHero();renderWest();renderShichu();renderName();renderKyusei();renderAnimal();
+  renderSynth();renderJobs();renderLife();renderHealth();renderYear();renderToday();renderKids();
+}
+
+/* ── Chart panel ── */
+function renderHero(){
+  const {inp,fp,sun,myStar,charName,animal,lp}=CUR;
+  const pillars=[
+    {label:"YEAR",s:fp.ys,b:fp.yb},{label:"MONTH",s:fp.ms,b:fp.mb},
+    {label:"DAY",s:fp.ds,b:fp.db,day:true},
+    fp.hs!=null?{label:"HOUR",s:fp.hs,b:fp.hb}:null
+  ].filter(Boolean);
+  const pHtml=pillars.map(p=>`
+    <div class="pillar${p.day?" day":""}">
+      <div class="p-label">${p.label}</div>
+      <div class="p-kanji" lang="ja">${kanshiName(p.s,p.b)}</div>
+      <div class="p-read">${kanshiRead(p.s,p.b)}</div>
+      <div class="p-el">${elTag(stemElem(p.s))}${elTag(BRANCH_ELEM[p.b])}</div>
+    </div>`).join("");
+  const timeStr=inp.hour==null?"time unknown":String(Math.floor(inp.hour)).padStart(2,"0")+":"+String(Math.round((inp.hour%1)*60)).padStart(2,"0");
+  const place=$("pref").value==="overseas"?"custom location":esc(PREFS[+$("pref").value][0]);
+  $("hero").innerHTML=`
+    <div class="meishiki-head">
+      <h2 class="m-name">${esc(inp.mei)} ${esc(inp.sei)}
+        <small>Born ${fmtDate(inp.y,inp.m,inp.d)} · ${timeStr} · ${place}</small>
+      </h2>
+      <div class="m-chips">
+        <span class="m-chip">Sun<b>${SIGNS[sun].sym} ${SIGNS[sun].n}</b></span>
+        <span class="m-chip">Day Master<b>${STEMS[fp.ds]} · ${DAYSTEM_T[fp.ds].sym}</b></span>
+        <span class="m-chip">Star<b>${KYUSEI[myStar-1].n}</b></span>
+        <span class="m-chip">Animal<b><span class="a-emoji">${ANIMAL_EMOJI[animal]}</span>${charName}</b></span>
+        <span class="m-chip">Life Path<b>${lp}</b></span>
+      </div>
+    </div>
+    <div class="pillars">${pHtml}</div>`;
+}
+
+/* ── Western astrology ── */
+function renderWest(){
+  const {sun,moon,asc,sunL,moonL,nys}=CUR;
+  const S=SIGNS[sun];
+  const sunEdge=degInSign(sunL)<1||degInSign(sunL)>29;
+  const moonEdge=degInSign(moonL)<3||degInSign(moonL)>27;
+  const moonNote=CUR.inp.hour==null?"approximate — no birth time given":moonEdge?"near a sign boundary — the neighboring sign is possible":null;
+  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
+  $("west-body").innerHTML=`
+    <div class="card">
+      <h3>Sun, Moon &amp; Rising</h3>
+      <dl class="kv">
+        <dt>Sun sign</dt><dd><span class="big-sign"><span class="sym">${S.sym}</span>${S.n}</span>
+          <span class="tag gold">${S.el} element</span>
+          ${sunEdge?'<span class="tag verm">born on a cusp — check both signs</span>':""}</dd>
+        <dt>Moon sign</dt><dd><span class="big-sign"><span class="sym">${SIGNS[moon].sym}</span>${SIGNS[moon].n}</span>
+          ${moonNote?`<span class="tag verm">${moonNote}</span>`:""}</dd>
+        ${asc!=null?`<dt>Rising sign</dt><dd><span class="big-sign"><span class="sym">${SIGNS[asc].sym}</span>${SIGNS[asc].n}</span>
+          <span class="tag matcha">computed from your birthplace coordinates</span></dd>`:`<dt>Rising sign</dt><dd class="muted">needs a birth time — skipped</dd>`}
+      </dl>
+    </div>
+    <div class="card">
+      <h3>What the stars say about you</h3>
+      <p><strong>Sun — your purpose, your daylight self.</strong> ${S.t}</p>
+      <p><strong>Moon — your private weather.</strong> ${MOON_T[moon]}</p>
+      ${asc!=null?`<p><strong>Rising — the first impression.</strong> ${ASC_T[asc]}</p>`:""}
+      <p><strong>Modality.</strong> ${S.n} is ${QUAL_T[sun%3]}</p>
+    </div>
+    <div class="card">
+      <h3>Work &amp; love, by starlight</h3>
+      <p><strong>Work.</strong> ${SIGN_WORK[sun]} Choose places that reward your "${S.key}" — that's the shortcut.</p>
+      <p><strong>Love.</strong> ${SIGN_LOVE[sun]}</p>
+    </div>
+    <div class="card">
+      <h3>This year, by your element</h3>
+      <p>${YEAR_EL_T[rel]}</p>
+      <p class="muted">As a ${S.el} sign, your keyword is <strong>${S.key}</strong> — build the year around it.</p>
+    </div>`;
+}
+
+/* ── Four Pillars ── */
+function renderShichu(){
+  const {fp,nys,nyb,nowY}=CUR;
+  const D=DAYSTEM_T[fp.ds];
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const maxC=Math.max(...counts,1);
+  const gogyo=ELEMS.map((e,i)=>`
+    <div class="gg">
+      <div class="gg-bar"><div class="gg-fill" style="height:${Math.round(counts[i]/maxC*100)}%;background:${elColor(i)}"></div></div>
+      <div class="gg-name" style="font-size:12px">${e}</div><div class="gg-count">${counts[i]}</div>
+    </div>`).join("");
+  const missingIdx=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
+  const strongestIdx=counts.indexOf(Math.max(...counts));
+  const vb=voidBranches(fp.di);
+  const ts=tsuhen(fp.ds,nys);
+  const j=juniun(fp.ds,fp.db);
+  const branchRel=(()=>{
+    if(mod(fp.db+6,12)===nyb)return["Clash","Your day branch clashes with this year's branch — expect scenery changes; make big calls calmly."];
+    if(mod(fp.db+nyb,12)===1)return["Union","Your day branch joins hands with this year's — alliances and agreements come together easily."];
+    if(fp.db%4===nyb%4)return["Trine","Your day branch forms a trine with this year's — you're swimming with the current."];
+    return[null,""];
+  })();
+  $("shichu-body").innerHTML=`
+    <div class="card">
+      <h3>Day Master — ${STEMS[fp.ds]} (${STEM_READ[fp.ds]}) · the ${D.sym}</h3>
+      <p>${D.t}</p>
+      <p class="muted">In BaZi, the stem of your birth <em>day</em> is your essential self. Your day pillar is
+        <strong>${kanshiName(fp.ds,fp.db)} (${kanshiRead(fp.ds,fp.db)})</strong>${fp.hs!=null?`, your hour pillar <strong>${kanshiName(fp.hs,fp.hb)}</strong> (${HOUR_NAMES[fp.hb]})`:""}.
+        Your "void" branches are <strong>${BRANCH_READ[vb[0]]} &amp; ${BRANCH_READ[vb[1]]}</strong>.</p>
+    </div>
+    <div class="card">
+      <h3>Three faces, one engine</h3>
+      <p><strong>Public face (year pillar · ${kanshiName(fp.ys,fp.yb)}).</strong> ${TSUHEN_P[fp.ys===fp.ds?0:tsuhen(fp.ds,fp.ys)]}. This is how the wider world meets you.</p>
+      <p><strong>Work &amp; home face (month pillar · ${kanshiName(fp.ms,fp.mb)}).</strong> ${TSUHEN_P[fp.ms===fp.ds?0:tsuhen(fp.ds,fp.ms)]}. The engine of your prime working years.</p>
+      <p><strong>Momentum (12 stages · ${JUNIUN[j]}).</strong> Your day pillar sits at the "${JUNIUN[j]}" stage: ${JUNIUN_T[j]}</p>
+    </div>
+    <div class="card">
+      <h3>Your five-element balance</h3>
+      <div class="gogyo">${gogyo}</div>
+      <p class="muted">Across your ${fp.hs!=null?"eight":"six"} characters, the strongest element is ${elTag(strongestIdx)}${
+        missingIdx.length?` and you're missing ${missingIdx.map(elTag).join("")} — a gap traditionally balanced through color, direction and habit.`:" — and all five elements are present. A rare, well-tempered chart."}</p>
+      <p class="fine">${elTag(0)}growth &amp; ideas　${elTag(1)}passion &amp; expression　${elTag(2)}trust &amp; persistence　${elTag(3)}decision &amp; finish　${elTag(4)}wisdom &amp; flow</p>
+    </div>
+    <div class="card">
+      <h3>This year in your chart — the year of the ${TSUHEN[ts]}</h3>
+      <p>${nowY} (${kanshiName(nys,nyb)} · ${kanshiRead(nys,nyb)}) brings the "<strong>${TSUHEN[ts]}</strong>" influence to your Day Master. ${TSUHEN_T[ts]}</p>
+      ${branchRel[0]?`<p><span class="tag gold">${branchRel[0]}</span>${branchRel[1]}</p>`:""}
+    </div>`;
+}
+
+/* ── Numerology ── */
+function renderName(){
+  const {inp,lp,nn,now}=CUR;
+  const py=reduceNum(inp.m+inp.d+reduceNum(String(now.getFullYear()).split("").reduce((a,c)=>a+ +c,0),false),false);
+  const numRow=(label,n,desc)=>n==null?"":`
+    <div class="gk"><div class="gk-name">${label}</div><div class="gk-num">${n}</div>
+      <div class="gk-fortune f-daikichi">${numOf(n).key}</div><div class="gk-phrase">${desc}</div></div>`;
+  $("name-body").innerHTML=`
+    <div class="card">
+      <h3>Your core numbers</h3>
+      <p class="muted">Pythagorean numerology, computed from your date of birth and the letters of "${esc(inp.mei)} ${esc(inp.sei)}". Master numbers 11, 22 and 33 are preserved.</p>
+      <div class="goka" style="grid-template-columns:repeat(4,1fr)">
+        ${numRow("LIFE PATH",lp,"from your birth date")}
+        ${nn?numRow("EXPRESSION",nn.expr,"all letters — your toolkit"):""}
+        ${nn&&nn.soul?numRow("SOUL URGE",nn.soul,"vowels — what your heart wants"):""}
+        ${nn&&nn.pers?numRow("PERSONALITY",nn.pers,"consonants — the face you show"):""}
+      </div>
+    </div>
+    <div class="card">
+      <h3>Reading the numbers</h3>
+      <p><strong>Life Path ${lp} — ${numOf(lp).key}.</strong> ${numOf(lp).t} This is the road itself: the lessons and gifts built into your birth date.</p>
+      ${nn?`<p><strong>Expression ${nn.expr} — ${numOf(nn.expr).key}.</strong> ${numOf(nn.expr).t} This is your natural equipment for walking that road.</p>`:`<p class="muted">Enter the name in Latin letters to unlock the name numbers.</p>`}
+      ${nn&&nn.soul?`<p><strong>Soul Urge ${nn.soul}.</strong> Beneath everything, you're moved by the themes of ${numOf(nn.soul).key} — ${numOf(nn.soul).t.split(".")[0].toLowerCase()}.</p>`:""}
+    </div>
+    <div class="card">
+      <h3>Personal Year ${py}</h3>
+      <p>Within numerology's nine-year cycle, ${now.getFullYear()} is your <strong>Personal Year ${py}</strong> — a year themed on ${numOf(py).key}: ${numOf(py).t.split(".")[0].toLowerCase()}.</p>
+      <p class="fine">Numerology reads Latin letters; the Japanese edition of Seimeiroku uses kanji stroke counts instead.</p>
+    </div>`;
+}
+
+/* ── Nine Star Ki ── */
+function renderKyusei(){
+  const {myStar,nowY,nys,nyb}=CUR;
+  const K=KYUSEI[myStar-1];
+  const center=honmeiStar(nowY);
+  const board={};PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
+  const badDir={};
+  const gohoDir=Object.keys(board).find(d=>board[d]===5);
+  if(gohoDir){badDir[gohoDir]="Five-Yellow";badDir[OPP_DIR[gohoDir]]="Dark Sword";}
+  const saihaDir=OPP_DIR[BRANCH_DIR[nyb]];
+  badDir[saihaDir]=(badDir[saihaDir]?badDir[saihaDir]+" · ":"")+"Year Break";
+  const myDir=Object.keys(board).find(d=>board[d]===myStar);
+  if(myDir){badDir[myDir]=(badDir[myDir]?badDir[myDir]+" · ":"")+"Own Star";badDir[OPP_DIR[myDir]]=(badDir[OPP_DIR[myDir]]?badDir[OPP_DIR[myDir]]+" · ":"")+"Opposite";}
+  const gooDir=[];
+  Object.keys(board).forEach(d=>{
+    if(badDir[d])return;
+    const s=board[d]; if(s===5||s===myStar)return;
+    const r=elemRel(K.el,KYUSEI[s-1].el);
+    if(r===0||r===1||r===2)gooDir.push(d);
+  });
+  const gridOrder=[["NW","N","NE"],["W","C","E"],["SW","S","SE"]];
+  const cells=gridOrder.flat().map(dir=>{
+    if(dir==="C")return `<div class="cell center"><div class="dir">CENTER</div><div class="star">${KYUSEI[center-1].n}</div></div>`;
+    const s=board[dir], good=gooDir.includes(dir), bad=badDir[dir];
+    return `<div class="cell${good?" good":bad?" bad":""}">
+      <div class="dir">${dir}</div><div class="star">${KYUSEI[s-1].n}</div>
+      ${good?'<div class="mark">lucky</div>':bad?`<div class="mark">${bad}</div>`:""}
+    </div>`;
+  }).join("");
+  const myPalace=myDir?PALACES.find(p=>p.dir===myDir).base:5;
+  const mi=mod(CUR.fp.mb-2,12);
+  const gm=mod(GETSUMEI_START[myStar]-1-mi,9)+1;
+  const seiki=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===1).map(s=>s.n);
+  const hiwa=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===0).map(s=>s.n);
+  $("kyusei-body").innerHTML=`
+    <div class="card">
+      <h3>Your principal star — ${K.n}</h3>
+      <p>${K.t}</p>
+      <p class="muted">Home palace <strong>${K.home}</strong>; element ${elTag(K.el)}.</p>
+    </div>
+    <div class="card">
+      <h3>Your month star — ${KYUSEI[gm-1].n}</h3>
+      <p>If the principal star is your adult, public self, the month star describes your <strong>inner, younger self</strong>. ${gm===myStar?"Yours are one and the same — what you see is truly what you get.":`Inside, there's a streak of the ${KYUSEI[gm-1].n} star: ${KYUSEI[gm-1].t.split(":")[1]||KYUSEI[gm-1].t}`}</p>
+      <p class="muted">Stars that feed your ${ELEMS[K.el]} energy: ${seiki.length?`<strong>${seiki.join(", ")}</strong>`:"—"}${hiwa.length?`; kindred-element stars: <strong>${hiwa.join(", ")}</strong>`:""}.</p>
+    </div>
+    <div class="card">
+      <h3>The ${nowY} direction board</h3>
+      <div class="ban-wrap">
+        <div class="ban" role="img" aria-label="Annual direction board">${cells}</div>
+        <div class="ban-legend">
+          <ul>
+            <li><span class="dir-b" style="color:var(--good)">Lucky</span><span>${gooDir.length?gooDir.join(" · "):"limited this year"}</span></li>
+            <li><span class="dir-b" style="color:var(--bad)">Caution</span><span>${Object.entries(badDir).map(([d,n])=>`${d} (${n})`).join(", ")}</span></li>
+            <li><span class="dir-b">Year's blessed bearing</span><span>${EHO[nys]}</span></li>
+          </ul>
+          <p class="fine">Travel and moves toward your lucky directions are said to feed your luck. "Caution" doesn't mean forbidden — just save the big, irreversible moves for another bearing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>This year in Nine Star Ki</h3>
+      <p>In ${nowY} your ${K.n} star sits in the <strong>${PALACE_T[myPalace].label}</strong> palace. ${PALACE_T[myPalace].t}</p>
+    </div>`;
+}
+
+/* ── Animal fortune ── */
+function renderAnimal(){
+  const {charNo,charName,animal,fp,nyb}=CUR;
+  const A=ANIMALS[animal];
+  const rel=(()=>{
+    if(mod(fp.db+6,12)===nyb)return "This year flips your rhythm — a pit-stop year. Rebuild your form instead of sprinting.";
+    if(mod(fp.db+nyb,12)===1||fp.db%4===nyb%4)return "This year runs with your rhythm — your natural style works as-is. Stretch your legs.";
+    return "A steady-rhythm year. Protecting your own pace is the luckiest thing you can do.";
+  })();
+  $("animal-body").innerHTML=`
+    <div class="card">
+      <div class="animal-hero">
+        <div class="animal-emblem emoji" aria-hidden="true"><span class="em">${ANIMAL_EMOJI[animal]}</span></div>
+        <div class="a-body">
+          <p class="animal-name">No.${charNo} — "${charName}"</p>
+          <p class="muted">One of 60 characters; base animal <strong>${animal}</strong>, ${grpTag(ANIMAL_GROUP[animal])} group.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="a-emoji">${ANIMAL_EMOJI[animal]}</span>The ${animal} in you</h3>
+      <p>${A.t}</p>
+      <p class="muted">Keyword: <strong>${A.key}</strong>. "${charName}" is the ${animal} temperament with its own tint of personality.</p>
+    </div>
+    <div class="card">
+      <h3>Your ${grpTag(ANIMAL_GROUP[animal])} group</h3>
+      <p>${GROUP_T[ANIMAL_GROUP[animal]]}</p>
+      <p class="muted">The 12 animals sort into Moon (relationships first), Earth (results first) and Sun (inspiration first) — most everyday friction is just a difference in this priority order.</p>
+    </div>
+    <div class="card">
+      <h3>This year's rhythm</h3>
+      <p>${rel}</p>
+    </div>`;
+}
+
+/* ── Synthesis ── */
+function renderSynth(){
+  const {inp,sun,fp,myStar,charName,animal}=CUR;
+  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],K=KYUSEI[myStar-1],A=ANIMALS[animal];
+  const sunG=SIGN_EL_TO_GOGYO[S.el], dayE=stemElem(fp.ds), starE=K.el;
+  const align=(sunG===dayE?1:0)+(dayE===starE?1:0)+(sunG===starE?1:0);
+  const alignT=align>=2
+    ? `Several arts point to the same ${ELEMS[dayE]} energy — an unusually consistent chart. Inside and outside match; trust your instincts.`
+    : align===1
+    ? `Different systems partly agree: your faces change with the room, but one thread runs through them.`
+    : `Each art reflects a different energy — that's range, not contradiction. You carry more than one instrument.`;
+  $("synth-body").innerHTML=`
+    <div class="synth">
+      <div class="key-chips">
+        <span class="key-chip">${S.key}</span><span class="key-chip">${D.key}</span>
+        <span class="key-chip">${A.key}</span>
+      </div>
+      <p>${esc(inp.mei)}, your daylight self runs on ${S.n}'s "<strong>${S.key}</strong>", your core is the ${D.sym}'s "<strong>${D.key}</strong>",
+      and with people you move as "${charName}" — <strong>${A.key}</strong>. Your Nine Star Ki is ${K.n}.</p>
+      <p>${alignT}</p>
+      <div class="today-grid" style="margin-top:18px">
+        <div class="mini"><div class="mini-label">FOR WORK</div>
+          <div class="mini-note">${SIGN_WORK[sun]} Your ${STEMS[fp.ds]} nature — "${D.key}" — is the tool you bring on site.</div></div>
+        <div class="mini"><div class="mini-label">FOR LOVE &amp; PEOPLE</div>
+          <div class="mini-note">${SIGN_LOVE[sun]} Lead with your ${ANIMAL_GROUP[animal]}-group gift: ${ANIMAL_GROUP[animal]==="Moon"?"genuine attentiveness":ANIMAL_GROUP[animal]==="Earth"?"kept promises":"unguarded enthusiasm"}.</div></div>
+        <div class="mini"><div class="mini-label">FOR DAILY LIFE</div>
+          <div class="mini-note">Your star is a ${ELEMS[starE]} star — invite ${["plants and living wood","warm light and gatherings","ceramics and earthy textures","clean metal and whites","water, quiet and rest"][starE]} into your home to settle its energy.</div></div>
+        <div class="mini"><div class="mini-label">THE FIVE WINDOWS</div>
+          <div class="mini-note">Astrology = purpose · BaZi = temperament &amp; timing · numerology = the name's undertone · Nine Star Ki = directions &amp; seasons · Animal Fortune = social style. Where they agree — that's your core.</div></div>
+      </div>
+    </div>`;
+}
+
+/* ── Careers ── */
+function renderJobs(){
+  const {sun,fp,animal}=CUR;
+  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],A=ANIMALS[animal];
+  const sJobs=SIGN_JOBS[sun], dJobs=STEM_JOBS[fp.ds], aJobs=ANIMAL_JOBS[animal];
+  const all=[...sJobs,...dJobs,...aJobs];
+  const dup=[...new Set(all.filter((j,i)=>all.findIndex(x=>x===j)!==i))];
+  const chips=jobs=>`<div class="job-chips">${jobs.map(j=>`<span class="job-chip${dup.includes(j)?" hot":""}">${j}</span>`).join("")}</div>`;
+  $("jobs-body").innerHTML=`
+    <div class="card"><h3>By your sun sign — ${S.n}</h3><p>${SIGN_WORK[sun]}</p>${chips(sJobs)}</div>
+    <div class="card"><h3>By your Day Master — ${STEMS[fp.ds]} (${D.sym})</h3><p>Work that rewards "${D.key}" fits the grain of your wood.</p>${chips(dJobs)}</div>
+    <div class="card"><h3>By your animal — ${animal}</h3><p>The ${animal}'s edge is "${A.key}" — it thrives in ${ANIMAL_GROUP[animal]==="Moon"?"trust-building, people-facing work":ANIMAL_GROUP[animal]==="Earth"?"goal-and-numbers work":"rooms that pay for imagination"}.</p>${chips(aJobs)}</div>
+    <div class="card"><p class="muted">${dup.length?`<strong>${dup.join(", ")}</strong> appears in more than one lens — a strong calling candidate. `:""}A vocation reading is a compass, not a verdict — it can point inside your current job too.</p></div>`;
+}
+
+/* ── Life curve ── */
+function renderLife(){
+  const {fp,myStar,nowY}=CUR;
+  const vb=voidBranches(fp.di);
+  const maxAge=90;
+  const pts=[];
+  for(let a=0;a<=maxAge;a++){
+    const y=fp.py+a;
+    pts.push({a,y,base:palaceOfYear(y,myStar),voidY:vb.includes(mod(y-4,12))});
+  }
+  const W=1000,H=220,padL=46,padR=14,padT=16,padB=34;
+  const X=a=>padL+(W-padL-padR)*a/maxAge;
+  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
+  const P=pts.map(p=>({x:X(p.a),y:Y(PALACE_SCORE[p.base])}));
+  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
+  for(let i=0;i<P.length-1;i++){
+    const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];
+    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+  }
+  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
+  const grid=[];
+  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}</text>`);
+  const voidDots=pts.filter(p=>p.voidY).map(p=>`<circle cx="${X(p.a)}" cy="${Y(PALACE_SCORE[p.base])}" r="3" fill="var(--vermil)"/>`).join("");
+  const nowAge=nowY-fp.py;
+  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">now · ${nowAge}</text>`:"";
+  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Fortune curve by age" style="min-width:720px;max-width:none">
+    ${grid.join("")}
+    <path d="${area}" fill="var(--gold-wash)"/>
+    <path d="${line}" fill="none" stroke="var(--gold-deep)" stroke-width="2.2" stroke-linejoin="round"/>
+    ${voidDots}${nowMark}
+    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">high</text>
+    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">rest</text>
+  </svg></div>`;
+  const next10=pts.filter(p=>p.y>=nowY&&p.y<nowY+10).map(p=>`
+    <div class="mini${p.y===nowY?" now":""}"><div class="mini-label">${p.y} · age ${p.a}${p.y===nowY?" · now":""}</div>
+      <div class="mini-val">${PALACE_SHORT[p.base]}${p.voidY?'<span class="tag verm" style="margin-left:8px">void</span>':""}</div>
+      <div class="mini-note">${PALACE_T[p.base].t.split(".")[0]}.</div></div>`).join("");
+  const nextPeak=pts.find(p=>p.y>nowY&&p.base===7);
+  const nextRest=pts.find(p=>p.y>=nowY&&p.base===1);
+  $("life-body").innerHTML=`
+    <div class="card">
+      <h3>Ages 0–90 at a glance</h3>
+      <p class="muted">Your fortune wave, drawn from Nine Star Ki's nine-year cycle (where your ${KYUSEI[myStar-1].n} star travels each year). <span style="color:var(--vermil)">●</span> marks BaZi "void" years — better for sorting and recharging than for planting. Ages are counted from the solar new year (early February).</p>
+      ${svg}
+      <p class="muted">The wave repeats every nine years. ${nextPeak?`Your next harvest crest is <strong>${nextPeak.y} (age ${nextPeak.a})</strong>. `:""}${nextRest?`<strong>${nextRest.y} (age ${nextRest.a})</strong> is a recharge trough — finish your planting before it arrives. `:""}A trough isn't a bad year; it's where the next climb is prepared.</p>
+    </div>
+    <div class="card">
+      <h3>The next ten years</h3>
+      <div class="months">${next10}</div>
+    </div>`;
+}
+
+/* ── Wellness ── */
+function renderHealth(){
+  const {fp,sun}=CUR;
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const strongest=counts.indexOf(Math.max(...counts));
+  const missing=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
+  const dayE=stemElem(fp.ds);
+  $("health-body").innerHTML=`
+    <div class="card">
+      <h3>Where your body asks for care</h3>
+      <p><strong>Your ${elTag(dayE)} constitution.</strong> ${ELEM_BODY[dayE].note} In the classical map this element governs the <strong>${ELEM_BODY[dayE].organ}</strong>.</p>
+      <p><strong>Care.</strong> ${ELEM_BODY[dayE].care}</p>
+      ${strongest!==dayE?`<p><strong>An excess of ${elTag(strongest)}.</strong> Your chart's most abundant element can overload the <strong>${ELEM_BODY[strongest].organ}</strong> when life runs hot. ${ELEM_BODY[strongest].care}</p>`:""}
+      ${missing.map(i=>`<p><strong>Missing ${elTag(i)}.</strong> The systems it governs — the <strong>${ELEM_BODY[i].organ}</strong> — tire more easily. ${ELEM_BODY[i].care}</p>`).join("")}
+    </div>
+    <div class="card">
+      <h3>By your sun sign — ${SIGNS[sun].n}</h3>
+      <p>Traditional astrology links ${SIGNS[sun].n} with the <strong>${SIGN_BODY[sun]}</strong>.</p>
+      <p>${SIGN_BODY_CARE[sun]}</p>
+    </div>
+    <div class="card">
+      <h3>Riding the wave</h3>
+      <p>Recharge years and void years are when your body asks for a slower gear — a fine time to book checkups. In harvest years, reserve sleep first; the calendar will fill itself.</p>
+      <p class="fine">These notes come from traditional correspondences in East Asian medicine and astrology. They are not medical advice — please see a professional about any real symptom.</p>
+    </div>`;
+}
+
+/* ── This year ── */
+function renderYear(){
+  const {sun,fp,myStar,nowY,nys,nyb}=CUR;
+  const S=SIGNS[sun];
+  const ts=tsuhen(fp.ds,nys);
+  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
+  const center=honmeiStar(nowY);
+  const board={};PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
+  const myDir=Object.keys(board).find(d=>board[d]===myStar);
+  const myPalace=myDir?PALACES.find(x=>x.dir===myDir).base:5;
+  let score=3;
+  if([2,4,5,7,9].includes(ts))score++;
+  if([3,4,6,7,9].includes(myPalace))score++;
+  if(mod(fp.db+6,12)===nyb)score--;
+  if(fp.db%4===nyb%4)score++;
+  score=Math.max(1,Math.min(5,score));
+  $("year-title").textContent=`This Year — ${nowY} (${kanshiRead(nys,nyb)})`;
+  const months=Array.from({length:12},(_,mi)=>{
+    const calM=mi+2>12?mi-10:mi+2;
+    const mstem=mod((nys%5)*2+2+mi,10);
+    const mts=tsuhen(fp.ds,mstem);
+    const nowMi=Math.floor(norm(sunLon(jdUT(CUR.now.getFullYear(),CUR.now.getMonth()+1,CUR.now.getDate(),12,9))-315)/30);
+    return `<div class="mini${mi===nowMi?" now":""}"><div class="mini-label">${MONTHS[calM-1]}${mi===nowMi?" · now":""}</div>
+      <div class="mini-val">${TSUHEN[mts]}</div><div class="mini-note">${TSUHEN_M[mts]}.</div></div>`;
+  }).join("");
+  $("year-body").innerHTML=`
+    <div class="card">
+      <h3>Overall ${starsHtml(score)}</h3>
+      <p>This year your chart receives the "<strong>${TSUHEN[ts]}</strong>" influence, and your star sits in the <strong>${PALACE_T[myPalace].label}</strong> palace — ${PALACE_T[myPalace].t.split(".")[0].toLowerCase()}.</p>
+      <div class="today-grid">
+        <div class="mini"><div class="mini-label">STARS (ASTROLOGY)</div><div class="mini-note">${YEAR_EL_T[rel]}</div></div>
+        <div class="mini"><div class="mini-label">CHART (BAZI)</div><div class="mini-note">${TSUHEN_T[ts]}</div></div>
+        <div class="mini"><div class="mini-label">SEASONS (NINE STAR KI)</div><div class="mini-note">${PALACE_T[myPalace].t}</div></div>
+        <div class="mini"><div class="mini-label">BLESSED BEARING</div><div class="mini-val">${EHO[nys]}</div><div class="mini-note">The auspicious compass bearing of ${nowY} — face it for your year's first shrine visit or big wish.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Month by month</h3>
+      <p class="muted">Each solar month (boundaries fall on the 4th–8th) brings a different influence to your Day Master.</p>
+      <div class="months">${months}</div>
+    </div>`;
+}
+
+/* ── Today ── */
+function dayScore(di){
+  const fp=CUR.fp, s=di%10, b=di%12;
+  const vb=voidBranches(fp.di);
+  let score=3,notes=[];
+  if(mod(s-fp.ds+10,10)===5){score++;notes.push("stems unite — ties come together");}
+  if(mod(b+fp.db,12)===1){score++;notes.push("branches join — a day of harmony");}
+  if(b%4===fp.db%4&&b!==fp.db){score++;notes.push("a trine tailwind");}
+  if(mod(fp.db+6,12)===b){score--;notes.push("a clash day — stay flexible");}
+  if(di===fp.di){score=5;notes.push("your own pillar returns (once in 60 days) — intuition runs sharp");}
+  if(vb.includes(b)){score=Math.min(score,2);notes.push("a void day — sort, don't sow");}
+  return {score:Math.max(1,Math.min(5,score)),notes};
+}
+function renderToday(){
+  const {fp,now,tdi,tds,tdb}=CUR;
+  const {score,notes}=dayScore(tdi);
+  const isVoid=voidBranches(fp.di).includes(tdb);
+  const advice=score>=5?"A green-light day. Send the message, make the call, take the leap."
+    :score===4?"The wind is with you — plans made with people go especially well."
+    :score===3?"An ordinary day. Care in small things compounds into tomorrow's luck."
+    :score===2?"A recharging day. Tidy something and let the batteries fill."
+    :"A defensive day. No forcing — a warm bath and an early night win.";
+  const dayEl=stemElem(tds);
+  const luckyColor={0:"green",1:"red & vermilion",2:"yellow & ochre",3:"white & gold",4:"navy & black"}[dayEl];
+  $("today-title").textContent=`Today — ${fmtDate(now.getFullYear(),now.getMonth()+1,now.getDate())}`;
+  const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
+  const tomorrow=mod(jdToday+1+49,60), tm=dayScore(tomorrow);
+  let best=null;
+  for(let i=1;i<=7;i++){
+    const di=mod(jdToday+i+49,60), r=dayScore(di);
+    if(!best||r.score>best.score){const d2=new Date(now);d2.setDate(d2.getDate()+i);best={score:r.score,di,date:d2,notes:r.notes};}
+  }
+  $("today-body").innerHTML=`
+    <div class="card">
+      <h3>Today is a ${kanshiRead(tds,tdb)} day ${starsHtml(score)}</h3>
+      <p>${advice}</p>
+      ${notes.length?`<ul style="margin:.6em 0;padding-left:1.4em">${notes.map(n=>`<li>${n}</li>`).join("")}</ul>`:""}
+      <div class="today-grid">
+        <div class="mini"><div class="mini-label">TODAY'S LUCKY COLOR</div><div class="mini-val">${luckyColor}</div>
+          <div class="mini-note">Drawn from today's ${elTag(dayEl)} stem.</div></div>
+        <div class="mini"><div class="mini-label">ONE SMALL NUDGE</div>
+          <div class="mini-note"><span class="a-emoji">${ANIMAL_EMOJI[CUR.animal]}</span>${isVoid?"Letting go counts as luck today — clear one small corner.":`Lead with your "${ANIMALS[CUR.animal].key}" — just once, on purpose, today.`}</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Tomorrow &amp; this week</h3>
+      <div class="today-grid">
+        <div class="mini"><div class="mini-label">TOMORROW — ${kanshiRead(tomorrow%10,tomorrow%12)}</div>
+          <div class="mini-val">${starsHtml(tm.score)}</div>
+          <div class="mini-note">${tm.notes.length?tm.notes[0]+".":"A steady day — carry today's work forward."}</div></div>
+        <div class="mini"><div class="mini-label">BEST DAY THIS WEEK</div>
+          <div class="mini-val">${WDAYS[best.date.getDay()]}, ${MONTHS[best.date.getMonth()]} ${best.date.getDate()} ${starsHtml(best.score)}</div>
+          <div class="mini-note">${best.notes.length?best.notes[0]+".":"A calm, favorable current."} Park your most important plan here.</div></div>
+      </div>
+      <p class="fine">Dates use this device's clock. Future ratings compare each day's pillar against yours — a compass, not a promise.</p>
+    </div>`;
+}
+
+/* ── For kids ── */
+function renderKids(){
+  const {inp,sun,fp,animal,tds,tdi}=CUR;
+  const S=SIGNS[sun];
+  const {score}=dayScore(tdi);
+  const kidStars=n=>{let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">☆</span>';return `<span class="kid-stars" role="img" aria-label="${n} of 5">${h}</span>`;};
+  const dayEl=stemElem(tds);
+  const kidColor={0:"green",1:"red",2:"yellow",3:"white & gold",4:"blue"}[dayEl];
+  $("kids-body").innerHTML=`
+    <div class="card">
+      <h3>Hey ${esc(inp.mei)} — what kind of kid are you?</h3>
+      <p><span class="kid-emblem">${S.sym}</span><strong>You're a ${S.n}!</strong> ${SIGN_KID[sun]}</p>
+      <p><span class="kid-emblem">${ANIMAL_EMOJI[animal]}</span><strong>Your animal is the ${animal}.</strong> ${ANIMAL_KID[animal]}</p>
+      <p><span class="kid-emblem">${STEMS[fp.ds]}</span><strong>Your birthday secret:</strong> ${STEM_KID[fp.ds]}</p>
+    </div>
+    <div class="card">
+      <h3>Today's luck</h3>
+      <p>${kidStars(score)}</p>
+      <p>${KID_TODAY[score]}</p>
+      <div class="kid-grid">
+        <div class="kid-mini"><div class="k-label">LUCKY COLOR TODAY</div><div class="k-val">${kidColor}</div></div>
+        <div class="kid-mini"><div class="k-label">LUCKY DIRECTION THIS YEAR</div><div class="k-val">${EHO[CUR.nys]}</div></div>
+      </div>
+      <p class="fine" style="margin-top:14px">Fortunes aren't "for sure" — they're hints! Keep the good bits as confidence, use the careful bits as tips, and have an awesome day.</p>
+    </div>`;
+}
+
+</script>
