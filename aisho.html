@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>星命録 極 — 十二占術完全鑑定</title>
+<title>星命録 縁 — ふたりの詳細相性鑑定</title>
 <style>
 :root{
   --paper:#f6f1e6; --card:#fdfaf1; --card2:#f0e9d8;
@@ -467,14 +467,46 @@ button.print-btn:hover{background:var(--gold-wash)}
   .cmp{overflow:visible}
   #results{display:block!important}
 }
+</style><style>
+/* ── 縁（ふたりの相性）専用 ── */
+.pair-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+@media(max-width:680px){.pair-grid{grid-template-columns:1fr}}
+.pair-box{
+  border:1px dashed var(--line-strong); border-radius:8px; padding:18px 18px 14px;
+  border-top:4px solid var(--pcol,var(--gold));
+}
+.pair-box .pb-head{font-family:var(--serif); font-size:15px; letter-spacing:.2em; color:var(--pcol,var(--gold-deep)); margin-bottom:12px}
+.pair-box .f-field{margin-bottom:12px}
+.rel-fld{display:flex; align-items:center; gap:12px; justify-content:center; margin-top:20px}
+.rel-fld label{font-size:11.5px; letter-spacing:.22em; color:var(--ink-soft)}
+.rel-fld select{max-width:220px}
+/* スコアメーター */
+.score-wrap{display:flex; align-items:center; gap:26px; flex-wrap:wrap; margin:6px 0 10px}
+.score-ring{
+  flex:none; width:120px; height:120px; border-radius:50%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:3px double var(--gold); background:var(--gold-wash);
+}
+.score-num{font-family:var(--serif); font-size:38px; line-height:1; color:var(--gold-deep); font-variant-numeric:tabular-nums}
+.score-max{font-size:11px; color:var(--ink-faint); letter-spacing:.1em}
+.score-grade{font-family:var(--serif); font-size:22px; letter-spacing:.2em; color:var(--vermil)}
+.score-bars{flex:1; min-width:240px}
+.sb{display:flex; align-items:center; gap:10px; margin:5px 0}
+.sb .sb-label{flex:none; width:7.5em; font-size:11px; letter-spacing:.1em; color:var(--ink-soft)}
+.sb .sb-track{flex:1; height:8px; background:var(--card2); border-radius:4px; overflow:hidden; border:1px solid var(--line)}
+.sb .sb-fill{height:100%; background:var(--gold); border-radius:4px}
+.sb .sb-num{flex:none; font-size:11px; color:var(--ink-faint); font-variant-numeric:tabular-nums; width:3.5em; text-align:right}
+/* 相性の向き表示 */
+.dir-pair{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px}
+@media(max-width:620px){.dir-pair{grid-template-columns:1fr}}
 </style>
 
 <div class="wrap">
 <header class="site">
-  <div class="site-eyebrow">Birthday Divination System</div>
-  <h1 class="site-title">星命録<span style="font-size:.55em; letter-spacing:.2em">　極</span></h1>
-  <p class="site-sub">十二占術による完全鑑定 ─ 占星術・四柱推命・姓名判断・九星・動物占い・数秘術・カバラ・マヤ暦・宿曜・算命学・六星占術・エニアグラム</p>
-  <div class="seal" aria-hidden="true">鑑</div>
+  <div class="site-eyebrow">Compatibility Reading for Two</div>
+  <h1 class="site-title">星命録<span style="font-size:.55em; letter-spacing:.2em">　縁</span></h1>
+  <p class="site-sub">ふたりの詳細相性鑑定 ─ 宿曜・四柱推命・西洋占星術・九星・動物占い・マヤ暦・数秘術の七つの窓から</p>
+  <div class="seal" aria-hidden="true">縁</div>
 </header>
 <div class="donate-top" style="max-width:620px;margin:30px auto 0;text-align:center;border:1px dashed var(--gold);border-radius:10px;background:var(--gold-wash);padding:16px 20px">
   <p style="margin:0 0 12px;font-size:13.5px;color:var(--ink);letter-spacing:.05em;line-height:1.9">このサイトは皆さまの善意で成り立っています。<br>もしよければ、ぜひ応援をお願いします。</p>
@@ -482,294 +514,165 @@ button.print-btn:hover{background:var(--gold-wash)}
 </div>
 
 <form class="entry" id="form" autocomplete="off">
-  <div id="savedList" class="saved-list" aria-label="保存した鑑定"></div>
-  <div class="f-grid">
-    <div class="f-field">
-      <label class="f-label" for="sei">姓（せい）</label>
-      <input type="text" id="sei" placeholder="例：磯崎" required>
+  <div class="pair-grid">
+    <div class="pair-box" style="--pcol:var(--vermil)">
+      <div class="pb-head">おひとり目</div>
+      <div class="f-field"><label class="f-label" for="a_sei">姓</label><input type="text" id="a_sei" placeholder="山田" required></div>
+      <div class="f-field"><label class="f-label" for="a_mei">名</label><input type="text" id="a_mei" placeholder="太郎" required></div>
+      <div class="f-field"><span class="f-label">生年月日</span>
+        <div class="f-row">
+          <input type="number" id="a_y" min="1900" max="2026" placeholder="1980" aria-label="年"><span class="f-unit">年</span>
+          <input type="number" id="a_m" min="1" max="12" placeholder="11" aria-label="月"><span class="f-unit">月</span>
+          <input type="number" id="a_d" min="1" max="31" placeholder="3" aria-label="日"><span class="f-unit">日</span>
+        </div></div>
+      <div class="f-field"><span class="f-label">時刻 <span class="opt">任意</span></span>
+        <div class="f-row">
+          <input type="number" id="a_h" min="0" max="23" placeholder="--" aria-label="時"><span class="f-unit">時</span>
+          <input type="number" id="a_min" min="0" max="59" placeholder="--" aria-label="分"><span class="f-unit">分</span>
+        </div></div>
     </div>
-    <div class="f-field">
-      <label class="f-label" for="mei">名（めい）</label>
-      <input type="text" id="mei" placeholder="例：太郎" required>
-    </div>
-    <div class="f-field" style="grid-column:1/-1">
-      <label class="f-label" for="romaji">ローマ字表記 <span class="opt">任意・数秘術の名前診断に使用（例：YAMADA HANAKO）</span></label>
-      <input type="text" id="romaji" placeholder="YAMADA HANAKO">
-    </div>
-    <div class="f-field">
-      <span class="f-label">生年月日</span>
-      <div class="f-row">
-        <input type="number" id="by" min="1900" max="2026" placeholder="1985" aria-label="年"><span class="f-unit">年</span>
-        <input type="number" id="bm" min="1" max="12" placeholder="4" aria-label="月"><span class="f-unit">月</span>
-        <input type="number" id="bd" min="1" max="31" placeholder="15" aria-label="日"><span class="f-unit">日</span>
-      </div>
-    </div>
-    <div class="f-field">
-      <span class="f-label">出生時刻 <span class="opt">アセンダント・時柱の算出に使用</span></span>
-      <div class="f-row">
-        <input type="number" id="bh" min="0" max="23" placeholder="10" aria-label="時"><span class="f-unit">時</span>
-        <input type="number" id="bmin" min="0" max="59" placeholder="30" aria-label="分"><span class="f-unit">分</span>
-      </div>
-      <label class="f-check"><input type="checkbox" id="noTime">時刻不明（正午として簡易計算）</label>
-    </div>
-    <div class="f-field">
-      <label class="f-label" for="pref">生まれた場所</label>
-      <select id="pref"></select>
-    </div>
-    <div id="overseas">
-      <div class="f-field">
-        <label class="f-label" for="olat">緯度（北+）</label>
-        <input type="number" id="olat" step="0.01" min="-90" max="90" placeholder="48.85">
-      </div>
-      <div class="f-field">
-        <label class="f-label" for="olon">経度（東+）</label>
-        <input type="number" id="olon" step="0.01" min="-180" max="180" placeholder="2.35">
-      </div>
-      <div class="f-field">
-        <label class="f-label" for="outc">時差（UTC±）</label>
-        <input type="number" id="outc" step="0.5" min="-12" max="14" placeholder="1">
-      </div>
+    <div class="pair-box" style="--pcol:var(--indigo)">
+      <div class="pb-head">おふたり目</div>
+      <div class="f-field"><label class="f-label" for="b_sei">姓</label><input type="text" id="b_sei" placeholder="山田" required></div>
+      <div class="f-field"><label class="f-label" for="b_mei">名</label><input type="text" id="b_mei" placeholder="花子" required></div>
+      <div class="f-field"><span class="f-label">生年月日</span>
+        <div class="f-row">
+          <input type="number" id="b_y" min="1900" max="2026" placeholder="1985" aria-label="年"><span class="f-unit">年</span>
+          <input type="number" id="b_m" min="1" max="12" placeholder="4" aria-label="月"><span class="f-unit">月</span>
+          <input type="number" id="b_d" min="1" max="31" placeholder="15" aria-label="日"><span class="f-unit">日</span>
+        </div></div>
+      <div class="f-field"><span class="f-label">時刻 <span class="opt">任意</span></span>
+        <div class="f-row">
+          <input type="number" id="b_h" min="0" max="23" placeholder="--" aria-label="時"><span class="f-unit">時</span>
+          <input type="number" id="b_min" min="0" max="59" placeholder="--" aria-label="分"><span class="f-unit">分</span>
+        </div></div>
     </div>
   </div>
-  <div class="f-actions"><button type="submit" class="go">鑑 定 す る</button></div>
+  <div class="rel-fld">
+    <label for="rel">おふたりの関係</label>
+    <select id="rel">
+      <option value="love">恋人・夫婦</option>
+      <option value="friend">友人</option>
+      <option value="work">仕事仲間</option>
+      <option value="family">家族</option>
+    </select>
+  </div>
+  <div class="f-actions"><button type="submit" class="go">縁 を 鑑 定</button></div>
   <div class="save-ctl">
-    <label class="f-check"><input type="checkbox" id="saveOpt" checked>鑑定した人をこの端末に保存する（ブラウザ内のみ）</label>
+    <label class="f-check"><input type="checkbox" id="saveOpt" checked>この組み合わせを端末に保存する（ブラウザ内のみ）</label>
     <button type="button" id="clearSaved">保存データを削除</button>
   </div>
-  <p class="f-note">入力された情報はこのページ内でのみ計算に使われ、外部には送信されません。保存を有効にすると、この端末のブラウザにだけ記録され、次回も呼び出せます。</p>
+  <p class="f-note">計算はこのページ内で完結し、入力情報は外部に送信されません。日付の暦計算は日本時間基準です。</p>
 </form>
 
 <div id="results">
   <div class="print-bar"><button type="button" class="print-btn" onclick="window.print()">PDFに保存 / 印刷</button></div>
-  <div class="meishiki" id="hero"></div>
-  <nav class="toc" aria-label="占術の目次">
-    <a class="chip" href="#sec-west">西洋占星術</a>
-    <a class="chip" href="#sec-shichu">四柱推命</a>
-    <a class="chip" href="#sec-name">姓名判断</a>
-    <a class="chip" href="#sec-kyusei">九星気学・方位</a>
-    <a class="chip" href="#sec-animal">動物占い</a>
-    <a class="chip" href="#sec-num">数秘術</a>
-    <a class="chip" href="#sec-kabbalah">カバラ</a>
-    <a class="chip" href="#sec-maya">マヤ暦</a>
-    <a class="chip" href="#sec-shukuyo">宿曜</a>
-    <a class="chip" href="#sec-sanmei">算命学</a>
-    <a class="chip" href="#sec-rokusei">六星占術</a>
-    <a class="chip" href="#sec-ennea">エニアグラム</a>
-    <a class="chip" href="#sec-synth">総合鑑定</a>
-    <a class="chip" href="#sec-jobs">適職</a>
-    <a class="chip" href="#sec-life">生涯の運気</a>
-    <a class="chip" href="#sec-health">健康</a>
-    <a class="chip" href="#sec-year">今年の運勢</a>
-    <a class="chip" href="#sec-today">今日の運勢</a>
-    <a class="chip" href="#sec-kids">こども向け</a>
+  <div class="meishiki" id="hero" style="padding:26px 28px"></div>
+  <nav class="toc" aria-label="鑑定の目次">
+    <a class="chip" href="#sec-summary">総合</a>
+    <a class="chip" href="#sec-shukuyo">宿曜の縁</a>
+    <a class="chip" href="#sec-shichu">四柱の縁</a>
+    <a class="chip" href="#sec-hoshi">星の縁</a>
+    <a class="chip" href="#sec-kyusei">九星の縁</a>
+    <a class="chip" href="#sec-animal">動物の縁</a>
+    <a class="chip" href="#sec-maya">マヤ暦の縁</a>
+    <a class="chip" href="#sec-num">数の縁</a>
+    <a class="chip" href="#sec-calendar">ふたりの運気こよみ</a>
   </nav>
 
-  <section class="art" id="sec-west">
+  <section class="art" id="sec-summary">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">星</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Western Astrology</div>
-        <h2 class="art-title">西洋占星術</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">綜</div>
+      <div class="art-titles"><div class="art-eyebrow">Overall</div><h2 class="art-title">総合相性</h2></div>
     </div>
-    <hr class="art-rule">
-    <p class="art-lead">古代バビロニアに生まれ、ギリシャで体系化された西洋占星術。生まれた瞬間の天体配置を「出生図」として読み、太陽は人生の目的、月は素の感情、アセンダントは世界に見せる第一印象を表すとされます。本鑑定は天文近似計算で、あなたの三つの星を実際の空から割り出します。</p><div id="west-body"></div>
-  </section>
-
-  <section class="art" id="sec-shichu">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">命</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Four Pillars of Destiny</div>
-        <h2 class="art-title">四柱推命</h2>
-      </div>
-    </div>
-    <hr class="art-rule">
-    <p class="art-lead">中国・宋代に体系化された四柱推命は、生まれた年・月・日・時の四本の柱に干支を立て、暦をめぐる気の巡りから人を読む東洋占術の王様です。数ある占いの中でも理論体系の精緻さは随一で、鑑定の要は生まれた「日」の干＝日主。あなたという存在の核を表します。</p><div id="shichu-body"></div>
-  </section>
-
-  <section class="art" id="sec-name">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">名</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Name Numerology</div>
-        <h2 class="art-title">姓名判断（画数占い）</h2>
-      </div>
-    </div>
-    <hr class="art-rule">
-    <p class="art-lead">姓名判断は、名前の画数から五つの「格」を導いて人生の各局面を読む、日本で発達した占いです。明治期に体系化された五格剖象法が主流で、本鑑定もその流れを汲みます。名は生涯でもっとも多く呼ばれ、書かれる「音と形」——その通奏低音を読み解きます。</p><div id="name-body"></div>
-  </section>
-
-  <section class="art" id="sec-kyusei">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">方</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Nine Star Ki &amp; Directions</div>
-        <h2 class="art-title">九星気学と方位</h2>
-      </div>
-    </div>
-    <hr class="art-rule">
-    <p class="art-lead">九星気学は、古代中国の伝説の図「洛書」に由来する九つの星を生まれ年に配当し、方位と時運を読む学問です。大正期に日本で「気学」として大成しました。九つの星が毎年盤上を巡るため、運気の季節と吉方位が年ごとに移り変わるのが特徴です。</p><div id="kyusei-body"></div>
-  </section>
-
-  <section class="art" id="sec-animal">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">動</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Animal Fortune — 60 Characters</div>
-        <h2 class="art-title">動物占い</h2>
-      </div>
-    </div>
-    <hr class="art-rule">
-    <p class="art-lead">動物占いは、四柱推命の十二運星を土台に1990年代の日本で生まれた性格分類です。60干支がそのまま60キャラクターに対応しており、愛らしい見た目の裏に本格的な東洋占術の骨格を持ちます。対人スタイルを直感的につかむ入口として優れています。</p><div id="animal-body"></div>
-  </section>
-
-  <section class="art" id="sec-num">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">数</div>
-      <div class="art-titles"><div class="art-eyebrow">Numerology</div><h2 class="art-title">数秘術 ─ 誕生数とライフパス</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">数秘術は、古代ギリシャの数学者ピタゴラスに帰される「数の神秘学」です。「万物は数である」——生年月日や名前を一桁に還元した数に、人生の設計図が刻まれていると考えます。11・22・33だけは還元しない特別な「マスターナンバー」として扱われます。</p><div id="num-body"></div>
-  </section>
-
-  <section class="art" id="sec-kabbalah">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">智</div>
-      <div class="art-titles"><div class="art-eyebrow">Kabbalah</div><h2 class="art-title">カバラ数秘術 ─ 生命の樹</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">カバラはユダヤ教に伝わる神秘思想で、宇宙の構造を「生命の樹」と呼ばれる10の球体（セフィラ）の図で表します。数秘術と同じ根を持ちますが、数を「樹のどこに立つ魂か」という霊的な地図として読むところに特徴があります。</p><div id="kabbalah-body"></div>
-  </section>
-
-  <section class="art" id="sec-maya">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">暦</div>
-      <div class="art-titles"><div class="art-eyebrow">Mayan Tzolkin</div><h2 class="art-title">マヤ暦 ─ KINと太陽の紋章</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">古代マヤ文明の神官が儀式に用いた260日周期の神聖暦「ツォルキン」。20の紋章と13の音が織りなす260のKINが日々を巡り、生まれた日のKINはその人の魂の設計図とされます。本鑑定は現代に広まったドリームスペル方式（うるう日を数えない）で算出しています。</p><div id="maya-body"></div>
+    <hr class="art-rule"><div id="summary-body"></div>
   </section>
 
   <section class="art" id="sec-shukuyo">
     <div class="art-head">
       <div class="art-seal" aria-hidden="true">宿</div>
-      <div class="art-titles"><div class="art-eyebrow">Shukuyo 27 Mansions</div><h2 class="art-title">宿曜占星術 ─ 二十七宿</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">宿曜占星術は、インド占星術が仏典「宿曜経」として中国を経由し、平安時代に弘法大師空海が日本へ伝えた密教占星術です。月の宿る二十七宿から本質と相性を読み、その的中ぶりから戦国武将が軍略に使い、江戸幕府が民間での使用を禁じたという逸話も残ります。</p><div id="shukuyo-body"></div>
-  </section>
-
-  <section class="art" id="sec-sanmei">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">算</div>
-      <div class="art-titles"><div class="art-eyebrow">Sanmeigaku</div><h2 class="art-title">算命学 ─ 人体星図</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">算命学は、中国の陰陽五行説を源流として日本で体系化された運命学です。生年月日の干支から「人体星図」という星の配置図を描き、頭・胸・腹・両手の五カ所に宿る星で人物像と人生の流れを読みます。政財界の帝王学としても学ばれてきました。</p><div id="sanmei-body"></div>
-  </section>
-
-  <section class="art" id="sec-rokusei">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">六</div>
-      <div class="art-titles"><div class="art-eyebrow">Six Star Astrology</div><h2 class="art-title">六星占術 ─ 運命星と殺界</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">六星占術は、細木数子氏が算命学や万象学を基に大成した占術です。生年月日から六つの運命星（土星人・金星人・火星人・天王星人・木星人・水星人）へ分類し、12年周期の運気——とりわけ運気の冬にあたる3年間「大殺界」——を読むことで広く知られています。</p><div id="rokusei-body"></div>
-  </section>
-
-  <section class="art" id="sec-ennea">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">型</div>
-      <div class="art-titles"><div class="art-eyebrow">Enneagram</div><h2 class="art-title">エニアグラム ─ 九つの性格類型</h2></div>
-    </div>
-    <hr class="art-rule"><p class="art-lead">エニアグラムは、古代からの智慧を起源に20世紀に心理学と統合された、9タイプの性格類型論です。円周上の9つの点を結ぶ図形がその名の由来。世界的な企業研修でも使われる自己理解の地図で、本来は自己観察でタイプを見極めていきます。</p><div id="ennea-body"></div>
-  </section>
-
-  <section class="art" id="sec-synth">
-    <div class="art-head">
-      <div class="art-seal" aria-hidden="true">綜</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Synthesis</div>
-        <h2 class="art-title">総合鑑定 ─ 五占術を貫くもの</h2>
-      </div>
+      <div class="art-titles"><div class="art-eyebrow">Shukuyo — the Master of Compatibility</div><h2 class="art-title">宿曜が読む、ふたりの縁</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="synth-body"></div>
+    <p class="art-lead">宿曜占星術は「相性占いの最高峰」と呼ばれます。二十七宿の距離から、縁の種類（命・業・胎・栄・衰・安・壊・成・危・友・親）と濃さ（近距離・中距離・遠距離）を読み分けます。しかも縁には向きがあり、あなたから見た相手と、相手から見たあなたは違う顔をしています。</p>
+    <div id="shukuyo-body"></div>
   </section>
 
-  <section class="art" id="sec-jobs">
+  <section class="art" id="sec-shichu">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">職</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Vocation</div>
-        <h2 class="art-title">適職 ─ 向いている仕事</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">命</div>
+      <div class="art-titles"><div class="art-eyebrow">Four Pillars</div><h2 class="art-title">四柱推命が読む、日柱の結び</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="jobs-body"></div>
+    <p class="art-lead">四柱推命の相性は、それぞれの「日柱」（生まれた日の干支）同士の関係で読みます。干合は五行を超えて引き合う結び、支合は日常のリズムの噛み合い、冲は正面からぶつかる縁。干合と支合が同時に成立する「天地徳合」は、60×60の組み合わせでも稀にしか現れない特別な縁です。</p>
+    <div id="shichu-body"></div>
   </section>
 
-  <section class="art" id="sec-life">
+  <section class="art" id="sec-hoshi">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">流</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Life Fortune Curve</div>
-        <h2 class="art-title">生涯の運気 ─ 年齢ごとの波</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">星</div>
+      <div class="art-titles"><div class="art-eyebrow">Astrology</div><h2 class="art-title">星が読む、太陽と月の相性</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="life-body"></div>
+    <p class="art-lead">西洋占星術の相性は、太陽同士（生き方の相性）だけでなく、太陽と月の組み合わせ（一方の生き方が、他方の心を安心させるか）で立体的になります。火と風、地と水は互いを活かす組み合わせとされます。</p>
+    <div id="hoshi-body"></div>
   </section>
 
-  <section class="art" id="sec-health">
+  <section class="art" id="sec-kyusei">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">養</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Health &amp; Self-care</div>
-        <h2 class="art-title">養生 ─ 気をつけたい体のこと</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">方</div>
+      <div class="art-titles"><div class="art-eyebrow">Nine Star Ki</div><h2 class="art-title">九星が読む、気の流れ</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="health-body"></div>
+    <p class="art-lead">九星気学の相性は五行の関係で読みます。大切なのは「どちらからどちらへ気が流れるか」。生じる側は与える喜びと消耗を、生じられる側は受け取る安心を感じやすい——向きを知ることが、長続きの秘訣です。</p>
+    <div id="kyusei-body"></div>
   </section>
 
-  <section class="art" id="sec-year">
+  <section class="art" id="sec-animal">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">年</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Annual Fortune</div>
-        <h2 class="art-title" id="year-title">今年の運勢</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">動</div>
+      <div class="art-titles"><div class="art-eyebrow">Animal Fortune</div><h2 class="art-title">動物占いが読む、ふるまいの相性</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="year-body"></div>
+    <p class="art-lead">動物占いの相性は、月（人間関係重視）・地球（結果重視）・太陽（ひらめき重視）というグループの組み合わせで、日常のすれ違いどころを言い当てます。ケンカの原因の多くは、性格の不一致ではなく「優先順位の違い」です。</p>
+    <div id="animal-body"></div>
   </section>
 
-  <section class="art" id="sec-today">
+  <section class="art" id="sec-maya">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">日</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">Daily Fortune</div>
-        <h2 class="art-title" id="today-title">今日の運勢</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">暦</div>
+      <div class="art-titles"><div class="art-eyebrow">Mayan Tzolkin</div><h2 class="art-title">マヤ暦が読む、魂の関係</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="today-body"></div>
+    <p class="art-lead">マヤ暦では、ふたりのKINの関係から魂レベルの縁を読みます。類似・神秘・反対・ガイドの関係に加え、KIN番号の和が261になる「鏡の向こう」、差が130の「絶対反対」は、260分の1でしか出会えない特別な対とされます。</p>
+    <div id="maya-body"></div>
   </section>
 
-  <section class="art" id="sec-kids">
+  <section class="art" id="sec-num">
     <div class="art-head">
-      <div class="art-seal" aria-hidden="true">童</div>
-      <div class="art-titles">
-        <div class="art-eyebrow">For Kids</div>
-        <h2 class="art-title">こどものページ ─ きみのうらない</h2>
-      </div>
+      <div class="art-seal" aria-hidden="true">数</div>
+      <div class="art-titles"><div class="art-eyebrow">Numerology</div><h2 class="art-title">数秘術が読む、リズムの相性</h2></div>
     </div>
     <hr class="art-rule">
-    <div id="kids-body"></div>
+    <p class="art-lead">数秘術では、ライフパスを三つの系譜——知性派（1・5・7）、現実派（2・4・8）、感性派（3・6・9）——に分け、同じ系譜同士は自然に共鳴すると読みます。マスターナンバー同士の出会いは、使命の共鳴です。</p>
+    <div id="num-body"></div>
+  </section>
+
+  <section class="art" id="sec-calendar">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">暦</div>
+      <div class="art-titles"><div class="art-eyebrow">Ten-Year Calendar for Two</div><h2 class="art-title">ふたりの運気こよみ ─ これからの10年</h2></div>
+    </div>
+    <hr class="art-rule">
+    <p class="art-lead">結婚・引越し・起業——ふたりの大きな決断は、どちらか一方ではなく「ふたりの運気が重なる年」に。九星気学と六星占術を重ねた10年こよみで、追い風の年と充電の年を見渡せます。</p>
+    <div id="calendar-body"></div>
   </section>
 </div>
 
 <footer class="site">
   <p class="fine">
-    本鑑定は娯楽・自己理解を目的とした簡易鑑定です。太陽・月の星座とアセンダントは天文近似式（月は±2°程度の誤差）、
-    四柱推命の節入りは太陽黄経により判定、画数は新字体を基準としています（旧字体で数える流派もあります）。
-    結果は流派により異なる場合があります。
+    本鑑定は娯楽・相互理解を目的とした簡易鑑定です。宿曜の宿は旧暦の天文近似（境界日は前後の可能性）、暦計算は日本時間基準。
+    相性の点数は「合う・合わない」の判定ではなく、ふたりの距離感と付き合い方のヒントです。結果は流派により異なる場合があります。
   </p>
   <div class="donate-box" style="text-align:center;margin:26px 0 10px">
   <p style="font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em;margin:0 0 10px">この占いを楽しんでいただけたら、開発の応援をいただけると嬉しいです</p>
@@ -1275,731 +1178,6 @@ const elColor=e=>(isDark()?ELEM_COLOR_DARK:ELEM_COLOR)[ELEMS[e]];
 const fClass=f=>({"大吉":"f-daikichi","吉":"f-kichi","半吉":"f-hankichi","凶":"f-kyo"})[f]||"f-kyo";
 function starsHtml(n){let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">★</span>';return `<span class="stars" role="img" aria-label="5点満点中${n}点">${h}</span>`;}
 
-/* ══════════ フォーム初期化 ══════════ */
-(function(){
-  const sel=$("pref");
-  PREFS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p[0];sel.appendChild(o);});
-  const ov=document.createElement("option");ov.value="overseas";ov.textContent="海外・その他（緯度経度を入力）";sel.appendChild(ov);
-  sel.value=12; // 東京都
-  sel.addEventListener("change",()=>{$("overseas").classList.toggle("show",sel.value==="overseas");});
-  $("noTime").addEventListener("change",e=>{
-    $("bh").disabled=$("bmin").disabled=e.target.checked;
-  });
-})();
-
-/* ══════════ 保存（この端末のみ・localStorage） ══════════ */
-const LS_KEY="seimeiroku_solo_v1";
-function lsGet(){try{return JSON.parse(localStorage.getItem(LS_KEY)||"null")}catch(e){return null}}
-function lsSet(v){try{localStorage.setItem(LS_KEY,JSON.stringify(v));return true}catch(e){return false}}
-function lsClear(){try{localStorage.removeItem(LS_KEY)}catch(e){}}
-function lsAvailable(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return true}catch(e){return false}}
-function fillForm(p){
-  $("sei").value=p.sei; $("mei").value=p.mei;
-  $("by").value=p.y; $("bm").value=p.m; $("bd").value=p.d;
-  $("noTime").checked=p.hour==null;
-  $("bh").disabled=$("bmin").disabled=p.hour==null;
-  if(p.hour!=null){$("bh").value=Math.floor(p.hour);$("bmin").value=Math.round(p.hour%1*60);}
-  else{$("bh").value="";$("bmin").value="";}
-  $("pref").value=p.pref;
-  $("overseas").classList.toggle("show",p.pref==="overseas");
-  if(p.pref==="overseas"){$("olat").value=p.lat;$("olon").value=p.lon;$("outc").value=p.utc;}
-}
-function renderSaved(){
-  const box=$("savedList"); if(!box)return;
-  const st=lsGet(); const ppl=(st&&st.people)||[];
-  box.innerHTML=ppl.length?`<span class="saved-label">保存した鑑定</span>`+ppl.map((p,i)=>
-    `<span class="saved-chip" data-i="${i}" role="button" tabindex="0">${esc(p.sei)} ${esc(p.mei)}<span class="fine">（${p.y}年）</span><button type="button" class="x" aria-label="${esc(p.mei)}を削除" data-x="${i}">×</button></span>`).join(""):"";
-  box.querySelectorAll(".saved-chip").forEach(ch=>{
-    ch.addEventListener("click",e=>{
-      if(e.target.dataset.x!==undefined){
-        const st2=lsGet(); if(st2&&st2.people){st2.people.splice(+e.target.dataset.x,1); lsSet(st2); renderSaved();}
-        e.stopPropagation(); return;
-      }
-      const st2=lsGet(); const p=st2&&st2.people&&st2.people[+ch.dataset.i];
-      if(p){fillForm(p); document.getElementById("form").dispatchEvent(new Event("submit",{cancelable:true}));}
-    });
-  });
-}
-function saveRecord(rec){
-  if(!$("saveOpt")||!$("saveOpt").checked)return;
-  const st=lsGet()||{people:[],opt:true};
-  const key=p=>`${p.sei}|${p.mei}|${p.y}-${p.m}-${p.d}`;
-  st.people=(st.people||[]).filter(p=>key(p)!==key(rec));
-  st.people.unshift(rec);
-  if(st.people.length>20)st.people.length=20;
-  st.opt=true; st.last=rec;
-  lsSet(st);
-  renderSaved();
-}
-(function initSaved(){
-  if(!lsAvailable()){
-    const ctl=document.querySelector(".save-ctl");
-    if(ctl)ctl.innerHTML='<span class="fine">この環境ではブラウザ保存を利用できません（鑑定機能はそのまま使えます）。</span>';
-    return;
-  }
-  const st=lsGet();
-  if(st){
-    if($("saveOpt"))$("saveOpt").checked=st.opt!==false;
-    if(st.last&&st.opt!==false)fillForm(st.last);
-  }
-  renderSaved();
-  if($("saveOpt"))$("saveOpt").addEventListener("change",e=>{
-    const st2=lsGet()||{people:[]}; st2.opt=e.target.checked; lsSet(st2);
-  });
-  if($("clearSaved"))$("clearSaved").addEventListener("click",()=>{
-    lsClear(); renderSaved();
-    if($("saveOpt"))$("saveOpt").checked=true;
-  });
-})();
-
-/* ══════════ 鑑定本体 ══════════ */
-let CUR=null; // 現在の鑑定コンテキスト
-
-document.getElementById("form").addEventListener("submit",e=>{
-  e.preventDefault();
-  const sei=$("sei").value.trim(), mei=$("mei").value.trim();
-  const y=+$("by").value, m=+$("bm").value, d=+$("bd").value;
-  if(!sei||!mei||!y||!m||!d){alert("姓・名・生年月日を入力してください。");return;}
-  const dt=new Date(y,m-1,d);
-  if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d){alert("実在しない日付です。");return;}
-  const noTime=$("noTime").checked;
-  let hour=null;
-  if(!noTime && $("bh").value!==""){ hour=+$("bh").value + (+$("bmin").value||0)/60; }
-  let lat,lon,utc;
-  if($("pref").value==="overseas"){
-    lat=parseFloat($("olat").value); lon=parseFloat($("olon").value); utc=parseFloat($("outc").value);
-    if(isNaN(lat)||isNaN(lon)||isNaN(utc)){alert("海外出生の場合は緯度・経度・時差を入力してください。");return;}
-  }else{ const p=PREFS[+$("pref").value]; lat=p[1]; lon=p[2]; utc=9; }
-  saveRecord({sei,mei,y,m,d,hour,pref:$("pref").value,lat,lon,utc});
-  render({sei,mei,y,m,d,hour,noTime,lat,lon,utc});
-  $("results").classList.add("show");
-  requestAnimationFrame(()=>$("hero").scrollIntoView({behavior:"smooth",block:"start"}));
-});
-
-function render(inp){
-  const {sei,mei,y,m,d,hour,lat,lon,utc}=inp;
-  const now=new Date();
-  const calcHour=hour==null?12:hour;
-  const jdBirth=jdUT(y,m,d,calcHour,utc);
-
-  /* 西洋 */
-  const sunL=sunLon(jdBirth), moonL=moonLon(jdBirth);
-  const sun=signOf(sunL), moon=signOf(moonL);
-  const asc=hour==null?null:signOf(ascendant(jdBirth,lat,lon));
-
-  /* 四柱 */
-  const fp=fourPillars(y,m,d,hour,utc);
-
-  /* 九星 */
-  const myStar=honmeiStar(fp.py);
-
-  /* 動物 */
-  const charNo=fp.di+1, charName=CHARS60[fp.di][0], animal=CHARS60[fp.di][1];
-
-  /* 今年・今日 */
-  const nowY=yearOfNow(now,9);
-  const nys=mod(nowY-4,10), nyb=mod(nowY-4,12);
-  const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
-  const tdi=mod(jdToday+49,60), tds=tdi%10, tdb=tdi%12;
-
-  CUR={inp,fp,sun,moon,asc,sunL,moonL,myStar,charNo,charName,animal,now,nowY,nys,nyb,tdi,tds,tdb};
-
-  renderHero(); renderWest(); renderShichu(); renderName(); renderKyusei(); renderAnimal();
-  renderSynth(); renderJobs(); renderLife(); renderHealth(); renderYear(); renderToday(); renderKids();
-}
-
-/* ── 命式盤ヒーロー ── */
-function renderHero(){
-  const {inp,fp,sun,myStar,charName}=CUR;
-  const pillars=[
-    {label:"年柱",s:fp.ys,b:fp.yb},{label:"月柱",s:fp.ms,b:fp.mb},
-    {label:"日柱",s:fp.ds,b:fp.db,day:true},
-    fp.hs!=null?{label:"時柱",s:fp.hs,b:fp.hb}:null
-  ].filter(Boolean);
-  const pHtml=pillars.map(p=>`
-    <div class="pillar${p.day?" day":""}">
-      <div class="p-label">${p.label}</div>
-      <div class="p-kanji" lang="ja">${kanshiName(p.s,p.b)}</div>
-      <div class="p-read">${STEM_READ[p.s]}・${BRANCH_READ[p.b]}</div>
-      <div class="p-el">${elTag(stemElem(p.s))}${elTag(BRANCH_ELEM[p.b])}</div>
-    </div>`).join("");
-  const timeStr=inp.hour==null?"時刻不明":String(Math.floor(inp.hour)).padStart(2,"0")+":"+String(Math.round((inp.hour%1)*60)).padStart(2,"0");
-  const strokes=[...inp.sei+inp.mei].map(c=>lookupStroke(c)||0);
-  const sou=strokes.every(n=>n>0)?kakusuNorm(strokes.reduce((a,b)=>a+b,0)):null;
-  $("hero").innerHTML=`
-    <div class="meishiki-head">
-      <h2 class="m-name">${esc(inp.sei)}　${esc(inp.mei)}
-        <small>${inp.y}年${inp.m}月${inp.d}日生・${timeStr}・${$("pref").value==="overseas"?"海外":esc(PREFS[+$("pref").value][0])}</small>
-      </h2>
-      <div class="m-chips">
-        <span class="m-chip">太陽<b>${SIGNS[sun].n}</b></span>
-        <span class="m-chip">日主<b>${STEMS[fp.ds]}（${DAYSTEM_T[fp.ds].sym}）</b></span>
-        <span class="m-chip">本命星<b>${KYUSEI[myStar-1].n}</b></span>
-        <span class="m-chip">動物<b><span class="a-emoji">${ANIMAL_EMOJI[CUR.animal]}</span>${charName}</b></span>
-        ${sou?`<span class="m-chip">総格<b>${sou}画</b></span>`:""}
-      </div>
-    </div>
-    <div class="pillars">${pHtml}</div>`;
-}
-
-/* ── 西洋占星術 ── */
-function renderWest(){
-  const {sun,moon,asc,sunL,moonL,nys}=CUR;
-  const S=SIGNS[sun];
-  const sunEdge=degInSign(sunL)<1||degInSign(sunL)>29;
-  const moonEdge=degInSign(moonL)<3||degInSign(moonL)>27;
-  const moonNote=CUR.inp.hour==null?"時刻未入力のため参考値":moonEdge?"星座の境界付近のため前後の星座の可能性":null;
-  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
-  $("west-body").innerHTML=`
-    <div class="card">
-      <h3>あなたの三つの星</h3>
-      <dl class="kv">
-        <dt>太陽星座</dt><dd><span class="big-sign"><span class="sym">${S.sym}</span>${S.n}</span>
-          <span class="tag gold">${S.el}のエレメント</span>
-          ${sunEdge?'<span class="tag verm">境界日生まれ・前後の星座の可能性</span>':""}</dd>
-        <dt>月星座</dt><dd><span class="big-sign"><span class="sym">${SIGNS[moon].sym}</span>${SIGNS[moon].n}</span>
-          ${moonNote?`<span class="tag verm">${moonNote}</span>`:""}</dd>
-        ${asc!=null?`<dt>アセンダント</dt><dd><span class="big-sign"><span class="sym">${SIGNS[asc].sym}</span>${SIGNS[asc].n}</span>
-          <span class="tag matcha">出生地の緯度経度から算出</span></dd>`:`<dt>アセンダント</dt><dd class="muted">出生時刻が必要なため省略しました</dd>`}
-      </dl>
-    </div>
-    <div class="card">
-      <h3>星から見た、あなたという人</h3>
-      <p><strong>太陽（人生の目的・表の顔）</strong>　${S.t}</p>
-      <p><strong>月（素の感情・内なる顔）</strong>　${MOON_T[moon]}</p>
-      ${asc!=null?`<p><strong>アセンダント（第一印象）</strong>　${ASC_T[asc]}</p>`:""}
-      <p><strong>三区分</strong>　${S.n}は${QUAL_T[sun%3]}</p>
-    </div>
-    <div class="card">
-      <h3>星が示す仕事と恋愛</h3>
-      <p><strong>仕事</strong>　${SIGN_WORK[sun]}太陽が示す「${S.key}」を活かせる環境を選ぶことが、キャリアの最短ルートです。</p>
-      <p><strong>恋愛</strong>　${SIGN_LOVE[sun]}内なる月は${SIGNS[moon].n}——${MOON_T[moon].split("。")[0]}という素顔を、安心できる相手には見せてあげてください。</p>
-    </div>
-    <div class="card">
-      <h3>星から見た今年</h3>
-      <p>${YEAR_EL_T[rel]}</p>
-      <p class="muted">${S.el}のエレメントに属する${S.n}にとって、キーワードは「${S.key}」。それを軸に一年を組み立ててみてください。</p>
-    </div>`;
-}
-
-/* ── 四柱推命 ── */
-function renderShichu(){
-  const {fp,nys,nyb}=CUR;
-  const D=DAYSTEM_T[fp.ds];
-  // 五行バランス
-  const counts=[0,0,0,0,0];
-  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
-  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
-  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
-  const maxC=Math.max(...counts,1);
-  const gogyo=ELEMS.map((e,i)=>`
-    <div class="gg">
-      <div class="gg-bar"><div class="gg-fill" style="height:${Math.round(counts[i]/maxC*100)}%;background:${elColor(i)}"></div></div>
-      <div class="gg-name">${e}</div><div class="gg-count">${counts[i]}</div>
-    </div>`).join("");
-  const missingIdx=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
-  const strongestIdx=counts.indexOf(Math.max(...counts));
-  const vb=voidBranches(fp.di);
-  const ts=tsuhen(fp.ds,nys);
-  const branchRel=(()=>{ // 今年の支と日支
-    if(mod(fp.db+6,12)===nyb)return["冲","日支と今年の支が向かい合う「冲」の年。環境の変化が起きやすい時。変化を恐れず、ただし大きな決断は丁寧に。"];
-    if(mod(fp.db+nyb,12)===1)return["支合","日支と今年の支が結ばれる「支合」の年。縁がまとまりやすく、協力運に恵まれます。"];
-    if(fp.db%4===nyb%4)return["三合","日支と今年の支が「三合」を組む年。追い風の流れに乗りやすい好相性です。"];
-    return[null,""];
-  })();
-  $("shichu-body").innerHTML=`
-    <div class="card">
-      <h3>日主 ─ ${STEMS[fp.ds]}（${STEM_READ[fp.ds]}）＝${D.sym}</h3>
-      <p>${D.t}</p>
-      <p class="muted">四柱推命では、生まれた「日」の干をその人の本質＝日主とみなします。あなたの日柱は
-        <strong>${kanshiName(fp.ds,fp.db)}</strong>${fp.hs!=null?`、時柱は<strong>${kanshiName(fp.hs,fp.hb)}（${HOUR_NAMES[fp.hb]}）</strong>`:""}。
-        天中殺（空亡）は<strong>${BRANCHES[vb[0]]}${BRANCHES[vb[1]]}</strong>です。</p>
-    </div>
-    <div class="card">
-      <h3>命式が語る、三つの顔と勢い</h3>
-      <p><strong>社会に見せる顔（年柱・${kanshiName(fp.ys,fp.yb)}）</strong>　${fp.ys===fp.ds?TSUHEN_P[0]:TSUHEN_P[tsuhen(fp.ds,fp.ys)]}。目上や世間との関わりに、この気質が表れます。</p>
-      <p><strong>仕事と家庭での顔（月柱・${kanshiName(fp.ms,fp.mb)}）</strong>　${fp.ms===fp.ds?TSUHEN_P[0]:TSUHEN_P[tsuhen(fp.ds,fp.ms)]}。働き盛りの中心運を担う柱です。</p>
-      <p><strong>日柱の勢い（十二運・${JUNIUN[juniun(fp.ds,fp.db)]}）</strong>　あなたの日柱${kanshiName(fp.ds,fp.db)}は「${JUNIUN[juniun(fp.ds,fp.db)]}」の星回り。${JUNIUN_T[juniun(fp.ds,fp.db)]}</p>
-    </div>
-    <div class="card">
-      <h3>五行のバランス</h3>
-      <div class="gogyo">${gogyo}</div>
-      <p class="muted">命式${fp.hs!=null?"八字":"六字"}の五行分布。最も強いのは${elTag(strongestIdx)}の気${
-        missingIdx.length?`、欠けているのは${missingIdx.map(elTag).join("")}の気です。欠けた五行は、色や方位・習慣で意識的に補うとバランスが整うとされます。`:"。五行が揃った、偏りの少ない命式です。"}</p>
-      <p class="fine">${elTag(0)}成長・発想　${elTag(1)}情熱・表現　${elTag(2)}信用・継続　${elTag(3)}決断・完成　${elTag(4)}知恵・柔軟。強い気はあなたの得意技、欠けた気は「借りてくる」意識で。</p>
-    </div>
-    <div class="card">
-      <h3>命式から見た今年 ─ ${TSUHEN[ts]}の年</h3>
-      <p>今年（${CUR.nowY}年・${kanshiName(nys,nyb)}）はあなたの日主から見て「<strong>${TSUHEN[ts]}</strong>」がめぐる年。${TSUHEN_T[ts]}</p>
-      ${branchRel[0]?`<p><span class="tag gold">${branchRel[0]}</span>${branchRel[1]}</p>`:""}
-    </div>`;
-}
-
-/* ── 姓名判断 ── */
-function renderName(){
-  const {inp}=CUR;
-  const seiChars=[...inp.sei], meiChars=[...inp.mei];
-  const all=[...seiChars.map((c,i)=>({c,grp:"sei",i})),...meiChars.map((c,i)=>({c,grp:"mei",i}))];
-  const inputs=all.map((o,idx)=>{
-    const st=lookupStroke(o.c);
-    return `${o.grp==="mei"&&o.i===0?'<div class="st-sep" aria-hidden="true">／</div>':""}
-      <div class="st-char">
-        <div class="ch">${esc(o.c)}</div>
-        <input type="number" min="1" max="40" id="st-${idx}" value="${st||""}" placeholder="?" aria-label="${esc(o.c)}の画数">
-      </div>`;
-  }).join("");
-  $("name-body").innerHTML=`
-    <div class="card">
-      <h3>各文字の画数</h3>
-      <p class="muted">辞書にある文字は自動入力済みです（新字体基準）。旧字体・特殊な字体で数える場合は直接修正してください。数値を変えると即座に再計算されます。</p>
-      <div class="strokes-edit" id="strokes-edit">${inputs}</div>
-      <div id="goka-out"></div>
-    </div>
-    <div class="card" id="name-reading"></div>
-    <div class="card">
-      <h3>姓名から見た運勢について</h3>
-      <p>姓名判断が示すのは年ごとの吉凶ではなく、生涯を通じて流れ続ける通奏低音です。中でも<strong>人格</strong>は働き盛りの中年期に、<strong>総格</strong>は晩年に向けて強く現れるとされます。今年の具体的な運気は、四柱推命・九星の章をあわせてご覧ください。</p>
-    </div>`;
-  const recompute=()=>{
-    const vals=all.map((_,idx)=>+$("st-"+idx).value||0);
-    if(vals.some(v=>v<=0)){
-      $("goka-out").innerHTML='<p class="fine">未入力の画数があります。すべて入力すると五格が表示されます。</p>';
-      $("name-reading").innerHTML='<h3>五格の読み解き</h3><p class="muted">画数の入力をお待ちしています。</p>';
-      return;
-    }
-    const seiArr=vals.slice(0,seiChars.length), meiArr=vals.slice(seiChars.length);
-    const g=nameGrids(seiArr,meiArr);
-    $("goka-out").innerHTML=`<div class="goka">${Object.entries(g).map(([k,v])=>{
-      const [f,ph]=KAKUSU[v];
-      return `<div class="gk"><div class="gk-name">${k}</div><div class="gk-num">${v}</div>
-        <div class="gk-fortune ${fClass(f)}">${f}</div><div class="gk-phrase">${ph}</div></div>`;
-    }).join("")}</div>`;
-    const jin=KAKUSU[g["人格"]], sou=KAKUSU[g["総格"]], chi=KAKUSU[g["地格"]], gai=KAKUSU[g["外格"]], ten=KAKUSU[g["天格"]];
-    // 三才配置（天・人・地の五行の流れ）
-    const digitElem=n=>{const d=n%10;return d===1||d===2?0:d===3||d===4?1:d===5||d===6?2:d===7||d===8?3:4;};
-    const tE=digitElem(g["天格"]),jE=digitElem(g["人格"]),cE=digitElem(g["地格"]);
-    const r1=elemRel(jE,tE),r2=elemRel(jE,cE);
-    const ok=r=>r===0||r===1||r===2;
-    const sansaiJudge=ok(r1)&&ok(r2)
-      ?["良好","五行が淀みなく流れる良い配置です。土台となる運の巡りが自然で、努力が結果につながりやすい名前といえます。"]
-      :ok(r1)||ok(r2)
-      ?["まずまず","一部に五行のぶつかりがありますが、流れの良い側が支えてくれます。無理が続いたら早めの休息を。"]
-      :["要調整","五行がぶつかり合う配置です。環境の影響を受けやすいので、住まいと人間関係の「心地よさ」を優先すると運が整います。"];
-    $("name-reading").innerHTML=`
-      <h3>五格の読み解き</h3>
-      <p><strong>天格 ${g["天格"]}画（${ten[0]}・${ten[1]}）</strong>　${GOKAKU_DESC["天格"]}${FORTUNE_LONG[ten[0]]}</p>
-      <p><strong>人格 ${g["人格"]}画（${jin[0]}・${jin[1]}）</strong>　${GOKAKU_DESC["人格"]}あなたの中心には「${jin[1]}」の気質が流れています。${FORTUNE_LONG[jin[0]]}</p>
-      <p><strong>地格 ${g["地格"]}画（${chi[0]}・${chi[1]}）</strong>　${GOKAKU_DESC["地格"]}若い頃の土台は「${chi[1]}」。${FORTUNE_LONG[chi[0]]}</p>
-      <p><strong>外格 ${g["外格"]}画（${gai[0]}・${gai[1]}）</strong>　${GOKAKU_DESC["外格"]}周囲からは「${gai[1]}」の人と映りやすいでしょう。${FORTUNE_LONG[gai[0]]}</p>
-      <p><strong>総格 ${g["総格"]}画（${sou[0]}・${sou[1]}）</strong>　${GOKAKU_DESC["総格"]}生涯を貫くテーマは「${sou[1]}」です。${FORTUNE_LONG[sou[0]]}</p>
-      <h3 style="margin-top:22px">三才配置 ─ ${ELEMS[tE]}・${ELEMS[jE]}・${ELEMS[cE]}（${sansaiJudge[0]}）</h3>
-      <p>天格・人格・地格それぞれの画数の一の位から五行を取り、気の流れを見る配置法です。あなたの名前は天＝<strong>${ELEMS[tE]}</strong>、人＝<strong>${ELEMS[jE]}</strong>、地＝<strong>${ELEMS[cE]}</strong>。${sansaiJudge[1]}</p>
-      <p class="fine">三才配置は流派による解釈差が特に大きい項目です。ひとつの参考としてご覧ください。</p>`;
-    // ヒーローの総格チップも更新
-    renderHeroChipSou(g["総格"]);
-  };
-  all.forEach((_,idx)=>$("st-"+idx).addEventListener("input",recompute));
-  recompute();
-}
-function renderHeroChipSou(sou){
-  const chips=document.querySelectorAll("#hero .m-chip");
-  chips.forEach(ch=>{ if(ch.textContent.startsWith("総格")) ch.innerHTML=`総格<b>${sou}画</b>`; });
-}
-
-/* ── 九星気学・方位 ── */
-function renderKyusei(){
-  const {myStar,nowY,nys,nyb}=CUR;
-  const K=KYUSEI[myStar-1];
-  const center=honmeiStar(nowY); // 年盤中宮
-  // 各方位の星
-  const board={}; PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
-  const gooDir=[],badDir={};
-  const gohoDir=Object.keys(board).find(d=>board[d]===5);
-  if(gohoDir){badDir[gohoDir]=(badDir[gohoDir]?badDir[gohoDir]+"・":"")+"五黄殺";badDir[OPP_DIR[gohoDir]]=(badDir[OPP_DIR[gohoDir]]?badDir[OPP_DIR[gohoDir]]+"・":"")+"暗剣殺";}
-  const saihaDir=OPP_DIR[BRANCH_DIR[nyb]];
-  badDir[saihaDir]=(badDir[saihaDir]?badDir[saihaDir]+"・":"")+"歳破";
-  const myDir=Object.keys(board).find(d=>board[d]===myStar);
-  if(myDir){badDir[myDir]=(badDir[myDir]?badDir[myDir]+"・":"")+"本命殺";badDir[OPP_DIR[myDir]]=(badDir[OPP_DIR[myDir]]?badDir[OPP_DIR[myDir]]+"・":"")+"本命的殺";}
-  Object.keys(board).forEach(d=>{
-    if(badDir[d])return;
-    const s=board[d]; if(s===5||s===myStar)return;
-    const r=elemRel(K.el,KYUSEI[s-1].el);
-    if(r===0||r===1||r===2) gooDir.push(d);
-  });
-  // 盤の描画（北を上）: grid order rows: [南東?]... 北上表示 → 上段: 北西 北 北東 / 中段: 西 中 東 / 下段: 南西 南 南東? 地図的に上=北なら 左上=北西
-  const gridOrder=[["北西","北","北東"],["西","中","東"],["南西","南","南東"]];
-  const cells=gridOrder.flat().map(dir=>{
-    if(dir==="中")return `<div class="cell center"><div class="dir">中宮</div><div class="star">${KYUSEI[center-1].n.slice(0,2)}</div></div>`;
-    const s=board[dir], good=gooDir.includes(dir), bad=badDir[dir];
-    return `<div class="cell${good?" good":bad?" bad":""}">
-      <div class="dir">${dir}</div><div class="star">${KYUSEI[s-1].n.slice(0,2)}</div>
-      ${good?'<div class="mark">吉方</div>':bad?`<div class="mark">${bad}</div>`:""}
-    </div>`;
-  }).join("");
-  const myPalace=myDir?PALACES.find(p=>p.dir===myDir).base:5;
-  // 月命星
-  const mi=mod(CUR.fp.mb-2,12);
-  const gm=mod(GETSUMEI_START[myStar]-1-mi,9)+1;
-  // 相性の良い九星（生じてくれる星＝生気、同じ五行＝比和）
-  const seiki=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===1).map(s=>s.n);
-  const hiwa=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===0).map(s=>s.n);
-  $("kyusei-body").innerHTML=`
-    <div class="card">
-      <h3>本命星 ─ ${K.n}</h3>
-      <p>${K.t}</p>
-      <p class="muted">定位は<strong>${K.home}</strong>、五行は${elTag(K.el)}の星です。</p>
-    </div>
-    <div class="card">
-      <h3>月命星 ─ ${KYUSEI[gm-1].n}</h3>
-      <p>本命星が「社会での自分・大人になってからの自分」を表すのに対し、生まれ月から出す月命星は<strong>感情面・若い頃の気質</strong>を表すとされます。あなたの月命星は<strong>${KYUSEI[gm-1].n}</strong>。${gm===myStar?"本命星と同じ星が重なる生まれで、内と外の顔が一致した、裏表のない気質です。":`内面には${KYUSEI[gm-1].t.split("。")[0]}。${KYUSEI[gm-1].t.split("。")[1]||""}という顔が隠れています。`}</p>
-      <p class="muted">気の合う九星は${seiki.length?`、あなたの${ELEMS[K.el]}の気を育ててくれる<strong>${seiki.join("・")}</strong>`:""}${hiwa.length?`、同じ${ELEMS[K.el]}の気で支え合う<strong>${hiwa.join("・")}</strong>`:""}の人とされます。</p>
-    </div>
-    <div class="card">
-      <h3>${nowY}年の方位盤と吉方位</h3>
-      <div class="ban-wrap">
-        <div class="ban" role="img" aria-label="${nowY}年の年盤">${cells}</div>
-        <div class="ban-legend">
-          <ul>
-            <li><span class="dir-b" style="color:var(--good)">吉方位</span><span>${gooDir.length?gooDir.join("・"):"今年は本命星と相性のよい安全な方位が限られます"}</span></li>
-            <li><span class="dir-b" style="color:var(--bad)">凶方位</span><span>${Object.entries(badDir).map(([d,n])=>`${d}（${n}）`).join("、")}</span></li>
-            <li><span class="dir-b">今年の恵方</span><span>${EHO[CUR.nys]}</span></li>
-          </ul>
-          <p class="fine">吉方位への旅行・引越し・参拝は運気を養うとされます。凶方位は「行ってはいけない」ではなく、大きな決断や移転を避け慎重に、という目安です。</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>九星から見た今年</h3>
-      <p>${nowY}年、あなたの${K.n}は<strong>${PALACE_T[myPalace].split("＝")[0]}</strong>に回座します。${PALACE_T[myPalace].split("＝")[1]}</p>
-    </div>`;
-}
-
-/* ── 動物占い ── */
-function renderAnimal(){
-  const {charNo,charName,animal,fp,nyb}=CUR;
-  const A=ANIMALS[animal];
-  const rel=(()=>{
-    if(mod(fp.db+6,12)===nyb)return "今年はリズムが切り替わる転換期。焦って走らず、フォームの立て直しに向く一年です。";
-    if(mod(fp.db+nyb,12)===1||fp.db%4===nyb%4)return "今年は追い風のリズム。持ち前のスタイルがそのまま活きる、のびのび動ける一年です。";
-    return "今年は平常運転のリズム。自分のペースを守ることが、いちばんの開運になります。";
-  })();
-  $("animal-body").innerHTML=`
-    <div class="card">
-      <div class="animal-hero">
-        <div class="animal-emblem" aria-hidden="true"><span class="em">${ANIMAL_EMOJI[animal]}</span></div>
-        <div class="a-body">
-          <p class="animal-name">No.${charNo}「${charName}」</p>
-          <p class="muted">60分類中のキャラクター。ベースは<strong>${animal}</strong>、${grpTag(ANIMAL_GROUP[animal])}グループです。</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <h3><span class="a-emoji">${ANIMAL_EMOJI[animal]}</span>${animal}のあなた</h3>
-      <p>${A.t}</p>
-      <p class="muted">キーワードは「<strong>${A.key}</strong>」。60分類の「${charName}」は、${animal}の気質に個性の色付けが加わったタイプです。</p>
-    </div>
-    <div class="card">
-      <h3>${grpTag(ANIMAL_GROUP[animal])}グループのあなた</h3>
-      <p>${GROUP_T[ANIMAL_GROUP[animal]]}</p>
-      <p class="muted">12動物は「月・地球・太陽」の3グループに分かれ、ものごとの優先順位——人間関係か、目標達成か、ひらめきか——の違いを表すとされます。グループの違いを知ると、身近な人とのすれ違いの正体が見えてきます。</p>
-    </div>
-    <div class="card">
-      <h3>動物占いから見た今年</h3>
-      <p>${rel}</p>
-      <p class="muted">${ANIMAL_GROUP[animal]}グループのあなたは、${ANIMAL_GROUP[animal]==="月"?"「誰と進むか」を整えることが今年の運気の入口です。信頼できる相談相手を一人決めておきましょう。":ANIMAL_GROUP[animal]==="地球"?"「何を達成するか」を数字で決めることが今年の運気の入口です。目標は小さく刻むほど加速します。":"「心が動くか」を基準に選ぶことが今年の運気の入口です。ワクワクしない予定は思い切って手放して。"}</p>
-    </div>`;
-}
-
-/* ── 総合鑑定 ── */
-function renderSynth(){
-  const {inp,sun,fp,myStar,charName,animal}=CUR;
-  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],K=KYUSEI[myStar-1],A=ANIMALS[animal];
-  const sunG=SIGN_EL_TO_GOGYO[S.el], dayE=stemElem(fp.ds), starE=K.el;
-  const align=(sunG===dayE?1:0)+(dayE===starE?1:0)+(sunG===starE?1:0);
-  const alignT=align>=2
-    ? `複数の占術が同じ<strong>${ELEMS[dayE]}</strong>の気を指しており、内と外の顔が一致した、ブレの少ない人物像が浮かびます。自分の直感を信じて進んでよいタイプです。`
-    : align===1
-    ? `異なる体系が部分的に同じ気を指しています。場面によって見せる顔は変われど、根には共通した芯が通っています。`
-    : `五占術がそれぞれ違う気を映しています。それは多面性の証。場に応じて引き出しを使い分けられる、幅の広い人物像です。`;
-  $("synth-body").innerHTML=`
-    <div class="synth">
-      <div class="key-chips">
-        <span class="key-chip">${S.key}</span><span class="key-chip">${D.key}</span>
-        <span class="key-chip">${A.key}</span>
-      </div>
-      <p>${esc(inp.sei)}${esc(inp.mei)}さんは、太陽${S.n}の「${S.key}」を表の顔に、日主${STEMS[fp.ds]}＝${D.sym}の「${D.key}」を芯に持つ人。
-      動物占いでは「${charName}」として${A.key.replace(/。$/,"")}が光り、九星では${K.n}の生まれです。</p>
-      <p>${alignT}</p>
-      <div class="today-grid" style="margin-top:18px">
-        <div class="mini"><div class="mini-label">仕事の指針</div>
-          <div class="mini-note">${SIGN_WORK[sun]}日主${STEMS[fp.ds]}＝${D.sym}の「${D.key}」が、現場でのあなたの武器です。</div></div>
-        <div class="mini"><div class="mini-label">恋愛・対人の指針</div>
-          <div class="mini-note">${SIGN_LOVE[sun]}${ANIMAL_GROUP[animal]}グループらしく、${ANIMAL_GROUP[animal]==="月"?"相手の気持ちに寄り添う姿勢":ANIMAL_GROUP[animal]==="地球"?"約束を守る誠実さ":"飾らない天真爛漫さ"}が、いちばんの魅力になります。</div></div>
-        <div class="mini"><div class="mini-label">暮らしの整え方</div>
-          <div class="mini-note">九星の${K.n}は${ELEMS[K.el]}の星。${["観葉植物や木の家具など、緑と成長の気配","朝日を浴びる習慣や、灯りの温かい空間","土鍋や陶器、土に触れる時間","金属や白を基調にした、整った空間","水回りを清潔に保ち、静かな時間"][K.el]}を暮らしに取り入れると、気が整うとされます。</div></div>
-        <div class="mini"><div class="mini-label">五つの窓</div>
-          <div class="mini-note">西洋占星術は「人生の目的」、四柱推命は「気質と巡り」、姓名判断は「名の通奏低音」、九星気学は「方位と時運」、動物占いは「対人スタイル」。共通して現れた言葉こそ、あなたの核心です。</div></div>
-      </div>
-    </div>`;
-}
-
-/* ── 適職 ── */
-function renderJobs(){
-  const {sun,fp,animal}=CUR;
-  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],A=ANIMALS[animal];
-  const sJobs=SIGN_JOBS[sun], dJobs=STEM_JOBS[fp.ds], aJobs=ANIMAL_JOBS[animal];
-  // 3視点で重複する職種があれば「天職候補」として強調
-  const all=[...sJobs,...dJobs,...aJobs];
-  const dup=[...new Set(all.filter((j,i)=>all.findIndex(x=>x===j)!==i))];
-  const chips=(jobs)=>`<div class="job-chips">${jobs.map(j=>`<span class="job-chip${dup.includes(j)?" hot":""}">${j}</span>`).join("")}</div>`;
-  $("jobs-body").innerHTML=`
-    <div class="card">
-      <h3>星座から見た適職 ─ ${S.n}</h3>
-      <p>${SIGN_WORK[sun]}</p>
-      ${chips(sJobs)}
-    </div>
-    <div class="card">
-      <h3>日主から見た適職 ─ ${STEMS[fp.ds]}（${D.sym}）</h3>
-      <p>「${D.key}」を活かせる仕事が、あなたの持ち味と噛み合います。</p>
-      ${chips(dJobs)}
-    </div>
-    <div class="card">
-      <h3>動物キャラから見た働き方 ─ ${animal}</h3>
-      <p>${animal}タイプの強みは「${A.key}」。${ANIMAL_GROUP[animal]==="月"?"人と関わりながら信頼を積む仕事":ANIMAL_GROUP[animal]==="地球"?"目標と成果がはっきり見える仕事":"発想力と勢いを買ってくれる環境"}で伸びます。</p>
-      ${chips(aJobs)}
-    </div>
-    <div class="card">
-      <p class="muted">${dup.length?`三つの視点に共通して現れた<strong>${dup.join("・")}</strong>は、特に有力な天職候補です。`:"三つの視点はそれぞれ違う分野を指しています。「星座＝情熱の方向」「日主＝才能の質」「動物＝働き方のスタイル」として、重なる場所を探してみてください。"}適職は「この仕事にしかならない」ではなく、才能の方向を示す羅針盤です。今の仕事の中で活かす道もあります。</p>
-    </div>`;
-}
-
-/* ── 生涯の運気 ── */
-function palaceOfYear(y,myStar){            // その年に本命星が回座する宮（定位番号1-9）
-  const center=honmeiStar(y);
-  let base=myStar-center+5;
-  while(base<1)base+=9; while(base>9)base-=9;
-  return base;
-}
-function renderLife(){
-  const {fp,myStar,nowY}=CUR;
-  const vb=voidBranches(fp.di);
-  const maxAge=90;
-  const pts=[];
-  for(let a=0;a<=maxAge;a++){
-    const y=fp.py+a;
-    pts.push({a,y,base:palaceOfYear(y,myStar),voidY:vb.includes(mod(y-4,12))});
-  }
-  // SVG カーブ
-  const W=1000,H=220,padL=40,padR=14,padT=16,padB=34;
-  const X=a=>padL+(W-padL-padR)*a/maxAge;
-  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
-  const P=pts.map(p=>({x:X(p.a),y:Y(PALACE_SCORE[p.base])}));
-  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
-  for(let i=0;i<P.length-1;i++){                       // Catmull-Rom → ベジェで滑らかに
-    const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];
-    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
-  }
-  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
-  const grid=[];
-  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}歳</text>`);
-  const voidDots=pts.filter(p=>p.voidY).map(p=>`<circle cx="${X(p.a)}" cy="${Y(PALACE_SCORE[p.base])}" r="3" fill="var(--vermil)"/>`).join("");
-  const nowAge=nowY-fp.py;
-  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">いま ${nowAge}歳</text>`:"";
-  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="年齢ごとの運気カーブ" style="min-width:720px;max-width:none">
-    ${grid.join("")}
-    <path d="${area}" fill="var(--gold-wash)"/>
-    <path d="${line}" fill="none" stroke="var(--gold-deep)" stroke-width="2.2" stroke-linejoin="round"/>
-    ${voidDots}${nowMark}
-    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">好調</text>
-    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">充電</text>
-  </svg></div>`;
-  // 今後10年
-  const next10=pts.filter(p=>p.y>=nowY&&p.y<nowY+10).map(p=>`
-    <div class="mini${p.y===nowY?" now":""}"><div class="mini-label">${p.y}年（${p.a}歳）${p.y===nowY?"・今年":""}</div>
-      <div class="mini-val">${PALACE_SHORT[p.base]}${p.voidY?'<span class="tag verm" style="margin-left:8px">空亡</span>':""}</div>
-      <div class="mini-note">${PALACE_T[p.base].split("＝")[1].split("。")[0]}。</div></div>`).join("");
-  // 次の見どころ
-  const nextPeak=pts.find(p=>p.y>nowY&&p.base===7);
-  const nextRest=pts.find(p=>p.y>=nowY&&p.base===1);
-  $("life-body").innerHTML=`
-    <div class="card">
-      <h3>0歳から90歳までの運気カーブ</h3>
-      <p class="muted">九星気学の9年周期（本命星${KYUSEI[myStar-1].n}が毎年めぐる宮）で描いた、あなたの運気の波です。<span style="color:var(--vermil)">●</span>は四柱推命の空亡（天中殺）にあたる年——新しい種まきより整理と充電に向く年です。年齢は立春区切りの目安です。</p>
-      ${svg}
-      <p class="muted">運気は9年でひとまわり。${nextPeak?`次の大きな見どころは<strong>${nextPeak.y}年（${nextPeak.a}歳・${PALACE_SHORT[nextPeak.base]}）</strong>。`:""}${nextRest?`<strong>${nextRest.y}年（${nextRest.a}歳）</strong>は充電の年なので、その前に仕込みを済ませておくのが上手な波乗りです。`:""}低い谷は「悪い年」ではなく、次の山のための準備期間と読んでください。</p>
-    </div>
-    <div class="card">
-      <h3>これからの10年</h3>
-      <div class="months">${next10}</div>
-    </div>`;
-}
-
-/* ── 養生 ── */
-function renderHealth(){
-  const {fp,sun}=CUR;
-  const counts=[0,0,0,0,0];
-  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
-  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
-  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
-  const strongest=counts.indexOf(Math.max(...counts));
-  const missing=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
-  const dayE=stemElem(fp.ds);
-  $("health-body").innerHTML=`
-    <div class="card">
-      <h3>五行から見た、いたわりどころ</h3>
-      <p><strong>日主${STEMS[fp.ds]}${elTag(dayE)}の体質</strong>　${ELEM_BODY[dayE].note}関わりが深いのは<strong>${ELEM_BODY[dayE].organ}</strong>とされます。</p>
-      <p><strong>養生のヒント</strong>　${ELEM_BODY[dayE].care}</p>
-      ${strongest!==dayE?`<p><strong>強すぎる${elTag(strongest)}の気</strong>　命式で最も多い${ELEMS[strongest]}の気は、過剰になると<strong>${ELEM_BODY[strongest].organ}</strong>に負担をかけるとされます。${ELEM_BODY[strongest].care}</p>`:""}
-      ${missing.length?missing.map(i=>`<p><strong>欠けた${elTag(i)}の気</strong>　${ELEMS[i]}が司る<strong>${ELEM_BODY[i].organ}</strong>は、もともと弱りやすい系統です。${ELEM_BODY[i].care}</p>`).join(""):""}
-    </div>
-    <div class="card">
-      <h3>星座から見た注意部位 ─ ${SIGNS[sun].n}</h3>
-      <p>西洋占星術では、${SIGNS[sun].n}は<strong>${SIGN_BODY[sun]}</strong>と関わりが深いとされます。</p>
-      <p>${SIGN_BODY_CARE[sun]}</p>
-    </div>
-    <div class="card">
-      <h3>運気の波と体調</h3>
-      <p>運気カーブの谷（充電の年）と空亡の年は、体も休みたがっている時期。この年に健康診断や歯科検診を予定しておくと、波を味方にできます。逆に頂点・収穫の年は予定が増えるぶん、睡眠時間を先に確保しておくのがおすすめです。</p>
-      <p class="fine">この章は東洋医学・占星術の伝統的な対応に基づく読みものであり、医学的な診断ではありません。気になる症状がある場合は、必ず医療機関にご相談ください。</p>
-    </div>`;
-}
-
-/* ── 今年の運勢 ── */
-function renderYear(){
-  const {sun,fp,myStar,nowY,nys,nyb}=CUR;
-  const S=SIGNS[sun];
-  const ts=tsuhen(fp.ds,nys);
-  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
-  const center=honmeiStar(nowY);
-  const board={};PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
-  const myDir=Object.keys(board).find(d=>board[d]===myStar);
-  const myPalace=myDir?PALACES.find(p=>p.dir===myDir).base:5;
-  // 年スコア（演出）：通変星・宮・支の関係から
-  let score=3;
-  if([2,4,5,7,9].includes(ts))score++;
-  if([3,4,6,7,9].includes(myPalace))score++;
-  if(mod(fp.db+6,12)===nyb)score--;
-  if(fp.db%4===nyb%4)score++;
-  score=Math.max(1,Math.min(5,score));
-  const palaceLabel=PALACE_T[myPalace].split("＝")[0];
-  const palaceTheme=PALACE_T[myPalace].split("＝")[1].split("。")[0];
-  $("year-title").textContent=`今年の運勢 ─ ${nowY}年（${kanshiName(nys,nyb)}）`;
-  $("year-body").innerHTML=`
-    <div class="card">
-      <h3>総合 ${starsHtml(score)}</h3>
-      <p>今年は四柱推命で「<strong>${TSUHEN[ts]}</strong>」がめぐり、九星では<strong>${palaceLabel}</strong>に回座する年。${TSUHEN_T[ts].split("。")[0]}であり、${palaceTheme}です。</p>
-      <div class="today-grid">
-        <div class="mini"><div class="mini-label">星（西洋占星術）</div><div class="mini-note">${YEAR_EL_T[rel]}</div></div>
-        <div class="mini"><div class="mini-label">命（四柱推命）</div><div class="mini-note">${TSUHEN_T[ts]}</div></div>
-        <div class="mini"><div class="mini-label">方（九星気学）</div><div class="mini-note">${PALACE_T[myPalace]}</div></div>
-        <div class="mini"><div class="mini-label">恵方</div><div class="mini-val">${EHO[nys]}</div><div class="mini-note">${nowY}年の歳徳神のいる方角。初詣や大事な参拝はこの方角へ。</div></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>十二か月のリズム ─ 月ごとの通変星</h3>
-      <p class="muted">四柱推命では月ごとにもあなたの日主との関係（通変星）が変わります。月の変わり目は節入り（毎月4〜8日頃）です。</p>
-      <div class="months">${Array.from({length:12},(_,mi)=>{
-        const calM=mi+2>12?mi-10:mi+2;
-        const mstem=mod((nys%5)*2+2+mi,10);
-        const mts=mstem===fp.ds?0:tsuhen(fp.ds,mstem);
-        const nowMi=Math.floor(norm(sunLon(jdUT(CUR.now.getFullYear(),CUR.now.getMonth()+1,CUR.now.getDate(),12,9))-315)/30);
-        return `<div class="mini${mi===nowMi?" now":""}"><div class="mini-label">${calM}月${mi===nowMi?"（今月）":""}</div>
-          <div class="mini-val">${TSUHEN[mts]}</div><div class="mini-note">${TSUHEN_M[mts]}。</div></div>`;
-      }).join("")}</div>
-    </div>`;
-}
-
-/* ── 今日の運勢 ── */
-function dayScore(di){
-  const fp=CUR.fp, s=di%10, b=di%12;
-  const vb=voidBranches(fp.di);
-  let score=3,notes=[];
-  if(mod(s-fp.ds+10,10)===5){score++;notes.push("日干が「干合」を結ぶ、縁がまとまりやすい日");}
-  if(mod(b+fp.db,12)===1){score++;notes.push("地支が「支合」する、調和の流れの日");}
-  if(b%4===fp.db%4&&b!==fp.db){score++;notes.push("地支が「三合」を組む、追い風の日");}
-  if(mod(fp.db+6,12)===b){score--;notes.push("地支が「冲」でぶつかる日。予定変更は柔軟に");}
-  if(di===fp.di){score=5;notes.push("60日に一度、自分の日柱と同じ干支がめぐる「律の日」。直感が冴えます");}
-  if(vb.includes(b)){score=Math.min(score,2);notes.push("天中殺（空亡）の日。新しい種まきより、整理と充電を");}
-  return {score:Math.max(1,Math.min(5,score)),notes};
-}
-function renderToday(){
-  const {fp,now,tdi,tds,tdb}=CUR;
-  const {score,notes}=dayScore(tdi);
-  const isVoid=voidBranches(fp.di).includes(tdb);
-  const advice=score>=5?"思い切った一歩が実を結ぶ最良日。大事な連絡・決断はこの日のうちに。"
-    :score===4?"流れは追い風。人と会う予定を入れると、良い縁が転がり込みます。"
-    :score===3?"平常運転の一日。目の前のことを丁寧に。積み重ねが明日の運を作ります。"
-    :score===2?"充電向きの日。無理に攻めず、身の回りを整えると運気が澄みます。"
-    :"守りの日。焦りは禁物、湯船にゆっくり浸かって早めの休息を。";
-  const dayEl=stemElem(tds);
-  const luckyColor={0:"緑・若草色",1:"赤・朱色",2:"黄・山吹色",3:"白・金色",4:"藍・黒"}[dayEl];
-  const dstr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
-  $("today-title").textContent=`今日の運勢 ─ ${dstr}`;
-  $("today-body").innerHTML=`
-    <div class="card">
-      <h3>本日 ${kanshiName(tds,tdb)}の日 ${starsHtml(score)}</h3>
-      <p>${advice}</p>
-      ${notes.length?`<ul style="margin:.6em 0;padding-left:1.4em">${notes.map(n=>`<li>${n}</li>`).join("")}</ul>`:""}
-      <div class="today-grid">
-        <div class="mini"><div class="mini-label">今日のラッキーカラー</div><div class="mini-val">${luckyColor}</div>
-          <div class="mini-note">日干${STEMS[tds]}${elTag(dayEl)}の気にちなむ色。</div></div>
-        <div class="mini"><div class="mini-label">今日の一言</div>
-          <div class="mini-note"><span class="a-emoji">${ANIMAL_EMOJI[CUR.animal]}</span>${isVoid?"手放すことも運のうち。机の上をひとつ片付けてみて。":ANIMALS[CUR.animal].key+"——あなたの持ち味を、今日はひとつだけ意識して使ってみてください。"}</div></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>明日、そして今週</h3>
-      ${(()=>{
-        const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
-        const tomorrow=mod(jdToday+1+49,60), tm=dayScore(tomorrow);
-        let best=null;
-        for(let i=1;i<=7;i++){
-          const di=mod(jdToday+i+49,60), r=dayScore(di);
-          if(!best||r.score>best.score){const d=new Date(now);d.setDate(d.getDate()+i);best={score:r.score,di,date:d,notes:r.notes};}
-        }
-        const youbi=["日","月","火","水","木","金","土"];
-        return `<div class="today-grid">
-          <div class="mini"><div class="mini-label">明日 ─ ${kanshiName(tomorrow%10,tomorrow%12)}の日</div>
-            <div class="mini-val">${starsHtml(tm.score)}</div>
-            <div class="mini-note">${tm.notes.length?tm.notes[0]+"。":"平常運転の一日。今日の続きを丁寧に。"}</div></div>
-          <div class="mini"><div class="mini-label">今週のベスト日</div>
-            <div class="mini-val">${best.date.getMonth()+1}月${best.date.getDate()}日（${youbi[best.date.getDay()]}）　${starsHtml(best.score)}</div>
-            <div class="mini-note">${kanshiName(best.di%10,best.di%12)}の日。${best.notes.length?best.notes[0]+"。":"安定した流れの日。"}大事な予定はこの日に寄せてみては。</div></div>
-        </div>`;
-      })()}
-      <p class="fine">日付はこのページを開いている端末の日付で計算しています。明日以降の評価は、あなたの日柱と日々の干支の関係から算出した目安です。</p>
-    </div>`;
-}
-
-/* ── こどものページ ── */
-function renderKids(){
-  const {inp,sun,fp,animal,tds,tdi}=CUR;
-  const S=SIGNS[sun];
-  const {score}=dayScore(tdi);
-  const kidStars=(n)=>{let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">☆</span>';return `<span class="kid-stars" role="img" aria-label="5てんまんてん中${n}てん">${h}</span>`;}
-  const dayEl=stemElem(tds);
-  const kidColor={0:"みどり",1:"あか",2:"きいろ",3:"しろ・きんいろ",4:"あお・こん"}[dayEl];
-  const kidDir=EHO[CUR.nys];
-  $("kids-body").innerHTML=`
-    <div class="card">
-      <h3>${esc(inp.mei)}さんは、どんな子？</h3>
-      <p><span class="kid-emblem">${S.sym}</span><strong>${S.n}のきみ</strong>　${SIGN_KID[sun]}</p>
-      <p><span class="kid-emblem">${ANIMAL_EMOJI[animal]}</span><strong>どうぶつうらないは「${animal}」</strong>　${ANIMAL_KID[animal]}</p>
-      <p><span class="kid-emblem">${STEMS[fp.ds]}</span><strong>うまれた日のひみつ</strong>　${STEM_KID[fp.ds]}</p>
-    </div>
-    <div class="card">
-      <h3>きょうの うんせい</h3>
-      <p>${kidStars(score)}</p>
-      <p>${KID_TODAY[score]}</p>
-      <div class="kid-grid">
-        <div class="kid-mini"><div class="k-label">きょうのラッキーカラー</div><div class="k-val">${kidColor}</div></div>
-        <div class="kid-mini"><div class="k-label">ことしのラッキーなほうがく</div><div class="k-val">${kidDir}</div></div>
-      </div>
-      <p class="fine" style="margin-top:14px">うらないは「ぜったい」じゃないよ。いいところは自信に、気をつけることはヒントにして、きょうも楽しくすごそう。</p>
-    </div>`;
-}
-
-
 /* ══════════════════ 極 ─ 追加七占術 ══════════════════ */
 
 /* ── 数秘術（ピタゴラス式） ── */
@@ -2226,485 +1404,308 @@ const ENNEA_GROW=[7,4,6,1,8,9,5,2,3];   // 成長(統合)の方向
 const ENNEA_STRESS=[4,8,9,2,7,3,1,5,6]; // ストレス(分裂)の方向
 const enneaOf=(y,m,d)=>{let n=reduceNum(String(y).split("").reduce((a,c)=>a+ +c,0)+String(m).split("").reduce((a,c)=>a+ +c,0)+String(d).split("").reduce((a,c)=>a+ +c,0),false);return n;}
 
-/* ══════════ 描画 ══════════ */
-function renderNumJP(){
-  const {inp,now}=CUR;
-  const lp=lifePathOf(inp.y,inp.m,inp.d);
-  const bd=reduceNum(inp.d,true);
-  const py=reduceNum(inp.m+inp.d+reduceNum(String(now.getFullYear()).split("").reduce((a,c)=>a+ +c,0),false),false);
-  const rom=($("romaji")&&$("romaji").value.trim())||"";
-  const nn=rom?nameNumsOf(rom):null;
-  const cell=(label,n,sub)=>`<div class="gk"><div class="gk-name">${label}</div><div class="gk-num">${n}</div>
-    <div class="gk-fortune f-daikichi">${numJP(n).k}</div><div class="gk-phrase">${sub}</div></div>`;
-  $("num-body").innerHTML=`
-    <div class="card">
-      <h3>あなたの数</h3>
-      <div class="goka" style="grid-template-columns:repeat(${nn?4:3},1fr)">
-        ${cell("ライフパス",lp,"生年月日の全数字")}
-        ${cell("誕生数",bd,"生まれた「日」")}
-        ${nn?cell("運命数（名前）",nn.expr,"ローマ字全文字"):""}
-        ${cell("パーソナルイヤー",py,String(now.getFullYear())+"年のテーマ")}
-      </div>
-      ${nn&&nn.soul?`<p class="muted" style="margin-top:12px">ハート数（母音）は<strong>${nn.soul}・${numJP(nn.soul).k}</strong>、外面数（子音）は<strong>${nn.pers}・${numJP(nn.pers).k}</strong>です。</p>`:""}
-      ${!nn?'<p class="fine">フォームにローマ字表記を入力すると、名前からの「運命数・ハート数・外面数」も算出されます。</p>':""}
-    </div>
-    <div class="card">
-      <h3>数の読み解き</h3>
-      <p><strong>ライフパス${lp}「${numJP(lp).k}」</strong>　${numJP(lp).t}人生という道そのものの性質を表します。</p>
-      <p><strong>誕生数${bd}「${numJP(bd).k}」</strong>　${numJP(bd).t.split("。")[0]}。日常にあらわれる素の顔です。</p>
-      <p><strong>パーソナルイヤー${py}</strong>　今年は9年周期の中で「${numJP(py).k}」のテーマがめぐる年。${numJP(py).t.split("。")[0]}。</p>
-    </div>`;
+
+/* ══════════════════ 縁 ─ ふたりの相性ロジック ══════════════════ */
+function palaceOfYear(y,myStar){const center=honmeiStar(y);
+  let base=myStar-center+5; while(base<1)base+=9; while(base>9)base-=9; return base;}
+
+/* 宿曜の縁テキスト */
+const SREL={
+ "命":["◎","同じ宿を持つ「合わせ鏡」の縁。言葉にしなくても通じ合う速さは全宿一。ただし欠点まで同じ形で現れるため、相手への苛立ちは自分の宿題と心得ると、最強の同志になります。"],
+ "業":["◎","前世であなたが相手に恩を残したとされる縁。理屈抜きに尽くしたくなり、相手の前では素の自分に戻れます。深い安心の一方、距離が近くなりすぎたら深呼吸を。"],
+ "胎":["◎","前世で相手があなたを支えたとされる縁。そばにいるだけで守られている感覚に包まれます。甘えが過ぎると縁の糸が緩むので、感謝を言葉にすることが護符になります。"],
+ "栄":["◎","一緒にいるほど物事が栄える「発展の縁」。共に始めたことが育ちやすく、結婚・共同事業に最良とされます。互いの成功を素直に喜べる、日向のような関係です。"],
+ "親":["◎","親が子を慈しむような「信頼の縁」。安心の土台が最初からあり、長い歳月に強い関係です。守られる側は、時々その恩を言葉で返すと絆がさらに深まります。"],
+ "友":["○","対等な「友情の縁」。利害を超えて笑い合える風通しのよさが持ち味で、恋愛でも友達のような夫婦になれます。刺激が欲しくなったら、ふたりで新しい場所へ。"],
+ "衰":["○","あなたの力が相手へ流れやすい縁。支えることに意味を見いだせれば佳き縁ですが、消耗を感じたら距離の再調整を。与えた分は、必ず別の形で巡ってきます。"],
+ "安":["○","安定と安らぎの縁。波風が立ちにくく、居心地のよさは随一です。ただし安定は馴れ合いと紙一重——年に一度は「初めて」を一緒に体験するのが長持ちの秘訣。"],
+ "成":["○","物事を「成し遂げさせてくれる」縁。仕事のパートナーとして特に力を発揮し、互いの足りない実務を埋め合えます。プロジェクトの相棒に最適です。"],
+ "危":["△","刺激と冒険の縁。一緒にいるとスリルがあり、停滞を打ち破る力がありますが、安定は少し苦手。日常の細々は仕組みに任せ、非日常を楽しむ関係が吉。"],
+ "壊":["△","強烈に惹かれ、強烈に揺さぶり合う「宿命の縁」。恋の始まりは劇的ですが、近づきすぎると互いの土台を削ることも。会う頻度や役割のルールを決めるほど、この縁は長く輝きます。"]
+};
+const SDIST={1:"近距離——縁の性質が濃く、日常に直接あらわれます",2:"中距離——ほどよい強さでバランスよく働きます",3:"遠距離——穏やかに、じんわりと効いてきます"};
+function shukuRel(a,b){ // a→b
+  const d=mod(b-a,27);
+  if(d===0)return {name:"命",dist:0};
+  if(d===9)return {name:"業",dist:0};
+  if(d===18)return {name:"胎",dist:0};
+  const p=d%9, loop=Math.ceil(d/9);
+  return {name:["","栄","衰","安","壊","成","危","友","親"][p],dist:loop};
 }
 
-function renderKabbalah(){
-  const {inp}=CUR;
-  const un=lifePathOf(inp.y,inp.m,inp.d);
-  const bd=reduceNum(inp.d,true);
-  $("kabbalah-body").innerHTML=`
-    <div class="card">
-      <h3>運命数 ${un} ─ ${SEPHIROT[un]||""}</h3>
-      <p>カバラでは、生年月日のすべての数字を足して還元した数を「運命数」とし、生命の樹（セフィロト）の球体に対応させて読みます。あなたの運命数<strong>${un}</strong>は<strong>${SEPHIROT[un]}</strong>。${numJP(un).t}</p>
-      <p><strong>誕生数${bd}</strong>は<strong>${SEPHIROT[bd]||"マスターナンバー"}</strong>の質を帯び、日々の癖や才能として表れます。</p>
-      <p class="muted">ピタゴラス式の数秘術とは兄弟関係にあたる体系です。同じ数でも、カバラでは「生命の樹のどこに立つか」という霊的な地図として読み解きます。</p>
-    </div>`;
-}
-
-function renderMaya(){
-  const {inp}=CUR;
-  const kin=mayaKin(inp.y,inp.m,inp.d);
-  const seal=mayaSealOf(kin), tone=mayaToneOf(kin);
-  const ws=mayaSealOf(mod(kin-1-(tone-1),260)+1);
-  const analog=mod(17-seal,20);        // 類似: 紋章番号の和が19（赤い竜1↔白い鏡18）
-  const antipode=mod(seal+10,20);
-  const occult=mod(21-1-(seal+1),20);  // 神秘: 番号和が21 → 0-based: 19-seal? 21-(s+1)-1=19-s
-  const guide=mayaGuide(seal,tone);
-  const chip=i=>`<span style="display:inline-block;border:1px solid ${MAYA_COLOR_CSS[MAYA_SEALS[i][1]]};color:${MAYA_COLOR_CSS[MAYA_SEALS[i][1]]};border-radius:999px;padding:2px 12px;font-size:12px;margin:2px">${MAYA_SEALS[i][0]}</span>`;
-  $("maya-body").innerHTML=`
-    <div class="card">
-      <h3>KIN ${kin} ─ ${MAYA_SEALS[seal][0]}・${MAYA_SEALS[ws][0]}・音${tone}</h3>
-      <p>マヤの神聖暦ツォルキン（260日周期）で、あなたは<strong>KIN${kin}</strong>の日に生まれました。
-      太陽の紋章（表の顔）は<strong>${MAYA_SEALS[seal][0]}</strong>、ウェイブスペル（潜在の13日間テーマ）は<strong>${MAYA_SEALS[ws][0]}</strong>、銀河の音は<strong>音${tone}・${MAYA_TONES[tone-1]}</strong>です。</p>
-      <p><strong>${MAYA_SEALS[seal][0]}</strong>　${MAYA_SEALS[seal][2]}。</p>
-      <p><strong>${MAYA_SEALS[ws][0]}（潜在意識）</strong>　${MAYA_SEALS[ws][2]}。</p>
-    </div>
-    <div class="card">
-      <h3>関わりの紋章</h3>
-      <dl class="kv">
-        <dt>類似KIN</dt><dd>${chip(analog)}<span class="muted">似た価値観で支え合う相手</span></dd>
-        <dt>神秘KIN</dt><dd>${chip(occult)}<span class="muted">説明のつかない引力で刺激し合う相手</span></dd>
-        <dt>反対KIN</dt><dd>${chip(antipode)}<span class="muted">正反対ゆえに視野を広げてくれる相手</span></dd>
-        <dt>ガイドKIN</dt><dd>${chip(guide)}<span class="muted">あなたを導く方向性</span></dd>
-      </dl>
-      ${CUR.inp.m===2&&CUR.inp.d===29?'<p class="muted">2月29日生まれの方は、ドリームスペルでは KIN を持たない特別な日「0.0 フナブ・ク」とされます（上記は前日相当の参考値です）。</p>':""}
-      <p class="fine">ドリームスペル方式（うるう日2月29日はKINを数えない）。基準日はKIN164＝2013年7月26日／2026年5月22日の二重検証済みです。</p>
-    </div>`;
-}
-
-function renderShukuyo(){
-  const {inp}=CUR;
-  const kr=kyureki(inp.y,inp.m,inp.d,inp.utc);
-  const idx=shukuOf(kr);
-  const [name,text]=SHUKU27[idx];
-  $("shukuyo-body").innerHTML=`
-    <div class="card">
-      <h3>本命宿 ─ ${name}</h3>
-      <p>宿曜占星術は、生まれた日の月が宿る「二十七宿」からその人の本質を読む、弘法大師空海が伝えた密教占星術です。
-      あなたの旧暦の誕生日は<strong>${kr.leap?"閏":""}${kr.month}月${kr.day}日</strong>ごろ——本命宿は<strong>${name}</strong>です。</p>
-      <p>${text}。</p>
-      <p class="fine">旧暦は天文近似式で算出しています。朔（新月）や中気の境界付近の生まれでは、宿がひとつ前後する場合があります。正確を期す場合は市販の宿曜暦をご確認ください。</p>
-    </div>`;
-}
-
-function renderSanmei(){
-  const {fp}=CUR;
-  const head=shuseiOf(fp.ds,fp.ys);
-  const chest=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.mb]);
-  const belly=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.db]);
-  const rhand=shuseiOf(fp.ds,fp.ms);
-  const lhand=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.yb]);
-  const j1=juseiOf(fp.ds,fp.yb), j2=juseiOf(fp.ds,fp.mb), j3=juseiOf(fp.ds,fp.db);
-  const energy=JUSEI[j1][1]+JUSEI[j2][1]+JUSEI[j3][1];
-  const box=(label,si)=>`<div class="gk"><div class="gk-name">${label}</div><div class="gk-num" style="font-size:19px">${SHUSEI[si][0]}</div></div>`;
-  $("sanmei-body").innerHTML=`
-    <div class="card">
-      <h3>人体星図 ─ 中心星は${SHUSEI[chest][0]}</h3>
-      <p class="muted">算命学は生年月日の干支から「人体星図」を描き、体の五カ所に宿る星で人物を読みます。四柱推命と同じ暦を使う、日本生まれの帝王学です。</p>
-      <div class="goka" style="grid-template-columns:repeat(3,1fr)">
-        <div class="gk" style="visibility:hidden"></div>${box("頭（目上・知性）",head)}<div class="gk" style="visibility:hidden"></div>
-        ${box("右手（仕事・社会）",rhand)}${box("胸（中心・本質）",chest)}${box("左手（家庭・配偶者）",lhand)}
-        <div class="gk" style="visibility:hidden"></div>${box("腹（家系・晩年）",belly)}<div class="gk" style="visibility:hidden"></div>
-      </div>
-      <p style="margin-top:14px"><strong>中心星「${SHUSEI[chest][0]}」</strong>　${SHUSEI[chest][1]}。これがあなたの魂の中心です。</p>
-      <p><strong>頭の星「${SHUSEI[head][0]}」</strong>　${SHUSEI[head][1].split("。")[0]}——目上や社会との関わり方に表れます。</p>
-    </div>
-    <div class="card">
-      <h3>十二大従星 ─ エネルギー総量 ${energy}点</h3>
-      <dl class="kv">
-        <dt>初年期</dt><dd><strong>${JUSEI[j1][0]}（${JUSEI[j1][1]}点）</strong>　${JUSEI[j1][2]}</dd>
-        <dt>中年期</dt><dd><strong>${JUSEI[j2][0]}（${JUSEI[j2][1]}点）</strong>　${JUSEI[j2][2]}</dd>
-        <dt>晩年期</dt><dd><strong>${JUSEI[j3][0]}（${JUSEI[j3][1]}点）</strong>　${JUSEI[j3][2]}</dd>
-      </dl>
-      <p class="muted">3つの従星の合計点（最小6・最大33）は生命エネルギーの器とされます。${energy>=24?"かなりの大器——大きな舞台ほど力を発揮します。":energy>=15?"バランスのよい中量級——燃費よく長く走れる器です。":"精妙な小容量——量より質、感性と集中で勝負する器です。"}</p>
-      <p class="fine">人体星図の配置は流派により異なる場合があります（本図は主流の一例です）。</p>
-    </div>`;
-}
-
-function renderRokusei(){
-  const {fp,nowY,nyb}=CUR;
+/* プロフィール構築 */
+function buildP(sei,mei,y,m,d,hour,col){
+  const fp=fourPillars(y,m,d,hour,9);
+  const calcHour=hour==null?12:hour;
+  const jdB=jdUT(y,m,d,calcHour,9);
+  const sun=signOf(sunLon(jdB)), moon=signOf(moonLon(jdB));
+  const myStar=honmeiStar(fp.py);
+  const charNo=fp.di+1, charName=CHARS60[fp.di][0], animal=CHARS60[fp.di][1];
+  const kr=kyureki(y,m,d,9), shu=shukuOf(kr);
+  const kin=mayaKin(y,m,d), seal=mayaSealOf(kin), tone=mayaToneOf(kin);
+  const lp=lifePathOf(y,m,d);
   const r=rokuseiOf(fp);
-  const starName=ROKUSEI_NAMES[r.star]+(r.plus?"（＋）":"（−）");
-  const phaseNow=mod(nyb-r.base,12);
-  const rows=[];
-  for(let i=0;i<12;i++){
-    const y=nowY+i;
-    const ph=mod(mod(y-4,12)-r.base,12);
-    const isDai=ph>=9, isChu=ph===5, isSho=ph===3;
-    rows.push(`<div class="mini${i===0?" now":""}" ${isDai?'style="border-color:var(--vermil)"':""}>
-      <div class="mini-label">${y}年${i===0?"・今年":""}</div>
-      <div class="mini-val">${UNKI12[ph]}${isDai?'<span class="tag verm" style="margin-left:6px">大殺界</span>':isChu?'<span class="tag verm" style="margin-left:6px">中殺界</span>':isSho?'<span class="tag" style="margin-left:6px;border:1px solid var(--warn);color:var(--warn)">小殺界</span>':""}</div>
-      <div class="mini-note">${UNKI_T[ph]}</div></div>`);
-  }
-  $("rokusei-body").innerHTML=`
-    <div class="card">
-      <h3>運命星 ─ ${starName}</h3>
-      <p>六星占術の運命数（星数）は<strong>${r.num}</strong>。あなたは<strong>${starName}</strong>です。</p>
-      <p>${ROKUSEI_T[r.star]}。${r.plus?"陽（＋）のあなたは、その気質が外へ向かって表れるタイプ。":"陰（−）のあなたは、その気質が内に深く満ちるタイプ。"}</p>
-      <p>今年（${nowY}年）の運気は<strong>${UNKI12[phaseNow]}</strong>——${UNKI_T[phaseNow]}です。</p>
-    </div>
-    <div class="card">
-      <h3>これから12年の運気（殺界カレンダー）</h3>
-      <div class="months">${rows.join("")}</div>
-      <p class="muted">大殺界の3年間は「新築・転職・結婚などの大勝負を避け、守りと仕込みに徹する」時期とされます。恐れる期間ではなく、次の9年を強くする充電期間です。</p>
-      <p class="fine">運気周期は公表されている土星人の殺界年（2018〜2020年ほか）と照合済みですが、書籍・流派により1年前後する場合があります。</p>
-    </div>`;
+  return {sei,mei,y,m,d,hour,fp,sun,moon,myStar,charNo,charName,animal,shu,kin,seal,tone,lp,r,vb:voidBranches(fp.di),col};
 }
 
-function renderEnnea(){
-  const {inp}=CUR;
-  const t=enneaOf(inp.y,inp.m,inp.d);           // 1-9
-  const grow=ENNEA_GROW[t-1], stress=ENNEA_STRESS[t-1];
-  const wingL=t===1?9:t-1, wingR=t===9?1:t+1;
-  $("ennea-body").innerHTML=`
-    <div class="card">
-      <h3>タイプ${t}「${ENNEA[t-1][0]}」</h3>
-      <p>${ENNEA[t-1][1]}。</p>
-      <dl class="kv">
-        <dt>ウイング</dt><dd>隣接するタイプ${wingL}「${ENNEA[wingL-1][0]}」・タイプ${wingR}「${ENNEA[wingR-1][0]}」の風味が加わることがあります</dd>
-        <dt>成長の方向</dt><dd>調子のよいとき、タイプ${grow}「${ENNEA[grow-1][0]}」の美点が表れます</dd>
-        <dt>ストレス時</dt><dd>余裕を失うと、タイプ${stress}「${ENNEA[stress-1][0]}」の影の面が出やすくなります</dd>
-      </dl>
-      <p class="fine">エニアグラムは本来、自己観察と質問診断でタイプを見きわめる性格類型論です。ここでは生年月日の数から数秘術的に対応づけた「入口としての参考タイプ」を表示しています。読んでみて違和感があれば、それも大切な自己発見です。</p>
-    </div>`;
-}
-
-/* ── 総合鑑定への統合 ── */
-function renderSynthPlus(){
-  const sy=$("synth-body"); if(!sy||sy.querySelector(".x-twelve"))return;
-  const {inp,fp}=CUR;
-  const lp=lifePathOf(inp.y,inp.m,inp.d);
-  const kin=mayaKin(inp.y,inp.m,inp.d);
-  const seal=mayaSealOf(kin), tone=mayaToneOf(kin);
-  const kr=kyureki(inp.y,inp.m,inp.d,inp.utc);
-  const shu=shukuOf(kr);
-  const chest=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.mb]);
-  const j1=juseiOf(fp.ds,fp.yb),j2=juseiOf(fp.ds,fp.mb),j3=juseiOf(fp.ds,fp.db);
-  const energy=JUSEI[j1][1]+JUSEI[j2][1]+JUSEI[j3][1];
-  const r=rokuseiOf(fp);
-  const et=enneaOf(inp.y,inp.m,inp.d);
-  // キーワードチップを3つ追加
-  const chips=sy.querySelector(".key-chips");
-  if(chips)chips.insertAdjacentHTML("beforeend",
-    `<span class="key-chip">${numJP(lp).k}</span><span class="key-chip">${MAYA_SEALS[seal][0]}</span><span class="key-chip">${SHUSEI[chest][0]}</span>`);
-  const win=(l,v,n)=>`<div class="mini"><div class="mini-label">${l}</div><div class="mini-val" style="font-size:15.5px">${v}</div><div class="mini-note">${n}</div></div>`;
-  sy.insertAdjacentHTML("beforeend",`
-    <div class="card x-twelve">
-      <h3>十二の窓 ─ 新しい七占術から見たあなた</h3>
-      <p>${esc(inp.mei)}さんの場合——数秘術のライフパス${lp}「<strong>${numJP(lp).k}</strong>」とマヤ暦の「<strong>${MAYA_SEALS[seal][0]}</strong>」が魂のテーマを、
-      宿曜の<strong>${SHUKU27[shu][0]}</strong>と算命学の中心星<strong>${SHUSEI[chest][0]}</strong>が生まれ持った資質を、
-      六星占術の<strong>${ROKUSEI_NAMES[r.star]}${r.plus?"（＋）":"（−）"}</strong>が運気の律動を語ります。</p>
-      <div class="today-grid">
-        ${win("数秘術",`ライフパス${lp}「${numJP(lp).k}」`,numJP(lp).t.split("。")[1]||numJP(lp).t.split("。")[0]+"。")}
-        ${win("カバラ数秘術",`運命数${lp}`,SEPHIROT[lp]||"マスターナンバー")}
-        ${win("マヤ暦",`KIN${kin}・${MAYA_SEALS[seal][0]}`,`音${tone}・${MAYA_TONES[tone-1]}。${MAYA_SEALS[seal][2].split("。")[0]}`)}
-        ${win("宿曜占星術",SHUKU27[shu][0],SHUKU27[shu][1].split("。")[0]+"。")}
-        ${win("算命学",`中心星・${SHUSEI[chest][0]}`,`${SHUSEI[chest][1].split("。")[0]}。エネルギー${energy}点`)}
-        ${win("六星占術",ROKUSEI_NAMES[r.star]+(r.plus?"（＋）":"（−）"),ROKUSEI_T[r.star].split("。")[0]+"。")}
-        ${win("エニアグラム",`タイプ${et}「${ENNEA[et-1][0]}」`,ENNEA[et-1][1].split("。")[0]+"。")}
-      </div>
-      <p class="muted" style="margin-top:14px">東洋の暦（四柱推命・算命学・六星占術・宿曜）は「生まれ持った器と巡り」を、
-      西洋と中南米の体系（占星術・数秘術・カバラ・マヤ暦）は「魂のテーマ」を、
-      動物占いとエニアグラムは「ふるまいの型」を照らします。十二の窓に繰り返し現れる言葉こそ、あなたの核心です。</p>
-    </div>`);
-}
-
-/* ── フック ── */
-const _origRender=render;
-render=function(inp){
-  _origRender(inp);
-  renderNumJP();renderKabbalah();renderMaya();renderShukuyo();renderSanmei();renderRokusei();renderEnnea();renderSynthPlus();
-  // 命式盤チップ追加
-  const chips=document.querySelector("#hero .m-chips");
-  if(chips&&!chips.querySelector(".x-kin")){
-    const kin=mayaKin(inp.y,inp.m,inp.d);
-    const kr=kyureki(inp.y,inp.m,inp.d,inp.utc);
-    const r=rokuseiOf(CUR.fp);
-    chips.insertAdjacentHTML("beforeend",
-      `<span class="m-chip x-kin">KIN<b>${kin}</b></span>
-       <span class="m-chip">宿曜<b>${SHUKU27[shukuOf(kr)][0]}</b></span>
-       <span class="m-chip">六星<b>${ROKUSEI_NAMES[r.star]}${r.plus?"＋":"−"}</b></span>`);
+/* 保存 */
+const LSP_KEY="seimeiroku_pair_v1";
+function lsGet(){try{return JSON.parse(localStorage.getItem(LSP_KEY)||"null")}catch(e){return null}}
+function lsSet(v){try{localStorage.setItem(LSP_KEY,JSON.stringify(v))}catch(e){}}
+(function(){
+  try{localStorage.setItem("__t","1");localStorage.removeItem("__t");}catch(e){
+    const c=document.querySelector(".save-ctl"); if(c)c.innerHTML='<span class="fine">この環境ではブラウザ保存を利用できません。</span>'; return;}
+  const st=lsGet();
+  if(st&&st.opt!==false&&st.a){
+    ["sei","mei","y","m","d","h","min"].forEach(k=>{
+      if(st.a[k]!=null)document.getElementById("a_"+k).value=st.a[k];
+      if(st.b[k]!=null)document.getElementById("b_"+k).value=st.b[k];});
+    if(st.rel)document.getElementById("rel").value=st.rel;
   }
-};
+  const so=document.getElementById("saveOpt");
+  if(st&&so)so.checked=st.opt!==false;
+  if(so)so.addEventListener("change",e=>{const s2=lsGet()||{};s2.opt=e.target.checked;lsSet(s2);});
+  const cl=document.getElementById("clearSaved");
+  if(cl)cl.addEventListener("click",()=>{try{localStorage.removeItem(LSP_KEY)}catch(e){};if(so)so.checked=true;});
+})();
 
-/* ══════════════════ 極 ─ 解説拡充と総合年表 ══════════════════ */
-
-/* 追加データ */
-const NUM_DETAIL={
- 1:{s:"決断の速さと開拓精神。ゼロから一を生む力",c:"独走しすぎて孤立しないこと。頼るのも実力のうち"},
- 2:{s:"人の気持ちを察する繊細なアンテナと調整力",c:"合わせすぎて自分を見失わないこと。NOも優しさ"},
- 3:{s:"場を明るくする表現力と、遊びを形にする創造力",c:"散らかりがちな興味の風呂敷を、ときどき畳むこと"},
- 4:{s:"コツコツ積む継続力と、仕組みを作る設計力",c:"予定外の変化を「壊れた」ではなく「更新」と捉えること"},
- 5:{s:"変化への適応力と、人を惹きつける行動力",c:"自由の追求が「飽きっぽさ」にならないよう軸を一本"},
- 6:{s:"深い愛情と責任感。人を癒し育てる力",c:"世話の焼きすぎは相手の力を奪うことも。見守る勇気を"},
- 7:{s:"本質を見抜く分析力と、深く潜る集中力",c:"考えすぎて動けなくなる前に、小さく試すこと"},
- 8:{s:"大きな目標を実現する統率力と経済感覚",c:"力の使い道を「支配」ではなく「保護」に向けること"},
- 9:{s:"広い視野と慈悲。違いを包み込む器",c:"みんなに良くしようとして、自分が空っぽにならないこと"},
- 11:{s:"鋭い直感とインスピレーション。人を照らす感化力",c:"敏感すぎる感受性の休ませ方を覚えること"},
- 22:{s:"理想を現実の建築物に変える、稀有な実務力",c:"完璧な設計図を待たず、仮組みで進める勇気"},
- 33:{s:"見返りを求めない愛と、人を育てる大きな器",c:"自己犠牲に傾かないこと。まず自分の器を満たして"}
-};
-const TONE_T=["第1の音・磁気：目的を定め、すべてを引き寄せる始まりの音","第2の音・月：二つの極の間で挑戦を見定める音","第3の音・電気：人と結びつき、奉仕で電流を流す音","第4の音・自己存在：形を測り、土台を定める音","第5の音・倍音：中心に立ち、輝きを放つ指揮の音","第6の音・律動：ゆらぎを整え、平等に組織する音","第7の音・共振：天と調律し、ひらめきを受信する音","第8の音・銀河：調和を体現し、手本となる音","第9の音・太陽：意図を脈動させ、大きく実現する音","第10の音・惑星：仕上げ、完成させ、見える形にする音","第11の音・スペクトル：溶かし、解放し、手放す音","第12の音・水晶：協力を束ね、普遍化する音","第13の音・宇宙：今に在り、超えて持ちこたえる音"];
-const SEPHIROT_LONG={
- 1:"生命の樹の頂・ケテル（王冠）。純粋な意志と始まりの光を司ります。何もないところに最初の一点を打つ——それがあなたの霊的な役割です。",
- 2:"第2のセフィラ・コクマー（知恵）。ひらめきの原液のような創造力を司ります。理屈より先に「わかってしまう」直観こそ、あなたの泉です。",
- 3:"第3のセフィラ・ビナー（理解）。閃きを受け止め、形と秩序に変える力です。混沌に輪郭を与える編集者の魂を持ちます。",
- 4:"第4のセフィラ・ケセド（慈悲）。惜しみなく広げ、与える愛の力です。あなたの豊かさは、循環させるほど大きくなります。",
- 5:"第5のセフィラ・ゲブラー（峻厳）。断ち切り、律する強さの力です。優しさだけでは守れないものを、あなたの厳しさが守ります。",
- 6:"中央に輝く第6のセフィラ・ティファレト（美）。すべてを調和させる太陽の座です。バランスの中心に立つことが、あなたの美学です。",
- 7:"第7のセフィラ・ネツァク（勝利）。情熱を持続させ、勝利まで運ぶ力です。感情の炎を絶やさないことが、あなたの武器になります。",
- 8:"第8のセフィラ・ホド（栄光）。知性の輝きと伝達の力です。言葉と論理で世界を写し取る書記官の魂を持ちます。",
- 9:"第9のセフィラ・イェソド（基礎）。見える世界と見えない世界をつなぐ月の座です。イメージの力で現実の土台を作ります。",
- 11:"マスターナンバー11——直感の門。ケテルとコクマーの間に架かる稲妻の通り道とされ、受信した光を人に伝える役割を持ちます。",
- 22:"マスターナンバー22——構築の門。生命の樹の22の小径すべてを歩む数とされ、理想を地上に建てる大工の魂です。",
- 33:"マスターナンバー33——愛の門。教え、癒し、育てることに人生が向かう、もっとも稀な数のひとつです。"
-};
-const UNKI_LONG=["畑に種を蒔く年。すぐに芽は出なくても、ここで蒔いたものが次の12年を決めます。新しい学びや出会いを意識的に。","蒔いた種が芽吹く年。小さな手応えが見え始めます。焦らず水をやり続けることが、後の大輪につながります。","花が開く年。人からの評価や引き立てが増え、物事が形になります。ここでの信用が財産になります。","少し立ち止まる小殺界。体調と心の点検を。無理をしなければ、次の飛躍への良い踊り場になります。","12年周期の最初の頂点。実力が実を結ぶ収穫期です。大きな決断や挑戦は、この年が好機です。","心が揺れやすい中殺界。判断が迷いがちになるため、大きな契約や転身は慎重に。相談相手を持つのが吉。","風向きが再び整う年。一度離れたチャンスや縁が戻ってくることも。再挑戦・再会に追い風が吹きます。","金運が実る年。収入・財産に関する動きが好調に。堅実な投資や貯蓄の仕組み作りに向きます。","高原のような安定期。攻めも守りもバランスよく進む、心地よい巡航速度の年です。","大殺界の一年目「陰影」。見通しが利きにくくなる時期の入口です。新規の大勝負より、足元の見直しを。","大殺界の二年目「停止」。動きが止まりやすい年。守りに徹し、力を蓄えることが最善の攻めになります。","大殺界の三年目「減退」。手放しと整理の年。ここで身軽になった人ほど、翌年の種子から鮮やかに再起します。"];
-const ENNEA_CORE=[
- ["正しくありたい、良くありたい","堕落すること、間違った人間になること"],
- ["愛されたい、必要とされたい","愛される価値がないと見なされること"],
- ["価値ある存在でありたい、認められたい","無価値であること、失敗者と見られること"],
- ["自分自身でありたい、特別でありたい","個性を失うこと、平凡に埋もれること"],
- ["理解したい、有能でありたい","無知で無力なまま世界に飲まれること"],
- ["安全でありたい、支えが欲しい","支えを失い、独りで放り出されること"],
- ["満たされたい、痛みを避けたい","退屈と苦痛に閉じ込められること"],
- ["自分の人生を自分で決めたい","他人に支配され、傷つけられること"],
- ["平和でいたい、つながっていたい","分離と衝突で心の平和を失うこと"]
-];
-
-/* ── 数秘術：深読みカードを追加 ── */
-const _renderNumJP=renderNumJP;
-renderNumJP=function(){
-  _renderNumJP();
-  const {inp}=CUR;
-  const lp=lifePathOf(inp.y,inp.m,inp.d);
-  const bd=reduceNum(inp.d,true);
-  const D=NUM_DETAIL[lp]||NUM_DETAIL[reduceNum(lp,false)];
-  const Db=NUM_DETAIL[bd]||NUM_DETAIL[reduceNum(bd,false)];
-  $("num-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>ライフパス${lp}の深読み</h3>
-      <p><strong>強み</strong>　${D.s}。これはあなたが意識せずとも発揮している、生まれつきの装備です。</p>
-      <p><strong>人生の課題</strong>　${D.c}。数秘術では、課題は欠点ではなく「この人生で磨くと決めてきたテーマ」と読みます。</p>
-      <p><strong>誕生数${bd}との重なり</strong>　日常のふるまいには誕生数${bd}「${numJP(bd).k}」の癖——${Db.s.split("。")[0]}——が顔を出します。人生の大きな方向（ライフパス）と日々の癖（誕生数）、二つの数の間を行き来しながら、人は自分らしさを育てていきます。</p>
-    </div>`);
-};
-
-/* ── カバラ：生命の樹の解説を拡充 ── */
-renderKabbalah=function(){
-  const {inp}=CUR;
-  const un=lifePathOf(inp.y,inp.m,inp.d);
-  const bd=reduceNum(inp.d,true);
-  $("kabbalah-body").innerHTML=`
-    <div class="card">
-      <h3>運命数 ${un} ─ ${(SEPHIROT[un]||"マスターナンバー").split("─")[0]}</h3>
-      <p>カバラでは、生年月日のすべての数字を足して還元した「運命数」を、生命の樹のどの球体（セフィラ）に立つ魂かを示す座標として読みます。</p>
-      <p><strong>あなたの座＝${SEPHIROT[un]||"マスターナンバー"}</strong>　${SEPHIROT_LONG[un]||""}</p>
-      <p><strong>誕生数${bd}の彩り</strong>　${SEPHIROT_LONG[bd]?SEPHIROT_LONG[bd].split("。")[0]+"。日々の選択には、この球体の光が差し込みます。":"日々の選択にはマスターナンバーの光が差し込みます。"}</p>
-      <p class="muted">ピタゴラス式の数秘術が「数の性格」を読むのに対し、カバラは「魂の立ち位置」を読みます。同じ数でも、二つの体系を重ねることで立体的な像が浮かび上がります。生命の樹には10の球体と22の小径があり、タロットの大アルカナ22枚とも対応する、西洋神秘思想の背骨です。</p>
-    </div>`;
-};
-
-/* ── マヤ暦：音の解説と関係KINの使い方を追加 ── */
-const _renderMaya=renderMaya;
-renderMaya=function(){
-  _renderMaya();
-  const {inp}=CUR;
-  const kin=mayaKin(inp.y,inp.m,inp.d);
-  const tone=mayaToneOf(kin);
-  $("maya-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>銀河の音${tone}の生き方</h3>
-      <p>${TONE_T[tone-1]}。マヤ暦では、紋章が「何を持って生まれたか」を、音が「それをどう奏でるか」を表します。</p>
-      <p>音${tone}のあなたは、${tone<=4?"ウェイブスペルの序盤を担う「立ち上げの音」。物事の始まりに立ち会うとき、いちばん自然に力が出ます。":tone<=9?"ウェイブスペルの中盤を担う「展開の音」。始まったものを膨らませ、形にしていく過程で本領を発揮します。":"ウェイブスペルの終盤を担う「仕上げと手放しの音」。完成させ、次へ渡す場面であなたの真価が光ります。"}</p>
-      <p class="muted">関わりの紋章の使い方——類似KINの人とは安心して長く組めます。神秘KINの人には理屈抜きに惹かれ、学びが多い相手。反対KINの人は最初ぶつかりやすいものの、あなたに欠けた視点をくれる最高の鏡です。ガイドKINは人だけでなく「その紋章らしい生き方」を指針にする、という読み方もできます。</p>
-    </div>`);
-};
-
-/* ── 宿曜：相性の宿（栄親・安壊）を追加 ── */
-const _renderShukuyo=renderShukuyo;
-renderShukuyo=function(){
-  _renderShukuyo();
-  const {inp}=CUR;
-  const kr=kyureki(inp.y,inp.m,inp.d,inp.utc);
-  const my=shukuOf(kr);
-  const eishin=[],ankai=[],gotai=[];
-  for(let dd=1;dd<27;dd++){
-    const t=mod(my+dd,27), p=dd%9;
-    if(p===1||p===8)eishin.push(t);
-    if(p===3||p===4)ankai.push(t);
-    if(p===0)gotai.push(t);
-  }
-  const chips=arr=>arr.map(i=>`<span class="job-chip">${SHUKU27[i][0]}</span>`).join("");
-  $("shukuyo-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>${SHUKU27[my][0]}と縁の深い宿 ─ 宿曜の相性</h3>
-      <p>宿曜占星術の真骨頂は相性です。二十七宿の距離関係から「栄親」「安壊」などの縁を読みます。</p>
-      <p><strong>栄親（えいしん）─ 互いを繁栄させる最良の縁</strong><br>一緒にいるほど運が育つ、公私ともに理想的な相手です。</p>
-      <div class="job-chips">${chips(eishin)}</div>
-      <p style="margin-top:14px"><strong>安壊（あんかい）─ 強く惹かれ、強く壊し合う縁</strong><br>抗いがたい引力を持つ一方、近すぎると互いの土台を崩すことも。適度な距離が絆を長持ちさせます。</p>
-      <div class="job-chips">${chips(ankai)}</div>
-      <p style="margin-top:14px"><strong>命・業・胎 ─ 前世からの因縁の宿</strong><br>同じ${SHUKU27[my][0]}の人は「命」＝合わせ鏡の縁。${gotai.map(i=>SHUKU27[i][0]).join("・")}は「業・胎」＝どこか懐かしさを覚える魂の同郷です。</p>
-      <p class="fine">相性は見る方向（どちらから数えるか）で意味合いが変わるとされます。ここでは、あなたから見た縁を表示しています。</p>
-    </div>`);
-};
-
-/* ── 算命学：五本の星すべての解説 ── */
-const _renderSanmei=renderSanmei;
-renderSanmei=function(){
-  _renderSanmei();
-  const {fp}=CUR;
-  const rhand=shuseiOf(fp.ds,fp.ms);
-  const lhand=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.yb]);
-  const belly=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.db]);
-  $("sanmei-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>残る三つの星の読み解き</h3>
-      <p><strong>右手の星「${SHUSEI[rhand][0]}」（仕事・社会での顔）</strong>　${SHUSEI[rhand][1]}。職場やお金の稼ぎ方に、この星の質が表れます。</p>
-      <p><strong>左手の星「${SHUSEI[lhand][0]}」（家庭・パートナーへの顔）</strong>　${SHUSEI[lhand][1]}。身近な人にだけ見せる素顔です。</p>
-      <p><strong>腹の星「${SHUSEI[belly][0]}」（晩年と家系の顔）</strong>　${SHUSEI[belly][1]}。歳を重ねるほど、この星が前に出てきます。</p>
-      <p class="muted">五つの主星がすべて同じ人はほとんどいません。場面によって出てくる星が入れ替わる——それが算命学の考える「多面体としての人間」です。</p>
-    </div>`);
-};
-
-/* ── 六星占術：今年の運気の詳解 ── */
-const _renderRokusei=renderRokusei;
-renderRokusei=function(){
-  _renderRokusei();
-  const {fp,nowY,nyb}=CUR;
-  const r=rokuseiOf(fp);
-  const ph=mod(nyb-r.base,12);
-  $("rokusei-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>今年「${UNKI12[ph]}」の過ごし方</h3>
-      <p>${UNKI_LONG[ph]}</p>
-      <p class="muted">六星占術の12年周期は、農業の暦に似ています。種を蒔き（種子）、育て（緑生・立花）、刈り取り（達成・財成）、土を休ませる（大殺界）。どの季節にも意味があり、冬に種を蒔かないのと同じように、時期に合った動きを選ぶことが開運の本質です。</p>
-    </div>`);
-};
-
-/* ── エニアグラム：根源的欲求と恐れ ── */
-const _renderEnnea=renderEnnea;
-renderEnnea=function(){
-  _renderEnnea();
-  const {inp}=CUR;
-  const t=enneaOf(inp.y,inp.m,inp.d);
-  $("ennea-body").insertAdjacentHTML("beforeend",`
-    <div class="card">
-      <h3>タイプ${t}を動かしているもの</h3>
-      <p><strong>根源的な欲求</strong>　「${ENNEA_CORE[t-1][0]}」。あなたの行動の多くは、意識するしないにかかわらず、この願いから発しています。</p>
-      <p><strong>根源的な恐れ</strong>　「${ENNEA_CORE[t-1][1]}」。強いストレス下の反応は、たいていこの恐れが引き金です。</p>
-      <p class="muted">エニアグラムの目的はタイプに人を閉じ込めることではなく、「自分の自動反応に気づき、選び直せるようになること」。欲求と恐れの正体を知るだけで、同じ状況でも打てる手が増えていきます。</p>
-    </div>`);
-};
-
-/* ── 生涯の運気：六星統合カーブ＋総合年表 ── */
-renderLife=function(){
-  const {fp,myStar,nowY}=CUR;
-  const vb=voidBranches(fp.di);
-  const r=rokuseiOf(fp);
-  const maxAge=90;
-  const pts=[];
-  for(let a=0;a<=maxAge;a++){
-    const y=fp.py+a;
-    const yb2=mod(y-4,12);
-    pts.push({a,y,base:palaceOfYear(y,myStar),voidY:vb.includes(yb2),rok:mod(yb2-r.base,12)});
-  }
-  const W=1000,H=230,padL=40,padR=14,padT=16,padB=34;
-  const X=a=>padL+(W-padL-padR)*a/maxAge;
-  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
-  // 六星大殺界の帯
-  let bands="";
-  let i=0;
-  while(i<=maxAge){
-    if(pts[i].rok>=9){let j=i;while(j+1<=maxAge&&pts[j+1].rok>=9)j++;
-      bands+=`<rect x="${(X(Math.max(i-0.5,0))).toFixed(1)}" y="${padT}" width="${(X(Math.min(j+0.5,maxAge))-X(Math.max(i-0.5,0))).toFixed(1)}" height="${H-padT-padB}" fill="var(--vermil)" opacity="0.09"/>`;i=j+1;}
-    else i++;
-  }
-  const P=pts.map(p=>({x:X(p.a),y:Y(PALACE_SCORE[p.base])}));
-  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
-  for(let k=0;k<P.length-1;k++){
-    const p0=P[Math.max(0,k-1)],p1=P[k],p2=P[k+1],p3=P[Math.min(P.length-1,k+2)];
-    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
-  }
-  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
-  const grid=[];
-  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}歳</text>`);
-  const voidDots=pts.filter(p=>p.voidY).map(p=>`<circle cx="${X(p.a)}" cy="${Y(PALACE_SCORE[p.base])}" r="3" fill="var(--vermil)"/>`).join("");
-  const nowAge=nowY-fp.py;
-  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">いま ${nowAge}歳</text>`:"";
-  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="年齢ごとの運気カーブ（九星の波と六星の大殺界）" style="min-width:720px;max-width:none">
-    ${bands}${grid.join("")}
-    <path d="${area}" fill="var(--gold-wash)"/>
-    <path d="${line}" fill="none" stroke="var(--gold-deep)" stroke-width="2.2" stroke-linejoin="round"/>
-    ${voidDots}${nowMark}
-    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">好調</text>
-    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">充電</text>
-  </svg></div>`;
-  const nextPeak=pts.find(p=>p.y>nowY&&p.base===7);
-  const nextRest=pts.find(p=>p.y>=nowY&&p.base===1);
-  // 総合年表（今年から20年）
-  const symOf=p=>{
-    let g=0;
-    g+=PALACE_SCORE[p.base]>=4?1:(PALACE_SCORE[p.base]<=2?-1:0);
-    g+=p.rok>=9?-1.5:(p.rok===5?-0.5:([4,7,8].includes(p.rok)?1:0));
-    if(p.voidY)g-=0.5;
-    return g>=1.5?["◎","絶好調の重なり"]:g>=0.5?["○","追い風"]:g>-1?["△","平常〜慎重に"]:["▲","充電・守りの年"];
+/* 鑑定 */
+let PA=null,PB=null;
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const g=id=>document.getElementById(id).value;
+  const read=p=>{
+    const sei=g(p+"_sei").trim(), mei=g(p+"_mei").trim();
+    const y=+g(p+"_y"), m=+g(p+"_m"), d=+g(p+"_d");
+    if(!sei||!mei||!y||!m||!d)return null;
+    const dt=new Date(y,m-1,d);
+    if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d)return null;
+    let hour=null; if(g(p+"_h")!=="")hour=+g(p+"_h")+(+g(p+"_min")||0)/60;
+    return {sei,mei,y,m,d,hour};
   };
-  const rows=pts.filter(p=>p.y>=nowY&&p.y<nowY+20).map(p=>{
-    const dai=p.rok>=9, chu=p.rok===5, sho=p.rok===3;
-    const sym=symOf(p);
-    return `<tr${p.y===nowY?' class="now"':''}>
-      <td>${p.y}年</td><td>${p.a}歳</td><td>${kanshiName(mod(p.y-4,10),mod(p.y-4,12))}</td>
-      <td>${PALACE_SHORT[p.base]}<span class="fine">・${PALACE_T[p.base].split("＝")[0]}</span></td>
-      <td${dai?' class="dai"':''}>${UNKI12[p.rok]}${dai?"・大殺界":chu?"・中殺界":sho?"・小殺界":""}</td>
-      <td>${p.voidY?"空亡":"—"}</td>
-      <td><span class="sym">${sym[0]}</span> <span class="fine">${sym[1]}</span></td>
-    </tr>`;
-  }).join("");
-  $("life-body").innerHTML=`
+  const a=read("a"), b=read("b");
+  if(!a||!b){alert("おふたりとも姓・名・生年月日を正しく入力してください。");return;}
+  PA=buildP(a.sei,a.mei,a.y,a.m,a.d,a.hour,"var(--vermil)");
+  PB=buildP(b.sei,b.mei,b.y,b.m,b.d,b.hour,"var(--indigo)");
+  if(document.getElementById("saveOpt")&&document.getElementById("saveOpt").checked){
+    lsSet({opt:true,rel:g("rel"),
+      a:{sei:a.sei,mei:a.mei,y:a.y,m:a.m,d:a.d,h:g("a_h"),min:g("a_min")},
+      b:{sei:b.sei,mei:b.mei,y:b.y,m:b.m,d:b.d,h:g("b_h"),min:g("b_min")}});
+  }
+  renderPair();
+  document.getElementById("results").classList.add("show");
+  requestAnimationFrame(()=>document.getElementById("hero").scrollIntoView({behavior:"smooth",block:"start"}));
+});
+
+/* 相性スコア */
+function pairScores(){
+  const s={};
+  // 宿曜(25)
+  const rAB=shukuRel(PA.shu,PB.shu);
+  s.shuku={rAB,rBA:shukuRel(PB.shu,PA.shu)};
+  s.shukuPt={"栄":25,"親":25,"業":22,"胎":22,"命":22,"友":20,"成":20,"安":16,"衰":15,"危":14,"壊":11}[rAB.name];
+  // 四柱(25)
+  const gou=mod(PA.fp.ds-PB.fp.ds+10,10)===5;
+  const shigou=mod(PA.fp.db+PB.fp.db,12)===1;
+  const sangou=PA.fp.db%4===PB.fp.db%4&&PA.fp.db!==PB.fp.db;
+  const chu=mod(PA.fp.db+6,12)===PB.fp.db;
+  const sameVoid=PA.vb[0]===PB.vb[0];
+  s.shichu={gou,shigou,sangou,chu,sameVoid,rel:elemRel(stemElem(PA.fp.ds),stemElem(PB.fp.ds))};
+  s.shichuPt=gou&&shigou?25:(gou||shigou)?21:sangou?20:chu?11:15;
+  if(sameVoid)s.shichuPt=Math.min(25,s.shichuPt+2);
+  // 星(15)
+  const eRel=(x,y)=>{const gx=SIGN_EL_TO_GOGYO[SIGNS[x].el],gy=SIGN_EL_TO_GOGYO[SIGNS[y].el];
+    if(SIGNS[x].el===SIGNS[y].el)return 1;
+    const good=(a,b)=>(a==="火"&&b==="風")||(a==="風"&&b==="火")||(a==="地"&&b==="水")||(a==="水"&&b==="地");
+    return good(SIGNS[x].el,SIGNS[y].el)?2:0;};
+  s.hoshi={sun:eRel(PA.sun,PB.sun),moon:eRel(PA.moon,PB.moon),ab:eRel(PA.sun,PB.moon),ba:eRel(PB.sun,PA.moon)};
+  s.hoshiPt=({2:8,1:6,0:3})[s.hoshi.sun]+({2:7,1:5,0:2})[s.hoshi.moon];
+  // 九星(10)
+  const kr2=elemRel(KYUSEI[PA.myStar-1].el,KYUSEI[PB.myStar-1].el);
+  s.kyusei=kr2;
+  s.kyuseiPt=(kr2===1||kr2===2)?10:kr2===0?8:5;
+  // 動物(10)
+  const gA=ANIMAL_GROUP[PA.animal],gB=ANIMAL_GROUP[PB.animal];
+  s.animal={gA,gB,same:PA.animal===PB.animal};
+  s.animalPt=gA===gB?8:((gA==="月"&&gB==="太陽")||(gA==="太陽"&&gB==="月"))?9:((gA==="月")||(gB==="月"))?7:6;
+  if(s.animal.same)s.animalPt=Math.min(10,s.animalPt+1);
+  // マヤ(10)
+  const rel20=(x,y)=>y===x?"同紋章":y===mod(17-x,20)?"類似":y===mod(19-x,20)?"神秘":y===mod(x+10,20)?"反対":y===mayaGuide(x,PA.tone)?"ガイド":null;
+  const mrel=rel20(PA.seal,PB.seal);
+  const mirror=PA.kin+PB.kin===261, abs=Math.abs(PA.kin-PB.kin)===130;
+  const sameTone=PA.tone===PB.tone, sameWS=mod(PA.kin-1-(PA.tone-1),260)===mod(PB.kin-1-(PB.tone-1),260);
+  s.maya={mrel,mirror,abs,sameTone,sameWS};
+  s.mayaPt=mirror?10:mrel==="類似"?10:mrel==="神秘"?9:mrel==="ガイド"?8:mrel==="同紋章"?8:abs?7:mrel==="反対"?7:sameWS?7:sameTone?6:5;
+  // 数秘(5)
+  const grp=n=>{const m2=reduceNum(n,false);return [1,5,7].includes(m2)?0:[2,4,8].includes(m2)?1:2;};
+  const masterA=[11,22,33].includes(PA.lp), masterB=[11,22,33].includes(PB.lp);
+  s.num={same:PA.lp===PB.lp,grpSame:grp(PA.lp)===grp(PB.lp),masterPair:masterA&&masterB,grpA:grp(PA.lp),grpB:grp(PB.lp)};
+  s.numPt=s.num.masterPair?5:s.num.same?5:s.num.grpSame?4:3;
+  s.total=s.shukuPt+s.shichuPt+s.hoshiPt+s.kyuseiPt+s.animalPt+s.mayaPt+s.numPt;
+  return s;
+}
+
+/* 描画 */
+function renderPair(){
+  const S=pairScores();
+  const A=PA,B=PB;
+  const an=esc(A.mei), bn=esc(B.mei);
+  const rel=document.getElementById("rel").value;
+  // 命式盤
+  const prof=p=>`
+    <div class="mini" style="border-top:3px solid ${p.col}">
+      <div class="mini-label">${esc(p.sei)} ${esc(p.mei)}<span class="fine">　${p.y}年${p.m}月${p.d}日生</span></div>
+      <div class="mini-note" style="line-height:2.1">
+        ${SIGNS[p.sun].sym}${SIGNS[p.sun].n} ／ 日柱 <strong>${kanshiName(p.fp.ds,p.fp.db)}</strong>（${DAYSTEM_T[p.fp.ds].sym}）<br>
+        ${KYUSEI[p.myStar-1].n} ／ <span class="a-emoji">${ANIMAL_EMOJI[p.animal]}</span>${p.animal}（No.${p.charNo}）<br>
+        本命宿 <strong>${SHUKU27[p.shu][0]}</strong> ／ KIN${p.kin}・${MAYA_SEALS[p.seal][0]} ／ ライフパス${p.lp} ／ ${ROKUSEI_NAMES[p.r.star]}${p.r.plus?"＋":"−"}
+      </div>
+    </div>`;
+  document.getElementById("hero").innerHTML=`
+    <h2 class="m-name" style="font-size:22px;margin-bottom:14px">${an} × ${bn} の縁<small>${{"love":"恋人・夫婦","friend":"友人","work":"仕事仲間","family":"家族"}[rel]}の相性として鑑定</small></h2>
+    <div class="today-grid">${prof(A)}${prof(B)}</div>`;
+  // 総合
+  const grade=S.total>=88?["天縁","七つの窓のほとんどが良縁を指す、めったにない組み合わせです。出会えたこと自体がひとつの奇跡——大切に育ててください。"]
+    :S.total>=78?["大吉縁","複数の占術が強い結びを示しています。土台のしっかりした、末永く育てられる縁です。"]
+    :S.total>=68?["良縁","かみ合う窓とすれ違う窓がありつつ、全体は温かい追い風。違いを面白がれれば長続きします。"]
+    :S.total>=58?["中吉の縁","安定した窓と刺激的な窓が半々。距離感の設計しだいで、良縁にも学びの縁にもなります。"]
+    :["学びの縁","ぶつかりやすい窓が多めですが、それは互いを最も成長させる組み合わせでもあります。ルールと余白を上手に。"];
+  const bar=(l,v,m)=>`<div class="sb"><span class="sb-label">${l}</span><span class="sb-track"><span class="sb-fill" style="width:${Math.round(v/m*100)}%"></span></span><span class="sb-num">${v}/${m}</span></div>`;
+  document.getElementById("summary-body").innerHTML=`
     <div class="card">
-      <h3>0歳から90歳までの運気カーブ ─ 九星の波 × 六星の大殺界</h3>
-      <p class="muted">金色の曲線は九星気学の9年周期（本命星${KYUSEI[myStar-1].n}がめぐる宮）。<span style="color:var(--vermil)">薄い赤の帯</span>は六星占術（${ROKUSEI_NAMES[r.star]}${r.plus?"＋":"−"}）の大殺界の3年間、<span style="color:var(--vermil)">●</span>は四柱推命の空亡の年です。三つの体系の「休め」のサインが重なる時期こそ、本当の充電期と読めます。年齢は立春区切りの目安です。</p>
-      ${svg}
-      <p class="muted">運気は9年と12年、二つの周期が重なって巡ります。${nextPeak?`九星の次の収穫は<strong>${nextPeak.y}年（${nextPeak.a}歳）</strong>。`:""}${nextRest?`<strong>${nextRest.y}年（${nextRest.a}歳）</strong>は九星の充電年です。`:""}山の年に思い切り攻め、帯の重なる谷の年に学びと整理を——それが二重周期の波乗りです。</p>
-    </div>
+      <div class="score-wrap">
+        <div class="score-ring"><div class="score-num">${S.total}</div><div class="score-max">/ 100</div></div>
+        <div>
+          <div class="score-grade">${grade[0]}</div>
+          <p style="max-width:30em;margin-top:8px">${grade[1]}</p>
+        </div>
+      </div>
+      <div class="score-bars">
+        ${bar("宿曜",S.shukuPt,25)}${bar("四柱推命",S.shichuPt,25)}${bar("西洋占星術",S.hoshiPt,15)}
+        ${bar("九星気学",S.kyuseiPt,10)}${bar("動物占い",S.animalPt,10)}${bar("マヤ暦",S.mayaPt,10)}${bar("数秘術",S.numPt,5)}
+      </div>
+      <p class="muted" style="margin-top:14px">${rel==="love"?"恋人・夫婦の縁は、点数より「壊れやすい窓をどう扱うか」で決まります。低い項目こそ、ふたりの伸びしろです。":rel==="work"?"仕事の相性は、役割分担で点数を超えられます。高い窓を共同作業に、低い窓は担当を分けて。":rel==="family"?"家族の縁は選べないからこそ、窓ごとの距離感が効きます。すれ違う窓は「そういう星回り」と笑い飛ばすのが一番の薬。":"友情は、合う窓で遊び、合わない窓に踏み込みすぎないのが長持ちの秘訣です。"}</p>
+    </div>`;
+  // 宿曜
+  const sAB=S.shuku.rAB, sBA=S.shuku.rBA;
+  const srel=(from,to,r2)=>`
+    <div class="mini"><div class="mini-label">${from}から見た${to}</div>
+      <div class="mini-val">${r2.name}の縁 <span class="fine">${SREL[r2.name][0]}</span></div>
+      <div class="mini-note">${r2.dist?SDIST[r2.dist]+"。":""}${SREL[r2.name][1]}</div></div>`;
+  document.getElementById("shukuyo-body").innerHTML=`
     <div class="card">
-      <h3>総合運気年表 ─ これからの20年</h3>
+      <h3>${SHUKU27[A.shu][0]} × ${SHUKU27[B.shu][0]}</h3>
+      <div class="dir-pair">${srel(an,bn,sAB)}${srel(bn,an,sBA)}</div>
+      ${sAB.name!==sBA.name?`<p class="muted" style="margin-top:12px">向きによって縁の顔が異なる組み合わせです。${an}さんには「${sAB.name}」、${bn}さんには「${sBA.name}」として働く——この非対称を知っておくだけで、すれ違いの半分は防げます。</p>`:`<p class="muted" style="margin-top:12px">どちらから見ても「${sAB.name}」となる、向きの揃った縁です。</p>`}
+    </div>`;
+  // 四柱
+  const sc=S.shichu;
+  const dsA=stemElem(A.fp.ds), dsB=stemElem(B.fp.ds);
+  const flow=sc.rel===0?`おふたりの日干はどちらも${elTag(dsA)}。同じ気を分かち合う「比和」で、感覚の近い同志です。`
+    :sc.rel===2?`${an}さんの${elTag(dsA)}の気が、${bn}さんの${elTag(dsB)}の気を生み育てる「相生」。${an}さんが与え、${bn}さんが受け取る流れが基本形です。`
+    :sc.rel===1?`${bn}さんの${elTag(dsB)}の気が、${an}さんの${elTag(dsA)}の気を生み育てる「相生」。${bn}さんが与え、${an}さんが受け取る流れが基本形です。`
+    :`${elTag(dsA)}と${elTag(dsB)}は剋し合う関係。ぶつかる分だけ鍛え合える、遠慮のない縁です。`;
+  document.getElementById("shichu-body").innerHTML=`
+    <div class="card">
+      <h3>${kanshiName(A.fp.ds,A.fp.db)} × ${kanshiName(B.fp.ds,B.fp.db)}</h3>
+      ${sc.gou&&sc.shigou?'<p><span class="tag verm">天地徳合</span><strong>干合と支合が同時に成立する、極めて稀な結びです。</strong>天（心）も地（暮らし）も結ばれる、昔から夫婦に最上とされた縁。</p>':""}
+      ${sc.gou&&!sc.shigou?'<p><span class="tag gold">干合</span>日干同士が五行を超えて引き合う結び。理屈でなく「気になる」相手です。</p>':""}
+      ${sc.shigou&&!sc.gou?'<p><span class="tag gold">支合</span>日支同士が結ばれ、日常のリズムが自然に噛み合います。</p>':""}
+      ${sc.sangou?'<p><span class="tag gold">三合</span>同じ流れに乗る協力の縁。目標を共有すると強さが倍増します。</p>':""}
+      ${sc.chu?'<p><span class="tag verm">冲</span>日支が正面からぶつかる縁。刺激的で退屈しませんが、疲れたら物理的な距離が特効薬です。</p>':""}
+      ${!sc.gou&&!sc.shigou&&!sc.sangou&&!sc.chu?"<p>特別な合や冲のない、穏やかなニュートラルの結びです。作為なく自然体で付き合える縁といえます。</p>":""}
+      <p>${flow}</p>
+      ${sc.sameVoid?`<p><span class="tag matcha">同じ天中殺</span>おふたりは空亡（${BRANCHES[A.vb[0]]}${BRANCHES[A.vb[1]]}）が同じグループ。人生の休符が同じタイミングで訪れる「隠れた同志」で、価値観の深部が似ているとされます。</p>`:""}
+    </div>`;
+  // 星
+  const em={2:"◎ 互いを活かし合う",1:"○ 同じ気質で共鳴する",0:"△ 異文化を学び合う"};
+  document.getElementById("hoshi-body").innerHTML=`
+    <div class="card">
+      <h3>${SIGNS[A.sun].sym}${SIGNS[A.sun].n} × ${SIGNS[B.sun].sym}${SIGNS[B.sun].n}</h3>
+      <dl class="kv">
+        <dt>太陽×太陽</dt><dd>${em[S.hoshi.sun]}——生き方・目指す方向の相性です。</dd>
+        <dt>月×月</dt><dd>${em[S.hoshi.moon]}——素の感情、ふたりきりのときの空気です。</dd>
+        <dt>${an}の太陽×${bn}の月</dt><dd>${em[S.hoshi.ab]}——${an}さんの生き方が、${bn}さんの心を${S.hoshi.ab===2?"深く安心させます":S.hoshi.ab===1?"自然に落ち着かせます":"時に揺らします。ペースの説明を言葉で"}。</dd>
+        <dt>${bn}の太陽×${an}の月</dt><dd>${em[S.hoshi.ba]}——${bn}さんの生き方が、${an}さんの心を${S.hoshi.ba===2?"深く安心させます":S.hoshi.ba===1?"自然に落ち着かせます":"時に揺らします。ペースの説明を言葉で"}。</dd>
+      </dl>
+      ${A.hour==null||B.hour==null?'<p class="fine">時刻未入力の方の月星座は正午基準の参考値です。</p>':""}
+    </div>`;
+  // 九星
+  const k2=S.kyusei;
+  document.getElementById("kyusei-body").innerHTML=`
+    <div class="card">
+      <h3>${KYUSEI[A.myStar-1].n} × ${KYUSEI[B.myStar-1].n}</h3>
+      <p>${k2===0?`同じ${elTag(KYUSEI[A.myStar-1].el)}の気で支え合う「比和」。似た運気のリズムを刻むので、好調も不調も一緒に来やすいふたりです。`
+        :k2===2?`${an}さんの気が${bn}さんを生じる「相生」。${an}さんは育てる喜びを、${bn}さんは追い風を受け取ります。${an}さんが疲れたときは、遠慮なく充電宣言を。`
+        :k2===1?`${bn}さんの気が${an}さんを生じる「相生」。${bn}さんは育てる喜びを、${an}さんは追い風を受け取ります。${bn}さんが疲れたときは、遠慮なく充電宣言を。`
+        :`剋し合う五行の組み合わせ。パワーの衝突は、裏を返せば互いに「効く」証拠。共通の目標を外に置くと、その力が同じ方向を向きます。`}</p>
+    </div>`;
+  // 動物
+  document.getElementById("animal-body").innerHTML=`
+    <div class="card">
+      <h3><span class="a-emoji">${ANIMAL_EMOJI[A.animal]}</span>${A.animal} × <span class="a-emoji">${ANIMAL_EMOJI[B.animal]}</span>${B.animal}</h3>
+      <p>${grpTag(S.animal.gA)} × ${grpTag(S.animal.gB)}　${groupPairText(S.animal.gA,S.animal.gB)}</p>
+      ${S.animal.same?`<p><span class="tag gold">同じ動物</span>60分の1の偶然で同じ${A.animal}同士。長所も地雷も同じ場所にあります。相手の失敗に優しくなれたら、それは自分を許せた証拠です。</p>`:""}
+      <p class="muted">${S.animal.gA===S.animal.gB?"同じグループなので優先順位が揃い、決め事がスムーズです。その分、ふたりとも苦手な領域が盲点になりやすいので、そこだけ外部の力を借りて。":`優先順位が異なるふたりです。${S.animal.gA==="月"||S.animal.gB==="月"?"月グループの側は相手の合意を待ってから、":""}${S.animal.gA==="地球"||S.animal.gB==="地球"?"地球グループの側は結論とセットで、":""}${S.animal.gA==="太陽"||S.animal.gB==="太陽"?"太陽グループの側はまず気分が乗る形で、":""}と入口を相手仕様にするだけで会話が滑らかになります。`}</p>
+    </div>`;
+  // マヤ
+  const m2=S.maya;
+  const mayaMain=m2.mirror?`<p><span class="tag verm">鏡の向こうのKIN</span><strong>KIN${A.kin}とKIN${B.kin}——足すと261になる「鏡の向こう」の対です。</strong>260分の1でしか出会えない、自分の隠れた半面を映す運命的な関係とされます。</p>`
+    :m2.abs?`<p><span class="tag verm">絶対反対KIN</span><strong>ちょうど130離れた「絶対反対」の対。</strong>ツォルキンの対極に立つ、魂の宿題を分け合う関係とされます。</p>`:"";
+  document.getElementById("maya-body").innerHTML=`
+    <div class="card">
+      <h3>KIN${A.kin}・${MAYA_SEALS[A.seal][0]} × KIN${B.kin}・${MAYA_SEALS[B.seal][0]}</h3>
+      ${mayaMain}
+      <p>${m2.mrel==="類似"?`ふたりの紋章は<strong>類似の関係</strong>。似た価値観で背中を預け合える、最も安心できる組み合わせです。`
+        :m2.mrel==="神秘"?`ふたりの紋章は<strong>神秘の関係</strong>。説明のつかない引力で惹かれ合い、一緒にいると思わぬ力が引き出されます。`
+        :m2.mrel==="反対"?`ふたりの紋章は<strong>反対の関係</strong>。正反対だからこそ、自分にない視点をくれる最高の鏡です。最初の違和感は、伸びしろの合図。`
+        :m2.mrel==="ガイド"?`${bn}さんの紋章は${an}さんの<strong>ガイドKIN</strong>。${bn}さんの生き方そのものが、${an}さんの道しるべになります。`
+        :m2.mrel==="同紋章"?`ふたりは<strong>同じ紋章</strong>。同じ質のエネルギーを持つ、魂の同郷です。`
+        :`紋章同士に特別な関係はありませんが、それは「フラットに新しい物語を作れる」ということでもあります。`}</p>
+      ${m2.sameWS?"<p><span class='tag gold'>同じウェイブスペル</span>同じ13日間の物語の中で生まれたふたり。人生の目的の根っこが同じ方向を向いています。</p>":""}
+      ${m2.sameTone?`<p><span class="tag gold">同じ銀河の音${A.tone}</span>物事を進めるリズムが同じで、共同作業のテンポが合います。</p>`:""}
+    </div>`;
+  // 数秘
+  document.getElementById("num-body").innerHTML=`
+    <div class="card">
+      <h3>ライフパス${A.lp} × ライフパス${B.lp}</h3>
+      <p>${an}さんは${A.lp}「${numJP(A.lp).k}」、${bn}さんは${B.lp}「${numJP(B.lp).k}」。</p>
+      <p>${S.num.masterPair?"おふたりともマスターナンバー——使命を帯びた数同士の、稀有な共鳴です。日常の些事より「何のために出会ったか」を語り合うと絆が深まります。"
+        :S.num.same?"同じ数を持つ「鏡の関係」。長所も課題もそっくりで、相手を見ることが自分を知ることになります。"
+        :S.num.grpSame?`同じ${["知性派（1・5・7）","現実派（2・4・8）","感性派（3・6・9）"][S.num.grpA]}の系譜に属し、根っこのリズムが自然に共鳴します。`
+        :`${["知性派","現実派","感性派"][S.num.grpA]}と${["知性派","現実派","感性派"][S.num.grpB]}——異なる系譜の組み合わせは、互いに持っていない楽器を持ち寄るバンドのようなもの。違いこそ編成の強みです。`}</p>
+    </div>`;
+  // ふたりの運気こよみ
+  const nowY=yearOfNow(new Date());
+  const yearRow=y=>{
+    const cell=p=>{
+      const palace=palaceOfYear(y,p.myStar);
+      const ph=mod(mod(y-4,12)-p.r.base,12);
+      const dai=ph>=9;
+      const good=[3,4,6,7].includes(palace)&&!dai&&ph!==5;
+      return {palace,ph,dai,good,
+        txt:`${PALACE_SHORT[palace]}／${UNKI12[ph]}${dai?'<span class="tag verm" style="margin-left:4px">大殺界</span>':ph===5?'<span class="fine">（中殺界）</span>':""}`};
+    };
+    const ca=cell(A), cb=cell(B);
+    const note=ca.good&&cb.good?["◎","ふたり揃って追い風。共同の大勝負に最適"]
+      :ca.dai&&cb.dai?["▲","ふたり同時の充電期。大きな契約は避け、守りを固めて"]
+      :ca.dai||cb.dai?["△",`${ca.dai?an:bn}さんが充電期。${ca.dai?bn:an}さんが舵を取る年`]
+      :ca.good||cb.good?["○",`${ca.good?an:bn}さんに追い風。引っ張ってもらう年`]
+      :["—","平常運転。日々を丁寧に"];
+    return `<tr${y===nowY?' class="now"':''}><td>${y}年</td><td>${ca.txt}</td><td>${cb.txt}</td><td><span class="sym">${note[0]}</span> <span class="fine">${note[1]}</span></td></tr>`;
+  };
+  let rows="";
+  for(let y=nowY;y<nowY+10;y++)rows+=yearRow(y);
+  document.getElementById("calendar-body").innerHTML=`
+    <div class="card">
+      <h3>ふたりの10年 ─ 九星の宮 × 六星の運気</h3>
       <div class="chron"><table>
-        <thead><tr><th>年</th><th>年齢</th><th>干支</th><th>九星気学</th><th>六星占術</th><th>空亡</th><th>総合</th></tr></thead>
+        <thead><tr><th>年</th><th style="color:${A.col}">${an}さん</th><th style="color:${B.col}">${bn}さん</th><th>ふたりへの一言</th></tr></thead>
         <tbody>${rows}</tbody>
       </table></div>
-      <p class="muted" style="margin-top:12px">総合欄は九星の宮・六星の運気・空亡を重ねた目安です。◎＝両体系の追い風が重なる年、▲＝複数の「休め」が重なる年。▲の年は悪運ではなく、次の◎を大きくするための仕込みの季節です。</p>
-      <p class="fine">六星占術の周期は公表の殺界年と照合済みですが、流派により1年前後する場合があります。</p>
+      <p class="muted" style="margin-top:12px">◎の年は結婚・転居・起業などふたりの節目に、▲の年は「ふたりで静かに充電」と決めてしまうのが上手な波乗りです。片方だけ追い風の年は、その人が舵を取り、もう一方が地図を読む——役割交代も縁を育てます。</p>
+      <p class="fine">六星占術の周期は流派により1年前後する場合があります。</p>
     </div>`;
-};
+}
 
 </script>
