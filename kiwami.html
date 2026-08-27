@@ -562,6 +562,7 @@ button.print-btn:hover{background:var(--gold-wash)}
     <a class="chip" href="#sec-year">今年の運勢</a>
     <a class="chip" href="#sec-today">今日の運勢</a>
     <a class="chip" href="#sec-kids">こども向け</a>
+    <a class="chip" href="#sec-guardian">守護獣</a>
   </nav>
 
   <section class="art" id="sec-west">
@@ -762,6 +763,16 @@ button.print-btn:hover{background:var(--gold-wash)}
     </div>
     <hr class="art-rule">
     <div id="kids-body"></div>
+  </section>
+
+  <section class="art" id="sec-guardian">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">結</div>
+      <div class="art-titles"><div class="art-eyebrow">Your Guardian Beast — Sixteen Types</div><h2 class="art-title">結び ─ あなたの守護獣</h2></div>
+    </div>
+    <hr class="art-rule">
+    <p class="art-lead">十二の占術を締めくくる、星命録だけの十六分類。陽⇔陰・天⇔地・火⇔水・星⇔森の四つの軸を、それぞれ三つの占術の多数決で判定し、あなたの魂を守る一頭を導きます。</p>
+    <div id="guardian-body"></div>
   </section>
 </div>
 
@@ -2771,5 +2782,93 @@ renderRokusei=function(){
       <p class="muted">大きな挑戦は「達成」「財成」の年齢に、仕込みと充電は赤い帯の3年間に——12年の農事暦のように使ってください。大殺界に始めたことが必ず失敗するわけではありませんが、逆風での船出になりやすい、というのが六星占術の考え方です。</p>
     </div>`);
 };
+
+
+/* ══════════════════ 極 ─ 守護獣（十六型総合分類） ══════════════════ */
+const GUARDIANS={
+ "陽天火星":{e:"🐦‍🔥",n:"鳳凰",t:"時代を照らす革新のカリスマ",d:"ひらめきを炎に変え、まだ誰も見ていない空へ飛ぶ人。あなたが本気で燃えると、周りの人まで温まり、動き出します。灰からでも何度でも蘇る再生力が最大の武器。",a:"翼を休める止まり木（信頼できる相談相手）を一本だけ持っておくと、飛距離がさらに伸びます。"},
+ "陽天火森":{e:"👺",n:"天狗",t:"仲間を鍛え導く山の軍師",d:"風を読み、先を見通し、仲間の力を底上げする指導者型。面倒見の良さと厳しさを併せ持ち、あなたに鍛えられた人は必ず強くなります。",a:"たまに山を下りて、教える側から学ぶ側に回ると、術がさらに冴えます。"},
+ "陽天水星":{e:"🐉",n:"白龍",t:"大きな流れで人を運ぶ直感の器",d:"理屈より流れを感じ取り、気づけば大きな渦の中心にいる人。器が大きく、多くの人を背に乗せて運べます。決断は直感が正解のことが多いタイプ。",a:"雲に乗り続けると疲れます。定期的に深い水（ひとりの静けさ）へ潜って充電を。"},
+ "陽天水森":{e:"🦒",n:"麒麟",t:"歩くだけで場が和む、育ての聖獣",d:"争いを好まず、いるだけで空気を浄化する不思議な徳の持ち主。人や物事を育てる名人で、あなたの周りでは新芽がよく育ちます。",a:"聖獣も腹は減ります。「与える前に自分を満たす」を合言葉に。"},
+ "陽地火星":{e:"🦅",n:"鷹",t:"目標に一直線、現実の空の狩人",d:"高くから全体を見渡し、獲物（目標）を定めたら最短距離で急降下する実行者。視力（目標設定の精度）と速さの両立は十六型で随一です。",a:"狩りの合間の羽づくろい（メンテナンス）を軽視しないこと。翼が資本です。"},
+ "陽地火森":{e:"🐎",n:"駿馬",t:"皆を引っ張る働き者のエンジン",d:"毎日走ることが苦にならない、チームの推進力。あなたが先頭で走ると、皆のペースが上がります。汗をかいた分だけ確実に前へ進む正直な星です。",a:"速く走るより、長く走る。休憩所を最初にコースへ組み込んでおきましょう。"},
+ "陽地水星":{e:"🎏",n:"錦鯉",t:"人の輪を華やかに泳ぐ社交家",d:"どんな池でも泳げる適応力と、目を引く華やかさの持ち主。人と人の間を泳いで縁をつなぎ、いつの間にか場の中心にいます。滝を登れば龍になる出世運も。",a:"泳ぎ続けなくても、あなたの鱗は十分きれいです。時々は流れに身を任せて。"},
+ "陽地水森":{e:"🦌",n:"白鹿",t:"神域の森の、癒しの世話役",d:"神社の森に棲む神使のように、穏やかさで人を安心させる世話役。困っている人を放っておけず、あなたの周りには自然と安心の輪ができます。",a:"角は飾りではありません。譲れないものの前では、堂々と構えて。"},
+ "陰天火星":{e:"🦅",n:"隼",t:"静かに燃える、一撃必中の異能",d:"普段は静かに気流を読み、ここぞの瞬間に音速で決める勝負師。内に秘めた炎は誰よりも高温で、少数の本物だけを狙います。群れないのは弱さではなく精度のためです。",a:"急降下の前後に、意識して滑空（余白の時間）を。集中力が長持ちします。"},
+ "陰天火森":{e:"🦊",n:"赤狐",t:"知略で身内を守る森の策士",d:"表は物静か、頭の中は千手の策。大切な人と縄張りを守るためなら、誰よりも粘り強く知恵を巡らせます。化かすのではなく、先を読むのが本業。",a:"策の九割は使わずに終わって正解。考えたことを一つだけ口に出すと、信頼が増します。"},
+ "陰天水星":{e:"🦉",n:"梟",t:"月夜を旅する静かな賢者",d:"皆が騒ぐ昼より、静かな夜に本領を発揮する思索家。物事の裏側まで見通す目と、蓄えた知恵で、要所で場の流れを変えます。",a:"知恵は使われてこそ。年に数回、森の外へ飛んで見聞を仕入れると翼が強くなります。"},
+ "陰天水森":{e:"🦢",n:"鶴",t:"静けさの中で美を織る芸術家",d:"恩を忘れず、心を込めて一羽ずつ織り上げる美意識の人。騒がしさから離れた場所で、あなたにしか作れないものを生み出します。千年の孤高も様になる品格。",a:"織っている姿を、たまには見せてもいいのです。過程の美しさも作品のうち。"},
+ "陰地火星":{e:"🐗",n:"猪",t:"黙って突き進む一点突破の人",d:"言葉より行動、宣言より結果。決めた一点に向かって、脇目も振らず突き進む集中力は十六型最強です。静かな外見の内側に、誰にも止められない推進力を積んでいます。",a:"突進の前に三歩だけ助走の余裕を。方向確認の三歩が、威力を倍にします。"},
+ "陰地火森":{e:"🐻",n:"月の輪熊",t:"森の奥でコツコツ極める職人",d:"人前に出るより、自分の縄張りで黙々と腕を磨く職人気質。冬ごもり（充電期間）の使い方がうまく、明けたときには一回り強くなっています。胸の三日月は隠れた情熱の印。",a:"作ったものは森の外へも出しましょう。あなたの腕は、思っているより世に求められています。"},
+ "陰地水星":{e:"🦦",n:"川獺",t:"器用に世を渡る遊びの達人",d:"流れの速い川でも楽しそうに泳ぐ、器用で身軽な自由人。遊びと仕事の境目なく、手先と機転でどこでも生きていけます。深刻な場を和ませる天然の才も。",a:"器用貧乏と言わせないために、道具（得意技）を一つだけ磨き抜いて看板に。"},
+ "陰地水森":{e:"🐢",n:"大亀",t:"千年を積む静かな賢守",d:"急がず、比べず、自分の歩幅で千年を歩く安定の人。甲羅（積み上げた経験と信用）は誰にも破れません。最後に物語の勝者になっているのは、たいていこの型です。",a:"たまには甲羅を干して（成果を見せて）ください。周りはあなたの偉大さに気づくべきです。"}
+};
+function guardianType(){
+  const {sun,moon,fp,myStar,animal,inp}=CUR;
+  const maj=a=>a.filter(Boolean).length>=2;
+  // 軸1 陽⇔陰
+  const elS=SIGNS[sun].el;
+  const v1=[elS==="火"||elS==="風", fp.ds%2===0, ANIMAL_GROUP[animal]==="太陽"];
+  // 軸2 天⇔地（天=ひらめき）
+  const lp=lifePathOf(inp.y,inp.m,inp.d), lpr=reduceNum(lp,false);
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const strongest=counts.indexOf(Math.max(...counts));
+  const seal=mayaSealOf(mayaKin(inp.y,inp.m,inp.d));
+  const col=MAYA_SEALS[seal][1];
+  const v2=[![2,4,8].includes(lpr), [0,1,4].includes(strongest), col==="赤"||col==="青"];
+  // 軸3 火⇔水（火=情熱直球）
+  const elM=SIGNS[moon].el;
+  const chest=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.mb]);
+  const r=rokuseiOf(fp);
+  const v3=[elM==="火"||elM==="風", [3,6,7,8].includes(chest), r.plus];
+  // 軸4 星⇔森（星=高く飛ぶ）
+  const et=enneaOf(inp.y,inp.m,inp.d);
+  const v4=[sun%3!==1, [1,3,4].includes(KYUSEI[myStar-1].el), [3,5,7,8].includes(et)];
+  const ax=[maj(v1),maj(v2),maj(v3),maj(v4)];
+  const key=(ax[0]?"陽":"陰")+(ax[1]?"天":"地")+(ax[2]?"火":"水")+(ax[3]?"星":"森");
+  const opp=(ax[0]?"陰":"陽")+(ax[1]?"地":"天")+(ax[2]?"水":"火")+(ax[3]?"森":"星");
+  return {key,opp,ax,v1,v2,v3,v4,elS,elM,strongest,col,chest,lpr,et,r};
+}
+function renderGuardian(){
+  const box=$("guardian-body"); if(!box)return;
+  const g=guardianType();
+  const G=GUARDIANS[g.key], O=GUARDIANS[g.opp];
+  const {inp,fp,animal,myStar}=CUR;
+  const yn=(b,t,f)=>b?t:f;
+  const vote=(label,val,to)=>`<dd style="margin:0">${label} → <strong>${to}</strong></dd>`;
+  box.innerHTML=`
+    <div class="synth" style="text-align:center">
+      <div style="font-size:64px;line-height:1.2">${G.e}</div>
+      <p style="font-size:12px;letter-spacing:.3em;color:var(--gold-deep);margin:10px 0 2px">${g.key.split("").join("・")}の型</p>
+      <h3 style="justify-content:center;font-size:26px;letter-spacing:.24em;margin:4px 0 2px">守護獣「${G.n}」</h3>
+      <p style="font-family:var(--serif);letter-spacing:.1em;color:var(--ink-soft);margin:0 0 16px">─ ${G.t} ─</p>
+      <p style="text-align:left;max-width:38em;margin:0 auto 10px">${G.d}</p>
+      <p style="text-align:left;max-width:38em;margin:0 auto"><strong>開運のひとこと</strong>　${G.a}</p>
+    </div>
+    <div class="card">
+      <h3>この型が導かれた理由 ─ 四つの軸</h3>
+      <dl class="kv">
+        <dt>${yn(g.ax[0],"陽","陰")}（動きの向き）</dt>
+        <dd>太陽星座＝${g.elS}のエレメント → <strong>${yn(g.v1[0],"陽","陰")}</strong>　／　日主＝${STEMS[fp.ds]}（${yn(g.v1[1],"陽干","陰干")}） → <strong>${yn(g.v1[1],"陽","陰")}</strong>　／　動物占い＝${grpTag(ANIMAL_GROUP[animal])}グループ → <strong>${yn(g.v1[2],"陽","陰")}</strong></dd>
+        <dt>${yn(g.ax[1],"天","地")}（決め方）</dt>
+        <dd>数秘＝${g.lpr}の系譜 → <strong>${yn(g.v2[0],"天","地")}</strong>　／　五行の最強＝${elTag(g.strongest)} → <strong>${yn(g.v2[1],"天","地")}</strong>　／　マヤ紋章の色＝${g.col} → <strong>${yn(g.v2[2],"天","地")}</strong></dd>
+        <dt>${yn(g.ax[2],"火","水")}（人との関わり）</dt>
+        <dd>月星座＝${SIGNS[CUR.moon].n} → <strong>${yn(g.v3[0],"火","水")}</strong>　／　算命学中心星＝${SHUSEI[g.chest][0]} → <strong>${yn(g.v3[1],"火","水")}</strong>　／　六星＝${ROKUSEI_NAMES[g.r.star]}${yn(g.r.plus,"＋","−")} → <strong>${yn(g.v3[2],"火","水")}</strong></dd>
+        <dt>${yn(g.ax[3],"星","森")}（歩み方）</dt>
+        <dd>三区分＝${QUAL_T[CUR.sun%3].split(" ─ ")[0]} → <strong>${yn(g.v4[0],"星","森")}</strong>　／　九星＝${KYUSEI[myStar-1].n}（${ELEMS[KYUSEI[myStar-1].el]}） → <strong>${yn(g.v4[1],"星","森")}</strong>　／　エニアグラム＝タイプ${g.et} → <strong>${yn(g.v4[2],"星","森")}</strong></dd>
+      </dl>
+      <p class="muted">各軸とも三つの占術の多数決です。陽⇔陰＝エネルギーの向き、天⇔地＝ひらめき派か現実派か、火⇔水＝情熱直球か共感受容か、星⇔森＝高く飛ぶか深く育てるか。</p>
+    </div>
+    <div class="card">
+      <h3>対（つい）の守護獣 ─ ${O.e} ${O.n}</h3>
+      <p>すべての軸が逆になる「${O.n}」（${g.opp.split("").join("・")}の型）は、あなたに無いものをすべて持つ運命の対。${O.t.replace("─","")}であるこの型の人と組むと、十六の力が全部そろいます。身近にいたら、大切に。</p>
+      <p class="fine">守護獣は十二占術の結果から導いた、星命録オリジナルの十六分類です。占術の締めくくりの読み物としてお楽しみください。</p>
+    </div>`;
+}
+const _renderBeforeGuardian=render;
+render=function(inp){_renderBeforeGuardian(inp);renderGuardian();};
 
 </script>
