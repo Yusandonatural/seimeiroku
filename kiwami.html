@@ -2707,4 +2707,69 @@ renderLife=function(){
     </div>`;
 };
 
+
+/* ══════════════════ 極 ─ 六星占術 0〜80歳の運気の流れ ══════════════════ */
+const ROKU_SCORE=[2.5,3.2,4.2,2,5,2,3.5,4.6,4.4,1.5,1,1.4]; // 種子〜減退の運気レベル
+const _renderRokuseiLife=renderRokusei;
+renderRokusei=function(){
+  _renderRokuseiLife();
+  const {fp,nowY}=CUR;
+  const r=rokuseiOf(fp);
+  const maxAge=80;
+  const pts=[];
+  for(let a=0;a<=maxAge;a++){
+    const y=fp.py+a;
+    pts.push({a,y,ph:mod(mod(y-4,12)-r.base,12)});
+  }
+  const W=1000,H=230,padL=40,padR=14,padT=16,padB=34;
+  const X=a=>padL+(W-padL-padR)*a/maxAge;
+  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
+  // 大殺界の帯
+  let bands="",bi=0;
+  const daiRanges=[];
+  while(bi<=maxAge){
+    if(pts[bi].ph>=9){
+      let j=bi;while(j+1<=maxAge&&pts[j+1].ph>=9)j++;
+      daiRanges.push([bi,j]);
+      bands+=`<rect x="${X(Math.max(bi-0.5,0)).toFixed(1)}" y="${padT}" width="${(X(Math.min(j+0.5,maxAge))-X(Math.max(bi-0.5,0))).toFixed(1)}" height="${H-padT-padB}" fill="var(--vermil)" opacity="0.10"/>`;
+      bi=j+1;
+    }else bi++;
+  }
+  // なめらかな曲線
+  const P=pts.map(p=>({x:X(p.a),y:Y(ROKU_SCORE[p.ph])}));
+  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
+  for(let k=0;k<P.length-1;k++){
+    const p0=P[Math.max(0,k-1)],p1=P[k],p2=P[k+1],p3=P[Math.min(P.length-1,k+2)];
+    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+  }
+  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
+  const grid=[];
+  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}歳</text>`);
+  const nowAge=nowY-fp.py;
+  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">いま ${nowAge}歳</text>`:"";
+  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="六星占術 0歳から80歳までの運気カーブ" style="min-width:720px;max-width:none">
+    ${bands}${grid.join("")}
+    <path d="${area}" fill="var(--matcha-wash)"/>
+    <path d="${line}" fill="none" stroke="var(--matcha)" stroke-width="2.2" stroke-linejoin="round"/>
+    ${nowMark}
+    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">好調</text>
+    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">殺界</text>
+  </svg></div>`;
+  const daiChips=daiRanges.map(([a1,a2])=>`<span class="job-chip" style="border-color:var(--vermil);color:var(--vermil)">${a1}〜${a2}歳（${fp.py+a1}〜${fp.py+a2}年）</span>`).join("");
+  const peaks=pts.filter(p=>p.ph===4).map(p=>`${p.a}歳（${p.y}年）`).join("・");
+  const zaisei=pts.filter(p=>p.ph===7).map(p=>`${p.a}歳`).join("・");
+  const starName=ROKUSEI_NAMES[r.star]+(r.plus?"（＋）":"（−）");
+  $("rokusei-body").insertAdjacentHTML("beforeend",`
+    <div class="card">
+      <h3>0歳から80歳までの運気の流れ ─ ${starName}の一生</h3>
+      <p class="muted">緑の曲線が六星占術の12年周期の波、<span style="color:var(--vermil)">薄い赤の帯</span>が大殺界の3年間です。人生に大殺界は約7回めぐりますが、そのたびに波は必ず立ち上がります。年齢は誕生年からの経過年（立春区切りの目安）です。</p>
+      ${svg}
+      <p><strong>あなたの大殺界（陰影・停止・減退）</strong></p>
+      <div class="job-chips">${daiChips}</div>
+      <p style="margin-top:14px"><strong>達成の年（12年周期の頂点）</strong>　${peaks}</p>
+      <p><strong>財成の年（金運の実り）</strong>　${zaisei}</p>
+      <p class="muted">大きな挑戦は「達成」「財成」の年齢に、仕込みと充電は赤い帯の3年間に——12年の農事暦のように使ってください。大殺界に始めたことが必ず失敗するわけではありませんが、逆風での船出になりやすい、というのが六星占術の考え方です。</p>
+    </div>`);
+};
+
 </script>
