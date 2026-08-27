@@ -544,6 +544,7 @@ table.cmp-t{border-collapse:separate; border-spacing:0; width:100%; min-width:52
 </div>
 
 <form class="entry" id="form" autocomplete="off">
+  <div id="soloPeople" class="saved-list" aria-label="個人版で保存した鑑定"></div>
   <div id="members"></div>
   <div class="add-row"><button type="button" class="add-member" id="addBtn">＋ 家族を追加（あと<span id="left">5</span>人）</button></div>
   <div class="f-actions"><button type="submit" class="go">一 家 鑑 定</button></div>
@@ -1738,5 +1739,33 @@ function renderKidsF(){
       <p class="fine" style="margin-top:14px">うらないは「ぜったい」じゃないよ。家族のいいところを見つけたら、こっそり教えてあげよう。</p>
     </div>`;
 }
+
+/* ── 個人版・極で保存した鑑定を家族版に呼び出す ── */
+(function(){
+  let ppl=[];
+  try{const st=JSON.parse(localStorage.getItem("seimeiroku_solo_v1")||"null");ppl=(st&&st.people)||[];}catch(e){}
+  const box=document.getElementById("soloPeople");
+  if(!box||!ppl.length)return;
+  box.innerHTML='<span class="saved-label">個人版で保存した鑑定から追加</span>'+ppl.map((p,i)=>
+    `<span class="saved-chip" data-i="${i}" role="button" tabindex="0">${esc(p.sei)} ${esc(p.mei)}<span class="fine">（${p.y}年）</span></span>`).join("");
+  box.querySelectorAll(".saved-chip").forEach(ch=>{
+    ch.addEventListener("click",()=>{
+      const p=ppl[+ch.dataset.i];
+      let row=[...document.querySelectorAll(".member-row")].find(r=>!r.querySelector(".imei").value.trim());
+      if(!row){
+        if(memberCount>=MAXM){alert("メンバーは7人までです。");return;}
+        addMember("");
+        const rows=[...document.querySelectorAll(".member-row")];row=rows[rows.length-1];
+      }
+      row.querySelector(".isei").value=p.sei; row.querySelector(".imei").value=p.mei;
+      row.querySelector(".iy").value=p.y; row.querySelector(".im").value=p.m; row.querySelector(".id").value=p.d;
+      if(p.hour!=null){row.querySelector(".ih").value=Math.floor(p.hour);row.querySelector(".imin").value=Math.round(p.hour%1*60);}
+      else{row.querySelector(".ih").value="";row.querySelector(".imin").value="";}
+      const sel=row.querySelector(".ipref");
+      if(p.pref!=null&&p.pref!=="overseas"&&sel&&sel.querySelector(`option[value="${p.pref}"]`))sel.value=p.pref;
+      row.scrollIntoView({behavior:"smooth",block:"center"});
+    });
+  });
+})();
 
 </script>
