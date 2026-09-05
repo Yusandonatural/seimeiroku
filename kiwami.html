@@ -436,6 +436,30 @@ html{scroll-behavior:smooth}
 .chron td.dai{color:var(--bad); font-weight:600}
 .chron .sym{font-size:15px}
 @media print{.chron{overflow:visible}}
+/* ── AI相談 ── */
+.cst-q{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 16px}
+.cst-q button{
+  font-family:var(--sans);font-size:12.5px;letter-spacing:.06em;cursor:pointer;
+  color:var(--ink-soft);background:var(--card2);border:1px solid var(--line-strong);
+  border-radius:999px;padding:5px 14px;
+}
+.cst-q button:hover{color:var(--gold-deep);border-color:var(--gold);background:var(--gold-wash)}
+.cst-q button.on{color:var(--gold-deep);border-color:var(--gold);background:var(--gold-wash);font-weight:700}
+textarea.cst-t{
+  width:100%;min-height:210px;resize:vertical;
+  font-family:var(--sans);font-size:12.5px;line-height:1.85;color:var(--ink);
+  background:var(--paper);border:1px solid var(--line-strong);border-radius:6px;padding:14px 16px;
+}
+.cst-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-items:center}
+.cst-act button,.cst-act a{
+  font-family:var(--sans);font-size:13px;letter-spacing:.1em;cursor:pointer;text-decoration:none;
+  border-radius:999px;padding:9px 22px;border:1px solid var(--gold);
+  color:var(--gold-deep);background:var(--card);white-space:nowrap;
+}
+.cst-act button.primary{background:var(--gold-wash);font-weight:700}
+.cst-act button:hover,.cst-act a:hover{background:var(--gold-wash)}
+.cst-msg{font-size:12px;color:var(--matcha);letter-spacing:.06em}
+@media print{#sec-consult{display:none!important}}
 
 /* ── PDF・印刷 ── */
 .print-bar{display:flex; justify-content:flex-end; margin:20px 0 -10px}
@@ -537,7 +561,7 @@ button.print-btn:hover{background:var(--gold-wash)}
     <label class="f-check"><input type="checkbox" id="saveOpt" checked>鑑定した人をこの端末に保存する（ブラウザ内のみ）</label>
     <button type="button" id="clearSaved">保存データを削除</button>
   </div>
-  <p class="f-note">入力された情報はこのページ内でのみ計算に使われ、外部には送信されません。保存を有効にすると、この端末のブラウザにだけ記録され、次回も呼び出せます。</p>
+  <p class="f-note">入力された情報はこのページ内でのみ計算に使われ、鑑定のために外部へ送信されることはありません。保存を有効にすると、この端末のブラウザにだけ記録され、次回も呼び出せます。（末尾の「AIに相談する」でご自身がAIサービスへ貼り付けた場合のみ、その内容は各サービスに送信されます）</p>
 </form>
 
 <div id="results">
@@ -564,6 +588,7 @@ button.print-btn:hover{background:var(--gold-wash)}
     <a class="chip" href="#sec-today">今日の運勢</a>
     <a class="chip" href="#sec-kids">こども向け</a>
     <a class="chip" href="#sec-guardian">守護獣</a>
+    <a class="chip" href="#sec-consult">AIに相談</a>
   </nav>
 
   <section class="art" id="sec-west">
@@ -774,6 +799,16 @@ button.print-btn:hover{background:var(--gold-wash)}
     <hr class="art-rule">
     <p class="art-lead">十二の占術を締めくくる、星命録だけの十六分類。陽⇔陰・天⇔地・火⇔水・星⇔森の四つの軸を、それぞれ三つの占術の多数決で判定し、あなたの魂を守る一頭を導きます。</p>
     <div id="guardian-body"></div>
+  </section>
+
+  <section class="art" id="sec-consult">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">談</div>
+      <div class="art-titles"><div class="art-eyebrow">Ask an AI</div><h2 class="art-title">この結果をAIに相談する</h2></div>
+    </div>
+    <hr class="art-rule">
+    <p class="art-lead">十二占術の結果を、AIに相談しやすい一枚の文章にまとめました。コピーして Claude や ChatGPT に貼り付ければ、あなたの命式をふまえた対話ができます。占いは「決めつけ」ではなく考えるための材料——AIと一緒に、暮らしへの活かし方を探してみてください。</p>
+    <div id="consult-body"></div>
   </section>
 </div>
 
@@ -4648,5 +4683,102 @@ function renderCelebs(){
 }
 const _renderGuardianCelebs=renderGuardian;
 renderGuardian=function(){_renderGuardianCelebs();renderCelebs();};
+
+
+/* ══════════════════ 極 ─ AIに相談する（相談文の生成） ══════════════════ */
+const CST_Q=[
+ ["今年の過ごし方","この鑑定をふまえて、今年はどんなことに力を入れるとよいでしょうか。具体的な行動を3つ教えてください。"],
+ ["仕事・キャリア","この鑑定から見て、私の強みが活きる働き方や役割を教えてください。今の仕事で活かす方法も知りたいです。"],
+ ["人づきあい","この鑑定をふまえて、人との距離の取り方や、私が気をつけるとよい癖を教えてください。"],
+ ["健康・習慣","この鑑定でいたわりどころとされた部分に合わせて、無理なく続けられる習慣を提案してください。"],
+ ["迷いごとの相談","いま迷っていることがあります。この鑑定の性質をふまえて、判断の物差しを一緒に整理してください。"],
+ ["こどもへの伝え方","この結果を、子どもにもわかる言葉でやさしく言いかえてください。"]
+];
+function cstEsc(s){return String(s==null?"":s);}
+function buildConsultText(question){
+  const {inp,fp,sun,moon,asc,myStar,charNo,charName,animal,nowY,nys}=CUR;
+  const g=guardianType(), G=GUARDIANS[g.key];
+  const nick=ADJ9[g.lpr]+GCOLOR[g.strongest].c+(G.b||G.n);
+  const lp=lifePathOf(inp.y,inp.m,inp.d);
+  const kin=mayaKin(inp.y,inp.m,inp.d), seal=mayaSealOf(kin), tone=mayaToneOf(kin);
+  const shu=shukuOf(kyureki(inp.y,inp.m,inp.d,9));
+  const chest=shuseiOf(fp.ds,BRANCH_HIDDEN[fp.mb]), jus=juseiOf(fp.ds,fp.db);
+  const r=rokuseiOf(fp), ph=mod(mod(nowY-4,12)-r.base,12);
+  const et=enneaOf(inp.y,inp.m,inp.d);
+  const palace=palaceOfYear(nowY,myStar);
+  const ts=tsuhen(fp.ds,nys);
+  const vb=voidBranches(fp.di);
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const gogyo=ELEMS.map((e,i)=>`${e}${counts[i]}`).join("・");
+  // 姓名判断（辞書で全文字判明したときのみ）
+  const seiSt=[...inp.sei].map(lookupStroke), meiSt=[...inp.mei].map(lookupStroke);
+  const grids=(seiSt.every(Boolean)&&meiSt.every(Boolean))?nameGrids(seiSt,meiSt):null;
+  const timeStr=inp.hour==null?"時刻不明":String(Math.floor(inp.hour)).padStart(2,"0")+":"+String(Math.round(inp.hour%1*60)).padStart(2,"0");
+  const place=$("pref")&&$("pref").value==="overseas"?"海外":($("pref")?PREFS[+$("pref").value][0]:"");
+  const L=[];
+  L.push("【私の鑑定データ｜星命録・十二占術】");
+  L.push(`・名前：${inp.sei} ${inp.mei}／${inp.y}年${inp.m}月${inp.d}日 ${timeStr}・${place}生まれ`);
+  L.push(`・西洋占星術：太陽=${SIGNS[sun].n}（${SIGNS[sun].key}）、月=${SIGNS[moon].n}${asc!=null?`、アセンダント=${SIGNS[asc].n}`:"（アセンダントは出生時刻不明のため省略）"}`);
+  L.push(`・四柱推命：${kanshiName(fp.ys,fp.yb)}／${kanshiName(fp.ms,fp.mb)}／${kanshiName(fp.ds,fp.db)}${fp.hs!=null?"／"+kanshiName(fp.hs,fp.hb):""}　日主=${STEMS[fp.ds]}（${DAYSTEM_T[fp.ds].sym}・${DAYSTEM_T[fp.ds].key}）　五行=${gogyo}　天中殺=${BRANCHES[vb[0]]}${BRANCHES[vb[1]]}`);
+  L.push(`・九星気学：本命星=${KYUSEI[myStar-1].n}／${nowY}年は${PALACE_T[palace].split("＝")[0]}に回座（${PALACE_T[palace].split("＝")[1].split("。")[0]}）`);
+  L.push(`・動物占い：No.${charNo}「${charName}」＝${animal}（${ANIMAL_GROUP[animal]}グループ／${ANIMALS[animal].key}）`);
+  if(grids)L.push(`・姓名判断：天格${grids["天格"]}・人格${grids["人格"]}（${KAKUSU[grids["人格"]][0]}／${KAKUSU[grids["人格"]][1]}）・地格${grids["地格"]}・外格${grids["外格"]}・総格${grids["総格"]}（${KAKUSU[grids["総格"]][0]}）`);
+  L.push(`・数秘術／カバラ：ライフパス${lp}「${numJP(lp).k}」／${SEPHIROT[lp]||SEPHIROT[reduceNum(lp,false)]}`);
+  L.push(`・マヤ暦：KIN${kin}／${MAYA_SEALS[seal][0]}・銀河の音${tone}（${MAYA_TONES[tone-1]}）`);
+  L.push(`・宿曜占星術：${SHUKU27[shu][0]}（${SHUKU27[shu][1]}）`);
+  L.push(`・算命学：中心星=${SHUSEI[chest][0]}（${SHUSEI[chest][1].split("。")[0]}）／日の従星=${JUSEI[jus][0]}（エネルギー${JUSEI[jus][1]}点）`);
+  L.push(`・六星占術：${ROKUSEI_NAMES[r.star]}${r.plus?"＋":"−"}／${nowY}年は「${UNKI12[ph]}」（${UNKI_T[ph]}）`);
+  L.push(`・エニアグラム：タイプ${et}「${ENNEA[et-1][0]}」（生年月日からの簡易判定）`);
+  L.push(`・四柱推命から見た今年：${TSUHEN[ts]}の年（${TSUHEN_T[ts].split("。")[0]}）`);
+  L.push(`・守護獣（十二占術の総合分類）：${g.key.split("").join("・")}の型「${G.n}」＝${nick}（${G.t}）`);
+  L.push("");
+  L.push("【相談したいこと】");
+  L.push(question||CST_Q[0][1]);
+  L.push("");
+  L.push("【AIへのおねがい】");
+  L.push("上のデータは日本の占い（十二占術）の鑑定結果です。占いを事実として断定せず、また頭ごなしに否定もせず、「この結果をどう日常に活かすか」という視点で、やさしく具体的に助言してください。断定的な予言や、医療・投資・法律にあたる判断は避けてください。わからない前提があれば、質問し返してくれてかまいません。");
+  return L.join("\n");
+}
+function renderConsult(){
+  const box=$("consult-body"); if(!box)return;
+  box.innerHTML=`
+    <div class="card">
+      <h3>相談したいテーマを選ぶ</h3>
+      <div class="cst-q" id="cst-q">${CST_Q.map((q,i)=>`<button type="button" data-i="${i}"${i===0?' class="on"':""}>${q[0]}</button>`).join("")}</div>
+      <textarea class="cst-t" id="cst-t" spellcheck="false" aria-label="AIへの相談文"></textarea>
+      <div class="cst-act">
+        <button type="button" class="primary" id="cst-copy">相談文をコピー</button>
+        <a href="https://claude.ai/new" target="_blank" rel="noopener">Claude をひらく →</a>
+        <a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT をひらく →</a>
+        <span class="cst-msg" id="cst-msg"></span>
+      </div>
+      <p class="muted" style="margin-top:14px">テーマを選ぶと相談文が入れ替わります。文章はそのまま書き足し・書き換えできます（自由に質問を足してください）。コピーしたら、上のリンクからAIを開いて貼り付けてください。</p>
+      <p class="fine">※ この鑑定はお使いの端末内だけで計算していますが、<strong>相談文をAIサービスに貼り付けると、その内容は各サービス（Anthropic・OpenAI など）に送信されます</strong>。生年月日や氏名を送りたくない場合は、文中の該当箇所を消してから貼り付けてください（占術の結果だけでも相談できます）。</p>
+    </div>`;
+  const ta=$("cst-t");
+  const set=i=>{ta.value=buildConsultText(CST_Q[i][1]);};
+  set(0);
+  $("cst-q").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
+    $("cst-q").querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on"); set(+b.dataset.i);
+  }));
+  $("cst-copy").addEventListener("click",async()=>{
+    const msg=$("cst-msg");
+    try{
+      await navigator.clipboard.writeText(ta.value);
+      msg.textContent="コピーしました。AIを開いて貼り付けてください。";
+    }catch(e){
+      ta.focus(); ta.select();
+      let ok=false; try{ok=document.execCommand("copy");}catch(e2){}
+      msg.textContent=ok?"コピーしました。AIを開いて貼り付けてください。":"自動コピーできませんでした。文章を選択して手動でコピーしてください。";
+    }
+    setTimeout(()=>{msg.textContent="";},6000);
+  });
+}
+const _renderBeforeConsult=render;
+render=function(inp){_renderBeforeConsult(inp);renderConsult();};
 
 </script>
