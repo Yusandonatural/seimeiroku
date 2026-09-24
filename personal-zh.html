@@ -1,0 +1,1923 @@
+<meta charset="utf-8">
+<script>document.documentElement.lang="zh-Hant";</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>星命錄 — 生日綜合鑑定</title>
+<style>
+:root{
+  --paper:#f6f1e6; --card:#fdfaf1; --card2:#f0e9d8;
+  --ink:#2b2733; --ink-soft:#5f596b; --ink-faint:#8b8496;
+  --line:#d9d0bc; --line-strong:#b9ad92;
+  --indigo:#26324e; --indigo-soft:#3d4c6e;
+  --gold:#a8842e; --gold-deep:#8a6b20; --gold-wash:rgba(168,132,46,.12);
+  --vermil:#b5432e; --vermil-wash:rgba(181,67,46,.1);
+  --matcha:#68724d; --matcha-wash:rgba(104,114,77,.14);
+  --good:#5a7a4e; --warn:#a56a2a; --bad:#a4432f;
+  --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho","Noto Serif JP","MS PMincho",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic","YuGothic","Noto Sans JP","Meiryo",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#131722; --card:#1b2130; --card2:#222a3d;
+    --ink:#e8e1cd; --ink-soft:#b3abc0; --ink-faint:#847d93;
+    --line:#39415a; --line-strong:#4d5674;
+    --indigo:#9db1dd; --indigo-soft:#7e93c4;
+    --gold:#d2ab55; --gold-deep:#e0bd6e; --gold-wash:rgba(210,171,85,.13);
+    --vermil:#d76a52; --vermil-wash:rgba(215,106,82,.13);
+    --matcha:#9cab7b; --matcha-wash:rgba(156,171,123,.15);
+    --good:#8fb37f; --warn:#d1a35e; --bad:#d4715c;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#f6f1e6; --card:#fdfaf1; --card2:#f0e9d8;
+  --ink:#2b2733; --ink-soft:#5f596b; --ink-faint:#8b8496;
+  --line:#d9d0bc; --line-strong:#b9ad92;
+  --indigo:#26324e; --indigo-soft:#3d4c6e;
+  --gold:#a8842e; --gold-deep:#8a6b20; --gold-wash:rgba(168,132,46,.12);
+  --vermil:#b5432e; --vermil-wash:rgba(181,67,46,.1);
+  --matcha:#68724d; --matcha-wash:rgba(104,114,77,.14);
+  --good:#5a7a4e; --warn:#a56a2a; --bad:#a4432f;
+}
+:root[data-theme="dark"]{
+  --paper:#131722; --card:#1b2130; --card2:#222a3d;
+  --ink:#e8e1cd; --ink-soft:#b3abc0; --ink-faint:#847d93;
+  --line:#39415a; --line-strong:#4d5674;
+  --indigo:#9db1dd; --indigo-soft:#7e93c4;
+  --gold:#d2ab55; --gold-deep:#e0bd6e; --gold-wash:rgba(210,171,85,.13);
+  --vermil:#d76a52; --vermil-wash:rgba(215,106,82,.13);
+  --matcha:#9cab7b; --matcha-wash:rgba(156,171,123,.15);
+  --good:#8fb37f; --warn:#d1a35e; --bad:#d4715c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.9;
+  font-feature-settings:"palt";
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 96px}
+
+/* ── header ── */
+header.site{
+  padding:56px 0 36px; text-align:center; position:relative;
+  border-bottom:1px solid var(--line);
+}
+header.site::before{
+  content:""; display:block; height:5px; margin:0 auto 44px; max-width:880px;
+  border-top:1px solid var(--gold); border-bottom:3px double var(--gold);
+  opacity:.75;
+}
+.site-eyebrow{
+  font-family:var(--sans); font-size:11px; letter-spacing:.42em; text-indent:.42em;
+  color:var(--gold-deep); text-transform:uppercase; margin-bottom:18px;
+}
+h1.site-title{
+  font-family:var(--serif); font-weight:600;
+  font-size:clamp(30px,6vw,42px); letter-spacing:.3em; text-indent:.3em;
+  margin:0 0 14px; text-wrap:balance; color:var(--ink);
+}
+.site-sub{color:var(--ink-soft); font-size:13.5px; letter-spacing:.14em; margin:0}
+.seal{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px;height:34px; margin-top:22px;
+  border:1.5px solid var(--vermil); color:var(--vermil);
+  font-family:var(--serif); font-size:17px; border-radius:4px;
+  transform:rotate(-3deg);
+}
+
+/* ── form ── */
+.entry{
+  margin:44px 0 0; background:var(--card); border:1px solid var(--line);
+  border-radius:6px; padding:34px 34px 30px; position:relative;
+}
+.entry::before{
+  content:"請填寫"; position:absolute; top:-11px; left:28px;
+  background:var(--card); padding:0 10px;
+  font-family:var(--serif); font-size:12.5px; letter-spacing:.3em;
+  color:var(--gold-deep);
+}
+.f-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px 28px}
+@media(max-width:620px){.f-grid{grid-template-columns:1fr}}
+.f-field{display:flex; flex-direction:column; gap:7px}
+.f-label{
+  font-size:11.5px; letter-spacing:.22em; color:var(--ink-soft);
+  display:flex; align-items:baseline; gap:8px;
+}
+.f-label .opt{font-size:10px; color:var(--ink-faint); letter-spacing:.08em}
+.f-row{display:flex; gap:8px; align-items:center}
+input[type=text],input[type=number],select{
+  font-family:var(--sans); font-size:15px; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line-strong); border-radius:4px;
+  padding:9px 12px; width:100%; min-width:0;
+}
+input:focus-visible,select:focus-visible,button:focus-visible,.chip:focus-visible{
+  outline:2px solid var(--gold); outline-offset:2px;
+}
+.f-unit{font-size:12px; color:var(--ink-faint); flex:none}
+.f-check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-soft); margin-top:4px}
+.f-check input{width:15px;height:15px;accent-color:var(--gold)}
+.f-actions{margin-top:30px; display:flex; justify-content:center}
+button.go{
+  font-family:var(--serif); font-size:16.5px; letter-spacing:.42em; text-indent:.42em;
+  color:var(--paper); background:var(--indigo);
+  border:1px solid var(--indigo); border-radius:4px;
+  padding:13px 54px; cursor:pointer; transition:background .2s;
+}
+:root[data-theme="dark"] button.go, .dark-btn{color:#131722}
+@media (prefers-color-scheme: dark){ button.go{color:#131722} }
+:root[data-theme="light"] button.go{color:#f6f1e6}
+button.go:hover{background:var(--gold-deep); border-color:var(--gold-deep)}
+.f-note{margin-top:16px; font-size:11.5px; color:var(--ink-faint); text-align:center; letter-spacing:.05em}
+#overseas{display:none; grid-column:1/-1}
+#overseas.show{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:620px){#overseas.show{grid-template-columns:1fr}}
+
+/* ── results shell ── */
+#results{display:none}
+#results.show{display:block}
+
+/* hero 命式盤 */
+.meishiki{
+  margin-top:52px; background:var(--card); border:1px solid var(--line-strong);
+  border-radius:6px; overflow:hidden; position:relative;
+}
+.meishiki-head{
+  padding:30px 34px 24px; border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(circle at 84% 20%, var(--gold-wash), transparent 55%),
+    var(--card);
+  display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
+}
+.m-name{font-family:var(--serif); font-size:30px; letter-spacing:.18em; margin:0; line-height:1.4}
+.m-name small{display:block; font-size:12px; color:var(--ink-soft); letter-spacing:.22em; margin-top:6px; font-family:var(--sans)}
+.m-chips{display:flex; flex-wrap:wrap; gap:8px; max-width:420px; justify-content:flex-end}
+.m-chip{
+  font-size:12px; letter-spacing:.06em; padding:5px 12px; border-radius:999px;
+  border:1px solid var(--line-strong); background:var(--card2); color:var(--ink-soft);
+  white-space:nowrap;
+}
+.m-chip b{color:var(--ink); font-weight:600; margin-left:4px}
+.pillars{
+  display:flex; justify-content:center; gap:clamp(14px,4vw,38px);
+  padding:30px 20px 34px; background:var(--card);
+}
+.pillar{display:flex; flex-direction:column; align-items:center; gap:10px}
+.pillar .p-label{font-size:10.5px; letter-spacing:.3em; text-indent:.3em; color:var(--ink-faint)}
+.pillar .p-kanji{
+  writing-mode:vertical-rl; font-family:var(--serif); font-weight:600;
+  font-size:clamp(26px,5vw,34px); letter-spacing:.18em; line-height:1;
+  padding:14px 10px; border:1px solid var(--line); border-radius:4px;
+  background:var(--card2); color:var(--ink); min-height:96px;
+}
+.pillar.day .p-kanji{border-color:var(--gold); background:var(--gold-wash); color:var(--gold-deep)}
+.pillar .p-read{font-size:10.5px; color:var(--ink-faint); letter-spacing:.1em}
+.pillar .p-el{font-size:11px; color:var(--ink-soft)}
+
+/* nav chips */
+nav.toc{
+  position:sticky; top:0; z-index:30;
+  background:color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  margin:0 -20px; padding:10px 20px;
+  display:flex; gap:8px; overflow-x:auto; scrollbar-width:none;
+}
+nav.toc::-webkit-scrollbar{display:none}
+.chip{
+  flex:none; font-size:12.5px; letter-spacing:.1em; text-decoration:none;
+  color:var(--ink-soft); border:1px solid var(--line-strong); border-radius:999px;
+  padding:5px 15px; background:var(--card); white-space:nowrap;
+}
+.chip:hover{color:var(--gold-deep); border-color:var(--gold)}
+
+/* sections */
+section.art{margin-top:64px}
+.art-head{display:flex; align-items:center; gap:16px; margin-bottom:6px}
+.art-seal{
+  flex:none; width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  border:1.5px solid var(--gold); border-radius:4px; color:var(--gold-deep);
+  font-family:var(--serif); font-size:22px; font-weight:600;
+}
+.art-titles{min-width:0}
+.art-eyebrow{font-size:10.5px; letter-spacing:.3em; color:var(--gold-deep); text-transform:uppercase}
+h2.art-title{
+  font-family:var(--serif); font-size:23px; font-weight:600; letter-spacing:.16em;
+  margin:2px 0 0; text-wrap:balance;
+}
+.art-rule{border:none; border-top:1px solid var(--line); margin:14px 0 22px; position:relative}
+.art-rule::after{content:""; position:absolute; left:0; top:-1px; width:64px; border-top:1px solid var(--gold)}
+
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:6px;
+  padding:26px 28px; margin-bottom:16px;
+}
+.card h3{
+  font-family:var(--serif); font-size:16.5px; font-weight:600; letter-spacing:.12em;
+  margin:0 0 12px; color:var(--ink);
+  display:flex; align-items:center; gap:10px;
+}
+.card h3::before{content:""; width:7px; height:7px; background:var(--gold); transform:rotate(45deg); flex:none}
+.card p{margin:.5em 0; color:var(--ink); max-width:42em}
+.muted{color:var(--ink-soft); font-size:13px}
+.fine{color:var(--ink-faint); font-size:11.5px; letter-spacing:.04em}
+
+.kv{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; margin:10px 0}
+.kv dt{font-size:12px; color:var(--ink-faint); letter-spacing:.14em; padding-top:3px; white-space:nowrap}
+.kv dd{margin:0}
+.big-sign{font-family:var(--serif); font-size:22px; letter-spacing:.1em}
+.big-sign .sym{color:var(--gold-deep); margin-right:8px}
+
+.tag{
+  display:inline-block; font-size:11.5px; letter-spacing:.1em; border-radius:3px;
+  padding:2px 9px; margin-right:6px; vertical-align:2px;
+}
+.tag.gold{background:var(--gold-wash); color:var(--gold-deep); border:1px solid var(--gold)}
+.tag.verm{background:var(--vermil-wash); color:var(--vermil); border:1px solid var(--vermil)}
+.tag.matcha{background:var(--matcha-wash); color:var(--matcha); border:1px solid var(--matcha)}
+
+/* 五行 bars */
+.gogyo{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:16px 0 6px}
+.gg{display:flex; flex-direction:column; align-items:center; gap:6px}
+.gg .gg-bar{width:100%; height:88px; background:var(--card2); border:1px solid var(--line); border-radius:3px; display:flex; align-items:flex-end; overflow:hidden}
+.gg .gg-fill{width:100%; border-radius:2px 2px 0 0; min-height:3px; transition:height .6s ease}
+.gg .gg-name{font-family:var(--serif); font-size:15px}
+.gg .gg-count{font-size:11px; color:var(--ink-faint); font-variant-numeric:tabular-nums}
+
+/* 姓名 grids */
+.strokes-edit{display:flex; flex-wrap:wrap; gap:14px; margin:8px 0 18px}
+.st-char{display:flex; flex-direction:column; align-items:center; gap:5px}
+.st-char .ch{font-family:var(--serif); font-size:26px; line-height:1}
+.st-char input{width:56px; text-align:center; padding:5px 4px; font-variant-numeric:tabular-nums}
+.st-sep{align-self:center; color:var(--ink-faint); font-size:18px; padding:0 2px}
+.goka{display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:14px}
+@media(max-width:620px){.goka{grid-template-columns:repeat(2,1fr)}}
+.gk{
+  border:1px solid var(--line); border-radius:5px; background:var(--card2);
+  padding:14px 10px; text-align:center;
+}
+.gk .gk-name{font-size:11px; letter-spacing:.24em; text-indent:.24em; color:var(--ink-faint)}
+.gk .gk-num{font-family:var(--serif); font-size:30px; margin:4px 0 2px; font-variant-numeric:tabular-nums}
+.gk .gk-fortune{font-size:12px; letter-spacing:.15em}
+.gk .gk-phrase{font-size:10.5px; color:var(--ink-soft); margin-top:3px; line-height:1.5}
+.f-daikichi{color:var(--vermil)} .f-kichi{color:var(--good)}
+.f-hankichi{color:var(--warn)} .f-kyo{color:var(--ink-faint)} .f-daikyo{color:var(--ink-faint)}
+
+/* 方位盤 */
+.ban-wrap{display:flex; gap:26px; align-items:flex-start; flex-wrap:wrap; margin-top:8px}
+.ban{
+  flex:none; display:grid; grid-template-columns:repeat(3,88px); grid-template-rows:repeat(3,88px);
+  border:1.5px solid var(--line-strong); background:var(--line);
+  gap:1px; font-variant-numeric:tabular-nums;
+}
+@media(max-width:420px){.ban{grid-template-columns:repeat(3,76px); grid-template-rows:repeat(3,76px)}}
+.ban .cell{
+  background:var(--card); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+  position:relative; padding:4px;
+}
+.ban .dir{font-size:10px; letter-spacing:.2em; color:var(--ink-faint)}
+.ban .star{font-family:var(--serif); font-size:15.5px; letter-spacing:.04em; text-align:center; line-height:1.35}
+.ban .cell.center{background:var(--card2)}
+.ban .cell.good{background:var(--matcha-wash)}
+.ban .cell.bad{background:var(--vermil-wash)}
+.ban .mark{font-size:9.5px; letter-spacing:.08em}
+.ban .cell.good .mark{color:var(--good)} .ban .cell.bad .mark{color:var(--bad)}
+.ban-legend{flex:1; min-width:240px}
+.ban-legend ul{list-style:none; margin:8px 0; padding:0}
+.ban-legend li{padding:5px 0; border-bottom:1px dashed var(--line); font-size:13.5px; display:flex; gap:10px; align-items:baseline}
+.ban-legend li:last-child{border-bottom:none}
+.dir-b{font-family:var(--serif); letter-spacing:.1em; white-space:nowrap}
+
+/* 動物 */
+.animal-hero{display:flex; align-items:center; gap:22px; flex-wrap:wrap}
+.animal-emblem{
+  flex:none; width:92px; height:92px; border-radius:50%;
+  border:1.5px solid var(--gold); background:var(--gold-wash);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif); font-size:30px; color:var(--gold-deep); font-weight:600;
+  letter-spacing:0; line-height:1.15; text-align:center; padding:8px;
+}
+.animal-hero .a-body{flex:1; min-width:240px}
+.animal-name{font-family:var(--serif); font-size:21px; letter-spacing:.08em; margin:0 0 4px}
+
+/* stars / score */
+.stars{font-size:18px; letter-spacing:.28em; color:var(--gold-deep); white-space:nowrap}
+.stars .off{color:var(--line-strong)}
+.today-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:14px}
+@media(max-width:620px){.today-grid{grid-template-columns:1fr}}
+.mini{border:1px solid var(--line); border-radius:5px; background:var(--card2); padding:16px 18px}
+.mini .mini-label{font-size:10.5px; letter-spacing:.26em; color:var(--ink-faint); margin-bottom:6px}
+.mini .mini-val{font-family:var(--serif); font-size:17px; letter-spacing:.06em}
+.mini .mini-note{font-size:12px; color:var(--ink-soft); margin-top:4px; line-height:1.7}
+
+/* 適職チップ */
+.job-chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px}
+.job-chip{
+  font-size:13px; letter-spacing:.08em; border-radius:999px;
+  border:1px solid var(--line-strong); color:var(--ink); background:var(--card2);
+  padding:4px 14px; white-space:nowrap;
+}
+.job-chip.hot{border-color:var(--gold); color:var(--gold-deep); background:var(--gold-wash)}
+
+/* こどものページ */
+#sec-kids .card{
+  border-radius:14px; font-size:16.5px; line-height:2.15;
+  border-width:1.5px;
+}
+#sec-kids .card h3{font-size:18px; letter-spacing:.14em}
+#sec-kids .card h3::before{background:var(--vermil); border-radius:50%; transform:none; width:9px; height:9px}
+#sec-kids .card p{max-width:38em}
+.kid-emblem{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:52px; height:52px; border-radius:50%; padding:0 10px;
+  border:1.5px solid var(--vermil); color:var(--vermil); background:var(--vermil-wash);
+  font-family:var(--serif); font-size:19px; margin-right:12px; vertical-align:middle;
+}
+.kid-stars{font-size:26px; letter-spacing:.2em; color:var(--gold-deep)}
+.kid-stars .off{color:var(--line-strong)}
+.kid-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:12px}
+@media(max-width:620px){.kid-grid{grid-template-columns:1fr}}
+.kid-mini{
+  border:1.5px dashed var(--line-strong); border-radius:12px; padding:16px 18px;
+  background:var(--card2);
+}
+.kid-mini .k-label{font-size:12px; letter-spacing:.22em; color:var(--vermil); margin-bottom:6px}
+.kid-mini .k-val{font-family:var(--serif); font-size:19px}
+
+/* 月運カレンダー */
+.months{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px}
+@media(max-width:620px){.months{grid-template-columns:repeat(2,1fr)}}
+.months .mini{padding:13px 14px}
+.months .mini .mini-val{font-size:15.5px}
+.months .mini.now{border-color:var(--gold); background:var(--gold-wash)}
+.months .mini.now .mini-label{color:var(--gold-deep)}
+
+/* synthesis */
+.synth{
+  border:1px solid var(--gold); background:var(--gold-wash);
+  border-radius:6px; padding:30px 32px; margin-bottom:16px;
+}
+.synth p{max-width:44em}
+.key-chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 4px}
+.key-chip{
+  font-family:var(--serif); font-size:13.5px; letter-spacing:.14em;
+  border:1px solid var(--gold); color:var(--gold-deep); border-radius:999px;
+  padding:4px 16px; background:var(--card);
+}
+
+footer.site{
+  margin-top:80px; padding:28px 0 8px; border-top:1px solid var(--line);
+  text-align:center;
+}
+footer .fine{max-width:46em; margin:0 auto; line-height:1.9}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important; scroll-behavior:auto!important}
+}
+html{scroll-behavior:smooth}
+
+/* ── 保存（この端末のみ） ── */
+.saved-list{display:flex; flex-wrap:wrap; gap:8px; margin:0 0 20px; align-items:center}
+.saved-list:empty{display:none}
+.saved-label{font-size:11px; letter-spacing:.18em; color:var(--gold-deep)}
+.saved-chip{
+  display:inline-flex; align-items:center; gap:8px; font-size:12.5px;
+  border:1px solid var(--line-strong); border-radius:999px; background:var(--card2);
+  padding:4px 6px 4px 14px; cursor:pointer; color:var(--ink);
+}
+.saved-chip:hover{border-color:var(--gold); background:var(--gold-wash)}
+.saved-chip .x{
+  width:18px; height:18px; border-radius:50%; border:none;
+  background:var(--line); color:var(--ink-soft); font-size:11px; cursor:pointer; line-height:1; padding:0;
+}
+.saved-chip .x:hover{background:var(--vermil); color:#fff}
+.save-ctl{display:flex; justify-content:center; align-items:center; gap:18px; margin-top:16px; flex-wrap:wrap}
+.save-ctl button{
+  font-size:11px; letter-spacing:.1em; color:var(--ink-faint);
+  background:none; border:1px solid var(--line-strong); border-radius:999px;
+  padding:3px 14px; cursor:pointer;
+}
+.save-ctl button:hover{color:var(--vermil); border-color:var(--vermil)}
+@media print{.saved-list,.save-ctl{display:none!important}}
+
+/* ── 五行カラー・動物グループ章 ── */
+:root{--el-wood:#5e6c43; --el-fire:#ab4029; --el-earth:#9a7a28; --el-metal:#7d7f8d; --el-water:#2c3c5e; --el-ink:#f6f1e6}
+@media (prefers-color-scheme: dark){
+  :root{--el-wood:#8fa06b; --el-fire:#cd6a52; --el-earth:#c7a44f; --el-metal:#9aa4b5; --el-water:#7e93c4; --el-ink:#131722}
+}
+:root[data-theme="light"]{--el-wood:#5e6c43; --el-fire:#ab4029; --el-earth:#9a7a28; --el-metal:#7d7f8d; --el-water:#2c3c5e; --el-ink:#f6f1e6}
+:root[data-theme="dark"]{--el-wood:#8fa06b; --el-fire:#cd6a52; --el-earth:#c7a44f; --el-metal:#9aa4b5; --el-water:#7e93c4; --el-ink:#131722}
+.el-t{
+  display:inline-block; min-width:2.1em; text-align:center; padding:0 7px; margin:0 2px;
+  border-radius:3px; font-size:11.5px; letter-spacing:.12em; font-family:var(--sans);
+  color:var(--el-ink); vertical-align:1.5px; font-weight:600;
+  print-color-adjust:exact; -webkit-print-color-adjust:exact;
+}
+.el-0{background:var(--el-wood)} .el-1{background:var(--el-fire)} .el-2{background:var(--el-earth)}
+.el-3{background:var(--el-metal)} .el-4{background:var(--el-water)}
+.grp-t{
+  display:inline-block; padding:0 10px; margin:0 3px; border-radius:999px;
+  font-size:11px; letter-spacing:.14em; font-family:var(--sans); font-weight:600;
+  color:var(--el-ink); vertical-align:1.5px;
+  print-color-adjust:exact; -webkit-print-color-adjust:exact;
+}
+.grp-m{background:var(--el-water)} .grp-e{background:var(--el-wood)} .grp-s{background:var(--el-fire)}
+.animal-emblem .em{font-size:44px; line-height:1}
+.a-emoji{font-size:20px; vertical-align:-2px; margin-right:3px}
+
+/* ── PDF・印刷 ── */
+.print-bar{display:flex; justify-content:flex-end; margin:20px 0 -10px}
+button.print-btn{
+  font-family:var(--sans); font-size:12.5px; letter-spacing:.18em;
+  color:var(--gold-deep); background:var(--card);
+  border:1px solid var(--gold); border-radius:999px;
+  padding:8px 24px; cursor:pointer;
+}
+button.print-btn:hover{background:var(--gold-wash)}
+@page{margin:12mm}
+@media print{
+  :root,:root[data-theme="dark"]{
+    --paper:#fff; --card:#fff; --card2:#f4f1e9;
+    --ink:#1e1b26; --ink-soft:#4c4658; --ink-faint:#6f6880;
+    --line:#c9c2b2; --line-strong:#a89d86;
+    --indigo:#26324e; --indigo-soft:#3d4c6e;
+    --gold:#8a6b20; --gold-deep:#6f5518; --gold-wash:#f3ecd9;
+    --vermil:#a4432f; --vermil-wash:#f7e8e3;
+    --matcha:#5c6b46; --matcha-wash:#edf0e2;
+    --good:#4c6a41; --warn:#8a5a1f; --bad:#933d2a;
+  }
+  nav.toc, form.entry, .print-bar, .mr-del, .add-row, button.go{display:none!important}
+  body{background:#fff}
+  header.site{padding:10px 0 20px}
+  header.site::before{margin-bottom:20px}
+  section.art{margin-top:28px}
+  .card,.mini,.gk,.kid-person,.kid-mini,.synth,.ban-wrap{break-inside:avoid}
+  .cmp{overflow:visible}
+  #results{display:block!important}
+}
+</style>
+
+<div class="wrap">
+<header class="site">
+  <div class="site-eyebrow">Birthday Divination System</div>
+  <h1 class="site-title">星命錄</h1>
+  <p class="tagline" style="font-family:var(--serif);font-size:clamp(17px,3.6vw,22px);font-weight:600;letter-spacing:.22em;text-indent:.22em;color:var(--gold-deep);margin:2px 0 8px;text-wrap:balance">認識你所不知道的自己</p>
+  <p class="tagline-sub" style="font-size:13.5px;line-height:1.9;letter-spacing:.06em;color:var(--ink-soft);margin:0 auto 16px">當你更了解自己，<br>你就能活得更輕鬆、更快樂。</p>
+  <p class="site-sub">以五種占術進行的生日綜合鑑定 ─ 西洋占星術・四柱推命・姓名筆畫・九星氣學・動物占卜</p>
+  <div class="seal" aria-hidden="true">鑑</div>
+</header>
+<div class="langsw" style="display:flex;gap:6px;justify-content:center;align-items:center;margin:10px 0 0"><span style="font-size:12px;color:var(--ink-faint)">🌐</span><a href="personal.html" style="display:inline-block;padding:4px 12px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.06em;border:1px solid var(--line,rgba(128,110,60,.35));color:inherit">日本語</a><a href="personal-en.html" style="display:inline-block;padding:4px 12px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.06em;border:1px solid var(--line,rgba(128,110,60,.35));color:inherit">English</a><a href="personal-zh.html" style="display:inline-block;padding:4px 12px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.06em;border:1px solid var(--gold);color:var(--gold-deep);background:var(--gold-wash);font-weight:700">繁體中文</a></div>
+
+
+<div class="donate-top" style="max-width:620px;margin:30px auto 0;text-align:center;border:1px dashed var(--gold);border-radius:10px;background:var(--gold-wash);padding:16px 20px">
+  <p style="margin:0 0 12px;font-size:13.5px;color:var(--ink);letter-spacing:.05em;line-height:1.9">這個網站是靠大家的善意維持下去的。<br>若您願意，懇請給予支持。</p>
+  <a href="https://buymeacoffee.com/quietsheep" target="_blank" rel="noopener" style="display:inline-block;font-family:var(--serif);font-size:14px;letter-spacing:.18em;color:var(--gold-deep);border:1px solid var(--gold);border-radius:999px;padding:9px 26px;text-decoration:none;background:var(--card)">☕ 以一杯茶支持我們</a>
+</div>
+
+<form class="entry" id="form" autocomplete="off">
+  <div id="savedList" class="saved-list" aria-label="已儲存的鑑定"></div>
+  <div class="f-grid">
+    <div class="f-field">
+      <label class="f-label" for="sei">姓</label>
+      <input type="text" id="sei" placeholder="例：王" required>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="mei">名</label>
+      <input type="text" id="mei" placeholder="例：小明" required>
+    </div>
+    <div class="f-field">
+      <span class="f-label">出生年月日</span>
+      <div class="f-row">
+        <input type="number" id="by" min="1900" max="2026" placeholder="1985" aria-label="年"><span class="f-unit">年</span>
+        <input type="number" id="bm" min="1" max="12" placeholder="4" aria-label="月"><span class="f-unit">月</span>
+        <input type="number" id="bd" min="1" max="31" placeholder="15" aria-label="日"><span class="f-unit">日</span>
+      </div>
+    </div>
+    <div class="f-field">
+      <span class="f-label">出生時刻 <span class="opt">用於推算上升星座與時柱</span></span>
+      <div class="f-row">
+        <input type="number" id="bh" min="0" max="23" placeholder="10" aria-label="時"><span class="f-unit">時</span>
+        <input type="number" id="bmin" min="0" max="59" placeholder="30" aria-label="分"><span class="f-unit">分</span>
+      </div>
+      <label class="f-check"><input type="checkbox" id="noTime">時刻不明（以正午簡易計算）</label>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="pref">出生地點</label>
+      <select id="pref"></select>
+    </div>
+    <div id="overseas">
+      <div class="f-field">
+        <label class="f-label" for="olat">緯度（北+）</label>
+        <input type="number" id="olat" step="0.01" min="-90" max="90" placeholder="48.85">
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="olon">經度（東+）</label>
+        <input type="number" id="olon" step="0.01" min="-180" max="180" placeholder="2.35">
+      </div>
+      <div class="f-field">
+        <label class="f-label" for="outc">時差（UTC±）</label>
+        <input type="number" id="outc" step="0.5" min="-12" max="14" placeholder="1">
+      </div>
+    </div>
+  </div>
+  <div class="f-actions"><button type="submit" class="go">開 始 鑑 定</button></div>
+  <div class="save-ctl">
+    <label class="f-check"><input type="checkbox" id="saveOpt" checked>將鑑定過的人儲存在這台裝置（僅限瀏覽器內）</label>
+    <button type="button" id="clearSaved">刪除儲存的資料</button>
+  </div>
+  <p class="f-note">您輸入的資訊只在本頁面內用於計算，不會傳送到外部。開啟儲存功能後，資料只會記錄在這台裝置的瀏覽器裡，下次仍可叫出使用。</p>
+</form>
+
+<div id="results">
+  <div class="print-bar"><button type="button" class="print-btn" onclick="window.print()">存成PDF / 列印</button></div>
+  <div class="meishiki" id="hero"></div>
+  <nav class="toc" aria-label="占術目次">
+    <a class="chip" href="#sec-west">西洋占星術</a>
+    <a class="chip" href="#sec-shichu">四柱推命</a>
+    <a class="chip" href="#sec-name">姓名筆畫</a>
+    <a class="chip" href="#sec-kyusei">九星氣學・方位</a>
+    <a class="chip" href="#sec-animal">動物占卜</a>
+    <a class="chip" href="#sec-synth">綜合鑑定</a>
+    <a class="chip" href="#sec-jobs">適職</a>
+    <a class="chip" href="#sec-life">一生的運勢</a>
+    <a class="chip" href="#sec-health">健康</a>
+    <a class="chip" href="#sec-year">今年運勢</a>
+    <a class="chip" href="#sec-today">今日運勢</a>
+    <a class="chip" href="#sec-kids">給孩子</a>
+  </nav>
+
+  <section class="art" id="sec-west">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">星</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Western Astrology</div>
+        <h2 class="art-title">西洋占星術</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="west-body"></div>
+  </section>
+
+  <section class="art" id="sec-shichu">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">命</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Four Pillars of Destiny</div>
+        <h2 class="art-title">四柱推命</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="shichu-body"></div>
+  </section>
+
+  <section class="art" id="sec-name">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">名</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Name Numerology</div>
+        <h2 class="art-title">姓名筆畫占卜</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="name-body"></div>
+  </section>
+
+  <section class="art" id="sec-kyusei">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">方</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Nine Star Ki &amp; Directions</div>
+        <h2 class="art-title">九星氣學與方位</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="kyusei-body"></div>
+  </section>
+
+  <section class="art" id="sec-animal">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">動</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Animal Fortune — 60 Characters</div>
+        <h2 class="art-title">動物占卜</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="animal-body"></div>
+  </section>
+
+  <section class="art" id="sec-synth">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">綜</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Synthesis</div>
+        <h2 class="art-title">綜合鑑定 ─ 貫穿五種占術的線索</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="synth-body"></div>
+  </section>
+
+  <section class="art" id="sec-jobs">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">職</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Vocation</div>
+        <h2 class="art-title">適職 ─ 適合你的工作</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="jobs-body"></div>
+  </section>
+
+  <section class="art" id="sec-life">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">流</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Life Fortune Curve</div>
+        <h2 class="art-title">一生的運勢 ─ 各年齡的波動</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="life-body"></div>
+  </section>
+
+  <section class="art" id="sec-health">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">養</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Health &amp; Self-care</div>
+        <h2 class="art-title">養生 ─ 身體需要留意之處</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="health-body"></div>
+  </section>
+
+  <section class="art" id="sec-year">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">年</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Annual Fortune</div>
+        <h2 class="art-title" id="year-title">今年運勢</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="year-body"></div>
+  </section>
+
+  <section class="art" id="sec-today">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">日</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">Daily Fortune</div>
+        <h2 class="art-title" id="today-title">今日運勢</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="today-body"></div>
+  </section>
+
+  <section class="art" id="sec-kids">
+    <div class="art-head">
+      <div class="art-seal" aria-hidden="true">童</div>
+      <div class="art-titles">
+        <div class="art-eyebrow">For Kids</div>
+        <h2 class="art-title">兒童專頁 ─ 你的占卜</h2>
+      </div>
+    </div>
+    <hr class="art-rule">
+    <div id="kids-body"></div>
+  </section>
+</div>
+
+<footer class="site">
+  <p class="fine">
+    本鑑定是以娛樂與自我理解為目的的簡易鑑定。太陽、月亮星座與上升星座採天文近似式（月亮約有±2°的誤差），
+    四柱推命的節入以太陽黃經判定，筆畫以日本新字體為準（也有流派以舊字體計算）。
+    結果可能因流派而異。
+  </p>
+  <div class="donate-box" style="text-align:center;margin:26px 0 10px">
+  <p style="font-size:12.5px;color:var(--ink-soft);letter-spacing:.06em;margin:0 0 10px">若這份占卜讓您感到愉快，很歡迎您支持我們繼續開發</p>
+  <a href="https://buymeacoffee.com/quietsheep" target="_blank" rel="noopener" style="display:inline-block;font-family:var(--serif);font-size:14px;letter-spacing:.18em;color:var(--gold-deep);border:1px solid var(--gold);border-radius:999px;padding:9px 26px;text-decoration:none;background:var(--gold-wash)">☕ 以一杯茶支持我們</a>
+</div>
+<div class="seal" aria-hidden="true" style="margin-top:14px">了</div>
+</footer>
+</div>
+
+<script>
+"use strict";
+/* ══════════ 基礎データ ══════════ */
+const STEMS=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+const STEM_READ=["陽木","陰木","陽火","陰火","陽金","陰金","陽土","陰土","陽水","陰水"];
+const BRANCHES=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const BRANCH_READ=["鼠","牛","虎","兔","龍","蛇","馬","綿羊","猴","雞","狗","豬"];
+const ELEMS=["木","火","土","金","水"];
+const ELEM_COLOR={ "木":"#68724d","火":"#b5432e","土":"#a8842e","金":"#8d8d99","水":"#26324e" };
+const ELEM_COLOR_DARK={ "木":"#9cab7b","火":"#d76a52","土":"#d2ab55","金":"#a9b3c4","水":"#7e93c4" };
+const stemElem=s=>Math.floor(s/2);            // 0木1火2土3金4水
+const BRANCH_ELEM=[4,2,0,0,2,1,1,2,3,3,2,4];  // 子水 丑土 寅木 卯木 辰土 巳火 午火 未土 申金 酉金 戌土 亥水
+const ZODIAC_JA=["子・鼠","丑・牛","寅・虎","卯・兔","辰・龍","巳・蛇","午・馬","未・羊","申・猴","酉・雞","戌・狗","亥・豬"];
+
+/* ══════════ 西洋占星術 ══════════ */
+const SIGNS=[
+ {n:"牡羊座",sym:"♈",el:"火",key:"行動力",t:"衝鋒在前的開拓者。想到就立刻行動，憑著那份熱情與氣勢，親手開出自己的路。最不擅長的就是猶豫不決的時間，比起失敗，更討厭「沒去做的後悔」。"},
+ {n:"金牛座",sym:"♉",el:"地",key:"安定感",t:"用五感品味世界的人。看穿真品的審美眼光，以及一旦決定就做到最後的韌性，是他的看家本領。雖然不喜歡被催促，但所累積之物的扎實程度，堪稱十二星座之最。"},
+ {n:"雙子座",sym:"♊",el:"風",key:"好奇心",t:"長著好奇心翅膀的消息通。天生擅長駕馭語言，同時處理兩件事也顯得輕盈自在。像風一樣享受變化，在任何場合都能找到開啟話題的線頭。"},
+ {n:"巨蟹座",sym:"♋",el:"水",key:"同理心",t:"守護的高手。對認定為自己人的對象，情深如海，以豐沛的同理心悄悄包覆他人的心。記性很好，把與重要的人之間的回憶，當成心靈養分而活。"},
+ {n:"獅子座",sym:"♌",el:"火",key:"存在感",t:"天生的主角。擁有堂堂正正的存在感，以及如太陽般照亮四周的溫暖。讚美是最大的燃料。屬於會自己導演出戲劇性人生的類型。"},
+ {n:"處女座",sym:"♍",el:"地",key:"分析力",t:"打磨完美的職人。不放過細節裡的任何東西，觀察力敏銳，實務能力又高，因而聚集了周遭的信任。在無人看見處持續努力，受託的工作總會超出期待一步交回。"},
+ {n:"天秤座",sym:"♎",el:"風",key:"和諧",t:"活出和諧美學的人。以出色的平衡感與社交能力，把當下的氣氛調整得漂亮得體。凡事講求優雅，比起爭執更願意對話。那份洗練的品味是與生俱來的。"},
+ {n:"天蠍座",sym:"♏",el:"水",key:"探究心",t:"深深潛入的探究者。一旦決定的事，可以貫徹好幾年的專注力，以及深不見底的情感。比起淺薄的往來，更重視與少數人的濃厚牽絆。藏起來的熱情，甚至勝過火象星座。"},
+ {n:"射手座",sym:"♐",el:"火",key:"冒險心",t:"射向遠方靶心的冒險者。追求自由與真理，心總是望向地平線的彼端。樂觀而不拘小節，連危機都能轉化成旅途中有趣的插曲。"},
+ {n:"摩羯座",sym:"♑",el:"地",key:"忍耐力",t:"朝著頂峰前進的登山家。讓時間站在自己這一邊，一步一步確實地爬上名為社會的高山。年輕時的辛苦，會隨著年歲增長而結成果實，是大器晚成型。責任感之強更是有口皆碑。"},
+ {n:"水瓶座",sym:"♒",el:"風",key:"獨創性",t:"來自未來的使者。以獨創的視角走在常識的前一步，對任何人都一視同仁。不隨群結黨，卻貫徹友愛的自由人。正是在時代的轉折點上，最能發揮本領。"},
+ {n:"雙魚座",sym:"♓",el:"水",key:"想像力",t:"溶解界線的夢想家。擁有豐沛的想像力，以及如大海般接納任何人的溫柔。天生具備藝術的感性，不靠道理，而是用心去感受世界的細微之處。"}
+];
+SIGNS.forEach(s=>s.sym+="\uFE0E"); // 記号を絵文字ではなくテキスト表示に固定
+const MOON_T=["情感直來直往，恢復之快首屈一指。就算生氣，睡一晚就忘了，是個乾脆爽快的人。","比什麼都追求內心的安定，面對變化希望慢慢來。好吃的東西與舒適的空間，就是最好的良藥。","轉換心情的高手，無聊才是最大的敵人。閒聊與新資訊就是心靈的氧氣。","重情義，對認定為自己人的對象，溫柔得幾乎毫無防備。正因為有能安心的「歸處」，在外面才使得出力氣。","想被認同的心情，直接就是原動力。掌聲與讚美是心靈的養分，沒有戲劇性的日常會讓他有點不滿足。","擔心的另一面，是一流的體貼。能實際感受到自己幫上了誰的忙，就是心靈的安定劑。","一嗅到爭執的氣息就靜靜拉開距離的和平主義者。接觸美麗的事物與整潔的空間，心就會復原。","情感深濃，不會輕易表露出來。只在信任的人面前展露的真實樣貌，專一得令人吃驚。","骨子裡樂觀，最怕的就是被束縛。心一旦變得侷促，旅行與冒險就是特效藥。","擁有約束情感的自制力。容易把軟弱吞進心底，所以請有意識地為自己安排讓心放鬆的時間。","以獨處的時間整頓內心，是精神上的自由人。對「和別人一樣」並不覺得有什麼價值。","感受力豐沛而容易落淚，是懂得他人痛楚的心。豐饒的幻想世界，給了他活在現實中的力量。"];
+const QUAL_T=["活動宮 ─ 自己點燃引線的啟動者。開始的力量是十二星座之首，但把收尾交給夥伴的果斷同樣為吉。","不動宮 ─ 一旦決定就不移動的持續者。韌性是最大的資產，相對地，要轉向就需要時間。","柔軟宮 ─ 乘上變化浪頭的適應者。讀懂情勢、自在改變形狀的柔韌，就是武器。"];
+const SIGN_WORK=["在開拓、草創、業務等「把零變成一」的現場閃閃發光。","在品質與持續說了算的工作中，建立起不可動搖的信任。","在處理資訊、語言與企劃的工作中，才氣會閃閃發光。","在守護與培育人的現場，會成為團隊的核心。","在需要站上檯面的角色，以及擁有裁量權的位置上，最能發揮本領。","在講究精度的實務與分析中，會成為無可取代的存在。","能發揮協調、談判與美感的場合，就是適合的職業。","在把一門專業鑽研到底的路上，擁有能成為第一人的專注力。","請走向海外、教育、傳播等能發揮寬廣視野的舞台。","是擅長穩步爬上組織階梯、走王道職涯的星。","在需要創新、技術與改革的場合裡大放異彩。","在能運用感性與同理的工作中，做出留在人心裡的工作。"];
+const SIGN_LOVE=["戀愛是直球對決。比起耍手段，坦率才是最好的武器。","慢慢培養的戀愛。不要急，一點一點累積安心感。","和聊得起來的人才能長久。從朋友開始的戀愛為吉。","追求家庭溫暖的戀愛。請注意不要付出過度。","喜歡戲劇性的戀愛，並且堂堂正正地表達愛。","誠實而細心的戀愛。連細節都看得一清二楚的觀察力，適度就好。","喜歡聰明俐落、平等關係的戀愛社交家。","專一而深刻的戀愛。信任愈是滋長，牽絆就愈堅固。","能彼此尊重自由的戀愛才是理想。束縛只會有反效果。","花時間誠實培養的戀愛。是婚姻運很強的星。","從友情延伸出來的自由戀愛。尊重彼此的「個體」是關鍵。","奉獻而浪漫的戀愛。只是要小心陷得太深。"];
+const ASC_T=["充滿活力、令人覺得可靠的第一印象。","沉穩的舉止，以及在身旁就令人安心的氛圍。","年輕有朝氣，初次見面也很好聊的氣息。","容易親近，看起來很愛照顧人的印象。","華麗而引人注目的存在感。","知性而端正的印象。","優雅而取得平衡的姿態。","神祕而看起來核心堅強的印象。","明朗開放的氣場。","認真、看起來值得信賴的印象。","某處帶著個性、抓不住的魅力。","柔和、彷彿在作夢的氛圍。"];
+/* 年の五行と星座エレメントの相性テキスト（rel: 0比和 1生入 2泄 3剋入 4剋出）*/
+const YEAR_EL_T=[
+ "順風的一年。原有的氣質會直接成為強項。請在擅長的領域一決勝負。",
+ "受眷顧的一年。得到周遭的支持與環境的推力，自然就能成長。請坦然接受。",
+ "給予的一年。傳播、創作與教導都會結出果實，但要注意別努力過頭而消耗自己。",
+ "被鍛鍊的一年。負荷會成為成長的養分，但切忌勉強。休息也是實力的一部分。",
+ "進攻的一年。瞄準目標行動，就能帶回確實的戰果。"
+];
+const SIGN_EL_TO_GOGYO={ "火":1,"地":2,"風":0,"水":4 };
+
+/* ══════════ 養生（五行×臓腑・星座×身体） ══════════ */
+const ELEM_BODY=[
+ {organ:"肝・膽囊・眼睛・肌肉・自律神經",note:"累積壓力時，容易以眼睛疲勞、肩頸僵硬、煩躁、自律神經失調等形式顯現的體質。",care:"深沉的睡眠與深呼吸，綠色蔬菜與帶酸味的食物。怒氣與鬱悶，用運動流掉是最好的藥。"},
+ {organ:"心臟・小腸・血管・舌",note:"勉強持續下去時，容易以心悸、血壓起伏、臉部潮熱、失眠等形式顯現的體質。",care:"用短暫的午睡與休息，勤快地讓心休息。綠茶、苦瓜等適度的苦味會成為你的盟友。"},
+ {organ:"胃・脾・消化器官・嘴巴周圍",note:"煩惱與飲食不規律，容易直接反映在腸胃上的體質。",care:"細嚼慢嚥、吃溫熱的食物、甜食適可而止。想太多的時候，就動動身體讓腦袋放空。"},
+ {organ:"肺・大腸・呼吸道・皮膚・鼻",note:"在乾燥的季節裡，容易出現咳嗽、皮膚粗糙、鼻子不適與排便失調的體質。",care:"把加濕與腸道保養（發酵食品、膳食纖維）變成習慣。心情低落時及早找人說說，呼吸就會變深。"},
+ {organ:"腎・膀胱・耳・骨骼・荷爾蒙",note:"受寒與過勞，容易以腰部沉重、耳鳴、水腫、白髮等訊號顯現的體質。",care:"首要之務是別讓下半身受寒。黑豆、黑芝麻、海藻等黑色食材可多吃，鹽分則要節制。"}
+];
+const SIGN_BODY=["頭・臉・眼","喉嚨・脖子・甲狀腺","肺・手臂・肩・神經","胃・胸部","心臟・背部・血壓","腸・消化器官","腎臟・腰・皮膚","泌尿系統・荷爾蒙平衡","肝臟・腰・大腿","骨骼・關節・膝・牙齒","小腿・血液循環","腳・淋巴・免疫"];
+const SIGN_BODY_CARE=[
+ "頭痛與眼睛疲勞，是努力過頭的訊號。請有意識地安排離開螢幕的休息。",
+ "注意喉嚨乾燥與脖子僵硬。圍巾、加濕，以及轉動頸部的伸展就是守護神。",
+ "呼吸容易變淺。把肩胛骨周圍的伸展與深呼吸變成習慣。",
+ "壓力容易跑到胃的類型。請多吃溫熱的食物，並練習「不要一個人扛」。",
+ "疲勞容易出現在心臟與背部的星。正因為天天在衝刺，更要先把休息排進行程。",
+ "腸道是心理狀態的晴雨表。多吃發酵食品，並把「算了沒關係」當口頭禪。",
+ "注意腰部受寒與皮膚狀況不穩。補充水分與均衡飲食是根本。",
+ "荷爾蒙平衡與泌尿系統是這顆星的要害。別讓身體受寒，並讓定期健檢成為盟友。",
+ "暴飲暴食容易傷到肝臟的星。請安排休肝日，並做髖關節伸展。",
+ "骨骼、關節與牙齒是一輩子的事。把補鈣與牙科檢查變成習慣，這顆星就很強韌。",
+ "注意血液循環與畏寒。養成活動小腿的習慣——散步與爬樓梯都有效。",
+ "注意腳部水腫與免疫力下降。睡眠正是這顆星最強的保健品。"
+];
+
+/* ══════════ 適職 ══════════ */
+const SIGN_JOBS=[
+ ["創業家","業務","運動相關","急救醫療","消防・警察"],
+ ["廚師・甜點師","金融・資產管理","音樂家","職人・手作製造","不動產"],
+ ["記者・編輯","主播","口譯・筆譯","行銷人員","IT・Web"],
+ ["幼教老師","護理師","教師","諮商師","餐飲・飯店"],
+ ["經營者","演員・藝人","製作人","設計師","政治・團體幹部"],
+ ["會計師・稅務師","藥師","品質管理","數據分析","編輯・校對"],
+ ["人事・對外","律師","美容・時尚","婚禮產業","外交・協調者"],
+ ["研究人員","醫師","心理師","調查・分析","傳統工藝"],
+ ["貿易商社","旅行・觀光","大學教師","出版","運動指導"],
+ ["公務員","銀行員","建築・土木","經營管理","傳統產業"],
+ ["IT・AI開發","研究開發","發明・專利","NPO・社會活動","廣播・媒體"],
+ ["藝術家","音樂・影像","照護福利","幼教","治療師"]
+];
+const STEM_JOBS=[
+ ["管理職","教育工作者","建築・林業","公務員","經營企劃"],
+ ["設計師","園藝・花藝","祕書・協調者","服務業","編輯"],
+ ["演藝・娛樂","業務","公關・PR","能源相關","運動"],
+ ["研究人員","美髮師","廚師","諮商師","燈光・影像"],
+ ["不動產","土木建築","金融","農業","物流"],
+ ["教師","農業・食品","營養師","人才培育","地方振興"],
+ ["警察・軍人","外科醫師","金屬・機械","運動員","開拓業務"],
+ ["珠寶・美容","牙醫","精密儀器","藝術家","評論・批評"],
+ ["貿易","運輸・海運","水產","觀光","自由接案"],
+ ["學者","作家","釀酒・飲料","醫療","心理・心靈世界"]
+];
+const ANIMAL_JOBS={
+ "狼":["專業職","職人","研究人員","自由接案"],
+ "小鹿":["客服","幼教・教育","公關","團隊支援"],
+ "猴子":["業務","娛樂","企劃","技術職"],
+ "獵豹":["開發新客業務","運動","新聞","新創公司"],
+ "黑豹":["時尚","美容","廣告","商品開發"],
+ "獅子":["經營","管理職","教育","品牌事業"],
+ "老虎":["經營","現場監工","法律","公職"],
+ "狸":["傳統產業","人事","仲介・不動產","客戶服務"],
+ "無尾熊":["企劃・規劃職","金融","不動產","療癒系服務"],
+ "大象":["技術職","製造","研究","傳統工藝"],
+ "綿羊":["行政","會計","社福","團隊協調者"],
+ "天馬":["創意工作","海外相關","藝術","企劃開發"]
+};
+
+/* ══════════ こども向け ══════════ */
+const SIGN_KID=[
+ "一想到「好想試試看！」就能馬上行動，是有活力的挑戰者。就算跌倒也能馬上站起來，這點超厲害。",
+ "最喜歡好吃的、漂亮的、摸起來舒服的東西。雖然慢，但堅持到最後的力量是第一名。",
+ "愛問東問西的聊天高手。學新東西學得很快，還能同時做兩件事。",
+ "溫柔又重視同伴。會一直記得家人和朋友的事，看到有困難的孩子就放不下。",
+ "班上的人氣王。被拍手鼓掌就更有幹勁。像太陽一樣把大家照得亮亮的孩子。",
+ "很注意小地方的可靠孩子。很會整理和幫忙，大家都很依賴。",
+ "很會把吵架變和好的平衡高手。很時髦，跟誰都能變成好朋友。",
+ "能夠對一件事專心到讓人嚇一跳的孩子。喜歡上的東西，會一路鑽研到非常清楚。",
+ "最喜歡冒險。對遙遠的世界充滿好奇。不在意小細節，是開朗的旅人型。",
+ "能夠慢慢努力、很能忍耐的孩子。花上時間，一定會抵達目標。長大之後會愈來愈厲害喔。",
+ "會想到跟別人不一樣的點子，是發明家型。最擅長思考「為什麼？」「如果呢？」。",
+ "想像力超厲害的溫柔孩子。懂得別人的難過，心很柔軟。"
+];
+const STEM_KID=[
+ "心的正中央有「大樹」的人。正直，討厭說謊。是能成為大家指標的那棵樹喔。",
+ "心的正中央有「花和草」的人。柔軟，而且擁有在任何地方都能漂亮綻放的堅強喔。",
+ "心的正中央有「太陽」的人。光是待在那裡，周圍就會一下子明亮起來，擁有光的力量。",
+ "心的正中央有「蠟燭的火」的人。安靜卻溫暖，會悄悄照亮重要的東西喔。",
+ "心的正中央有「大山」的人。穩穩地矗立著，一點小事動搖不了，是可以依靠的孩子。",
+ "心的正中央有「田裡的土」的人。就像培育花和蔬菜一樣，能夠對人很溫柔的孩子。",
+ "心的正中央有「刀（鋼鐵）」的人。一旦決定就很強！愈練習就愈鋒利喔。",
+ "心的正中央有「寶石」的人。最喜歡漂亮的東西，愈打磨就愈閃亮喔。",
+ "心的正中央有「大海」的人。心胸寬廣，最喜歡自由。智慧會不斷湧出來。",
+ "心的正中央有「雨滴」的人。擅長安靜地思考，擁有能滲進大家心裡的溫柔喔。"
+];
+const ANIMAL_KID={
+ "狼":"喜歡獨處時間、按自己步調來的狼。是找出專屬自己做法的天才喔。",
+ "小鹿":"親人的小鹿。對要好的朋友會撒嬌。是不會說謊的誠實孩子喔。",
+ "猴子":"玩耍的天才，猴子先生。手很巧，最擅長想辦法動腦筋。被稱讚就會力量大增！",
+ "獵豹":"一跑起來就比誰都快的獵豹。最擅長在新的事情上「搶第一」喔。",
+ "黑豹":"最喜歡帥氣事物的黑豹。是發現新東西、時髦東西的高手喔。",
+ "獅子":"動物的國王，獅子。其實是很努力的孩子，卻把這件事藏起來，表現得堂堂正正喔。",
+ "老虎":"可靠的老虎大哥。看到有困難的孩子，就放不下的那種溫柔。",
+ "狸":"讓大家鬆一口氣的狸先生。珍惜舊時光與回憶，是心很暖的孩子。",
+ "無尾熊":"看起來慢吞吞，其實很聰明的無尾熊。午睡時間，絕對不能少！",
+ "大象":"一點一滴努力的大象。記憶力超強，練習過的事絕對不會忘記。",
+ "綿羊":"和大家在一起就開心的綿羊。能注意到落單孩子的溫柔孩子喔。",
+ "天馬":"在天空飛的天馬。靈感超級厲害，愈是讓他自由，就愈能大顯身手喔。"
+};
+const KID_TODAY={
+ 5:"最棒的日子！試著挑戰一直想做的事吧。",
+ 4:"順流的日子。和朋友一起，就會變得更好喔。",
+ 3:"普通的日子。認真仔細地過，明天就會變得更好喔。",
+ 2:"慢慢來的日子。整理一下房間，運氣就會上升喔。",
+ 1:"休息的日子。早點睡，把明天的力量存起來。"
+};
+
+/* ══════════ 四柱推命 ══════════ */
+const DAYSTEM_T=[
+ {sym:"大樹",key:"筆直的信念",t:"甲是朝天伸展的大樹。筆直而責任感強，是討厭歪曲之事的領袖氣質。以寧折不彎的堅強核心，成為周遭的依靠。"},
+ {sym:"花草",key:"柔韌的堅強",t:"乙是隨風彎折的花草。柔軟而堅韌，具有配合環境改變綻放方式的適應才能。身段雖柔，紮根的力量卻不輸大樹。"},
+ {sym:"太陽",key:"照亮的力量",t:"丙是照亮萬物的太陽。明朗而開放，光是存在就能讓場面熱鬧起來。表裡如一、公平傾注的能量，本身就是培育人的光。"},
+ {sym:"燈火",key:"洞察與情感",t:"丁是暗夜的燈火、燭火。纖細而情深，具有照出事物本質的洞察力。是能安靜溫暖靠近之人的人。"},
+ {sym:"山岳",key:"不為所動的包容力",t:"戊是穩穩矗立的山。有安定感與包容力，一般的事情動搖不了他。信用招來信用，不知不覺間，就成了大家倚靠的中流砥柱。"},
+ {sym:"田地",key:"培育的力量",t:"己是孕育作物的田土。照顧人很周到，具有一點一滴培育人與事的才能。即使不顯眼，在收成的背後，總是有這片土。"},
+ {sym:"鋼鐵",key:"開創的決斷力",t:"庚是鍛鍊過的鋼、是刀刃。決斷力與行動力出眾，具有劈開困難的力量。愈經鍛鍊愈是鋒利，是戰鬥者之星。"},
+ {sym:"寶石",key:"被打磨的美感",t:"辛是打磨過的寶石。擁有敏銳的美感與細緻的自尊，不斷追求洗練。每經歷一次名為試煉的研磨，就更加光彩奪目。"},
+ {sym:"大海",key:"雄大的自由",t:"壬是大河與大海之水。自由而格局宏大，討厭被圈住。智慧如流水一般，不知停留為何物。"},
+ {sym:"雨露",key:"滲透的智性",t:"癸是滲入大地的雨露。擁有沉靜的智性，以及不知不覺滲進人心的穿透力。作為帶來滋潤的存在，是不可或缺的人。"}
+];
+const TSUHEN=["比肩","劫財","食神","傷官","偏財","正財","偏官","正官","偏印","印綬"];
+const TSUHEN_T=[
+ "自立與自我軸心之年。單獨挑戰會結出果實。是可以貫徹自己步調的一年，但要小心固執與支出。",
+ "與夥伴合作大展身手的一年。協力會成為很大的力量，但金錢借貸與合資事業的契約要謹慎。",
+ "衣食住都豐足的享樂之年。興趣、創作與飲食的緣分擴展開來，生活多了滋潤。好好玩、好好休息為吉。",
+ "感受力變得敏銳的一年。表現活動與技術學習都有順風。言辭也會變得犀利，用字遣詞請謹慎。",
+ "愈動愈有收穫的一年。生意頭腦與人脈會招來財運。請身段輕盈地多往有相遇的場合走走。",
+ "踏實累積的一年。信用會變成金錢。一點一滴的努力與儲蓄，以及珍惜家庭，就是開運的關鍵。",
+ "忙碌與挑戰之年。課題接踵而來，但正是擅長速度戰的時候。健康管理與睡眠，是最重要的武器。",
+ "責任與評價之年。升遷、證照、簽約等社會性的節點上都有好時機。誠實本身就會成為順風。",
+ "學習與企劃之年。專業知識、副業，以及對新領域的好奇心都為吉。適合試著穿上「第二雙草鞋」。",
+ "得享智慧與援助的一年。學問、證照與長輩的提攜都會成為助力。虛心受教會把運氣帶來。"
+];
+const HOUR_NAMES=["子時","丑時","寅時","卯時","辰時","巳時","午時","未時","申時","酉時","戌時","亥時"];
+/* 通変星の「人物像」テキスト（年柱・月柱の顔として使用） */
+const TSUHEN_P=[
+ "獨立獨行。比起在誰之下，更想立起自己的旗子",
+ "與夥伴合作把事情做大的人。兼具敢賭的膽識與社交能力",
+ "享受衣食住的豁達。玩心自然而然把人吸引過來",
+ "敏銳的感性與表現力。以言語或作品打動人心",
+ "腦筋轉得快、有生意頭腦的人。一邊走一邊想，把緣分變成收成",
+ "踏實而信用第一。一點一滴累積的誠實就是財產",
+ "行動力與不服輸。愈是困難愈是燃燒的戰將型",
+ "責任感與品行。在組織中一步步累積信任的人",
+ "企劃與發想之人。以靈感與專業知識一決勝負",
+ "智慧與學習之人。教養會直接化為人望"
+];
+/* 十二運 */
+const JUNIUN=["長生","沐浴","冠帶","建祿","帝旺","衰","病","死","墓","絕","胎","養"];
+const JUNIUN_T=[
+ "坦率而舒展。得人緣、很會被培育的星。",
+ "善變與風情。在變化之中打磨自己的星。",
+ "華麗的上升企圖。愈站上檯面愈耀眼的星。",
+ "自立與實力。踏實建立起的力量會成為一生根基的星。",
+ "頂點的強運。氣勢之強是十二運之首的星。",
+ "圓熟的沉穩。擅長防守、踏實生活的星。",
+ "纖細的感受力。以溫柔與想像力療癒他人的星。",
+ "專注與探究。是把一條路鑽研到深處的星。",
+ "儲蓄的力量。一點一滴累積，守護家與傳統的星。",
+ "變化與再生。能從零重新站起、具爆發力的星。",
+ "好奇心與柔軟度。被新事物吸引的企劃之星。",
+ "擅長撒嬌的人望。受人提攜而成長的星。"
+];
+const YANG_START={0:11,2:2,4:2,6:5,8:8}, YIN_START={1:6,3:9,5:9,7:0,9:3};
+function juniun(stem,branch){
+  const yang=stem%2===0;
+  const start=yang?YANG_START[stem]:YIN_START[stem];
+  return yang?mod(branch-start,12):mod(start-branch,12);
+}
+/* 月運ワンポイント */
+const TSUHEN_M=[
+ "單獨行動為吉。憑自己的決斷行動的月份",
+ "與夥伴的共同作業很有氣勢。金錢管理要仔細",
+ "娛樂與美食的緣分擴展的月份。最適合放鬆充電",
+ "感性敏銳的月份。只要用字遣詞謹慎些就好",
+ "人脈帶來財運的月份。請身段輕盈地多走動",
+ "踏實累積的月份。適合簽約與儲蓄",
+ "忙碌的勝負之月。健康管理列為第一優先",
+ "評價傳達到位的月份。誠實會成為順風",
+ "學習與企劃之月。接觸新的領域為吉",
+ "智慧與援助之月。找長輩商量，路就會打開"
+];
+
+/* ══════════ 九星気学 ══════════ */
+const KYUSEI=[
+ {n:"一白水星",el:4,home:"北",t:"水之星。柔軟而有耐性，能配合任何容器，是人際關係的高手。把辛勞化為深度，安靜地成就大業。"},
+ {n:"二黑土星",el:2,home:"西南",t:"母性大地之星。踏實又愛照顧人，在幕後支撐他人的力量是九星第一。一點一滴的努力，會成為晚年的收成。"},
+ {n:"三碧木星",el:0,home:"東",t:"雷之星。行動力與發聲力都強，不論到幾歲都是年輕的挑戰者。總能最早聽見時代最前端的聲音。"},
+ {n:"四綠木星",el:0,home:"東南",t:"風之星。是兼具和諧與信用的人，具備結緣與傳遞的天賦。柔軟的身段背後，藏著精明的判斷力。"},
+ {n:"五黃土星",el:2,home:"中央",t:"帝王之星。以強運與存在感，不論好壞都站在場子的中心。從谷底重新站起的再生力，無人能及。"},
+ {n:"六白金星",el:3,home:"西北",t:"天之星。責任感強，是追求完美的理想主義者。正因為是上天要磨練的星而格外忙碌，但也因此升得更高。"},
+ {n:"七赤金星",el:3,home:"西",t:"澤之星。社交與談吐的天才，懂得享受，也懂得人生的收穫。討喜的背後，有著敏銳的金錢盤算與觀察力。"},
+ {n:"八白土星",el:2,home:"東北",t:"山之星。是繼承與變革之星，儲蓄與累積的能力出眾。也是把轉機化為機會、擅長切換的高手。"},
+ {n:"九紫火星",el:1,home:"南",t:"火之星。是兼具熱情與美感的人，頭腦清晰，散發華麗的存在感。得享名譽的同時，也有容易上火的一面。"}
+];
+/* 年盤で回座した宮のテーマ（palace index = 定位星-1）*/
+const PALACE_T={
+ 1:"坎宮（北）＝充電與內省之年。運勢的冬天。不急躁，以學習與健康管理整頓根基，明年起的上升就會大不相同。",
+ 2:"坤宮（西南）＝準備與培育之年。是耕田的時期。只要專心一點一滴打好基礎，日後的收成就是必然。",
+ 3:"震宮（東）＝發展與啟動之年。運勢的春雷。新的挑戰與開始都能乘上最好的順風。",
+ 4:"巽宮（東南）＝緣分理順之年。信用、談判與姻緣都有好時機。好名聲會乘著風傳開。",
+ 5:"中宮＝受注目與聚焦之年。是八方視線匯聚的運勢中心。比起自己四處走動，提高向心力靜待為吉。",
+ 6:"乾宮（西北）＝充實與完成之年。實力獲得認可，並受到長輩的提攜。雖然忙碌，手感卻十分紮實。",
+ 7:"兌宮（西）＝喜悅與收穫之年。娛樂、財運與人際往來都熱鬧起來的豐收之秋。唯獨花錢要節制。",
+ 8:"艮宮（東北）＝變化與轉換之年。是越過一座山的節點。只要不害怕整理與切換，下一座山峰就會浮現。",
+ 9:"離宮（南）＝名譽與鎂光燈之年。與評價、錄取、獲獎有緣，但另一方面也容易發生離合。請把實力化為光芒。"
+};
+/* 宮ごとの運気スコア（生涯運カーブ用・5点満点） */
+const PALACE_SCORE={1:1,2:2,3:3,4:4,5:4.5,6:4.8,7:5,8:3.5,9:2.5};
+const PALACE_SHORT={1:"充電",2:"準備",3:"啟動",4:"伸展",5:"注目",6:"充實",7:"收穫",8:"變化",9:"鎂光燈"};
+const PALACES=[ // 方位盤の並び（北を下にした伝統盤ではなく、北を上に）
+ {dir:"北",base:1,angle:"N"},{dir:"東北",base:8,angle:"NE"},{dir:"東",base:3,angle:"E"},{dir:"東南",base:4,angle:"SE"},
+ {dir:"南",base:9,angle:"S"},{dir:"西南",base:2,angle:"SW"},{dir:"西",base:7,angle:"W"},{dir:"西北",base:6,angle:"NW"}
+];
+/* 月命星（寅月スタートの星。本命星のグループで決まる） */
+const GETSUMEI_START={1:8,4:8,7:8,2:2,5:2,8:2,3:5,6:5,9:5};
+const BRANCH_DIR={0:"北",1:"東北",2:"東北",3:"東",4:"東南",5:"東南",6:"南",7:"西南",8:"西南",9:"西",10:"西北",11:"西北"};
+const OPP_DIR={"北":"南","南":"北","東":"西","西":"東","東北":"西南","西南":"東北","東南":"西北","西北":"東南"};
+const EHO={0:"東北東",5:"東北東",1:"西南西",6:"西南西",2:"南南東",7:"南南東",4:"南南東",9:"南南東",3:"北北西",8:"北北西"};
+
+/* ══════════ 動物占い ══════════ */
+const ANIMALS={
+ "狼":{key:"獨有的世界觀",t:"擁有獨自一人也能自在的強大，狼。比起群體的邏輯更看重自己的信念，比起流行更選擇真品，是職人性格。不喜歡步調被打亂，卻能以獨有的世界觀做出無可取代的工作。"},
+ "小鹿":{key:"不耍心機的誠實",t:"好奇心與警戒心並存的小鹿。一旦讓對方進到怕生的那道牆內，就會徹底撒嬌、全心付出。不耍心機的誠實，正是這個人最大的武器。"},
+ "猴子":{key:"炒熱氣氛的靈巧",t:"把場子炒熱、多才多藝的猴子。兼具細膩的體貼與靈巧的身手，在遊戲與比賽上很強，是人見人愛的角色。愈被稱讚愈能成長，骨子裡就是個拚命三郎。"},
+ "獵豹":{key:"超群的爆發力",t:"草原上最快的獵豹。發現新目標那一瞬間的起跑衝刺，誰也比不上。比起長期戰更適合短期決戰。在持續挑戰之中閃閃發光，是不折不扣的挑戰者。"},
+ "黑豹":{key:"洗練的感性",t:"洗練的造型師，黑豹。自尊心高，對新穎與美麗事物的嗅覺超群。那份藏在易受傷之下的溫柔，懂的人自然懂。"},
+ "獅子":{key:"王者的風範",t:"百獸之王獅子。在人前絕不示弱，具有守護夥伴的照顧之心。對「被特別對待」沒有抵抗力，倒也可愛。那份堂堂正正的舉止是天生的。"},
+ "老虎":{key:"從容的大哥氣度",t:"從容不迫、帶著大哥氣度的老虎。憑著出色的平衡感與公平，人自然而然聚集過來。看似慢條斯理，關鍵時刻的底力卻是森林裡第一。"},
+ "狸":{key:"讓人放鬆的討喜",t:"經驗說了算的人情派，狸。珍惜古老而美好的事物，身上有種讓氣氛變柔和的不可思議的討喜。能讓人說出一句「真是拿你沒辦法」就算贏了，屬於大器晚成型。"},
+ "無尾熊":{key:"看似悠哉其實是策略家",t:"服務精神旺盛的無尾熊。看起來慢吞吞，其實是會擬定長期計畫的策略家。休息就是這個人的充電時間。尤加利樹，可是誰也不讓的。"},
+ "大象":{key:"沉靜的專業意識",t:"安靜的努力家，大象。專業意識很高，以一點一滴累積起來的技術與知識，朝著頂峰前進。被踩過的恩情與被踩過的怨懟都不會忘記，是記憶之人。"},
+ "綿羊":{key:"守護連結的協調者",t:"群體的協調者，綿羊。怕寂寞，把人與人的連結看得比什麼都重要，並以客觀的視角支撐整個場面。「為了大家」會直接連結到自己的幸福。"},
+ "天馬":{key:"翱翔天際的直覺",t:"天馬行空的自由人，天馬。比起道理，更靠直覺與靈感而活，一旦進入狀態的爆發力簡直是天才。唯一的天敵，就是綁住翅膀的繁瑣規則。"}
+};
+const ANIMAL_GROUP={"小鹿":"月","黑豹":"月","綿羊":"月","狸":"月","狼":"地球","猴子":"地球","老虎":"地球","無尾熊":"地球","獅子":"太陽","大象":"太陽","獵豹":"太陽","天馬":"太陽"};
+const ANIMAL_EMOJI={"狼":"🐺","小鹿":"🦌","猴子":"🐵","獵豹":"🐆","黑豹":"🐈‍⬛","獅子":"🦁","老虎":"🐯","狸":"🦝","無尾熊":"🐨","大象":"🐘","綿羊":"🐑","天馬":"🦄"};
+/* 動物グループの組み合わせ（相性の読み物） */
+const GROUP_PAIR_T={
+ "月月":"兩個「好人」的融洽組合。氣氛是最好的，剩下的就是別忘了說真心話的勇氣。",
+ "地球地球":"以目標凝聚的實務搭檔。溝通很快，利害盤算也一致。",
+ "太陽太陽":"氣勢與衝勁的最強組合。炒熱氣氛天下第一，只要把截止期限的管理交給別人就好。",
+ "月地球":"重感受的一方與重結果的一方。只要互相把話翻譯給對方聽，守與攻就都齊了，是出色的搭檔。",
+ "月太陽":"月亮悄悄支撐太陽的好組合。太陽這一方把感謝說出口，就能持續得長久得多。",
+ "地球太陽":"現實派與感性派。只要把步調的差異理解成「角色的差異」，就能擁有彼此所沒有的武器。"
+};
+const groupPairText=(g1,g2)=>GROUP_PAIR_T[g1+g2]||GROUP_PAIR_T[g2+g1];
+/* 五行の色タグ・動物グループ章 */
+const elTag=i=>`<span class="el-t el-${i}">${ELEMS[i]}</span>`;
+const grpTag=g=>`<span class="grp-t grp-${g==="月"?"m":g==="地球"?"e":"s"}">${g}</span>`;
+const GROUP_T={
+ "月":"如滿月般照亮場面的「月族群」。是希望當個好人的溫柔調停者，把人與人的和睦看得比什麼都重要。體察對方心情的能力是最大的武器，但被拜託就拒絕不了、把事情全攬在身上是美中不足之處。練習說「NO」，會讓這份氣質更加發光。",
+ "地球":"雙腳踏在大地上的「地球族群」。是重視目標與結果的現實派，珍惜自己的步調與計畫，不浪費地穩步前進。因為太可靠，常被以得失來看待，但偶爾流露的真實撒嬌，會一口氣拉近與周遭的距離。",
+ "太陽":"活在靈光一閃中的「太陽族群」。以天真爛漫的存在感把場面照亮，不落窠臼的發想與衝勁就是武器。情緒容易有起伏，因此適合在狀態好的時段一口氣推進的工作方式。瑣碎的管理，就交給擅長的人吧。"
+};
+const CHARS60=[
+ ["長跑選手型的獵豹","獵豹"],["社交家的狸","狸"],["靜不下來的猴子","猴子"],["身段輕盈的無尾熊","無尾熊"],["照顧人的黑豹","黑豹"],
+ ["愛意滿溢的老虎","老虎"],["全力疾馳的獵豹","獵豹"],["打磨得閃閃發亮的狸","狸"],["懷抱遠大志向的猴子","猴子"],["母性豐沛的無尾熊","無尾熊"],
+ ["誠實的小鹿","小鹿"],["人氣王大象","大象"],["開朗的狼","狼"],["缺乏協調性的綿羊","綿羊"],["穩重踏實的猴子","猴子"],
+ ["無尾熊中的無尾熊","無尾熊"],["意志堅強的小鹿","小鹿"],["纖細的大象","大象"],["流浪的狼","狼"],["沉靜的綿羊","綿羊"],
+ ["沉著冷靜的天馬","天馬"],["擁有強韌翅膀的天馬","天馬"],["天真無邪的綿羊","綿羊"],["富有創意的狼","狼"],["溫和的狼","狼"],
+ ["堅韌的綿羊","綿羊"],["波瀾萬丈的天馬","天馬"],["優雅的天馬","天馬"],["挑戰精神旺盛的綿羊","綿羊"],["適應力強的狼","狼"],
+ ["成為領袖的大象","大象"],["踏實可靠的小鹿","小鹿"],["活躍的無尾熊","無尾熊"],["善變的猴子","猴子"],["被依賴就開心的綿羊","綿羊"],
+ ["惹人好感的狼","狼"],["一路直衝的大象","大象"],["華麗的小鹿","小鹿"],["充滿夢與浪漫的無尾熊","無尾熊"],["盡心的猴子","猴子"],
+ ["大器晚成的狸","狸"],["腳力強健的獵豹","獵豹"],["四處走動的老虎","老虎"],["熱情的黑豹","黑豹"],["服務精神旺盛的無尾熊","無尾熊"],
+ ["防守的猴子","猴子"],["充滿人情味的狸","狸"],["有品格的獵豹","獵豹"],["悠然自得的老虎","老虎"],["情緒起伏很大的黑豹","黑豹"],
+ ["走自己的路的獅子","獅子"],["具有統率力的獅子","獅子"],["情感豐沛的黑豹","黑豹"],["樂天的老虎","老虎"],["充滿力量的老虎","老虎"],
+ ["不裝模作樣的黑豹","黑豹"],["情緒化的獅子","獅子"],["容易受傷的獅子","獅子"],["討厭束縛的黑豹","黑豹"],["慈悲深厚的老虎","老虎"]
+];
+
+/* ══════════ 姓名判断 81数理 ══════════ */
+/* [吉凶, 短評] 吉凶: 大吉/吉/半吉/凶 */
+const KAKUSU={
+ 1:["大吉","萬物之始・成功"],2:["凶","分離・迷惘"],3:["大吉","才能綻放・福德"],4:["凶","辛勞・波瀾"],5:["大吉","福壽・圓滿"],
+ 6:["大吉","天惠・安泰"],7:["吉","獨立・意志堅強"],8:["吉","努力・堅實"],9:["凶","波瀾・薄運"],10:["凶","空虛・消耗"],
+ 11:["大吉","踏實・上天的恩惠"],12:["凶","挫折・硬撐"],13:["大吉","人氣・才智"],14:["凶","孤獨・不和"],15:["大吉","德望・圓滿"],
+ 16:["大吉","眾望・大哥運"],17:["吉","突破力・剛氣"],18:["吉","意志堅定・發展"],19:["凶","障礙・波瀾"],20:["凶","苦難・忍耐"],
+ 21:["大吉","獨立・領袖運"],22:["凶","中途而廢・薄弱"],23:["大吉","隆盛・發跡"],24:["大吉","財運・蓄財"],25:["大吉","才幹・安泰"],
+ 26:["凶","波瀾萬丈・英雄運"],27:["半吉","批判・中途而廢"],28:["凶","不安定・遇難"],29:["大吉","智謀・成功"],30:["半吉","浮沉・投機"],
+ 31:["大吉","智仁勇・統率"],32:["大吉","幸運・僥倖"],33:["大吉","昇天・權威"],34:["凶","破亂・災難"],35:["大吉","溫和・技藝"],
+ 36:["凶","波瀾・俠氣"],37:["大吉","獨立・忠實"],38:["半吉","技藝・文才"],39:["大吉","權威・富貴"],40:["半吉","智略・變動"],
+ 41:["大吉","實力・名聲"],42:["半吉","多藝・靈巧"],43:["凶","散財・迷惘"],44:["凶","破兆・苦難"],45:["大吉","順風・大成"],
+ 46:["凶","變遷・辛勞"],47:["大吉","開花・結實"],48:["大吉","智德・軍師"],49:["半吉","吉凶參半"],50:["半吉","一成一敗"],
+ 51:["半吉","盛衰交錯"],52:["大吉","遠見・收成"],53:["半吉","外實內虛"],54:["凶","多難・障礙"],55:["半吉","外美內苦"],
+ 56:["凶","消極・不足"],57:["大吉","寒梅・剛毅"],58:["半吉","先苦後樂"],59:["凶","遲疑・不遇"],60:["凶","動搖・不安定"],
+ 61:["大吉","名利・繁榮"],62:["凶","衰退・不和"],63:["大吉","富榮・發展"],64:["凶","浮沉・別離"],65:["大吉","長壽・隆昌"],
+ 66:["凶","進退兩難"],67:["大吉","通達・天惠"],68:["大吉","發明・勤勉"],69:["凶","停滯・不安"],70:["凶","空虛・寂寥"],
+ 71:["半吉","內心多勞"],72:["半吉","外吉內凶"],73:["半吉","志向高遠而難以實行"],74:["凶","無為・逆境"],75:["半吉","退而守之則吉"],
+ 76:["凶","傾覆・逆境"],77:["半吉","前半吉・後半凶"],78:["半吉","先吉後苦"],79:["凶","窮極・不遇"],80:["凶","波瀾・凶兆"],81:["大吉","還原・最大吉"]
+};
+const FORTUNE_LONG={
+ "大吉":"擁有強力推助的數。在關鍵時刻，運氣會站在你這邊。",
+ "吉":"踏實成長的數。累積會直接連結到結果。",
+ "半吉":"高峰與低谷交替出現的數。請設法看清好的浪頭再乘上去。",
+ "凶":"透過試煉受到鍛鍊的數。只要了解數的含意並加以準備，凶也能轉為學習。"
+};
+const GOKAKU_DESC={
+ "天格":"從祖先繼承而來的家族運。由姓氏本身的筆畫，代表與社會接點的根基。",
+ "人格":"出現在姓與名接點上的、屬於這個人的中心運。掌管性格的核心、工作運與中年期的運勢。",
+ "地格":"名字筆畫所顯示的幼年到青年期運勢。代表素質、才能與財運的萌芽。",
+ "外格":"從外部看見的印象與人際運。代表與家人以外的往來，以及受援助的運勢。",
+ "総格":"全部筆畫的總和所顯示的一生總運。特別會在邁向晚年時強烈顯現。"
+};
+
+/* ══════════ 画数辞書（新字体） ══════════ */
+const STROKES={
+"一":1,"二":2,"三":3,"四":5,"五":4,"六":4,"七":2,"八":2,"九":2,"十":2,"百":6,"千":3,"万":3,
+"人":2,"乃":2,"了":2,"子":3,"之":3,"也":3,"士":3,"大":3,"小":3,"山":3,"川":3,"口":3,"丸":3,"上":3,"下":3,"女":3,"弓":3,"々":3,"久":3,"工":3,"己":3,"土":3,"夕":3,
+"中":4,"木":4,"井":4,"内":4,"太":4,"友":4,"心":4,"仁":4,"斗":4,"月":4,"水":4,"火":4,"王":4,"牛":4,"犬":4,"丹":4,"化":4,"区":4,"斤":4,"今":4,"元":4,"天":4,"文":4,"日":4,"公":4,"戸":4,"手":4,"方":4,"比":4,"毛":4,"氏":4,"円":4,"仲":6,
+"田":5,"本":5,"加":5,"石":5,"央":5,"由":5,"礼":5,"史":5,"司":5,"矢":5,"正":5,"弘":5,"平":5,"冬":5,"北":5,"外":5,"辺":5,"白":5,"玉":5,"立":5,"古":5,"永":5,"可":5,"世":5,"生":5,"半":5,"広":5,"市":5,"布":5,"未":5,"末":5,"民":5,"玄":5,"甲":5,"申":5,"辻":5,
+"伊":6,"吉":6,"江":6,"西":6,"光":6,"有":6,"旭":6,"朱":6,"合":6,"妃":6,"好":6,"如":6,"曲":6,"竹":6,"米":6,"糸":6,"羽":6,"老":6,"耳":6,"臼":6,"安":6,"宇":6,"寺":6,"池":6,"早":6,"会":6,"休":6,"名":6,"字":6,"守":6,"成":6,"地":6,"多":6,"年":6,"百":6,"向":6,"行":6,"衣":6,"仁":4,
+"佐":7,"里":7,"花":7,"沙":7,"宏":7,"孝":7,"秀":7,"良":7,"芳":7,"村":7,"沢":7,"谷":7,"近":7,"坂":7,"阪":7,"杏":7,"伶":7,"志":7,"佑":7,"希":7,"妙":7,"赤":7,"玖":7,"快":7,"尾":7,"均":7,"究":7,"求":7,"作":7,"伸":7,"体":7,"住":7,"助":7,"努":7,"男":7,"町":7,"社":7,"見":7,"言":7,"車":7,"利":7,"別":7,"判":7,"角":7,"身":7,"寿":7,"図":7,
+"奈":8,"幸":8,"明":8,"直":8,"和":8,"忠":8,"東":8,"岡":8,"長":8,"金":8,"阿":8,"青":8,"岸":8,"岩":8,"林":8,"松":8,"空":8,"河":8,"昌":8,"武":8,"佳":8,"侑":8,"弥":8,"実":8,"茉":8,"怜":8,"果":8,"苗":8,"芽":8,"妹":8,"姉":8,"門":8,"虎":8,"斉":8,"京":8,"協":8,"学":8,"周":8,"和":8,"典":8,"卓":8,"尚":8,"歩":8,"波":8,"治":8,"法":8,"知":8,"英":8,"茂":8,"若":8,"雨":8,"奉":8,"宗":8,"官":8,"定":8,"宜":8,"忍":7,"念":8,"服":8,"朋":8,"枝":8,"欣":8,"步":8,
+"郎":9,"美":9,"香":9,"春":9,"秋":9,"星":9,"海":9,"城":9,"柳":9,"咲":9,"哉":9,"音":9,"勇":9,"俊":9,"昭":9,"亮":9,"紅":9,"奏":9,"律":9,"玲":9,"祐":9,"柚":9,"前":9,"南":9,"後":9,"荒":9,"信":9,"保":9,"風":9,"飛":9,"食":9,"首":9,"紀":9,"約":9,"建":9,"彦":9,"思":9,"恒":9,"政":9,"故":9,"施":9,"栄":9,"栃":9,"洋":9,"津":9,"活":9,"皆":9,"相":9,"研":9,"科":9,"祝":9,"神":9,"胡":9,"茜":9,"要":9,"計":9,"貞":9,"軍":9,"重":9,"面":9,"革":9,"品":9,"型":9,"垣":9,"変":9,"奎":9,"姿":9,"威":9,"宣":9,"室":9,"屋":9,
+"高":10,"桃":10,"桜":10,"恵":10,"浩":10,"真":10,"純":10,"泰":10,"哲":10,"敏":10,"竜":10,"馬":10,"隼":10,"剛":10,"晃":10,"桂":10,"姫":10,"珠":10,"島":10,"原":10,"浜":10,"浦":10,"宮":10,"峰":10,"峯":10,"桑":10,"栗":10,"郡":10,"紙":10,"能":10,"脇":10,"家":10,"梅":10,"莉":10,"悦":10,"起":10,"記":10,"娘":10,"修":10,"倫":10,"健":11,"候":10,"倉":10,"個":10,"値":10,"夏":10,"孫":10,"容":10,"師":10,"席":10,"帰":10,"庭":10,"恩":10,"息":10,"恭":10,"拳":10,"挙":10,"料":10,"旅":10,"時":10,"書":10,"朗":10,"根":10,"格":10,"梶":11,"殊":10,"流":10,"消":10,"珂":9,"珈":9,"班":10,"祥":10,"素":10,"紗":10,"紘":10,"純":10,"翁":10,"航":10,"般":10,"荘":9,"華":10,"訓":10,"財":10,"貢":10,"通":10,"速":10,"造":10,"連":10,"郁":9,"酒":10,"針":10,"隆":11,"馬":10,"骨":10,
+"崎":11,"斎":11,"菜":11,"彩":11,"理":11,"康":11,"悠":11,"唯":11,"梨":11,"麻":11,"涼":11,"崇":11,"強":11,"進":11,"野":11,"部":11,"堀":11,"菊":11,"笹":11,"曽":11,"黒":11,"紺":11,"萌":11,"菫":11,"規":11,"基":11,"堂":11,"婚":11,"宿":11,"密":11,"常":11,"彬":11,"御":12,"惟":11,"探":11,"接":11,"推":11,"教":11,"斜":11,"旋":11,"望":11,"梓":11,"梗":11,"渚":11,"清":11,"深":11,"淳":11,"猛":11,"猪":11,"率":11,"現":11,"球":11,"産":11,"略":11,"盛":11,"票":11,"章":11,"笛":11,"符":11,"細":11,"紳":11,"紹":11,"経":11,"翌":11,"習":11,"船":11,"菖":11,"菅":11,"訪":11,"設":11,"許":11,"販":11,"責":11,"逗":11,"透":10,"逢":11,"郷":11,"都":11,"陵":11,"雪":11,"鳥":11,"鹿":11,"麦":7,
+"渡":12,"森":12,"陽":12,"翔":12,"絵":12,"智":12,"博":12,"裕":12,"雄":12,"結":12,"遥":12,"晴":12,"葉":12,"琴":12,"勝":12,"貴":12,"敬":12,"景":12,"富":12,"間":12,"開":12,"隅":12,"塚":12,"湖":12,"暁":12,"晶":12,"紫":12,"詞":12,"善":12,"喜":12,"堅":12,"堤":12,"場":12,"塁":12,"奥":12,"媛":12,"寒":12,"尊":12,"就":12,"嵐":12,"幾":12,"廊":12,"弾":12,"復":12,"循":12,"惣":12,"愉":12,"揮":12,"提":12,"揚":12,"敦":12,"斑":12,"普":12,"晩":12,"最":12,"朝":12,"期":12,"椋":12,"植":12,"椎":12,"検":12,"湊":12,"温":12,"港":12,"満":12,"湯":12,"然":12,"焼":12,"琳":12,"番":12,"登":12,"短":12,"程":12,"税":12,"筆":12,"等":12,"筋":12,"統":12,"給":12,"絢":12,"覚":12,"詠":12,"詔":12,"象":12,"賀":12,"超":12,"越":12,"距":12,"軽":12,"遊":12,"道":12,"達":12,"雅":13,"集":12,"雲":12,"順":12,"須":12,"歯":12,
+"愛":13,"誠":13,"義":13,"鈴":13,"遠":13,"福":13,"想":13,"蒼":13,"楓":13,"椿":13,"瑚":13,"瑞":13,"詩":13,"靖":13,"新":13,"暖":13,"照":13,"幹":13,"寛":13,"廉":13,"彙":13,"意":13,"慈":13,"戦":13,"携":13,"数":13,"楽":13,"歳":13,"殿":13,"源":13,"溝":13,"滝":13,"漢":13,"煙":13,"献":13,"猿":13,"聖":13,"腰":13,"蓮":13,"裏":13,"誉":13,"豊":13,"路":13,"跡":13,"農":13,"鉄":13,"雷":13,"電":13,"預":13,"頌":13,"飾":13,"椰":13,"業":13,"継":13,
+"歌":14,"嘉":14,"稲":14,"熊":14,"綾":14,"聡":14,"嶋":14,"関":14,"瑠":14,"翠":14,"碧":14,"銀":14,"暢":14,"様":14,"構":14,"槙":14,"歴":14,"漁":14,"漆":14,"漫":14,"熙":15,"爾":14,"獅":13,"瑳":14,"碑":14,"磁":14,"種":14,"稔":13,"端":14,"箕":14,"算":14,"管":14,"精":14,"綜":14,"綬":14,"維":14,"綱":14,"網":14,"緑":14,"総":14,"聞":14,"腐":14,"膜":14,"製":14,"複":14,"誌":14,"認":14,"誓":14,"誕":15,"語":14,"誘":14,"読":14,"豪":14,"賓":14,"輔":14,"遙":14,"銭":14,"閣":14,"際":14,"雑":14,"静":14,"領":14,"駆":14,"魂":14,"鳴":14,"徳":14,
+"輝":15,"舞":15,"凛":15,"凜":15,"慶":15,"毅":15,"遼":15,"諒":15,"蔵":15,"諏":15,"賢":16,"標":15,"横":15,"権":15,"歓":15,"潔":15,"潤":15,"澄":15,"熱":15,"畿":15,"監":15,"盤":15,"確":15,"稼":15,"稽":15,"稿":15,"穂":15,"箱":15,"範":15,"縁":15,"繁":16,"編":15,"緯":16,"膚":15,"舗":15,"蝶":15,"衛":16,"論":15,"諸":15,"調":15,"談":15,"請":15,"諭":15,"遷":15,"選":15,"遺":15,"鋭":15,"駒":15,"魅":15,"黎":15,"影":15,"徹":15,"摩":15,"敵":15,"敷":15,"暫":15,"槻":15,"劇":15,"億":15,"儀":15,"嬉":15,"寮":15,"導":15,"憂":15,"憧":16,"戯":15,
+"樹":16,"龍":16,"澪":16,"橋":16,"織":18,"整":16,"燕":16,"燈":16,"篤":16,"糖":16,"縞":16,"膳":16,"薫":16,"薬":16,"衡":16,"親":16,"諦":16,"謡":16,"賛":15,"輪":15,"還":16,"錦":16,"錬":16,"鋼":16,"錫":16,"隣":16,"頭":16,"館":16,"鮎":16,"叡":16,"憲":16,"操":16,"擁":16,"機":16,"激":16,"濃":16,"獲":16,"磨":16,"積":16,"穏":16,"興":16,"衛":16,"謀":16,"賢":16,"醍":16,
+"優":17,"翼":17,"駿":17,"環":17,"瞳":17,"礁":17,"績":17,"繊":17,"聴":17,"覧":17,"謙":17,"講":17,"謝":17,"鍵":17,"鍛":17,"闇":17,"霞":17,"鮮":17,"厳":17,"曖":17,"檀":17,"燦":17,"擢":17,
+"藤":18,"織":18,"観":18,"鎌":18,"鎮":18,"離":18,"難":18,"額":18,"顔":18,"類":18,"騎":18,"験":18,"藍":18,"藩":18,"繕":18,"繭":18,"職":18,"贈":18,"鎖":18,"曜":18,"濯":17,"燿":18,"璃":15,
+"瀬":19,"麗":19,"羅":19,"艶":19,"覇":19,"識":19,"譜":19,"警":19,"鏡":19,"霧":19,"韻":19,"願":19,"鯨":19,"麒":19,
+"響":20,"馨":20,"議":20,"譲":20,"護":20,"鐘":20,"耀":20,"騰":20,"欄":20,"蘭":19,
+"鶴":21,"櫻":21,"艦":21,"露":21,"驚":22,"讃":22,"巖":23,"鷹":24,"鷲":23,"麟":24,"鑑":23
+};
+const KANA_STROKES={
+"あ":3,"い":2,"う":2,"え":2,"お":3,"か":3,"き":4,"く":1,"け":3,"こ":2,"さ":3,"し":1,"す":2,"せ":3,"そ":1,
+"た":4,"ち":2,"つ":1,"て":1,"と":2,"な":4,"に":3,"ぬ":2,"ね":2,"の":1,"は":3,"ひ":1,"ふ":4,"へ":1,"ほ":4,
+"ま":3,"み":2,"む":3,"め":2,"も":3,"や":3,"ゆ":2,"よ":2,"ら":2,"り":2,"る":1,"れ":2,"ろ":1,"わ":2,"を":3,"ん":1,
+"ぁ":3,"ぃ":2,"ぅ":2,"ぇ":2,"ぉ":3,"っ":1,"ゃ":3,"ゅ":2,"ょ":2,
+"ア":2,"イ":2,"ウ":3,"エ":3,"オ":3,"カ":2,"キ":3,"ク":2,"ケ":3,"コ":2,"サ":3,"シ":3,"ス":2,"セ":2,"ソ":2,
+"タ":3,"チ":3,"ツ":3,"テ":3,"ト":2,"ナ":2,"ニ":2,"ヌ":2,"ネ":4,"ノ":1,"ハ":2,"ヒ":2,"フ":1,"ヘ":1,"ホ":4,
+"マ":2,"ミ":3,"ム":2,"メ":2,"モ":3,"ヤ":2,"ユ":2,"ヨ":3,"ラ":2,"リ":2,"ル":2,"レ":1,"ロ":3,"ワ":2,"ヲ":3,"ン":2,
+"ァ":2,"ィ":2,"ゥ":3,"ェ":3,"ォ":3,"ッ":3,"ャ":2,"ュ":2,"ョ":3,"ー":1
+};
+function lookupStroke(ch){
+  if(STROKES[ch]) return STROKES[ch];
+  if(KANA_STROKES[ch]) return KANA_STROKES[ch];
+  // 濁点・半濁点つきかなを分解して加算
+  const d=ch.normalize("NFD");
+  if(d.length===2 && KANA_STROKES[d[0]]){
+    if(d[1]==="゙") return KANA_STROKES[d[0]]+2; // 濁点
+    if(d[1]==="゚") return KANA_STROKES[d[0]]+1; // 半濁点
+  }
+  return null;
+}
+
+/* ══════════ 出生地 ══════════ */
+const PREFS=[
+["東京（日本）",35.69,139.69,9],["大阪（日本）",34.69,135.52,9],["京都（日本）",35.02,135.76,9],["奈良（日本）",34.69,135.83,9],
+["札幌（日本）",43.06,141.35,9],["仙台（日本）",38.27,140.87,9],["名古屋（日本）",35.18,136.91,9],["廣島（日本）",34.40,132.46,9],["福岡（日本）",33.61,130.42,9],["那霸（日本）",26.21,127.68,9],
+["臺北",25.03,121.57,8],["新北",25.01,121.47,8],["桃園",24.99,121.30,8],["臺中",24.15,120.68,8],["臺南",22.99,120.21,8],["高雄",22.63,120.30,8],["新竹",24.80,120.97,8],["花蓮",23.98,121.60,8],
+["香港",22.32,114.17,8],["澳門",22.20,113.54,8],["新加坡",1.35,103.82,8],
+["上海（中國）",31.23,121.47,8],["北京（中國）",39.90,116.41,8],["首爾（韓國）",37.57,126.98,9],["曼谷（泰國）",13.76,100.50,7],
+["紐約（美國）",40.71,-74.01,-5],["洛杉磯（美國）",34.05,-118.24,-8],["溫哥華（加拿大）",49.28,-123.12,-8],
+["倫敦（英國）",51.51,-0.13,0],["巴黎（法國）",48.85,2.35,1],["雪梨（澳洲）",-33.87,151.21,10]
+];
+
+/* ══════════ 天文計算 ══════════ */
+const rad=d=>d*Math.PI/180, deg=r=>r*180/Math.PI;
+const norm=d=>((d%360)+360)%360;
+const mod=(a,n)=>((a%n)+n)%n;
+function jdn(y,m,d){const a=Math.floor((14-m)/12),Y=y+4800-a,M=m+12*a-3;
+  return d+Math.floor((153*M+2)/5)+365*Y+Math.floor(Y/4)-Math.floor(Y/100)+Math.floor(Y/400)-32045;}
+function jdUT(y,m,d,hLocal,utcOff){return jdn(y,m,d)+((hLocal-utcOff)-12)/24;}
+function sunLon(jd){const n=jd-2451545,L=norm(280.460+0.9856474*n),g=rad(norm(357.528+0.9856003*n));
+  return norm(L+1.915*Math.sin(g)+0.020*Math.sin(2*g));}
+function moonLon(jd){const n=jd-2451545;
+  return norm(218.316+13.176396*n+6.289*Math.sin(rad(norm(134.963+13.064993*n))));}
+function ascendant(jd,lat,lon){const n=jd-2451545;
+  const ramc=rad(norm(norm(280.46061837+360.98564736629*n)+lon));
+  const eps=rad(23.4393),phi=rad(lat);
+  return norm(deg(Math.atan2(Math.cos(ramc),-(Math.sin(ramc)*Math.cos(eps)+Math.tan(phi)*Math.sin(eps)))));}
+const signOf=lon=>Math.floor(norm(lon)/30);
+const degInSign=lon=>norm(lon)%30;
+
+/* ══════════ 四柱推命 ══════════ */
+function fourPillars(y,m,d,hour,utcOff){
+  const sl=sunLon(jdUT(y,m,d,12,utcOff)); // 現地正午の太陽黄経
+  let py=y; if(m<=2 && sl>=270 && sl<315) py=y-1;           // 立春前は前年
+  const ys=mod(py-4,10), yb=mod(py-4,12);
+  const mi=Math.floor(norm(sl-315)/30);                      // 0=寅月
+  const ms=mod((ys%5)*2+2+mi,10), mb=mod(2+mi,12);
+  const di=mod(jdn(y,m,d)+49,60), ds=di%10, db=di%12;
+  let hs=null,hb=null;
+  if(hour!=null){ hb=Math.floor(mod(hour+1,24)/2)%12; hs=mod((ds%5)*2+hb,10); }
+  return {py,ys,yb,ms,mb,di,ds,db,hs,hb,sl};
+}
+function kanshiName(s,b){return STEMS[s]+BRANCHES[b];}
+function voidBranches(di){const g=Math.floor(di/10);return [mod(10-2*g,12),mod(11-2*g,12)];}
+function tsuhen(dayS,otherS){
+  const rel=mod(stemElem(otherS)-stemElem(dayS),5);
+  const same=(dayS%2)===(otherS%2);
+  return rel*2+(same?0:1);
+}
+/* 五行相性 rel: 0比和 1生入(相手が生) 2泄(自分が生) 3剋入 4剋出 */
+function elemRel(mine,other){
+  if(mine===other)return 0;
+  if(mod(other+1,5)===mine)return 1;
+  if(mod(mine+1,5)===other)return 2;
+  if(mod(other+2,5)===mine)return 3;
+  return 4;
+}
+
+/* ══════════ 九星 ══════════ */
+function honmeiStar(py){let n=11-mod(py,9); if(n>9)n-=9; return n;}
+function yearOfNow(date,utcOff){
+  const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();
+  const sl=sunLon(jdUT(y,m,d,12,utcOff==null?9:utcOff));
+  let py=y; if(m<=2 && sl>=270 && sl<315) py=y-1;
+  return py;
+}
+function starAt(center,base){let s=center+(base-5); while(s<1)s+=9; while(s>9)s-=9; return s;}
+
+/* ══════════ 姓名判断 ══════════ */
+function kakusuNorm(n){while(n>81)n-=80;return n;}
+function nameGrids(seiArr,meiArr){
+  const sSum=seiArr.reduce((a,b)=>a+b,0), mSum=meiArr.reduce((a,b)=>a+b,0);
+  const ten=sSum+(seiArr.length===1?1:0);
+  const chi=mSum+(meiArr.length===1?1:0);
+  const jin=seiArr[seiArr.length-1]+meiArr[0];
+  const sou=sSum+mSum;
+  const gai=Math.max(ten+chi-jin,1);
+  return {天格:kakusuNorm(ten),人格:kakusuNorm(jin),地格:kakusuNorm(chi),外格:kakusuNorm(gai),総格:kakusuNorm(sou)};
+}
+
+/* ══════════ ユーティリティ ══════════ */
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const isDark=()=>{
+  const t=document.documentElement.dataset.theme;
+  if(t==="dark")return true; if(t==="light")return false;
+  return matchMedia("(prefers-color-scheme: dark)").matches;
+};
+const elColor=e=>(isDark()?ELEM_COLOR_DARK:ELEM_COLOR)[ELEMS[e]];
+const fClass=f=>({"大吉":"f-daikichi","吉":"f-kichi","半吉":"f-hankichi","凶":"f-kyo"})[f]||"f-kyo";
+function starsHtml(n){let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">★</span>';return `<span class="stars" role="img" aria-label="滿分5分中的${n}分">${h}</span>`;}
+
+/* ══════════ フォーム初期化 ══════════ */
+(function(){
+  const sel=$("pref");
+  PREFS.forEach((p,i)=>{const o=document.createElement("option");o.value=i;o.textContent=p[0];sel.appendChild(o);});
+  const ov=document.createElement("option");ov.value="overseas";ov.textContent="海外・其他（請輸入緯度經度）";sel.appendChild(ov);
+  sel.value=12; // 東京都
+  sel.addEventListener("change",()=>{$("overseas").classList.toggle("show",sel.value==="overseas");});
+  $("noTime").addEventListener("change",e=>{
+    $("bh").disabled=$("bmin").disabled=e.target.checked;
+  });
+})();
+
+/* ══════════ 保存（この端末のみ・localStorage） ══════════ */
+const LS_KEY="seimeiroku_solo_v1";
+function lsGet(){try{return JSON.parse(localStorage.getItem(LS_KEY)||"null")}catch(e){return null}}
+function lsSet(v){try{localStorage.setItem(LS_KEY,JSON.stringify(v));return true}catch(e){return false}}
+function lsClear(){try{localStorage.removeItem(LS_KEY)}catch(e){}}
+function lsAvailable(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return true}catch(e){return false}}
+function fillForm(p){
+  $("sei").value=p.sei; $("mei").value=p.mei;
+  $("by").value=p.y; $("bm").value=p.m; $("bd").value=p.d;
+  $("noTime").checked=p.hour==null;
+  $("bh").disabled=$("bmin").disabled=p.hour==null;
+  if(p.hour!=null){$("bh").value=Math.floor(p.hour);$("bmin").value=Math.round(p.hour%1*60);}
+  else{$("bh").value="";$("bmin").value="";}
+  $("pref").value=p.pref;
+  $("overseas").classList.toggle("show",p.pref==="overseas");
+  if(p.pref==="overseas"){$("olat").value=p.lat;$("olon").value=p.lon;$("outc").value=p.utc;}
+}
+function renderSaved(){
+  const box=$("savedList"); if(!box)return;
+  const st=lsGet(); const ppl=(st&&st.people)||[];
+  box.innerHTML=ppl.length?`<span class="saved-label">已儲存的鑑定</span>`+ppl.map((p,i)=>
+    `<span class="saved-chip" data-i="${i}" role="button" tabindex="0">${esc(p.sei)} ${esc(p.mei)}<span class="fine">（${p.y}年）</span><button type="button" class="x" aria-label="刪除${esc(p.mei)}" data-x="${i}">×</button></span>`).join(""):"";
+  box.querySelectorAll(".saved-chip").forEach(ch=>{
+    ch.addEventListener("click",e=>{
+      if(e.target.dataset.x!==undefined){
+        const st2=lsGet(); if(st2&&st2.people){st2.people.splice(+e.target.dataset.x,1); lsSet(st2); renderSaved();}
+        e.stopPropagation(); return;
+      }
+      const st2=lsGet(); const p=st2&&st2.people&&st2.people[+ch.dataset.i];
+      if(p){fillForm(p); document.getElementById("form").dispatchEvent(new Event("submit",{cancelable:true}));}
+    });
+  });
+}
+function saveRecord(rec){
+  if(!$("saveOpt")||!$("saveOpt").checked)return;
+  const st=lsGet()||{people:[],opt:true};
+  const key=p=>`${p.sei}|${p.mei}|${p.y}-${p.m}-${p.d}`;
+  st.people=(st.people||[]).filter(p=>key(p)!==key(rec));
+  st.people.unshift(rec);
+  if(st.people.length>20)st.people.length=20;
+  st.opt=true; st.last=rec;
+  lsSet(st);
+  renderSaved();
+}
+(function initSaved(){
+  if(!lsAvailable()){
+    const ctl=document.querySelector(".save-ctl");
+    if(ctl)ctl.innerHTML='<span class="fine">此環境無法使用瀏覽器儲存（鑑定功能仍可正常使用）。</span>';
+    return;
+  }
+  const st=lsGet();
+  if(st){
+    if($("saveOpt"))$("saveOpt").checked=st.opt!==false;
+    if(st.last&&st.opt!==false)fillForm(st.last);
+  }
+  renderSaved();
+  if($("saveOpt"))$("saveOpt").addEventListener("change",e=>{
+    const st2=lsGet()||{people:[]}; st2.opt=e.target.checked; lsSet(st2);
+  });
+  if($("clearSaved"))$("clearSaved").addEventListener("click",()=>{
+    lsClear(); renderSaved();
+    if($("saveOpt"))$("saveOpt").checked=true;
+  });
+})();
+
+/* ══════════ 鑑定本体 ══════════ */
+let CUR=null; // 現在の鑑定コンテキスト
+
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const sei=$("sei").value.trim(), mei=$("mei").value.trim();
+  const y=+$("by").value, m=+$("bm").value, d=+$("bd").value;
+  if(!sei||!mei||!y||!m||!d){alert("請輸入姓、名與出生年月日。");return;}
+  const dt=new Date(y,m-1,d);
+  if(dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d){alert("這個日期不存在。");return;}
+  const noTime=$("noTime").checked;
+  let hour=null;
+  if(!noTime && $("bh").value!==""){ hour=+$("bh").value + (+$("bmin").value||0)/60; }
+  let lat,lon,utc;
+  if($("pref").value==="overseas"){
+    lat=parseFloat($("olat").value); lon=parseFloat($("olon").value); utc=parseFloat($("outc").value);
+    if(isNaN(lat)||isNaN(lon)||isNaN(utc)){alert("若出生於海外，請輸入緯度、經度與時差。");return;}
+  }else{ const p=PREFS[+$("pref").value]; lat=p[1]; lon=p[2]; utc=p[3]; }
+  saveRecord({sei,mei,y,m,d,hour,pref:$("pref").value,lat,lon,utc});
+  render({sei,mei,y,m,d,hour,noTime,lat,lon,utc});
+  $("results").classList.add("show");
+  requestAnimationFrame(()=>$("hero").scrollIntoView({behavior:"smooth",block:"start"}));
+});
+
+function render(inp){
+  const {sei,mei,y,m,d,hour,lat,lon,utc}=inp;
+  const now=new Date();
+  const calcHour=hour==null?12:hour;
+  const jdBirth=jdUT(y,m,d,calcHour,utc);
+
+  /* 西洋 */
+  const sunL=sunLon(jdBirth), moonL=moonLon(jdBirth);
+  const sun=signOf(sunL), moon=signOf(moonL);
+  const asc=hour==null?null:signOf(ascendant(jdBirth,lat,lon));
+
+  /* 四柱 */
+  const fp=fourPillars(y,m,d,hour,utc);
+
+  /* 九星 */
+  const myStar=honmeiStar(fp.py);
+
+  /* 動物 */
+  const charNo=fp.di+1, charName=CHARS60[fp.di][0], animal=CHARS60[fp.di][1];
+
+  /* 今年・今日 */
+  const nowY=yearOfNow(now,9);
+  const nys=mod(nowY-4,10), nyb=mod(nowY-4,12);
+  const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
+  const tdi=mod(jdToday+49,60), tds=tdi%10, tdb=tdi%12;
+
+  CUR={inp,fp,sun,moon,asc,sunL,moonL,myStar,charNo,charName,animal,now,nowY,nys,nyb,tdi,tds,tdb};
+
+  renderHero(); renderWest(); renderShichu(); renderName(); renderKyusei(); renderAnimal();
+  renderSynth(); renderJobs(); renderLife(); renderHealth(); renderYear(); renderToday(); renderKids();
+}
+
+/* ── 命式盤ヒーロー ── */
+function renderHero(){
+  const {inp,fp,sun,myStar,charName}=CUR;
+  const pillars=[
+    {label:"年柱",s:fp.ys,b:fp.yb},{label:"月柱",s:fp.ms,b:fp.mb},
+    {label:"日柱",s:fp.ds,b:fp.db,day:true},
+    fp.hs!=null?{label:"時柱",s:fp.hs,b:fp.hb}:null
+  ].filter(Boolean);
+  const pHtml=pillars.map(p=>`
+    <div class="pillar${p.day?" day":""}">
+      <div class="p-label">${p.label}</div>
+      <div class="p-kanji" lang="ja">${kanshiName(p.s,p.b)}</div>
+      <div class="p-read">${STEM_READ[p.s]}・${BRANCH_READ[p.b]}</div>
+      <div class="p-el">${elTag(stemElem(p.s))}${elTag(BRANCH_ELEM[p.b])}</div>
+    </div>`).join("");
+  const timeStr=inp.hour==null?"時刻不明":String(Math.floor(inp.hour)).padStart(2,"0")+":"+String(Math.round((inp.hour%1)*60)).padStart(2,"0");
+  const strokes=[...inp.sei+inp.mei].map(c=>lookupStroke(c)||0);
+  const sou=strokes.every(n=>n>0)?kakusuNorm(strokes.reduce((a,b)=>a+b,0)):null;
+  $("hero").innerHTML=`
+    <div class="meishiki-head">
+      <h2 class="m-name">${esc(inp.sei)}　${esc(inp.mei)}
+        <small>生於${inp.y}年${inp.m}月${inp.d}日・${timeStr}・${$("pref").value==="overseas"?"海外":esc(PREFS[+$("pref").value][0])}</small>
+      </h2>
+      <div class="m-chips">
+        <span class="m-chip">太陽<b>${SIGNS[sun].n}</b></span>
+        <span class="m-chip">日主<b>${STEMS[fp.ds]}（${DAYSTEM_T[fp.ds].sym}）</b></span>
+        <span class="m-chip">本命星<b>${KYUSEI[myStar-1].n}</b></span>
+        <span class="m-chip">動物<b><span class="a-emoji">${ANIMAL_EMOJI[CUR.animal]}</span>${charName}</b></span>
+        ${sou?`<span class="m-chip">總格<b>${sou}畫</b></span>`:""}
+      </div>
+    </div>
+    <div class="pillars">${pHtml}</div>`;
+}
+
+/* ── 西洋占星術 ── */
+function renderWest(){
+  const {sun,moon,asc,sunL,moonL,nys}=CUR;
+  const S=SIGNS[sun];
+  const sunEdge=degInSign(sunL)<1||degInSign(sunL)>29;
+  const moonEdge=degInSign(moonL)<3||degInSign(moonL)>27;
+  const moonNote=CUR.inp.hour==null?"因未輸入時刻，僅供參考":moonEdge?"因接近星座交界，也可能是前後的星座":null;
+  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
+  $("west-body").innerHTML=`
+    <div class="card">
+      <h3>你的三顆星</h3>
+      <dl class="kv">
+        <dt>太陽星座</dt><dd><span class="big-sign"><span class="sym">${S.sym}</span>${S.n}</span>
+          <span class="tag gold">${S.el}元素</span>
+          ${sunEdge?'<span class="tag verm">生於交界日・也可能是前後的星座</span>':""}</dd>
+        <dt>月亮星座</dt><dd><span class="big-sign"><span class="sym">${SIGNS[moon].sym}</span>${SIGNS[moon].n}</span>
+          ${moonNote?`<span class="tag verm">${moonNote}</span>`:""}</dd>
+        ${asc!=null?`<dt>上升星座</dt><dd><span class="big-sign"><span class="sym">${SIGNS[asc].sym}</span>${SIGNS[asc].n}</span>
+          <span class="tag matcha">由出生地的經緯度推算</span></dd>`:`<dt>上升星座</dt><dd class="muted">因為需要出生時刻，已省略</dd>`}
+      </dl>
+    </div>
+    <div class="card">
+      <h3>從星星看到的你這個人</h3>
+      <p><strong>太陽（人生的目的・外在的面貌）</strong>　${S.t}</p>
+      <p><strong>月亮（真實的情感・內在的面貌）</strong>　${MOON_T[moon]}</p>
+      ${asc!=null?`<p><strong>上升星座（第一印象）</strong>　${ASC_T[asc]}</p>`:""}
+      <p><strong>三分類</strong>　${S.n}屬於${QUAL_T[sun%3]}</p>
+    </div>
+    <div class="card">
+      <h3>星星所顯示的工作與戀愛</h3>
+      <p><strong>工作</strong>　${SIGN_WORK[sun]}選擇能發揮太陽所示「${S.key}」的環境，就是職涯的最短路徑。</p>
+      <p><strong>戀愛</strong>　${SIGN_LOVE[sun]}內在的月亮是${SIGNS[moon].n}——${MOON_T[moon].split("。")[0]}，這樣的真實面貌，請在能安心的人面前展現出來。</p>
+    </div>
+    <div class="card">
+      <h3>從星星看今年</h3>
+      <p>${YEAR_EL_T[rel]}</p>
+      <p class="muted">對於屬於${S.el}元素的${S.n}來說，關鍵詞是「${S.key}」。請試著以它為軸，來組織這一年。</p>
+    </div>`;
+}
+
+/* ── 四柱推命 ── */
+function renderShichu(){
+  const {fp,nys,nyb}=CUR;
+  const D=DAYSTEM_T[fp.ds];
+  // 五行バランス
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const maxC=Math.max(...counts,1);
+  const gogyo=ELEMS.map((e,i)=>`
+    <div class="gg">
+      <div class="gg-bar"><div class="gg-fill" style="height:${Math.round(counts[i]/maxC*100)}%;background:${elColor(i)}"></div></div>
+      <div class="gg-name">${e}</div><div class="gg-count">${counts[i]}</div>
+    </div>`).join("");
+  const missingIdx=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
+  const strongestIdx=counts.indexOf(Math.max(...counts));
+  const vb=voidBranches(fp.di);
+  const ts=tsuhen(fp.ds,nys);
+  const branchRel=(()=>{ // 今年の支と日支
+    if(mod(fp.db+6,12)===nyb)return["沖","日支與今年的地支正面相對的「沖」之年。環境容易生變。不必害怕變化，但重大決定要格外仔細。"];
+    if(mod(fp.db+nyb,12)===1)return["支合","日支與今年的地支相結的「支合」之年。緣分容易成形，也受惠於合作運。"];
+    if(fp.db%4===nyb%4)return["三合","日支與今年的地支結成「三合」之年。容易乘上順風的好相性。"];
+    return[null,""];
+  })();
+  $("shichu-body").innerHTML=`
+    <div class="card">
+      <h3>日主 ─ ${STEMS[fp.ds]}（${STEM_READ[fp.ds]}）＝${D.sym}</h3>
+      <p>${D.t}</p>
+      <p class="muted">四柱推命把出生「日」的天干視為一個人的本質，也就是日主。你的日柱是
+        <strong>${kanshiName(fp.ds,fp.db)}</strong>${fp.hs!=null?`，時柱是<strong>${kanshiName(fp.hs,fp.hb)}（${HOUR_NAMES[fp.hb]}）</strong>`:""}。
+        天中殺（空亡）為<strong>${BRANCHES[vb[0]]}${BRANCHES[vb[1]]}</strong>。</p>
+    </div>
+    <div class="card">
+      <h3>命盤訴說的三張臉與氣勢</h3>
+      <p><strong>面向社會的臉（年柱・${kanshiName(fp.ys,fp.yb)}）</strong>　${fp.ys===fp.ds?TSUHEN_P[0]:TSUHEN_P[tsuhen(fp.ds,fp.ys)]}。與長輩及外界往來時，會顯露這樣的氣質。</p>
+      <p><strong>工作與家庭中的臉（月柱・${kanshiName(fp.ms,fp.mb)}）</strong>　${fp.ms===fp.ds?TSUHEN_P[0]:TSUHEN_P[tsuhen(fp.ds,fp.ms)]}。這是撐起壯年期核心運勢的柱。</p>
+      <p><strong>日柱的氣勢（十二運・${JUNIUN[juniun(fp.ds,fp.db)]}）</strong>　你的日柱${kanshiName(fp.ds,fp.db)}落在「${JUNIUN[juniun(fp.ds,fp.db)]}」的星位。${JUNIUN_T[juniun(fp.ds,fp.db)]}</p>
+    </div>
+    <div class="card">
+      <h3>五行的平衡</h3>
+      <div class="gogyo">${gogyo}</div>
+      <p class="muted">命盤${fp.hs!=null?"八字":"六字"}的五行分布。最強的是${elTag(strongestIdx)}之氣${
+        missingIdx.length?`，缺少的是${missingIdx.map(elTag).join("")}之氣。據說缺少的五行，可透過顏色、方位與生活習慣有意識地補足，讓整體更為平衡。`:"。五行齊備，是偏頗很少的命盤。"}</p>
+      <p class="fine">${elTag(0)}成長・發想　${elTag(1)}熱情・表現　${elTag(2)}信用・持續　${elTag(3)}決斷・完成　${elTag(4)}智慧・柔軟。強的氣是你的拿手絕活，缺少的氣則以「向外借來」的心態面對。</p>
+    </div>
+    <div class="card">
+      <h3>從命盤看今年 ─ ${TSUHEN[ts]}之年</h3>
+      <p>今年（${CUR.nowY}年・${kanshiName(nys,nyb)}）從你的日主來看，是「<strong>${TSUHEN[ts]}</strong>」輪值的一年。${TSUHEN_T[ts]}</p>
+      ${branchRel[0]?`<p><span class="tag gold">${branchRel[0]}</span>${branchRel[1]}</p>`:""}
+    </div>`;
+}
+
+/* ── 姓名判断 ── */
+function renderName(){
+  const {inp}=CUR;
+  const seiChars=[...inp.sei], meiChars=[...inp.mei];
+  const all=[...seiChars.map((c,i)=>({c,grp:"sei",i})),...meiChars.map((c,i)=>({c,grp:"mei",i}))];
+  const inputs=all.map((o,idx)=>{
+    const st=lookupStroke(o.c);
+    return `${o.grp==="mei"&&o.i===0?'<div class="st-sep" aria-hidden="true">／</div>':""}
+      <div class="st-char">
+        <div class="ch">${esc(o.c)}</div>
+        <input type="number" min="1" max="40" id="st-${idx}" value="${st||""}" placeholder="?" aria-label="${esc(o.c)}的筆畫">
+      </div>`;
+  }).join("");
+  $("name-body").innerHTML=`
+    <div class="card">
+      <h3>各字的筆畫</h3>
+      <p class="muted">辭典中收錄的字已自動填入（以日本新字體為準）。若要以舊字體或特殊字形計算，請直接修改。數值一改就會立即重新計算。</p>
+      <div class="strokes-edit" id="strokes-edit">${inputs}</div>
+      <div id="goka-out"></div>
+    </div>
+    <div class="card" id="name-reading"></div>
+    <div class="card">
+      <h3>關於姓名所顯示的運勢</h3>
+      <p>姓名筆畫所示的並非逐年吉凶，而是貫穿一生、持續流動的低音。其中<strong>人格</strong>在壯年期最為明顯，<strong>總格</strong>則在晚年愈發顯現。今年具體的運勢，請一併參閱四柱推命與九星的章節。</p>
+    </div>`;
+  const recompute=()=>{
+    const vals=all.map((_,idx)=>+$("st-"+idx).value||0);
+    if(vals.some(v=>v<=0)){
+      $("goka-out").innerHTML='<p class="fine">還有筆畫尚未填寫。全部填好後就會顯示五格。</p>';
+      $("name-reading").innerHTML='<h3>五格的解讀</h3><p class="muted">正在等待筆畫輸入。</p>';
+      return;
+    }
+    const seiArr=vals.slice(0,seiChars.length), meiArr=vals.slice(seiChars.length);
+    const g=nameGrids(seiArr,meiArr);
+    $("goka-out").innerHTML=`<div class="goka">${Object.entries(g).map(([k,v])=>{
+      const [f,ph]=KAKUSU[v];
+      return `<div class="gk"><div class="gk-name">${k}</div><div class="gk-num">${v}</div>
+        <div class="gk-fortune ${fClass(f)}">${f}</div><div class="gk-phrase">${ph}</div></div>`;
+    }).join("")}</div>`;
+    const jin=KAKUSU[g["人格"]], sou=KAKUSU[g["総格"]], chi=KAKUSU[g["地格"]], gai=KAKUSU[g["外格"]], ten=KAKUSU[g["天格"]];
+    // 三才配置（天・人・地の五行の流れ）
+    const digitElem=n=>{const d=n%10;return d===1||d===2?0:d===3||d===4?1:d===5||d===6?2:d===7||d===8?3:4;};
+    const tE=digitElem(g["天格"]),jE=digitElem(g["人格"]),cE=digitElem(g["地格"]);
+    const r1=elemRel(jE,tE),r2=elemRel(jE,cE);
+    const ok=r=>r===0||r===1||r===2;
+    const sansaiJudge=ok(r1)&&ok(r2)
+      ?["良好","五行流動順暢、沒有淤塞的好配置。作為基底的運勢循環自然，可說是努力容易化為成果的名字。"]
+      :ok(r1)||ok(r2)
+      ?["尚可","五行之間有部分相衝，但流動順暢的一側會撐住你。若勉強持續太久，請及早休息。"]
+      :["需調整","五行相衝的配置。因為容易受環境影響，把居住與人際關係的「舒適度」放在優先，運勢就會安定下來。"];
+    $("name-reading").innerHTML=`
+      <h3>五格的解讀</h3>
+      <p><strong>天格 ${g["天格"]}畫（${ten[0]}・${ten[1]}）</strong>　${GOKAKU_DESC["天格"]}${FORTUNE_LONG[ten[0]]}</p>
+      <p><strong>人格 ${g["人格"]}畫（${jin[0]}・${jin[1]}）</strong>　${GOKAKU_DESC["人格"]}在你的中心，流動著「${jin[1]}」的氣質。${FORTUNE_LONG[jin[0]]}</p>
+      <p><strong>地格 ${g["地格"]}畫（${chi[0]}・${chi[1]}）</strong>　${GOKAKU_DESC["地格"]}年輕時期的根基是「${chi[1]}」。${FORTUNE_LONG[chi[0]]}</p>
+      <p><strong>外格 ${g["外格"]}畫（${gai[0]}・${gai[1]}）</strong>　${GOKAKU_DESC["外格"]}在旁人眼中，你容易被看成「${gai[1]}」的人。${FORTUNE_LONG[gai[0]]}</p>
+      <p><strong>總格 ${g["総格"]}畫（${sou[0]}・${sou[1]}）</strong>　${GOKAKU_DESC["総格"]}貫穿一生的主題是「${sou[1]}」。${FORTUNE_LONG[sou[0]]}</p>
+      <h3 style="margin-top:22px">三才配置 ─ ${ELEMS[tE]}・${ELEMS[jE]}・${ELEMS[cE]}（${sansaiJudge[0]}）</h3>
+      <p>這是從天格、人格、地格各自筆畫的個位數取出五行，觀察氣之流動的配置法。你的名字是天＝<strong>${ELEMS[tE]}</strong>、人＝<strong>${ELEMS[jE]}</strong>、地＝<strong>${ELEMS[cE]}</strong>。${sansaiJudge[1]}</p>
+      <p class="fine">三才配置是各流派解釋差異特別大的項目。請當作其中一種參考來看。</p>`;
+    // ヒーローの総格チップも更新
+    renderHeroChipSou(g["総格"]);
+  };
+  all.forEach((_,idx)=>$("st-"+idx).addEventListener("input",recompute));
+  recompute();
+}
+function renderHeroChipSou(sou){
+  const chips=document.querySelectorAll("#hero .m-chip");
+  chips.forEach(ch=>{ if(ch.textContent.startsWith("総格")) ch.innerHTML=`總格<b>${sou}畫</b>`; });
+}
+
+/* ── 九星気学・方位 ── */
+function renderKyusei(){
+  const {myStar,nowY,nys,nyb}=CUR;
+  const K=KYUSEI[myStar-1];
+  const center=honmeiStar(nowY); // 年盤中宮
+  // 各方位の星
+  const board={}; PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
+  const gooDir=[],badDir={};
+  const gohoDir=Object.keys(board).find(d=>board[d]===5);
+  if(gohoDir){badDir[gohoDir]=(badDir[gohoDir]?badDir[gohoDir]+"・":"")+"五黃殺";badDir[OPP_DIR[gohoDir]]=(badDir[OPP_DIR[gohoDir]]?badDir[OPP_DIR[gohoDir]]+"・":"")+"暗劍殺";}
+  const saihaDir=OPP_DIR[BRANCH_DIR[nyb]];
+  badDir[saihaDir]=(badDir[saihaDir]?badDir[saihaDir]+"・":"")+"歲破";
+  const myDir=Object.keys(board).find(d=>board[d]===myStar);
+  if(myDir){badDir[myDir]=(badDir[myDir]?badDir[myDir]+"・":"")+"本命殺";badDir[OPP_DIR[myDir]]=(badDir[OPP_DIR[myDir]]?badDir[OPP_DIR[myDir]]+"・":"")+"本命的殺";}
+  Object.keys(board).forEach(d=>{
+    if(badDir[d])return;
+    const s=board[d]; if(s===5||s===myStar)return;
+    const r=elemRel(K.el,KYUSEI[s-1].el);
+    if(r===0||r===1||r===2) gooDir.push(d);
+  });
+  // 盤の描画（北を上）: grid order rows: [南東?]... 北上表示 → 上段: 北西 北 北東 / 中段: 西 中 東 / 下段: 南西 南 南東? 地図的に上=北なら 左上=北西
+  const gridOrder=[["西北","北","東北"],["西","中","東"],["西南","南","東南"]];
+  const cells=gridOrder.flat().map(dir=>{
+    if(dir==="中")return `<div class="cell center"><div class="dir">中宮</div><div class="star">${KYUSEI[center-1].n.slice(0,2)}</div></div>`;
+    const s=board[dir], good=gooDir.includes(dir), bad=badDir[dir];
+    return `<div class="cell${good?" good":bad?" bad":""}">
+      <div class="dir">${dir}</div><div class="star">${KYUSEI[s-1].n.slice(0,2)}</div>
+      ${good?'<div class="mark">吉方</div>':bad?`<div class="mark">${bad}</div>`:""}
+    </div>`;
+  }).join("");
+  const myPalace=myDir?PALACES.find(p=>p.dir===myDir).base:5;
+  // 月命星
+  const mi=mod(CUR.fp.mb-2,12);
+  const gm=mod(GETSUMEI_START[myStar]-1-mi,9)+1;
+  // 相性の良い九星（生じてくれる星＝生気、同じ五行＝比和）
+  const seiki=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===1).map(s=>s.n);
+  const hiwa=KYUSEI.filter((s,i)=>i+1!==myStar&&elemRel(K.el,s.el)===0).map(s=>s.n);
+  $("kyusei-body").innerHTML=`
+    <div class="card">
+      <h3>本命星 ─ ${K.n}</h3>
+      <p>${K.t}</p>
+      <p class="muted">定位在<strong>${K.home}</strong>，五行屬${elTag(K.el)}之星。</p>
+    </div>
+    <div class="card">
+      <h3>月命星 ─ ${KYUSEI[gm-1].n}</h3>
+      <p>本命星代表的是「在社會上的自己、長大之後的自己」，而由出生月份推算的月命星，則被認為代表<strong>情感面與年輕時期的氣質</strong>。你的月命星是<strong>${KYUSEI[gm-1].n}</strong>。${gm===myStar?"你生來本命星與月命星是同一顆星，內外的面貌一致，是表裡如一的氣質。":`內在還藏著${KYUSEI[gm-1].t.split("。")[0]}。${KYUSEI[gm-1].t.split("。")[1]||""}這樣的另一張臉。`}</p>
+      <p class="muted">與你氣場相合的九星，據說是${seiki.length?`能滋養你${ELEMS[K.el]}之氣的<strong>${seiki.join("・")}</strong>`:""}${hiwa.length?`、以相同${ELEMS[K.el]}之氣互相扶持的<strong>${hiwa.join("・")}</strong>`:""}這些星的人。</p>
+    </div>
+    <div class="card">
+      <h3>${nowY}年的方位盤與吉方位</h3>
+      <div class="ban-wrap">
+        <div class="ban" role="img" aria-label="${nowY}年的年盤">${cells}</div>
+        <div class="ban-legend">
+          <ul>
+            <li><span class="dir-b" style="color:var(--good)">吉方位</span><span>${gooDir.length?gooDir.join("・"):"今年與本命星相合的安全方位較為有限"}</span></li>
+            <li><span class="dir-b" style="color:var(--bad)">凶方位</span><span>${Object.entries(badDir).map(([d,n])=>`${d}（${n}）`).join("、")}</span></li>
+            <li><span class="dir-b">今年的惠方</span><span>${EHO[CUR.nys]}</span></li>
+          </ul>
+          <p class="fine">前往吉方位旅行、搬遷或參拜，被認為可以涵養運勢。凶方位並不是「絕對不能去」，而是提醒你在該方位避免重大決定與遷移、行事謹慎的一個參考。</p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>從九星看今年</h3>
+      <p>${nowY}年，你的${K.n}回座於<strong>${PALACE_T[myPalace].split("＝")[0]}</strong>。${PALACE_T[myPalace].split("＝")[1]}</p>
+    </div>`;
+}
+
+/* ── 動物占い ── */
+function renderAnimal(){
+  const {charNo,charName,animal,fp,nyb}=CUR;
+  const A=ANIMALS[animal];
+  const rel=(()=>{
+    if(mod(fp.db+6,12)===nyb)return "今年是節奏切換的轉換期。不必急著奔跑，是適合重整姿勢的一年。";
+    if(mod(fp.db+nyb,12)===1||fp.db%4===nyb%4)return "今年是順風的節奏。原有的風格能夠原封不動地發揮，是可以舒展身手的一年。";
+    return "今年是平常運行的節奏。守住自己的步調，就是最好的開運。";
+  })();
+  $("animal-body").innerHTML=`
+    <div class="card">
+      <div class="animal-hero">
+        <div class="animal-emblem" aria-hidden="true"><span class="em">${ANIMAL_EMOJI[animal]}</span></div>
+        <div class="a-body">
+          <p class="animal-name">No.${charNo}「${charName}」</p>
+          <p class="muted">六十種分類中的角色。基底是<strong>${animal}</strong>，屬於${grpTag(ANIMAL_GROUP[animal])}族群。</p>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="a-emoji">${ANIMAL_EMOJI[animal]}</span>身為${animal}的你</h3>
+      <p>${A.t}</p>
+      <p class="muted">關鍵詞是「<strong>${A.key}</strong>」。六十分類中的「${charName}」，是在${animal}的氣質上再添一層個性色彩的類型。</p>
+    </div>
+    <div class="card">
+      <h3>身為${grpTag(ANIMAL_GROUP[animal])}族群的你</h3>
+      <p>${GROUP_T[ANIMAL_GROUP[animal]]}</p>
+      <p class="muted">十二種動物分成「月・地球・太陽」三個族群，據說代表著事情優先順序的差異——是人際關係，是達成目標，還是靈光一閃。了解族群的不同，就能看見自己與身邊的人為何容易錯身而過。</p>
+    </div>
+    <div class="card">
+      <h3>從動物占卜看今年</h3>
+      <p>${rel}</p>
+      <p class="muted">${ANIMAL_GROUP[animal]}族群的你，${ANIMAL_GROUP[animal]==="月"?"把「和誰一起前進」整理好，就是今年運氣的入口。先決定一位可以信賴的商量對象吧。":ANIMAL_GROUP[animal]==="地球"?"用數字定下「要達成什麼」，就是今年運氣的入口。目標切得愈小，前進得愈快。":"以「心有沒有被觸動」為標準來選擇，就是今年運氣的入口。讓你提不起勁的行程，不妨乾脆放掉。"}</p>
+    </div>`;
+}
+
+/* ── 総合鑑定 ── */
+function renderSynth(){
+  const {inp,sun,fp,myStar,charName,animal}=CUR;
+  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],K=KYUSEI[myStar-1],A=ANIMALS[animal];
+  const sunG=SIGN_EL_TO_GOGYO[S.el], dayE=stemElem(fp.ds), starE=K.el;
+  const align=(sunG===dayE?1:0)+(dayE===starE?1:0)+(sunG===starE?1:0);
+  const alignT=align>=2
+    ? `多個占術同時指向相同的<strong>${ELEMS[dayE]}</strong>之氣，浮現出內外面貌一致、不太搖擺的人物形象。你是可以相信自己直覺往前走的類型。`
+    : align===1
+    ? `不同的體系，部分指向了同一股氣。隨著場合不同，展現出來的面貌會改變，根部卻貫穿著共通的核心。`
+    : `五種占術各自映照出不同的氣。這正是多面性的證明。你是能因應場合、靈活取用不同抽屜的寬廣人物。`;
+  $("synth-body").innerHTML=`
+    <div class="synth">
+      <div class="key-chips">
+        <span class="key-chip">${S.key}</span><span class="key-chip">${D.key}</span>
+        <span class="key-chip">${A.key}</span>
+      </div>
+      <p>${esc(inp.sei)}${esc(inp.mei)}，是把太陽${S.n}的「${S.key}」放在外在面貌，把日主${STEMS[fp.ds]}＝${D.sym}的「${D.key}」放在核心的人。
+      在動物占卜中作為「${charName}」，閃耀著${A.key.replace(/。$/,"")}；在九星裡則生於${K.n}。</p>
+      <p>${alignT}</p>
+      <div class="today-grid" style="margin-top:18px">
+        <div class="mini"><div class="mini-label">工作的指針</div>
+          <div class="mini-note">${SIGN_WORK[sun]}日主${STEMS[fp.ds]}＝${D.sym}的「${D.key}」，就是你在現場的武器。</div></div>
+        <div class="mini"><div class="mini-label">戀愛與人際的指針</div>
+          <div class="mini-note">${SIGN_LOVE[sun]}正如${ANIMAL_GROUP[animal]}族群的特質，${ANIMAL_GROUP[animal]==="月"?"貼近對方心情的姿態":ANIMAL_GROUP[animal]==="地球"?"守約的誠實":"不加修飾的天真爛漫"}，會成為你最大的魅力。</div></div>
+        <div class="mini"><div class="mini-label">生活的整頓方式</div>
+          <div class="mini-note">九星的${K.n}是${ELEMS[K.el]}之星。據說把${["觀葉植物或木質家具等等，綠意與成長的氣息","沐浴晨光的習慣，或燈光溫暖的空間","土鍋與陶器，以及接觸泥土的時間","以金屬與白色為基調、井然有序的空間","保持用水處潔淨，以及安靜的時光"][K.el]}帶進生活裡，氣就會調和。</div></div>
+        <div class="mini"><div class="mini-label">五扇窗</div>
+          <div class="mini-note">西洋占星術看的是「人生的目的」，四柱推命看的是「氣質與流轉」，姓名判斷看的是「名字的通奏低音」，九星氣學看的是「方位與時運」，動物占卜看的是「與人相處的方式」。共通浮現出來的那些詞，正是你的核心。</div></div>
+      </div>
+    </div>`;
+}
+
+/* ── 適職 ── */
+function renderJobs(){
+  const {sun,fp,animal}=CUR;
+  const S=SIGNS[sun],D=DAYSTEM_T[fp.ds],A=ANIMALS[animal];
+  const sJobs=SIGN_JOBS[sun], dJobs=STEM_JOBS[fp.ds], aJobs=ANIMAL_JOBS[animal];
+  // 3視点で重複する職種があれば「天職候補」として強調
+  const all=[...sJobs,...dJobs,...aJobs];
+  const dup=[...new Set(all.filter((j,i)=>all.findIndex(x=>x===j)!==i))];
+  const chips=(jobs)=>`<div class="job-chips">${jobs.map(j=>`<span class="job-chip${dup.includes(j)?" hot":""}">${j}</span>`).join("")}</div>`;
+  $("jobs-body").innerHTML=`
+    <div class="card">
+      <h3>從星座看適合的職業 ─ ${S.n}</h3>
+      <p>${SIGN_WORK[sun]}</p>
+      ${chips(sJobs)}
+    </div>
+    <div class="card">
+      <h3>從日主看適合的職業 ─ ${STEMS[fp.ds]}（${D.sym}）</h3>
+      <p>能發揮「${D.key}」的工作，才與你的特質相契合。</p>
+      ${chips(dJobs)}
+    </div>
+    <div class="card">
+      <h3>從動物角色看工作方式 ─ ${animal}</h3>
+      <p>${animal}類型的強項是「${A.key}」。在${ANIMAL_GROUP[animal]==="月"?"一邊與人往來、一邊累積信任的工作":ANIMAL_GROUP[animal]==="地球"?"目標與成果都看得很清楚的工作":"願意看重發想力與衝勁的環境"}中，你會不斷成長。</p>
+      ${chips(aJobs)}
+    </div>
+    <div class="card">
+      <p class="muted">${dup.length?`在三個視角中共同出現的<strong>${dup.join("・")}</strong>，是特別有力的天職候選。`:"三個視角各自指向不同的領域。請把「星座＝熱情的方向」「日主＝才能的質地」「動物＝工作的風格」放在一起，找出重疊之處。"}所謂適職，並不是「非這份工作不可」，而是指示才能方向的羅盤。在現在的工作裡，也有能夠發揮它的路。</p>
+    </div>`;
+}
+
+/* ── 生涯の運気 ── */
+function palaceOfYear(y,myStar){            // その年に本命星が回座する宮（定位番号1-9）
+  const center=honmeiStar(y);
+  let base=myStar-center+5;
+  while(base<1)base+=9; while(base>9)base-=9;
+  return base;
+}
+function renderLife(){
+  const {fp,myStar,nowY}=CUR;
+  const vb=voidBranches(fp.di);
+  const maxAge=90;
+  const pts=[];
+  for(let a=0;a<=maxAge;a++){
+    const y=fp.py+a;
+    pts.push({a,y,base:palaceOfYear(y,myStar),voidY:vb.includes(mod(y-4,12))});
+  }
+  // SVG カーブ
+  const W=1000,H=220,padL=40,padR=14,padT=16,padB=34;
+  const X=a=>padL+(W-padL-padR)*a/maxAge;
+  const Y=s=>padT+(H-padT-padB)*(1-(s-1)/4);
+  const P=pts.map(p=>({x:X(p.a),y:Y(PALACE_SCORE[p.base])}));
+  let line=`M${P[0].x.toFixed(1)},${P[0].y.toFixed(1)}`;
+  for(let i=0;i<P.length-1;i++){                       // Catmull-Rom → ベジェで滑らかに
+    const p0=P[Math.max(0,i-1)],p1=P[i],p2=P[i+1],p3=P[Math.min(P.length-1,i+2)];
+    line+=`C${(p1.x+(p2.x-p0.x)/6).toFixed(1)},${(p1.y+(p2.y-p0.y)/6).toFixed(1)} ${(p2.x-(p3.x-p1.x)/6).toFixed(1)},${(p2.y-(p3.y-p1.y)/6).toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+  }
+  const area=`${line} L${X(maxAge)},${Y(0.8)} L${X(0)},${Y(0.8)} Z`;
+  const grid=[];
+  for(let a=0;a<=maxAge;a+=10)grid.push(`<line x1="${X(a)}" y1="${padT}" x2="${X(a)}" y2="${H-padB}" stroke="var(--line)" stroke-width="1"/><text x="${X(a)}" y="${H-padB+18}" text-anchor="middle" font-size="11" fill="var(--ink-faint)">${a}歲</text>`);
+  const voidDots=pts.filter(p=>p.voidY).map(p=>`<circle cx="${X(p.a)}" cy="${Y(PALACE_SCORE[p.base])}" r="3" fill="var(--vermil)"/>`).join("");
+  const nowAge=nowY-fp.py;
+  const nowMark=(nowAge>=0&&nowAge<=maxAge)?`<line x1="${X(nowAge)}" y1="${padT}" x2="${X(nowAge)}" y2="${H-padB}" stroke="var(--gold)" stroke-width="2" stroke-dasharray="4 3"/><text x="${X(nowAge)}" y="${padT-2}" text-anchor="middle" font-size="11" fill="var(--gold-deep)" font-weight="bold">現在 ${nowAge}歲</text>`:"";
+  const svg=`<div style="overflow-x:auto"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="各年齡的運勢曲線" style="min-width:720px;max-width:none">
+    ${grid.join("")}
+    <path d="${area}" fill="var(--gold-wash)"/>
+    <path d="${line}" fill="none" stroke="var(--gold-deep)" stroke-width="2.2" stroke-linejoin="round"/>
+    ${voidDots}${nowMark}
+    <text x="${padL-6}" y="${Y(5)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">高峰</text>
+    <text x="${padL-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--ink-faint)">充電</text>
+  </svg></div>`;
+  // 今後10年
+  const next10=pts.filter(p=>p.y>=nowY&&p.y<nowY+10).map(p=>`
+    <div class="mini${p.y===nowY?" now":""}"><div class="mini-label">${p.y}年（${p.a}歲）${p.y===nowY?"・今年":""}</div>
+      <div class="mini-val">${PALACE_SHORT[p.base]}${p.voidY?'<span class="tag verm" style="margin-left:8px">空亡</span>':""}</div>
+      <div class="mini-note">${PALACE_T[p.base].split("＝")[1].split("。")[0]}。</div></div>`).join("");
+  // 次の見どころ
+  const nextPeak=pts.find(p=>p.y>nowY&&p.base===7);
+  const nextRest=pts.find(p=>p.y>=nowY&&p.base===1);
+  $("life-body").innerHTML=`
+    <div class="card">
+      <h3>0歲到90歲的運勢曲線</h3>
+      <p class="muted">這是以九星氣學的9年周期（本命星${KYUSEI[myStar-1].n}每年行經的宮位）描繪出的、屬於你的運勢波動。<span style="color:var(--vermil)">●</span>是四柱推命的空亡（天中殺）之年——比起播下新的種子，更適合整理與充電的一年。年齡以立春為分界，僅供參考。</p>
+      ${svg}
+      <p class="muted">運勢每9年繞行一圈。${nextPeak?`下一個大看點是<strong>${nextPeak.y}年（${nextPeak.a}歲・${PALACE_SHORT[nextPeak.base]}）</strong>。`:""}${nextRest?`<strong>${nextRest.y}年（${nextRest.a}歲）</strong>是充電之年，在那之前先把準備做好，才是漂亮的乘浪方式。`:""}低谷並不是「不好的年」，請把它讀成為了下一座高峰而準備的時期。</p>
+    </div>
+    <div class="card">
+      <h3>接下來的10年</h3>
+      <div class="months">${next10}</div>
+    </div>`;
+}
+
+/* ── 養生 ── */
+function renderHealth(){
+  const {fp,sun}=CUR;
+  const counts=[0,0,0,0,0];
+  const parts=[[fp.ys,fp.yb],[fp.ms,fp.mb],[fp.ds,fp.db]];
+  if(fp.hs!=null)parts.push([fp.hs,fp.hb]);
+  parts.forEach(([s,b])=>{counts[stemElem(s)]++;counts[BRANCH_ELEM[b]]++;});
+  const strongest=counts.indexOf(Math.max(...counts));
+  const missing=ELEMS.map((e,i)=>i).filter(i=>counts[i]===0);
+  const dayE=stemElem(fp.ds);
+  $("health-body").innerHTML=`
+    <div class="card">
+      <h3>從五行看，身體需要照顧之處</h3>
+      <p><strong>日主${STEMS[fp.ds]}${elTag(dayE)}的體質</strong>　${ELEM_BODY[dayE].note}據說關係最深的是<strong>${ELEM_BODY[dayE].organ}</strong>。</p>
+      <p><strong>養生的提示</strong>　${ELEM_BODY[dayE].care}</p>
+      ${strongest!==dayE?`<p><strong>過強的${elTag(strongest)}之氣</strong>　命盤中最多的${ELEMS[strongest]}之氣一旦過剩，據說會加重<strong>${ELEM_BODY[strongest].organ}</strong>的負擔。${ELEM_BODY[strongest].care}</p>`:""}
+      ${missing.length?missing.map(i=>`<p><strong>缺少的${elTag(i)}之氣</strong>　${ELEMS[i]}所掌管的<strong>${ELEM_BODY[i].organ}</strong>本來就容易疲弱。${ELEM_BODY[i].care}</p>`).join(""):""}
+    </div>
+    <div class="card">
+      <h3>從星座看需要留意的部位 ─ ${SIGNS[sun].n}</h3>
+      <p>在西洋占星術中，${SIGNS[sun].n}與<strong>${SIGN_BODY[sun]}</strong>關係深厚。</p>
+      <p>${SIGN_BODY_CARE[sun]}</p>
+    </div>
+    <div class="card">
+      <h3>運勢的波動與身體狀況</h3>
+      <p>運勢曲線的低谷（充電之年）與空亡之年，也是身體想要休息的時期。把健康檢查或牙科檢查排在這些年份，就能把波動化為助力。反之在高峰、收穫之年行程變多，建議先把睡眠時間留出來。</p>
+      <p class="fine">本章是依據東洋醫學與占星術的傳統對應所寫的讀物，並非醫學診斷。若有在意的症狀，請務必諮詢醫療機構。</p>
+    </div>`;
+}
+
+/* ── 今年の運勢 ── */
+function renderYear(){
+  const {sun,fp,myStar,nowY,nys,nyb}=CUR;
+  const S=SIGNS[sun];
+  const ts=tsuhen(fp.ds,nys);
+  const rel=elemRel(SIGN_EL_TO_GOGYO[S.el],stemElem(nys));
+  const center=honmeiStar(nowY);
+  const board={};PALACES.forEach(p=>{board[p.dir]=starAt(center,p.base);});
+  const myDir=Object.keys(board).find(d=>board[d]===myStar);
+  const myPalace=myDir?PALACES.find(p=>p.dir===myDir).base:5;
+  // 年スコア（演出）：通変星・宮・支の関係から
+  let score=3;
+  if([2,4,5,7,9].includes(ts))score++;
+  if([3,4,6,7,9].includes(myPalace))score++;
+  if(mod(fp.db+6,12)===nyb)score--;
+  if(fp.db%4===nyb%4)score++;
+  score=Math.max(1,Math.min(5,score));
+  const palaceLabel=PALACE_T[myPalace].split("＝")[0];
+  const palaceTheme=PALACE_T[myPalace].split("＝")[1].split("。")[0];
+  $("year-title").textContent=`今年的運勢 ─ ${nowY}年（${kanshiName(nys,nyb)}）`;
+  $("year-body").innerHTML=`
+    <div class="card">
+      <h3>綜合 ${starsHtml(score)}</h3>
+      <p>今年在四柱推命中輪到「<strong>${TSUHEN[ts]}</strong>」，在九星中則是回座於<strong>${palaceLabel}</strong>的一年。是${TSUHEN_T[ts].split("。")[0]}，同時也是${palaceTheme}。</p>
+      <div class="today-grid">
+        <div class="mini"><div class="mini-label">星（西洋占星術）</div><div class="mini-note">${YEAR_EL_T[rel]}</div></div>
+        <div class="mini"><div class="mini-label">命（四柱推命）</div><div class="mini-note">${TSUHEN_T[ts]}</div></div>
+        <div class="mini"><div class="mini-label">方（九星氣學）</div><div class="mini-note">${PALACE_T[myPalace]}</div></div>
+        <div class="mini"><div class="mini-label">惠方</div><div class="mini-val">${EHO[nys]}</div><div class="mini-note">${nowY}年歲德神所在的方位。新年首次參拜或重要的參拜，請朝這個方向。</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>十二個月的節奏 ─ 每月的通變星</h3>
+      <p class="muted">在四柱推命中，每個月與你日主的關係（通變星）也會改變。月份的交替點是節入（大約每月4〜8日前後）。</p>
+      <div class="months">${Array.from({length:12},(_,mi)=>{
+        const calM=mi+2>12?mi-10:mi+2;
+        const mstem=mod((nys%5)*2+2+mi,10);
+        const mts=mstem===fp.ds?0:tsuhen(fp.ds,mstem);
+        const nowMi=Math.floor(norm(sunLon(jdUT(CUR.now.getFullYear(),CUR.now.getMonth()+1,CUR.now.getDate(),12,9))-315)/30);
+        return `<div class="mini${mi===nowMi?" now":""}"><div class="mini-label">${calM}月${mi===nowMi?"（本月）":""}</div>
+          <div class="mini-val">${TSUHEN[mts]}</div><div class="mini-note">${TSUHEN_M[mts]}。</div></div>`;
+      }).join("")}</div>
+    </div>`;
+}
+
+/* ── 今日の運勢 ── */
+function dayScore(di){
+  const fp=CUR.fp, s=di%10, b=di%12;
+  const vb=voidBranches(fp.di);
+  let score=3,notes=[];
+  if(mod(s-fp.ds+10,10)===5){score++;notes.push("日干結成「干合」的緣分容易聚合之日");}
+  if(mod(b+fp.db,12)===1){score++;notes.push("地支「支合」的和諧之日");}
+  if(b%4===fp.db%4&&b!==fp.db){score++;notes.push("地支結成「三合」的順風之日");}
+  if(mod(fp.db+6,12)===b){score--;notes.push("地支「沖」相撞之日。行程變動請保持彈性");}
+  if(di===fp.di){score=5;notes.push("每六十天一次、與自己日柱同一干支輪回的「律之日」。直覺特別敏銳");}
+  if(vb.includes(b)){score=Math.min(score,2);notes.push("天中殺（空亡）之日。比起播下新種，更適合整理與充電");}
+  return {score:Math.max(1,Math.min(5,score)),notes};
+}
+function renderToday(){
+  const {fp,now,tdi,tds,tdb}=CUR;
+  const {score,notes}=dayScore(tdi);
+  const isVoid=voidBranches(fp.di).includes(tdb);
+  const advice=score>=5?"放膽踏出一步就會結果的最佳之日。重要的聯絡與決斷，都趁今天完成。"
+    :score===4?"流向是順風。安排與人見面的行程，好緣分就會滾進來。"
+    :score===3?"平常運行的一天。把眼前的事做得仔細些。累積起來就會造就明天的運。"
+    :score===2?"適合充電的一天。不要硬攻，把身邊整理一下，運勢就會清澈起來。"
+    :"防守之日。焦躁是大忌，好好泡個澡，早點休息。";
+  const dayEl=stemElem(tds);
+  const luckyColor={0:"綠・嫩草綠",1:"紅・朱紅",2:"黃・棣棠黃",3:"白・金",4:"藍・黑"}[dayEl];
+  const dstr=`${now.getFullYear()}年${now.getMonth()+1}月${now.getDate()}日`;
+  $("today-title").textContent=`今日運勢 ─ ${dstr}`;
+  $("today-body").innerHTML=`
+    <div class="card">
+      <h3>今天是 ${kanshiName(tds,tdb)} 日 ${starsHtml(score)}</h3>
+      <p>${advice}</p>
+      ${notes.length?`<ul style="margin:.6em 0;padding-left:1.4em">${notes.map(n=>`<li>${n}</li>`).join("")}</ul>`:""}
+      <div class="today-grid">
+        <div class="mini"><div class="mini-label">今日的幸運色</div><div class="mini-val">${luckyColor}</div>
+          <div class="mini-note">取自今日日干${STEMS[tds]}${elTag(dayEl)}之氣的顏色。</div></div>
+        <div class="mini"><div class="mini-label">今日的一句話</div>
+          <div class="mini-note"><span class="a-emoji">${ANIMAL_EMOJI[CUR.animal]}</span>${isVoid?"懂得放手也是一種運氣。試著整理桌上的一個角落吧。":ANIMALS[CUR.animal].key+"——今天，請刻意使用你的其中一項特質。"}</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>明天，以及這星期</h3>
+      ${(()=>{
+        const jdToday=jdn(now.getFullYear(),now.getMonth()+1,now.getDate());
+        const tomorrow=mod(jdToday+1+49,60), tm=dayScore(tomorrow);
+        let best=null;
+        for(let i=1;i<=7;i++){
+          const di=mod(jdToday+i+49,60), r=dayScore(di);
+          if(!best||r.score>best.score){const d=new Date(now);d.setDate(d.getDate()+i);best={score:r.score,di,date:d,notes:r.notes};}
+        }
+        const youbi=["日","一","二","三","四","五","六"];
+        return `<div class="today-grid">
+          <div class="mini"><div class="mini-label">明天 ─ ${kanshiName(tomorrow%10,tomorrow%12)} 日</div>
+            <div class="mini-val">${starsHtml(tm.score)}</div>
+            <div class="mini-note">${tm.notes.length?tm.notes[0]+"。":"平常運行的一天。把今天的事仔細接下去。"}</div></div>
+          <div class="mini"><div class="mini-label">本週最佳日</div>
+            <div class="mini-val">${best.date.getMonth()+1}月${best.date.getDate()}日（週${youbi[best.date.getDay()]}）　${starsHtml(best.score)}</div>
+            <div class="mini-note">${kanshiName(best.di%10,best.di%12)} 日。${best.notes.length?best.notes[0]+"。":"流動安穩的一天。"}重要的行程不妨安排在這天。</div></div>
+        </div>`;
+      })()}
+      <p class="fine">日期依你開啟本頁裝置的日期計算。明天以後的評分，是依你的日柱與每日干支的關係推算出的概略。</p>
+    </div>`;
+}
+
+/* ── こどものページ ── */
+function renderKids(){
+  const {inp,sun,fp,animal,tds,tdi}=CUR;
+  const S=SIGNS[sun];
+  const {score}=dayScore(tdi);
+  const kidStars=(n)=>{let h="";for(let i=1;i<=5;i++)h+=i<=n?"★":'<span class="off">☆</span>';return `<span class="kid-stars" role="img" aria-label="滿分5分中的${n}分">${h}</span>`;}
+  const dayEl=stemElem(tds);
+  const kidColor={0:"綠色",1:"紅色",2:"黃色",3:"白色・金色",4:"藍色・深藍"}[dayEl];
+  const kidDir=EHO[CUR.nys];
+  $("kids-body").innerHTML=`
+    <div class="card">
+      <h3>${esc(inp.mei)}是個什麼樣的孩子呢？</h3>
+      <p><span class="kid-emblem">${S.sym}</span><strong>身為${S.n}的你</strong>　${SIGN_KID[sun]}</p>
+      <p><span class="kid-emblem">${ANIMAL_EMOJI[animal]}</span><strong>動物占卜是「${animal}」</strong>　${ANIMAL_KID[animal]}</p>
+      <p><span class="kid-emblem">${STEMS[fp.ds]}</span><strong>出生那天的祕密</strong>　${STEM_KID[fp.ds]}</p>
+    </div>
+    <div class="card">
+      <h3>今天的運勢</h3>
+      <p>${kidStars(score)}</p>
+      <p>${KID_TODAY[score]}</p>
+      <div class="kid-grid">
+        <div class="kid-mini"><div class="k-label">今天的幸運色</div><div class="k-val">${kidColor}</div></div>
+        <div class="kid-mini"><div class="k-label">今年的幸運方位</div><div class="k-val">${kidDir}</div></div>
+      </div>
+      <p class="fine" style="margin-top:14px">占卜並不是「絕對」喔。把好的地方變成自信，把要注意的地方當成提示，今天也開開心心地過吧。</p>
+    </div>`;
+}
+
+</script>
